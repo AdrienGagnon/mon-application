@@ -1,12 +1,12 @@
-:root {
-    --color-brand--1: #ffb545;
-    --color-brand--2: #00c46a;
+/* General */
 
-    --color-dark--1: #2d3439;
-    --color-dark--2: #42484d;
-    --color-light--1: #aaa;
-    --color-light--2: #ececec;
-    --color-light--3: rgb(214, 222, 224);
+:root {
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-orange-1: #f27500;
+    --color-grey-dark: #42484d;
+    --color-grey-light: #aaa;
+    --color-background: #ffffff;
     --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
 }
 
@@ -14,6 +14,8 @@
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
 html {
@@ -26,52 +28,74 @@ body {
     font-weight: 300;
     color: #444;
     line-height: 1.9;
-    background-color: #f3f3f3;
+    background-color: var(--color-background);
 }
 
-.welcome {
-    background-image: url('../img/paysage-sassolungo.jpg');
-    background-color: var(--color-light--2);
-    background-position: center;
-    background-repeat: no-repeat;
+/* Navigation */
+
+.nav {
+    color: var(--color-grey-dark);
+    background-color: var(--color-grey-light);
+    border: 30px 30px black;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-item {
+    margin-left: 4rem;
+}
+
+.nav-link--btn:hover,
+.nav-link--btn:active {
+    color: inherit;
+    background-color: var(--color-black);
+    color: var(--color-grey-dark);
+}
+
+/* Header welcome message */
+
+.container {
+    background-image: url('../img/panoramique-grenoble.jpg');
+    box-shadow: 0px -20px 30px 8px var(--color-background) inset;
+    height: 300px;
+    max-height: 300px;
     background-size: cover;
+}
 
-    flex: 1;
-
-    max-width: 115rem;
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    row-gap: 3rem;
-    align-content: center;
-    justify-content: center;
-  
-    align-items: start;
-    justify-items: start;
-
+.text-block {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .welcome-message {
-    text-decoration: transparent;
+    color: var(--color-white);
+    font-size: 4em;
+    line-height: 2;
+    /* text-shadow: 4px 4px 5px black; */
 }
 
-.header-text {
-    color: var(--color-brand--1);
-    background-color: var(--color-brand--2);
+.welcome-description {
+    color: var(--color-white);
+    text-align: center;
+    padding-left: 20%;
+    padding-right: 20%;
+    font-size: 1.6em;
+    line-height: 1.5;
 }
 
-.div {
-    background-color: var(--color-brand--1);
-}
-
-.p {
-    background-color: var(--color-brand--2);
-}
-
-.span {
-    background-color: var(--color-dark--2);
-}
+/* Section 1 */
 
 /* FOOTER */
+
 /* .footer {
     padding: 10rem 3rem;
     background-color: #37383d;
