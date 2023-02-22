@@ -1,0 +1,20 @@
+{
+    "name": "myproject",
+    "version": "1.0.0",
+    "description": "myProject",
+    "default": "index.html",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html --dist-dir ./dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AdrienGagnon/myProject.git"
+    },
+    "author": "Adrien Gagnon",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AdrienGagnon/myProject/issues"
+    },
+    "homepage": "https://github.com/AdrienGagnon/myProject#readme"
+}

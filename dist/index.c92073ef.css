@@ -1,0 +1,16 @@
+:root {
+  --color-brand--1: #ffb545;
+  --color-brand--2: #00c46a;
+  --color-dark--1: #2d3439;
+  --color-dark--2: #42484d;
+  --color-light--1: #aaa;
+  --color-light--2: #ececec;
+  --color-light--3: #d6dee0;
+}
+
+.header-text {
+  color: var(--color-brand--1);
+  background-color: var(--color-brand--2);
+}
+
+/*# sourceMappingURL=index.c92073ef.css.map */

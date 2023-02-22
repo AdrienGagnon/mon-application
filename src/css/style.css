@@ -1,0 +1,112 @@
+:root {
+    --color-brand--1: #ffb545;
+    --color-brand--2: #00c46a;
+
+    --color-dark--1: #2d3439;
+    --color-dark--2: #42484d;
+    --color-light--1: #aaa;
+    --color-light--2: #ececec;
+    --color-light--3: rgb(214, 222, 224);
+    --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #444;
+    line-height: 1.9;
+    background-color: #f3f3f3;
+}
+
+.welcome {
+    background-image: url('../img/paysage-sassolungo.jpg');
+    background-color: var(--color-light--2);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    flex: 1;
+
+    max-width: 115rem;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    row-gap: 3rem;
+    align-content: center;
+    justify-content: center;
+  
+    align-items: start;
+    justify-items: start;
+
+}
+
+.welcome-message {
+    text-decoration: transparent;
+}
+
+.header-text {
+    color: var(--color-brand--1);
+    background-color: var(--color-brand--2);
+}
+
+.div {
+    background-color: var(--color-brand--1);
+}
+
+.p {
+    background-color: var(--color-brand--2);
+}
+
+.span {
+    background-color: var(--color-dark--2);
+}
+
+/* FOOTER */
+/* .footer {
+    padding: 10rem 3rem;
+    background-color: #37383d;
+  }
+  
+  .footer__nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+  }
+  
+  .footer__item {
+    margin-right: 4rem;
+  }
+  
+  .footer__link {
+    font-size: 1.6rem;
+    color: #eee;
+    text-decoration: none;
+  }
+  
+  .footer__logo {
+    height: 5rem;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+  }
+  
+  .footer__copyright {
+    font-size: 1.4rem;
+    color: #aaa;
+    text-align: center;
+  }
+  
+  .footer__copyright .footer__link {
+    font-size: 1.4rem;
+  } */
