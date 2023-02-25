@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Adrien Gagnon" />
+        <meta
+            name="description"
+            content="This site aims to present myself and the things I can do using JavaScript, CSS, HTML and more."
+        />
+        <link rel="stylesheet" href="src/css/main.css" />
+        <link
+            rel="shortcut icon"
+            href="../src/img/forest.png"
+            type="image/x-icon"
+        />
+        <title>My app</title>
+        <script type="module" src="src/js/main.js"></script>
+    </head>
+    <header class="header">
+        <nav class="nav">
+            <img
+                src="../src/img/logo-adrien.png"
+                alt="logo-adrien"
+                width="150"
+                height="90"
+            />
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Menu principal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Infos personnels</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" href="photos.html">Photos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="quiz.html">Quiz</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="separator"></div>
+    </header>
+    <body>
+        <div class="menu-page page">
+            <div class="container">
+                <ul class="text-block">
+                    <h1 class="welcome-message">
+                        Bienvenue dans mon site Internet!
+                    </h1>
+                    <p class="welcome-description">
+                        Ce site sert à montrer mes connaissances en
+                        développement web. Il contient une section
+                        <span>information</span> pour en apprendre davantage sur
+                        moi, une section de <span>photos</span> et une section
+                        de <span>quiz</span>!
+                    </p>
+                </ul>
+            </div>
+            <section class="section" id="section1">
+                <h2 class="header-2">En connaitre davantage sur moi</h2>
+                <div class="contenu">
+                    <img
+                        class="questionnement"
+                        src="../src/img/question-mark.jpg"
+                        alt="Questionnement"
+                    />
+                    <div class="section-description">
+                        Dans cette section, vous pourrez en apprendre sur mon
+                        parcours et sur mes ambitions.
+                        <a class="link-contact" href="contact.html"
+                            >Cliquez ici</a
+                        >
+                    </div>
+                </div>
+            </section>
+            <section class="section" id="section2">
+                <h2 class="header-2">Des clichés d'Europe</h2>
+                <div class="contenu">
+                    <div class="section-description">
+                        Une petite application pour voir des paysages que l'on
+                        peut sélectionner sur une carte.
+                        <a href="photos.html">Cliquez ici</a>
+                    </div>
+                    <div class="imgs-preview">
+                        <div class="img-line-preview">
+                            <img
+                                class="img-preview"
+                                src="src/img/photos-page/Amsterdam-canal.jpg"
+                                alt=""
+                            />
+                            <img
+                                class="img-preview"
+                                src="src/img/photos-page/Corniglia-maisons.jpg"
+                                alt=""
+                            />
+                        </div>
+                        <div class="img-line-preview">
+                            <img
+                                class="img-preview"
+                                src="src/img/photos-page/Florence-Santa-Maria-del-Fiore.jpg"
+                                alt=""
+                            />
+                            <img
+                                class="img-preview"
+                                src="src/img/photos-page/Tre-Cime-Di-Lavaredo-north.jpg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section" id="section3">
+                <h2 class="header-2">Quiz</h2>
+                <div class="contenu">
+                    <img
+                        class="questionnement"
+                        src="../src/img/question-mark.jpg"
+                        alt="Questionnement"
+                    />
+                    <div class="section-description">
+                        Un petit quiz faisant appel à des APIs et enregistre
+                        votre score.
+                        <a href="quiz.html">Cliquez ici</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="contact-page page hidden">
+            <div class="sidebar">
+                <h2 class="header-2">Me contacter</h2>
+                <p>allo</p>
+                <div class="images">
+                    <div class="image">
+                        <img
+                            src="src/img/photos-page/paris-eiffel.jpg"
+                            alt="Photo"
+                        />
+                        <div class="image-lieu">Paris</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="photos-page page hidden">
+            <div class="sidebar">
+                <h2 class="header-2">Des clichés d'Europe</h2>
+                <p>
+                    Cliquez sur un lieu dans le menu ou directement sur la carte
+                    pour voir des photos!
+                </p>
+                <div class="images">
+                    <div class="image">image</div>
+                </div>
+            </div>
+
+            <div class="map"></div>
+        </div>
+        <div class="quiz-page page"></div>
+        <footer class="footer">
+            <div>
+                <p>Ce site a été conçu par Adrien Gagnon.</p>
+            </div>
+        </footer>
+    </body>
+</html>
