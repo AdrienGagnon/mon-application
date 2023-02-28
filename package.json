@@ -16,5 +16,9 @@
     "bugs": {
         "url": "https://github.com/AdrienGagnon/myProject/issues"
     },
-    "homepage": "https://github.com/AdrienGagnon/myProject#readme"
+    "homepage": "https://github.com/AdrienGagnon/myProject#readme",
+    "dependencies": {
+        "jquery": "^3.6.3",
+        "leaflet": "^1.9.3"
+    }
 }

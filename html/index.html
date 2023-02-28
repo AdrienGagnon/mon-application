@@ -9,7 +9,7 @@
             name="description"
             content="This site aims to present myself and the things I can do using JavaScript, CSS, HTML and more."
         />
-        <link rel="stylesheet" href="src/css/main.css" />
+        <link rel="stylesheet" href="../src/css/main.css" />
         <link
             rel="shortcut icon"
             href="../src/img/forest.png"
@@ -18,34 +18,26 @@
         <title>My app</title>
         <script type="module" src="src/js/main.js"></script>
     </head>
-    <header class="header">
-        <nav class="nav">
-            <img
-                src="../src/img/logo-adrien.png"
-                alt="logo-adrien"
-                width="150"
-                height="90"
-            />
-            <ul class="nav-links">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Menu principal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Infos personnels</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn" href="photos.html">Photos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="quiz.html">Quiz</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="separator"></div>
-    </header>
+    <nav>
+        <img class="logo" src="../src/img/logo-adrien.png" alt="logo-adrien" />
+        <ul class="nav-links">
+            <li class="nav-item nav-item--btn">
+                <a class="menu-link" href="index.html">Menu principal</a>
+            </li>
+            <li class="nav-item nav-item--btn">
+                <a class="info-link" href="contact.html">Infos personnelles</a>
+            </li>
+            <li class="nav-item nav-item--btn">
+                <a class="photos-link" href="photos.html">Photos</a>
+            </li>
+            <li class="nav-item nav-item--btn">
+                <a class="quiz-link" href="quiz.html">Quiz</a>
+            </li>
+        </ul>
+    </nav>
     <body>
         <div class="menu-page page">
-            <div class="container">
+            <header class="container">
                 <ul class="text-block">
                     <h1 class="welcome-message">
                         Bienvenue dans mon site Internet!
@@ -58,14 +50,15 @@
                         de <span>quiz</span>!
                     </p>
                 </ul>
-            </div>
+            </header>
             <section class="section" id="section1">
                 <h2 class="header-2">En connaitre davantage sur moi</h2>
                 <div class="contenu">
                     <img
-                        class="questionnement"
+                        class="img-section"
                         src="../src/img/question-mark.jpg"
                         alt="Questionnement"
+                        id="questionnement"
                     />
                     <div class="section-description">
                         Dans cette section, vous pourrez en apprendre sur mon
@@ -77,7 +70,7 @@
                 </div>
             </section>
             <section class="section" id="section2">
-                <h2 class="header-2">Des clichés d'Europe</h2>
+                <h2>Des clichés d'Europe</h2>
                 <div class="contenu">
                     <div class="section-description">
                         Une petite application pour voir des paysages que l'on
@@ -87,25 +80,25 @@
                     <div class="imgs-preview">
                         <div class="img-line-preview">
                             <img
-                                class="img-preview"
-                                src="src/img/photos-page/Amsterdam-canal.jpg"
+                                class="img-preview-menu"
+                                src="../src/img/photos-page/Amsterdam-canal.jpg"
                                 alt=""
                             />
                             <img
-                                class="img-preview"
-                                src="src/img/photos-page/Corniglia-maisons.jpg"
+                                class="img-preview-menu"
+                                src="../src/img/photos-page/Corniglia-maisons.jpg"
                                 alt=""
                             />
                         </div>
                         <div class="img-line-preview">
                             <img
-                                class="img-preview"
-                                src="src/img/photos-page/Florence-Santa-Maria-del-Fiore.jpg"
+                                class="img-preview-menu"
+                                src="../src/img/photos-page/Florence-Santa-Maria-del-Fiore.jpg"
                                 alt=""
                             />
                             <img
-                                class="img-preview"
-                                src="src/img/photos-page/Tre-Cime-Di-Lavaredo-north.jpg"
+                                class="img-preview-menu"
+                                src="../src/img/photos-page/Tre-Cime-Di-Lavaredo-north.jpg"
                                 alt=""
                             />
                         </div>
@@ -113,11 +106,11 @@
                 </div>
             </section>
             <section class="section" id="section3">
-                <h2 class="header-2">Quiz</h2>
+                <h2>Quiz</h2>
                 <div class="contenu">
                     <img
-                        class="questionnement"
-                        src="../src/img/question-mark.jpg"
+                        class="img-section"
+                        src="../src/img/globe.png"
                         alt="Questionnement"
                     />
                     <div class="section-description">
@@ -130,7 +123,7 @@
         </div>
         <div class="contact-page page hidden">
             <div class="sidebar">
-                <h2 class="header-2">Me contacter</h2>
+                <h2>Me contacter</h2>
                 <p>allo</p>
                 <div class="images">
                     <div class="image">
@@ -145,7 +138,7 @@
         </div>
         <div class="photos-page page hidden">
             <div class="sidebar">
-                <h2 class="header-2">Des clichés d'Europe</h2>
+                <h2>Des clichés d'Europe</h2>
                 <p>
                     Cliquez sur un lieu dans le menu ou directement sur la carte
                     pour voir des photos!
@@ -160,7 +153,13 @@
         <div class="quiz-page page"></div>
         <footer class="footer">
             <div>
-                <p>Ce site a été conçu par Adrien Gagnon.</p>
+                <p class="footer-text">
+                    Ce site a été conçu par Adrien Gagnon.
+                </p>
+                <p>
+                    Contactez-moi sur
+                    <a href="https://linkedin.com/in/adrien-gagnon">LinkedIn</a>
+                </p>
             </div>
         </footer>
     </body>

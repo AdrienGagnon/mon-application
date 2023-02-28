@@ -1,3 +1,49 @@
+:root {
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-orange-1: #f27500;
+    --color-grey-dark: #42484d;
+    --color-grey-light: #aaa;
+    --color-background: rgb(181, 212, 241);
+    --color-footer: #37383d;
+    --color-nav: rgb(145, 171, 196);
+    --color-font: #000000;
+    --color-font-footer: #aaa;
+    --color-background-sidebar: #42484d;
+    --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+}
+
+.body {
+    display: flex;
+}
+
+.sidebar {
+    flex-basis: 50rem;
+    background-color: var(--color-dark--1);
+    padding: 3rem 5rem 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background-sidebar);
+}
+
+.container-sidebar {
+}
+
+.content-sidebar {
+}
+
+.img-preview {
+    max-width: 10rem;
+}
+
+.img-lieu {
+}
+
+.img-description {
+}
+
+/* //////////////////////////////// */
+
 .images {
     grid-row: 2 / span 3;
     background-color: #fff;

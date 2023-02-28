@@ -6,9 +6,11 @@
     --color-orange-1: #f27500;
     --color-grey-dark: #42484d;
     --color-grey-light: #aaa;
-    --color-background: #ffffff;
+    --color-background: rgb(181, 212, 241);
     --color-footer: #37383d;
-    --color-nav: white;
+    --color-nav: rgb(145, 171, 196);
+    --color-font: #000000;
+    --color-font-footer: #aaa;
     --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
 }
 
@@ -28,7 +30,7 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
-    color: #444;
+    color: var(--color-font);
     line-height: 1.9;
     background-color: var(--color-background);
 }
@@ -45,53 +47,50 @@ body {
     transition: all 1s;
 }
 
+a {
+    color: var(--color-font);
+}
+
 /* Navigation */
 
-.nav {
-    display: inline-flex;
-    color: var(--color-grey-dark);
+nav {
+    display: flex;
     background-color: var(--color-background);
+    padding: 1rem;
+    border-bottom: 0.1rem solid black;
 }
 
-.nav-links {
-    align-items: center;
-    list-style: none;
-}
-
-.nav-item {
-    margin-left: 4rem;
-}
-
-.nav-link--btn:hover,
-.nav-link--btn:active {
-    color: inherit;
-    background-color: var(--color-black);
-    color: var(--color-grey-dark);
-}
-
-.btn {
-    display: inline-block;
-    background-color: var(--color-primary);
-    font-size: 1.6rem;
-    font-family: inherit;
-    font-weight: 500;
-    border: none;
-    padding: 1.25rem 4.5rem;
-    border-radius: 10rem;
-    cursor: pointer;
-    transition: all 0.3s;
+.logo {
+    display: flex;
+    float: left;
+    justify-content: left;
+    width: 15rem;
+    height: 9rem;
 }
 
 .nav-links {
     display: flex;
+    margin-left: auto;
+    margin-right: auto;
     align-items: center;
     list-style: none;
+    gap: 5rem;
 }
 
-/* Separator */
-.separator {
-    background-color: #000000;
-    height: 2px;
+.nav-item {
+    border: 0.2rem outset rgb(139, 139, 139);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--color-nav);
+    font-size: 1.5rem;
+}
+
+.nav-item--btn:hover,
+.nav-item--btn:active {
+    color: var(--color-nav);
+    background-color: var(--color-background);
+    border-style: inset;
 }
 
 /* Header welcome message */
@@ -119,7 +118,6 @@ body {
     color: var(--color-white);
     font-size: 4em;
     line-height: 2;
-    /* text-shadow: 4px 4px 5px black; */
 }
 
 .welcome-description {
@@ -135,9 +133,26 @@ body {
 
 .section {
     padding: 20rem 3rem;
-    height: 80em;
-    /* border-top: 1px solid #ddd; */
+    border-bottom: 1px dotted #666666;
     transition: transform 1s, opacity 1s;
+    position: relative;
+}
+
+.section::before {
+    /* content: '';
+    z-index: -1;
+    position: absolute;
+    left: -50%;
+    top: 30%;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50rem;
+    transform: rotateY(5deg);
+    */
 }
 
 .section--hidden {
@@ -145,54 +160,54 @@ body {
     transform: translateY(8rem);
 }
 
-/* Section 1 */
-
-#section1 {
-    height: 60em;
-    box-shadow: 0px 0px 50px 50px var(--color-background);
-}
-
-.header-2 {
+h2 {
     font-size: 4em;
 }
 
-.questionnement {
+.img-section {
     width: 40%;
     height: 100%;
     float: left;
-    box-shadow: 0 8 0px 8px var(--color-black) inset;
+}
+
+/* Section 1 */
+
+#section1 {
+    box-shadow: 0px 0px 50px 50px var(--color-background);
+}
+
+#questionnement {
+    border-radius: 10%;
 }
 
 .contenu {
-    display: inline;
+    display: flex;
     font-size: 1.6em;
     justify-content: center;
     align-items: center;
     align-content: center;
     vertical-align: middle;
+    gap: 3rem;
 }
 
 .section-description {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     float: left;
-    max-width: 60%;
-    padding-left: 5%;
-    padding-right: 5%;
 }
 
 /* Section 2 */
 
 .imgs-preview {
     display: grid;
-    height: '50px';
-    max-height: '50px';
+    max-width: 70%;
 }
 
 .img-line-preview {
     display: inline-flex;
 }
 
-.img-preview {
+.img-preview-menu {
     max-width: 40%;
     border-radius: 10%;
     padding: 1% 1% 1% 1%;
@@ -205,38 +220,9 @@ body {
 .footer {
     padding: 10rem 3rem;
     background-color: var(--color-footer);
+    color: var(--color-font-footer);
 }
 
-.footer__nav {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5rem;
-}
-
-.footer__item {
-    margin-right: 4rem;
-}
-
-.footer__link {
-    font-size: 1.6rem;
-    color: #eee;
-    text-decoration: none;
-}
-
-.footer__logo {
-    height: 5rem;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 5rem;
-}
-
-.footer__copyright {
-    font-size: 1.4rem;
-    color: #aaa;
-    text-align: center;
-}
-
-.footer__copyright .footer__link {
-    font-size: 1.4rem;
+.footer-text {
+    font-size: 1.5rem;
 }

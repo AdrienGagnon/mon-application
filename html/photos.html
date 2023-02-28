@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Adrien Gagnon" />
+        <meta
+            name="description"
+            content="This site aims to present myself and the things I can do using JavaScript, CSS, HTML and more."
+        />
+        <link rel="stylesheet" href="../src/css/main.css" />
+        <link
+            rel="shortcut icon"
+            href="../src/img/forest.png"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+            integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+            crossorigin=""
+        />
+        <script
+            src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""
+        ></script>
+        <title>My app</title>
+        <script type="module" src="../src/js/photos.js"></script>
+    </head>
+    <body>
+        <nav>
+            <img
+                class="logo"
+                src="../src/img/logo-adrien.png"
+                alt="logo-adrien"
+            />
+            <ul class="nav-links">
+                <li class="nav-item nav-item--btn">
+                    <a class="menu-link" href="index.html">Menu principal</a>
+                </li>
+                <li class="nav-item nav-item--btn">
+                    <a class="info-link" href="contact.html"
+                        >Infos personnelles</a
+                    >
+                </li>
+                <li class="nav-item nav-item--btn">
+                    <a class="photos-link" href="photos.html">Photos</a>
+                </li>
+                <li class="nav-item nav-item--btn">
+                    <a class="quiz-link" href="quiz.html">Quiz</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar">
+            <p>Cliquez sur un lieu pour voir la photo correspondante!</p>
+            <ul class="container-sidebar">
+                <li class="content-sidebar">
+                    <h2 class="img-lieu">Amsterdam</h2>
+                    <p class="img-description"></p>
+                    <img
+                        class="img-preview"
+                        src="../src/img/photos-page/Amsterdam-canal.jpg"
+                        alt="Amsterdam"
+                    />
+                </li>
+            </ul>
+        </div>
+        <div id="map"></div>
+    </body>
+</html>
