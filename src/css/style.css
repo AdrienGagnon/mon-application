@@ -1,17 +1,25 @@
 /* General */
 
 :root {
+    --color-green-dark: rgb(6, 70, 53);
+    --color-green: rgb(81, 146, 89);
+    --color-orange-light: rgb(240, 187, 98);
+    --color-yellow-light: rgb(244, 238, 169);
+
     --color-white: #ffffff;
     --color-black: #000000;
     --color-orange-1: #f27500;
     --color-grey-dark: #42484d;
     --color-grey-light: #aaa;
-    --color-background: rgb(181, 212, 241);
-    --color-footer: #37383d;
-    --color-nav: rgb(145, 171, 196);
+    --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+
+    --color-background: rgb(81, 146, 89);
+    --color-nav: #42484d;
+    --color-nav-btn: #aaa;
+    --color-nav-btn-active: #ffffff;
     --color-font: #000000;
     --color-font-footer: #aaa;
-    --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+    --color-footer: #42484d;
 }
 
 * {
@@ -55,7 +63,7 @@ a {
 
 nav {
     display: flex;
-    background-color: var(--color-background);
+    background-color: var(--color-nav);
     padding: 1rem;
     border-bottom: 0.1rem solid black;
 }
@@ -74,7 +82,7 @@ nav {
     margin-right: auto;
     align-items: center;
     list-style: none;
-    gap: 5rem;
+    white-space: nowrap;
 }
 
 .nav-item {
@@ -82,14 +90,14 @@ nav {
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
-    background-color: var(--color-nav);
+    background-color: var(--color-nav-btn);
+    text-decoration: none;
     font-size: 1.5rem;
 }
 
-.nav-item--btn:hover,
-.nav-item--btn:active {
-    color: var(--color-nav);
-    background-color: var(--color-background);
+.nav-item:hover,
+.nav-item:active {
+    background-color: var(--color-nav-btn-active);
     border-style: inset;
 }
 
@@ -97,9 +105,7 @@ nav {
 
 .container {
     background-image: url('../img/panoramique-grenoble.jpg');
-    /* box-shadow: 0px -20px 30px 8px var(--color-background) inset; */
     height: 600px;
-    max-height: 600px;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -112,6 +118,9 @@ nav {
     padding-bottom: 20px;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5);
+    max-height: 60%;
+    min-height: 40%;
+    overflow: hidden;
 }
 
 .welcome-message {
@@ -133,26 +142,8 @@ nav {
 
 .section {
     padding: 20rem 3rem;
-    border-bottom: 1px dotted #666666;
     transition: transform 1s, opacity 1s;
     position: relative;
-}
-
-.section::before {
-    /* content: '';
-    z-index: -1;
-    position: absolute;
-    left: -50%;
-    top: 30%;
-    content: '';
-    background-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 50rem;
-    transform: rotateY(5deg);
-    */
 }
 
 .section--hidden {
@@ -188,6 +179,7 @@ h2 {
     align-content: center;
     vertical-align: middle;
     gap: 3rem;
+    max-height: 50rem;
 }
 
 .section-description {
@@ -197,6 +189,10 @@ h2 {
 }
 
 /* Section 2 */
+
+#section2 {
+    background-color: var(--color-green-dark);
+}
 
 .imgs-preview {
     display: grid;
@@ -215,6 +211,19 @@ h2 {
 
 /* Section 3 */
 
+#earth-svg {
+    z-index: 3;
+    pointer-events: none;
+    text-align: center;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#earth-div {
+    height: 50rem;
+    width: 50rem;
+}
+
 /* FOOTER */
 
 .footer {
@@ -225,4 +234,47 @@ h2 {
 
 .footer-text {
     font-size: 1.5rem;
+}
+
+/* Waves */
+
+.section-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.section-top svg {
+    position: relative;
+    display: block;
+    width: calc(111% + 1.3px);
+    height: 110px;
+}
+
+.section-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.section-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(111% + 1.3px);
+    height: 110px;
+}
+
+.section-2-wave .shape-fill-2 {
+    fill: var(--color-green-dark);
+}
+
+.section-3-wave .shape-fill-3 {
+    fill: var(--color-footer);
 }

@@ -19,6 +19,7 @@
     "homepage": "https://github.com/AdrienGagnon/myProject#readme",
     "dependencies": {
         "jquery": "^3.6.3",
-        "leaflet": "^1.9.3"
+        "leaflet": "^1.9.3",
+        "three": "^0.150.1"
     }
 }
