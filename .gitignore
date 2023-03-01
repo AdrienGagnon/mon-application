@@ -1,2 +1,4 @@
 .parcel-cache
 dist
+.prettierrc
+node_modules
