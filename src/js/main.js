@@ -1,16 +1,6 @@
-// import { revealSection } from './script';
-
-// let currentPage = mainPage;
-// const allPages = document.querySelectorAll('.page');
-
-// const observer = new IntersectionObserver(entries => {
-//     if (FileSystemEntry.isIntersecting) {
-//         console.log('allo');
-//     }
-// });
-
 import * as THREE from '../../node_modules/three/build/three.module.js';
 // import { Renderer } from 'three';
+import { gsap, Expo } from 'https://cdn.skypack.dev/gsap@3.7.1';
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
@@ -67,3 +57,80 @@ function animate() {
 scene.add(light);
 scene.add(sphere);
 animate();
+
+//////////////////////////////////
+// Mouse blob
+/* gsap.set('.ball', { xPercent: -50, yPercent: -50 });
+
+const ball = document.querySelector('.ball');
+const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+const mouse = { x: pos.x, y: pos.y };
+const speed = 0.2;
+
+const xSet = gsap.quickSetter(ball, 'x', 'px');
+const ySet = gsap.quickSetter(ball, 'y', 'px');
+
+window.addEventListener('mousemove', e => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+gsap.ticker.add(() => {
+    // adjust speed for higher refresh monitors
+    const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
+
+    pos.x += (mouse.x - pos.x) * dt;
+    pos.y += (mouse.y - pos.y) * dt;
+    xSet(pos.x);
+    ySet(pos.y);
+});
+ */
+gsap.set('.ball', { xPercent: -50, yPercent: -50 });
+
+const ball = document.querySelector('.ball');
+const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+const mouse = { x: pos.x, y: pos.y };
+const speed = 0.35;
+
+const xSet = gsap.quickSetter(ball, 'x', 'px');
+const ySet = gsap.quickSetter(ball, 'y', 'px');
+
+window.addEventListener('mousemove', e => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+gsap.ticker.add(() => {
+    // adjust speed for higher refresh monitors
+    const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
+
+    pos.x += (mouse.x - pos.x) * dt;
+    pos.y += (mouse.y - pos.y) * dt;
+    xSet(pos.x);
+    ySet(pos.y);
+});
+
+/////////////////////////
+// Sliding in sections
+
+const allSections = document.querySelectorAll('.section-bottom');
+
+const revealSection = function (entries, observer) {
+    const [entry] = entries;
+    console.log(entry);
+    if (!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+};
+
+// Call the revealSection function when intersecting
+const sectionObserver = new IntersectionObserver(revealSection, {
+    root: null,
+    threshold: 0.35,
+});
+
+// Adding the hidden class to the sections
+allSections.forEach(function (section) {
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden');
+});

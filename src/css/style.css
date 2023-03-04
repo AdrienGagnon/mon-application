@@ -6,6 +6,11 @@
     --color-orange-light: rgb(240, 187, 98);
     --color-yellow-light: rgb(244, 238, 169);
 
+    color: rgb(20, 40, 80);
+    color: rgb(39, 73, 109);
+    color: rgb(12, 123, 147);
+    color: rgb(0, 168, 204);
+
     --color-white: #ffffff;
     --color-black: #000000;
     --color-orange-1: #f27500;
@@ -13,21 +18,42 @@
     --color-grey-light: #aaa;
     --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
 
-    --color-background: rgb(81, 146, 89);
-    --color-nav: #42484d;
-    --color-nav-btn: #aaa;
+    --color-section-1: rgb(12, 123, 147);
+    --color-section-1-middle: rgb(21, 191, 230);
+
+    --color-section-2: rgb(48, 30, 103);
+    --color-section-2-middle: rgb(69, 41, 150);
+
+    --color-section-3: rgb(39, 73, 109);
+    --color-section-3-middle: rgb(56, 105, 156);
+
+    --color-section-4: rgb(0, 114, 139);
+    --color-section-4-middle: rgb(0, 168, 204);
+
+    --color-header: rgb(11, 21, 44);
+    --color-header-middle: rgb(20, 40, 80);
+
+    --color-nav: rgb(11, 27, 61);
+    --color-nav-btn-border: rgb(91, 143, 185);
+    --color-blob: blue;
+
+    --color-background: rgb(3, 0, 28);
+    --color-nav-btn: #ffffff;
     --color-nav-btn-active: #ffffff;
-    --color-font: #000000;
+    --color-font: white;
     --color-font-footer: #aaa;
     --color-footer: #42484d;
+
+    --font: serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat';
     text-align: center;
+    color: var(--color-font);
 }
 
 html {
@@ -36,11 +62,10 @@ html {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     color: var(--color-font);
     line-height: 1.9;
-    background-color: var(--color-background);
+    overflow-x: hidden;
 }
 
 .hidden {
@@ -59,13 +84,30 @@ a {
     color: var(--color-font);
 }
 
+.ball {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: 3px solid dodgerblue;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    transform-origin: 50% 50%;
+}
+
 /* Navigation */
 
 nav {
+    position: relative;
     display: flex;
+    gap: 1rem;
     background-color: var(--color-nav);
     padding: 1rem;
     border-bottom: 0.1rem solid black;
+    z-index: 10;
 }
 
 .logo {
@@ -74,25 +116,45 @@ nav {
     justify-content: left;
     width: 15rem;
     height: 9rem;
+    background-color: rgb(255, 255, 255);
+    border: 0.2rem outset var(--color-nav-btn-border);
+    border-radius: 100%;
 }
 
 .nav-links {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
     align-items: center;
     list-style: none;
     white-space: nowrap;
 }
 
 .nav-item {
-    border: 0.2rem outset rgb(139, 139, 139);
-    border-radius: 1rem;
+    position: relative;
+    color: black;
+
+    border: 0.2rem outset var(--color-nav-btn-border);
+    border-radius: 0.5rem;
     padding: 1rem;
     margin: 1rem;
     background-color: var(--color-nav-btn);
     text-decoration: none;
     font-size: 1.5rem;
+
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid;
+    outline-color: rgba(255, 255, 255, 0.5);
+    outline-offset: 0px;
+    text-shadow: none;
+    z-index: 10;
+}
+
+.nav-item:hover {
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(97, 97, 97, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #505050;
 }
 
 .nav-item:hover,
@@ -104,27 +166,37 @@ nav {
 /* Header welcome message */
 
 .container {
-    background-image: url('../img/panoramique-grenoble.jpg');
-    height: 600px;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: radial-gradient(
+        var(--color-header-middle) 10%,
+        var(--color-header) 70%
+    );
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100rem;
+    box-shadow: 0% 0% 0% 100% var(--color-section-1) inset;
+    background-color: var(--color-header);
 }
 
 .text-block {
-    position: relative;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 50%;
     left: 50%;
-    padding-top: 20px;
-    padding-bottom: 20px;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
     max-height: 60%;
     min-height: 40%;
-    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
 }
 
 .welcome-message {
     color: var(--color-white);
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     font-size: 4em;
     line-height: 2;
 }
@@ -136,7 +208,246 @@ nav {
     padding-right: 20%;
     font-size: 1.6em;
     line-height: 1.5;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
+
+.blob {
+    position: relative;
+    display: flex;
+    height: 80%;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5%;
+}
+
+.blob > img {
+    object-fit: cover;
+    width: 90%;
+    height: 80%;
+    box-shadow: 0 20px 5px 5px rgba(0, 0, 0, 0.2);
+    animation: move 10s ease-in-out infinite;
+}
+
+@keyframes move {
+    0% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+    25% {
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+    }
+    50% {
+        border-radius: 60% 40% 30% 70%/60% 60% 30% 60%;
+    }
+    100% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+}
+
+.blob-page {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    filter: blur(40px);
+}
+
+.shape-blob {
+    background: #26c3f9;
+    height: 6rem;
+    width: 8rem;
+    border-radius: 40% 50% 30% 40%;
+    animation: transform 18s ease-in-out infinite both alternate,
+        movement_two 12s ease-in-out infinite both;
+    opacity: 0.7;
+    position: absolute;
+    left: 75%;
+    top: 60%;
+}
+.shape-blob.one {
+    background: #0085ff;
+    height: 15rem;
+    width: 20rem;
+    left: 1rem;
+    top: 10rem;
+    animation: transform 8s ease-in-out infinite both alternate,
+        movement_two 20s ease-in-out infinite both;
+}
+
+.shape-blob.six {
+    background: #0eafff;
+    height: 7rem;
+    width: 10rem;
+    left: 16rem;
+    top: 30rem;
+    transform: rotate(-180deg);
+    animation: transform 5s ease-in-out infinite both alternate,
+        movement_two 5s ease-in-out infinite both;
+}
+
+.shape-blob.four {
+    background: #4eaeff;
+    height: 10rem;
+    width: 8rem;
+    left: 35rem;
+    top: 16rem;
+    transform: rotate(-180deg);
+    animation: transform 17s ease-in-out infinite both alternate,
+        movement_two 13s ease-in-out infinite both;
+}
+
+.shape-blob.five {
+    background: #0085ff;
+    height: 10rem;
+    width: 8rem;
+    right: 2rem;
+    top: 13rem;
+    transform: rotate(-180deg);
+    animation: transform 12s ease-in-out infinite both alternate,
+        movement_two 18s ease-in-out infinite both;
+}
+
+.shape-blob.two {
+    background: #4eaeff;
+    height: 15rem;
+    width: 15rem;
+    right: 6rem;
+    top: 25rem;
+    transform: rotate(-180deg);
+    animation: transform 10s ease-in-out infinite both alternate,
+        movement_two 10s ease-in-out infinite both;
+}
+
+.shape-blob.three {
+    background: #0eafff;
+    height: 15rem;
+    width: 15rem;
+    right: 8rem;
+    top: 13rem;
+    transform: rotate(-180deg);
+    animation: transform 7s ease-in-out infinite both alternate,
+        movement_two 23s ease-in-out infinite both;
+}
+
+.shape-blob.seven {
+    background: #4eaeff;
+    height: 15rem;
+    width: 15rem;
+    left: 6rem;
+    top: 45rem;
+    transform: rotate(-180deg);
+    animation: transform 14s ease-in-out infinite both alternate,
+        movement_two 8s ease-in-out infinite both;
+}
+
+.shape-blob.eight {
+    background: #4eaeff;
+    height: 15rem;
+    width: 15rem;
+    left: 10rem;
+    top: 45rem;
+    transform: rotate(-180deg);
+    animation: transform 14s ease-in-out infinite both alternate,
+        movement_one 17s ease-in-out infinite both;
+}
+
+.shape-blob.nine {
+    background: #4eaeff;
+    height: 15rem;
+    width: 15rem;
+    left: 10rem;
+    top: 45rem;
+    transform: rotate(-180deg);
+    animation: transform 14s ease-in-out infinite both alternate,
+        movement_one 22s ease-in-out infinite both;
+}
+
+.shape-blob.ten {
+    background: #4eaeff;
+    height: 15rem;
+    width: 15rem;
+    right: 7rem;
+    top: 50rem;
+    transform: rotate(-180deg);
+    animation: transform 14s ease-in-out infinite both alternate,
+        movement_one 18s ease-in-out infinite both;
+}
+
+@keyframes transform {
+    0%,
+    100% {
+        border-radius: 33% 67% 70% 30% / 30% 40% 70% 70%;
+    }
+    20% {
+        border-radius: 37% 63% 51% 49% / 37% 35% 35% 63%;
+        transform: translateY(20rem);
+    }
+    40% {
+        border-radius: 36% 64% 64% 36% / 64% 48% 52% 26%;
+        transform: translateY(-10rem);
+    }
+    60% {
+        border-radius: 37% 63% 51% 49% / 30% 30% 70% 73%;
+        transform: translateY(10rem);
+    }
+    80% {
+        border-radius: 40% 60% 42% 58% / 51% 51% 49% 59%;
+    }
+}
+
+@keyframes movement_one {
+    0%,
+    500% {
+        transform: none;
+    }
+    50% {
+        transform: translate(0%, 100rem) rotate(-200deg) scale(1.3);
+    }
+}
+
+@keyframes movement_two {
+    0%,
+    500% {
+        transform: none;
+    }
+    50% {
+        transform: translate(50%, 20%) rotate(-200deg) scale(1.3);
+    }
+}
+
+/* .blob {
+    position: relative;
+    top: 10%;
+    left: 25%;
+
+    border: inset black 10px;
+    width: 60vmax;
+    z-index: 0;
+    animation: move 10s ease-in-out infinite;
+    transform-origin: 50% 50%;
+    overflow: hidden;
+}
+
+@keyframes move {
+    0% {
+        transform: scale(1) translate(10px, -30px); 
+    }
+    38% {
+        transform: scale(1.2, 1) rotate(160deg);
+    }
+    40% {
+        transform: scale(1.2, 1) rotate(160deg);
+    }
+    78% {
+        transform: scale(0.9) rotate(-20deg);
+    }
+    80% {
+        transform: scale(0.9) rotate(-20deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}  */
 
 /* Sections (general) */
 
@@ -144,6 +455,7 @@ nav {
     padding: 20rem 3rem;
     transition: transform 1s, opacity 1s;
     position: relative;
+    font-size: 2rem;
 }
 
 .section--hidden {
@@ -164,7 +476,10 @@ h2 {
 /* Section 1 */
 
 #section1 {
-    box-shadow: 0px 0px 50px 50px var(--color-background);
+    background: radial-gradient(
+        var(--color-section-1-middle) 10%,
+        var(--color-section-1) 70%
+    );
 }
 
 #questionnement {
@@ -172,14 +487,11 @@ h2 {
 }
 
 .contenu {
+    position: relative;
     display: flex;
     font-size: 1.6em;
-    justify-content: center;
     align-items: center;
-    align-content: center;
-    vertical-align: middle;
     gap: 3rem;
-    max-height: 50rem;
 }
 
 .section-description {
@@ -191,12 +503,19 @@ h2 {
 /* Section 2 */
 
 #section2 {
-    background-color: var(--color-green-dark);
+    position: relative;
+    background: radial-gradient(
+        var(--color-section-2-middle) 10%,
+        var(--color-section-2) 70%
+    );
+    z-index: -1;
 }
 
 .imgs-preview {
+    display: flex;
     display: grid;
     max-width: 70%;
+    max-height: 100%;
 }
 
 .img-line-preview {
@@ -211,17 +530,75 @@ h2 {
 
 /* Section 3 */
 
+#section3 {
+    background: radial-gradient(
+        var(--color-section-3-middle) 10%,
+        var(--color-section-3) 70%
+    );
+}
+
 #earth-svg {
+    width: 70%;
     z-index: 3;
     pointer-events: none;
     text-align: center;
-    max-height: 100%;
-    max-width: 100%;
 }
 
 #earth-div {
-    height: 50rem;
-    width: 50rem;
+    width: 70%;
+    max-width: 100%;
+    aspect-ratio: 1/1;
+}
+
+/* Section 4 */
+
+#section4 {
+    background: radial-gradient(
+        var(--color-section-4-middle) 10%,
+        var(--color-section-4) 70%
+    );
+    font-size: 2rem;
+}
+
+.contact-container {
+    margin: auto;
+    width: 80%;
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type='text'],
+textarea {
+    color: black;
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 1rem; /* Add a top margin */
+    margin-bottom: 2rem; /* Bottom margin */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type='soumettre'] {
+    background-color: var(--color-section-2-middle);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type='soumettre']:hover {
+    background-color: var(--color-section-2);
+}
+
+/* Add a background color and some padding around the form */
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
 }
 
 /* FOOTER */
@@ -259,22 +636,39 @@ h2 {
     bottom: 0;
     left: 0;
     width: 100%;
+    fill: url('../src/img/panoramique-grenoble.jpg');
     overflow: hidden;
     line-height: 0;
-    transform: rotate(180deg);
+    rotate: 180deg;
 }
 
 .section-bottom svg {
-    position: relative;
     display: block;
     width: calc(111% + 1.3px);
     height: 110px;
 }
 
-.section-2-wave .shape-fill-2 {
-    fill: var(--color-green-dark);
+/* header bottom color*/
+.header-bottom-wave .shape-fill-1 {
+    fill: var(--color-section-1);
 }
 
-.section-3-wave .shape-fill-3 {
+/* section 2 top color*/
+.section-2-wave .shape-fill-2 {
+    fill: var(--color-section-1);
+}
+
+/* section 2 bottom color*/
+.section-2-wave .shape-fill-3 {
+    fill: var(--color-section-3);
+}
+
+/* section 4 top color*/
+.shape-fill-3 {
+    fill: var(--color-section-3);
+}
+
+/* section 4 bottom color*/
+.section-4-wave .shape-fill-4 {
     fill: var(--color-footer);
 }
