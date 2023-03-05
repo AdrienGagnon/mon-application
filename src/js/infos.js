@@ -2,6 +2,7 @@ import * as THREE from '../../node_modules/three/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.117.0/examples/jsm/controls/OrbitControls.js';
 
 // spinning spirals info page
+const scene = new THREE.Scene();
 
 // import { Renderer } from 'three';
 const addpillar = function () {
@@ -157,7 +158,7 @@ let threecolors = colors.map(color => new THREE.Color(color));
 class Sketch {
     ///////////////////////////////
     // contructor
-    constructor(options) {
+    constructor(options, row, position, scene) {
         // constant
         this.time = 0;
         this.isPlaying = true;
@@ -165,9 +166,11 @@ class Sketch {
         this.fps = 60;
         this.step = 1 / (this.fps * this.duration);
         this.playhead = 0;
+        this.row = row;
+        this.position = position;
 
         // scene
-        this.scene = new THREE.Scene();
+        this.scene = scene;
         this.scene.position.y = 0.4;
 
         // renderer
@@ -178,8 +181,10 @@ class Sketch {
 
         // container
         this.container = options.dom;
-        this.width = this.container.offsetWidth;
-        this.height = this.container.offsetHeight;
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        // this.width = this.container.offsetWidth;
+        // this.height = this.container.offsetHeight;
         this.container.appendChild(this.renderer.domElement);
 
         // camera
@@ -189,7 +194,8 @@ class Sketch {
             0.01,
             100
         );
-        this.camera.position.set(0, -2, -10);
+        this.camera.position.set(0, 0, 0);
+        this.camera.lookAt(0, 0, -1);
 
         // controls
         this.controls = new OrbitControls(
@@ -210,17 +216,27 @@ class Sketch {
         // Add plane
         this.addPlane();
 
+        // Add light
+
         // debug GUI
         // this.settings();
     }
     // end of contructor
     ///////////////////////////////
 
+    addLight() {
+        // const pointLight = new THREE.PointLight(0xffffff);
+        // pointLight.position.set(0, 0, 0);
+        // this.scene.add(pointLight);
+    }
+
     ///////////////////////////////
     // resize
     resize() {
-        this.width = this.container.offsetWidth;
-        this.height = this.container.offsetHeight;
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        // this.width = this.container.offsetWidth;
+        // this.height = this.container.offsetHeight;
         this.renderer.setSize(this.width, this.height);
         this.camera.aspect = this.width / this.height;
         this.camera.updateProjectionMatrix();
@@ -297,7 +313,7 @@ class Sketch {
             let p = i / number;
 
             let x = 1 * Math.sin(p * 60);
-            let y = p * 10;
+            let y = p * 15;
             let z = 1 * Math.cos(p * 60);
 
             points.push(new THREE.Vector3(x, y, z));
@@ -313,23 +329,42 @@ class Sketch {
         );
 
         this.mesh = new THREE.Mesh(geometry, this.material);
-        this.mesh.position.y = -2;
+        this.mesh.position.y = -5.5;
+
+        this.mesh.position.z = -10;
+        this.mesh.position.z += this.row * -10;
+
+        this.mesh.position.x = this.position === 1 ? -10 : 10;
         this.scene.add(this.mesh);
     }
 
     addPlane() {
         const geometry = new THREE.PlaneBufferGeometry(100, 100);
         const material = new THREE.MeshBasicMaterial({
-            color: 'rgb(116, 116, 116)',
+            color: 'rgb(22, 22, 22)',
             side: THREE.DoubleSide,
         });
         const plane = new THREE.Mesh(geometry, material);
+        plane.rotateX(Math.PI / 2);
+        plane.translateZ(5);
         this.scene.add(plane);
-        console.log(this.camera);
-        this.scene.background = new THREE.Color('black');
     }
 }
 
-new Sketch({
-    dom: document.getElementById('container-infos'),
-});
+new Sketch(
+    {
+        dom: document.getElementById('container-infos'),
+    },
+    1,
+    1,
+    scene
+);
+
+new Sketch(
+    {
+        dom: document.getElementById('container-infos'),
+    },
+    1,
+    2,
+    scene
+);
