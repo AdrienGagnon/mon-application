@@ -22,9 +22,6 @@ camera.position.setZ(30);
 renderer.render(scene, camera);
 
 const geometry = new THREE.SphereGeometry(15, 32, 32);
-const material = new THREE.MeshStandardMaterial({
-    color: 'blue',
-});
 
 const color = 0xffffff;
 const intensity = 1;

@@ -1,4 +1,10 @@
 :root {
+    --color-pillar-1: rgb(240, 230, 140);
+    --color-pillar-2: rgb(255, 215, 0);
+    --color-pillar-3: rgb(255, 165, 0);
+    --color-pillar-4: rgb(210, 105, 30);
+    --color-pillar-5: rgb(160, 82, 45);
+    --color-pillar-5: rgb(141, 22, 22);
 }
 
 .container-infos {
