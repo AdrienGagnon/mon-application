@@ -2,6 +2,7 @@ import * as THREE from '../../node_modules/three/build/three.module.js';
 // import { Renderer } from 'three';
 import { gsap, Expo } from 'https://cdn.skypack.dev/gsap@3.7.1';
 const scene = new THREE.Scene();
+const container = document.querySelector('#earth-div');
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -14,10 +15,21 @@ const renderer = new THREE.WebGL1Renderer({
     canvas: document.querySelector('#earth-svg'),
     alpha: true,
 });
+renderer.setSize(container.offsetWidth, container.offsetHeight);
 
+container.addEventListener('resize', onContainerResize);
+
+function onContainerResize() {
+    const box = container.getBoundingClientRect();
+    console.log(box);
+    renderer.setSize(box.width, box.height);
+
+    camera.aspect = box.width / box.height;
+    camera.updateProjectionMatrix();
+    // optional animate/renderloop call put here for render-on-changes
+}
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
+camera.position.setZ(40);
 
 renderer.render(scene, camera);
 
@@ -110,24 +122,63 @@ gsap.ticker.add(() => {
 /////////////////////////
 // Sliding in sections
 
-const allSections = document.querySelectorAll('.section-bottom');
+const section1 = document.getElementById('section1');
+const section3 = document.getElementById('section3');
 
 const revealSection = function (entries, observer) {
     const [entry] = entries;
     console.log(entry);
-    if (!entry.isIntersecting) return;
-    entry.target.classList.remove('section--hidden');
-    observer.unobserve(entry.target);
+    if (
+        !entry.isIntersecting &&
+        !entry.target.classList.contains('section--hidden-down')
+    ) {
+        console.log('ici');
+        entry.target.classList.add('section--hidden-up');
+        observeDown(
+            `section${entry.target.id.slice(-1)}` === 1 ? section1 : section3
+        );
+    }
+    if (
+        !entry.isIntersecting &&
+        !entry.target.classList.contains('section--hidden-up')
+    ) {
+        console.log('ici');
+        entry.target.classList.add('section--hidden-down');
+        observeUp(
+            `section${entry.target.id.slice(-1)}` === 1 ? section1 : section3
+        );
+    }
+    if (entry.isIntersecting) {
+        console.log('la');
+        if (entry.target.classList.contains('section--hidden-down')) {
+            observeDown(entry.target.id.slice(-1) === 1 ? section1 : section3);
+        } else {
+            observeUp(entry.target.id.slice(-1) === 1 ? section1 : section3);
+        }
+
+        entry.target.classList.remove('section--hidden-down');
+        entry.target.classList.remove('section--hidden-up');
+    }
 };
 
 // Call the revealSection function when intersecting
 const sectionObserver = new IntersectionObserver(revealSection, {
     root: null,
-    threshold: 0.35,
+    threshold: 0.1,
 });
 
 // Adding the hidden class to the sections
-allSections.forEach(function (section) {
+const observeDown = function (section) {
     sectionObserver.observe(section);
-    section.classList.add('section--hidden');
-});
+    section.classList.add('section--hidden-down');
+    console.log(section.classList);
+};
+
+const observeUp = function (section) {
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden-up');
+    console.log(section.classList);
+};
+
+observeDown(section1);
+observeDown(section3);

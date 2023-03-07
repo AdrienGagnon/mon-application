@@ -353,18 +353,9 @@ class Sketch {
 
 new Sketch(
     {
-        dom: document.getElementById('container-infos'),
+        dom: document.querySelector('body'),
     },
     1,
     1,
-    scene
-);
-
-new Sketch(
-    {
-        dom: document.getElementById('container-infos'),
-    },
-    1,
-    2,
     scene
 );

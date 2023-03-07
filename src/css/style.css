@@ -21,8 +21,8 @@
     --color-section-1: rgb(12, 123, 147);
     --color-section-1-middle: rgb(21, 191, 230);
 
-    --color-section-2: rgb(48, 30, 103);
-    --color-section-2-middle: rgb(69, 41, 150);
+    --color-section-2: rgb(11, 21, 44);
+    --color-section-2-middle: rgb(20, 40, 80);
 
     --color-section-3: rgb(39, 73, 109);
     --color-section-3-middle: rgb(56, 105, 156);
@@ -45,6 +45,8 @@
     --color-footer: #42484d;
 
     --font: serif;
+
+    --padding-section: 20rem;
 }
 
 * {
@@ -66,19 +68,13 @@ body {
     color: var(--color-font);
     line-height: 1.9;
     overflow-x: hidden;
+    background-color: var(--color-header);
 }
 
-.hidden {
+/* .hidden {
     display: none;
     opacity: 0;
-}
-
-.appear {
-    opacity: 0;
-    filter: blur(5px);
-    transform: translate(-100px);
-    transition: all 1s;
-}
+} */
 
 a {
     color: var(--color-font);
@@ -462,20 +458,26 @@ nav {
 /* Sections (general) */
 
 .section {
-    padding: 20rem 3rem;
-    transition: transform 1s, opacity 1s;
+    padding: var(--padding-section) 3rem;
     position: relative;
-    font-size: 2rem;
     min-height: 100vh;
+    transition: all 500ms;
 }
 
-.section--hidden {
-    opacity: 0;
-    transform: translateY(8rem);
+.appear {
+    transform: translateY(100px);
 }
 
-h2 {
-    font-size: 4em;
+.section--hidden-down {
+    opacity: 0.5;
+    transform: translateY(15rem);
+    filter: blur(5px);
+}
+
+.section--hidden-up {
+    opacity: 0.5;
+    transform: translateY(-15rem);
+    filter: blur(5px);
 }
 
 .img-section {
@@ -502,6 +504,7 @@ h2 {
     display: flex;
     font-size: 1.6em;
     align-items: center;
+    justify-content: center;
     gap: 3rem;
 }
 
@@ -549,6 +552,7 @@ h2 {
 }
 
 #earth-svg {
+    position: relative;
     width: 70%;
     z-index: 3;
     pointer-events: none;
@@ -556,8 +560,8 @@ h2 {
 }
 
 #earth-div {
-    width: 70%;
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1/1;
 }
 
@@ -624,7 +628,8 @@ input[type='soumettre']:hover {
 
 .section-top {
     position: absolute;
-    top: 0;
+    bottom: -10%;
+    z-index: 5;
     left: 0;
     width: 100%;
     overflow: hidden;
@@ -640,12 +645,12 @@ input[type='soumettre']:hover {
 
 .section-bottom {
     position: absolute;
-    bottom: 0;
+    top: -10%;
     left: 0;
     width: 100%;
-    fill: url('../src/img/panoramique-grenoble.jpg');
     overflow: hidden;
     line-height: 0;
+    z-index: 5;
     rotate: 180deg;
 }
 
