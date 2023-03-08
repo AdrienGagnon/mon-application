@@ -21,7 +21,6 @@ container.addEventListener('resize', onContainerResize);
 
 function onContainerResize() {
     const box = container.getBoundingClientRect();
-    console.log(box);
     renderer.setSize(box.width, box.height);
 
     camera.aspect = box.width / box.height;
@@ -122,42 +121,94 @@ gsap.ticker.add(() => {
 /////////////////////////
 // Sliding in sections
 
+// Check on which sections current state
 const section1 = document.getElementById('section1');
 const section3 = document.getElementById('section3');
+const header = document.getElementById('header');
+const section2 = document.getElementById('section2');
+const section4 = document.getElementById('section4');
 
-const revealSection = function (entries, observer) {
+const headerState = ['header', false];
+const section2State = ['section2', false];
+const section4State = ['section4', false];
+
+const changeOtherState = function (entries) {
     const [entry] = entries;
-    console.log(entry);
-    if (
-        !entry.isIntersecting &&
-        !entry.target.classList.contains('section--hidden-down')
-    ) {
-        console.log('ici');
-        entry.target.classList.add('section--hidden-up');
-        observeDown(
-            `section${entry.target.id.slice(-1)}` === 1 ? section1 : section3
-        );
+    const activeOther = `${entry.target.id}`;
+    if (activeOther === 'header') {
+        headerState[1] = !entry.isIntersecting ? false : true;
+        document
+            .getElementById('section1')
+            .classList.remove('section--hidden-up');
     }
-    if (
-        !entry.isIntersecting &&
-        !entry.target.classList.contains('section--hidden-up')
-    ) {
-        console.log('ici');
-        entry.target.classList.add('section--hidden-down');
-        observeUp(
-            `section${entry.target.id.slice(-1)}` === 1 ? section1 : section3
-        );
+    if (activeOther === 'section2') {
+        section2State[1] = !entry.isIntersecting ? false : true;
     }
-    if (entry.isIntersecting) {
-        console.log('la');
-        if (entry.target.classList.contains('section--hidden-down')) {
-            observeDown(entry.target.id.slice(-1) === 1 ? section1 : section3);
-        } else {
-            observeUp(entry.target.id.slice(-1) === 1 ? section1 : section3);
-        }
+    if (activeOther === 'section4') {
+        section4State[1] = !entry.isIntersecting ? false : true;
+    }
+};
 
-        entry.target.classList.remove('section--hidden-down');
-        entry.target.classList.remove('section--hidden-up');
+const sectionObserverOther = new IntersectionObserver(changeOtherState, {
+    root: null,
+    threshold: 0.2,
+});
+
+const observeOther = function (sections) {
+    sections.forEach(section => {
+        sectionObserverOther.observe(section);
+    });
+};
+
+observeOther([header, section2, section4]);
+
+// Sliding sections 1 and 3
+const revealSection = function (entries) {
+    const [entry] = entries;
+    if (!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden-down');
+    const el1 = entry.target.querySelector('.layer1');
+    const el2 = entry.target.querySelector('.layer2');
+    if (
+        headerState[1] ||
+        (section2State[1] && entry.target.id === 'section3')
+    ) {
+        el1.classList.add('anim-slide-1');
+        el2.classList.add('anim-slide-2');
+    }
+    if (
+        section4State[1] ||
+        (section2State[1] && entry.target.id === 'section1')
+    ) {
+        el1.classList.add('anim-slide-3');
+        el2.classList.add('anim-slide-4');
+    }
+    entry.target.classList.remove('section--hidden-up');
+};
+
+const hideSection = function (entries) {
+    const [entry] = entries;
+    if (entry.isIntersecting) return;
+    if (entry.target.id === 'section1') {
+        entry.target.classList.add(
+            `section--hidden-${headerState[1] ? 'down' : 'up'}`
+        );
+        entry.target
+            .querySelector('.layer1')
+            .classList.remove('anim-slide-1', 'anim-slide-3');
+        entry.target
+            .querySelector('.layer2')
+            .classList.remove('anim-slide-2', 'anim-slide-4');
+    } else {
+        entry.target.classList.add(
+            `section--hidden-${section2State[1] ? 'down' : 'up'}`
+        );
+        entry.target
+            .querySelector('.layer1')
+            .classList.remove('anim-slide-1', 'anim-slide-3');
+        entry.target
+            .querySelector('.layer2')
+            .classList.remove('anim-slide-2', 'anim-slide-4');
     }
 };
 
@@ -166,19 +217,25 @@ const sectionObserver = new IntersectionObserver(revealSection, {
     root: null,
     threshold: 0.1,
 });
+const sectionObserverOut = new IntersectionObserver(hideSection, {
+    root: null,
+    threshold: 0.1,
+});
 
 // Adding the hidden class to the sections
-const observeDown = function (section) {
+const observeSection1 = function (section) {
     sectionObserver.observe(section);
-    section.classList.add('section--hidden-down');
-    console.log(section.classList);
+    sectionObserverOut.observe(section);
+
+    section.classList.add(`section--hidden-${headerState[1] ? 'down' : 'up'}`);
+};
+const observeSection3 = function (section) {
+    sectionObserver.observe(section);
+    sectionObserverOut.observe(section);
+    section.classList.add(
+        `section--hidden-${section2State[1] ? 'down' : 'up'}`
+    );
 };
 
-const observeUp = function (section) {
-    sectionObserver.observe(section);
-    section.classList.add('section--hidden-up');
-    console.log(section.classList);
-};
-
-observeDown(section1);
-observeDown(section3);
+observeSection1(section1);
+observeSection3(section3);

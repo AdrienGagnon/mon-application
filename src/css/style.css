@@ -44,8 +44,6 @@
     --color-font-footer: #aaa;
     --color-footer: #42484d;
 
-    --font: serif;
-
     --padding-section: 20rem;
 }
 
@@ -53,7 +51,7 @@
     margin: 0;
     padding: 0;
     box-sizing: inherit;
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
     color: var(--color-font);
 }
@@ -69,6 +67,7 @@ body {
     line-height: 1.9;
     overflow-x: hidden;
     background-color: var(--color-header);
+    z-index: -1;
 }
 
 /* .hidden {
@@ -221,7 +220,6 @@ nav {
     align-items: center;
     margin: none;
     width: 80rem;
-    filter: blur(3px);
 }
 
 .blob > img {
@@ -464,14 +462,59 @@ nav {
     transition: all 500ms;
 }
 
-.appear {
-    transform: translateY(100px);
-}
-
 .section--hidden-down {
     opacity: 0.5;
     transform: translateY(15rem);
     filter: blur(5px);
+}
+
+.layer1,
+.layer2 {
+    opacity: 0;
+    animation: 500ms;
+    transform: 500ms;
+}
+
+.anim-slide-1 {
+    animation: sliding 2s;
+    opacity: 0.5;
+    filter: blur(5px);
+}
+
+.anim-slide-2 {
+    animation: sliding 1s;
+    opacity: 0.9;
+    filter: blur(2px);
+}
+
+.anim-slide-3 {
+    animation: slidingUp 2s;
+    opacity: 0.5;
+    filter: blur(5px);
+}
+
+.anim-slide-4 {
+    animation: slidingUp 1s;
+    opacity: 0.9;
+    filter: blur(2px);
+}
+
+@keyframes sliding {
+    0% {
+        transform: translateY(-20rem);
+    }
+    100% {
+        transform: translateY(0rem);
+    }
+}
+
+@keyframes slidingUp {
+    0% {
+        transform: translateY(20rem);
+    }
+    100% {
+        transform: translateY(0rem);
+    }
 }
 
 .section--hidden-up {
@@ -569,47 +612,79 @@ nav {
 
 #section4 {
     background: radial-gradient(
-        var(--color-section-4-middle) 10%,
-        var(--color-section-4) 70%
+        var(--color-header-middle) 10%,
+        var(--color-header) 70%
     );
     font-size: 2rem;
 }
 
-/* Style inputs with type="text", select elements and textareas */
-input[type='text'],
-textarea {
-    color: black;
-    width: 100%; /* Full width */
-    padding: 12px; /* Some padding */
-    border: 1px solid #ccc; /* Gray border */
-    border-radius: 4px; /* Rounded borders */
-    box-sizing: border-box; /* Make sure that padding and width stays in place */
-    margin-top: 1rem; /* Add a top margin */
-    margin-bottom: 2rem; /* Bottom margin */
-    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
-}
-
-/* Style the submit button with a specific background color etc */
-input[type='soumettre'] {
-    background-color: var(--color-section-2-middle);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* When moving the mouse over the submit button, add a darker green color */
-input[type='soumettre']:hover {
-    background-color: var(--color-section-2);
-}
-
-/* Add a background color and some padding around the form */
 .contact-container {
+    position: relative;
     border-radius: 5px;
     padding: 20px;
     margin: auto;
-    width: 80%;
+    width: 90%;
+    color: rgb(255, 255, 255);
+    z-index: 100;
+}
+
+.contact-container > h1 {
+    font-size: 3rem;
+}
+
+.name-email-comp {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    font: black;
+    gap: 10px;
+}
+
+.name-email-comp > label {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.description {
+    margin: 5px;
+}
+
+.description > input {
+    height: 15rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+input[type='text'] {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+    color: black;
+    text-align: start;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type='submit'] {
+    font: var(--color-black);
+    background-color: var(--color-section-1-middle);
+    color: rgb(0, 0, 0);
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.submit-email:hover {
+    background-color: var(--color-section-1);
+}
+
+.envoi-email {
+    background-color: red;
+    height: 100px;
+    z-index: 10;
 }
 
 /* FOOTER */
@@ -641,6 +716,7 @@ input[type='soumettre']:hover {
     display: block;
     width: calc(111% + 1.3px);
     height: 110px;
+    z-index: 5;
 }
 
 .section-bottom {

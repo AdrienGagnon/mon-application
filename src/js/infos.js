@@ -28,7 +28,7 @@ const addpillar = function () {
 
     const color = 0xffffff;
     const intensity = 1;
-    const light = new THREE.AmbientLight(color, intensity);
+    // const light = new THREE.AmbientLight(color, intensity);
 
     const pillarTexture = new THREE.TextureLoader().load(
         '../src/img/gold-texture.jpg'
@@ -174,6 +174,7 @@ class Sketch {
         this.scene.position.y = 0.4;
 
         // renderer
+        this.group = new THREE.Group();
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(this.width, this.height);
         this.renderer.setClearColor(0x000000, 1);
@@ -208,26 +209,24 @@ class Sketch {
         this.setupResize();
 
         // add object
-        this.addObjects();
+        this.addObjects(-10, -20);
+        this.addObjects(10, -20);
+        this.addObjects(6, -30);
 
         // render
-        this.render();
 
         // Add plane
         this.addPlane();
-
-        // Add light
-
-        // debug GUI
-        // this.settings();
+        this.addLight();
     }
-    // end of contructor
     ///////////////////////////////
 
+    // Add light
     addLight() {
-        // const pointLight = new THREE.PointLight(0xffffff);
-        // pointLight.position.set(0, 0, 0);
-        // this.scene.add(pointLight);
+        const pointLight = new THREE.PointLight(0xffffff, 0.5);
+        pointLight.position.set(0, 0, -30);
+        pointLight.castShadow = true;
+        this.scene.add(pointLight);
     }
 
     ///////////////////////////////
@@ -246,21 +245,6 @@ class Sketch {
         window.addEventListener('resize', this.resize.bind(this));
     }
     // end of resize
-    ///////////////////////////////
-
-    ///////////////////////////////
-    // animation control
-    stop() {
-        this.isPlaying = false;
-    }
-
-    play() {
-        if (!this.isPlaying) {
-            this.renderer();
-            this.isPlaying = true;
-        }
-    }
-    // end of animation control
     ///////////////////////////////
 
     ///////////////////////////////
@@ -290,7 +274,7 @@ class Sketch {
 
     ///////////////////////////////
     // add objects
-    addObjects() {
+    addObjects(positionX, positionZ) {
         this.material = new THREE.ShaderMaterial({
             extensions: {
                 derivatives: '#extension GL_OES_standard_derivatives : enable',
@@ -313,7 +297,7 @@ class Sketch {
             let p = i / number;
 
             let x = 1 * Math.sin(p * 60);
-            let y = p * 15;
+            let y = p * 30;
             let z = 1 * Math.cos(p * 60);
 
             points.push(new THREE.Vector3(x, y, z));
@@ -331,16 +315,39 @@ class Sketch {
         this.mesh = new THREE.Mesh(geometry, this.material);
         this.mesh.position.y = -5.5;
 
-        this.mesh.position.z = -10;
-        this.mesh.position.z += this.row * -10;
+        this.mesh.position.z = positionZ;
+        this.mesh.position.x = positionX;
+        this.group.add(this.mesh);
+        // this.scene.add(this.mesh);
+        this.addPillar(this.mesh.position.x, this.mesh.position.z);
+        this.render();
+        this.scene.add(this.group);
+        console.log(this.group);
+    }
 
-        this.mesh.position.x = this.position === 1 ? -10 : 10;
-        this.scene.add(this.mesh);
+    addPillar(positionX, positionZ) {
+        const geometryPillar = new THREE.CylinderBufferGeometry(1, 1, 50, 8);
+
+        const pillarTexture = new THREE.TextureLoader().load(
+            '../src/img/gold-texture.jpg'
+        );
+
+        const cylinder = new THREE.Mesh(
+            geometryPillar,
+            new THREE.MeshPhongMaterial({
+                map: pillarTexture,
+            })
+        );
+        cylinder.position.x = positionX;
+        cylinder.position.z = positionZ;
+
+        // this.scene.add(cylinder);
+        this.group.add(cylinder);
     }
 
     addPlane() {
         const geometry = new THREE.PlaneBufferGeometry(100, 100);
-        const material = new THREE.MeshBasicMaterial({
+        const material = new THREE.MeshPhongMaterial({
             color: 'rgb(22, 22, 22)',
             side: THREE.DoubleSide,
         });
