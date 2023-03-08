@@ -71,7 +71,7 @@ float aastep(float threshold, float value) {
     return smoothstep(threshold-afwidth, threshold+afwidth, value);
   #else
     return step(threshold, value);
-  #endif  
+  #endif
 }
 
 float maskline(float p, float index) {
@@ -154,8 +154,9 @@ const colors = [
 ];
 
 let threecolors = colors.map(color => new THREE.Color(color));
-
+const body = document.getElementById('body-infos');
 class Sketch {
+    light;
     ///////////////////////////////
     // contructor
     constructor(options, row, position, scene) {
@@ -164,7 +165,7 @@ class Sketch {
         this.isPlaying = true;
         this.duration = 2;
         this.fps = 60;
-        this.step = 1 / (this.fps * this.duration);
+        this.step = 1 / (this.fps * this.duration) / 2;
         this.playhead = 0;
         this.row = row;
         this.position = position;
@@ -175,6 +176,7 @@ class Sketch {
 
         // renderer
         this.group = new THREE.Group();
+        this.childrenEl = [];
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(this.width, this.height);
         this.renderer.setClearColor(0x000000, 1);
@@ -182,8 +184,9 @@ class Sketch {
 
         // container
         this.container = options.dom;
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
+        this.width = body.offsetWidth;
+        this.height = body.offsetHeight;
+
         // this.width = this.container.offsetWidth;
         // this.height = this.container.offsetHeight;
         this.container.appendChild(this.renderer.domElement);
@@ -198,12 +201,6 @@ class Sketch {
         this.camera.position.set(0, 0, 0);
         this.camera.lookAt(0, 0, -1);
 
-        // controls
-        this.controls = new OrbitControls(
-            this.camera,
-            this.renderer.domElement
-        );
-
         // resize
         this.resize();
         this.setupResize();
@@ -212,8 +209,12 @@ class Sketch {
         this.addObjects(-10, -20);
         this.addObjects(10, -20);
         this.addObjects(6, -30);
+        this.addObjects(-8, -35);
+        this.addObjects(4, -60);
+        this.addObjects(-7, -65);
 
-        // render
+        // scroll
+        this.listenOnScroll();
 
         // Add plane
         this.addPlane();
@@ -223,17 +224,17 @@ class Sketch {
 
     // Add light
     addLight() {
-        const pointLight = new THREE.PointLight(0xffffff, 0.5);
-        pointLight.position.set(0, 0, -30);
-        pointLight.castShadow = true;
-        this.scene.add(pointLight);
+        this.light = new THREE.PointLight(0xffffff, 0.5);
+        this.light.position.set(0, 0, -20);
+        this.light.castShadow = true;
+        this.scene.add(this.light);
     }
 
     ///////////////////////////////
     // resize
     resize() {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
+        this.width = body.offsetWidth;
+        this.height = body.offsetHeight;
         // this.width = this.container.offsetWidth;
         // this.height = this.container.offsetHeight;
         this.renderer.setSize(this.width, this.height);
@@ -254,7 +255,10 @@ class Sketch {
         this.time += this.step;
         this.playhead = this.time % 1;
         this.material.uniforms.playhead.value = this.playhead;
-        this.mesh.rotation.y = this.playhead * 2 * Math.PI;
+        this.childrenEl.forEach(element => {
+            if (element.geometry.type === 'CylinderGeometry') return;
+            element.rotation.y = this.playhead * 2 * Math.PI;
+        });
         requestAnimationFrame(this.render.bind(this));
         this.renderer.render(this.scene, this.camera);
     }
@@ -311,6 +315,7 @@ class Sketch {
         this.addPillar(this.mesh.position.x, this.mesh.position.z);
         this.scene.add(this.group);
         this.render();
+        this.childrenEl = this.group.children;
     }
 
     addPillar(positionX, positionZ) {
@@ -334,7 +339,7 @@ class Sketch {
     }
 
     addPlane() {
-        const geometry = new THREE.PlaneBufferGeometry(100, 100);
+        const geometry = new THREE.PlaneBufferGeometry(100, 500);
         const material = new THREE.MeshPhongMaterial({
             color: 'rgb(22, 22, 22)',
             side: THREE.DoubleSide,
@@ -343,6 +348,18 @@ class Sketch {
         plane.rotateX(Math.PI / 2);
         plane.translateZ(5);
         this.scene.add(plane);
+    }
+
+    listenOnScroll() {
+        const container = document.querySelector('.container-infos');
+        container.addEventListener('scroll', this.moveOnScroll.bind(this));
+    }
+
+    moveOnScroll() {
+        const container = document.querySelector('.container-infos');
+        const movement = (-100 * container.scrollTop) / container.scrollHeight;
+        this.camera.position.set(0, 0, movement);
+        this.light.position.set(0, 0, -20 + movement);
     }
 }
 
@@ -358,16 +375,30 @@ new Sketch(
 ////////////////////////////////////////////////////////////////
 // Adding CV PDF view
 
-const infoSection = document.querySelector('.container-infos');
-const bodyInfo = document.querySelector('body');
+const containerInfos = document.querySelector('.container-infos');
+const iframe = document.querySelector('.pdf-cv');
 const visionnerCV = document.getElementById('visionner-cv');
 const telechargerCV = document.getElementById('telecharger-cv');
-const pdfMarkup = `<iframe
-id="pdf-cv"
-src="../src/pdf/CV_AG_janvier_2023-prog.pdf"
-></iframe>`;
 
-visionnerCV.addEventListener('click', function () {
-    infoSection.insertAdjacentHTML('afterbegin', pdfMarkup);
-    bodyInfo.style.filter = blur('0.5px');
-});
+const toggleCV = function () {
+    iframe.classList.toggle('hidden-cv');
+    containerInfos.classList.toggle('blur-page');
+};
+
+const clickVisioPDf = function () {
+    visionnerCV.addEventListener('click', function () {
+        toggleCV();
+        clickExitCV();
+    });
+};
+
+const exitCV = function () {
+    window.removeEventListener('mousedown', exitCV);
+    toggleCV();
+};
+
+const clickExitCV = function () {
+    window.addEventListener('mousedown', exitCV);
+};
+
+clickVisioPDf();

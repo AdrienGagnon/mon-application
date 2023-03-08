@@ -224,66 +224,72 @@
             </div>
         </section>
         <section class="section" id="section4">
-            <div class="contact-container">
-                <h1>Contactez-moi!</h1>
-                <form
-                    action="https://formsubmit.co/adrien.gagnon25@outlook.com"
-                    method="POST"
-                >
-                    <div class="name-email-comp">
-                        <label for="name">Nom</label>
-                        <input
-                            id="name"
-                            type="text"
-                            name="name"
-                            placeholder="Votre nom..."
-                            required
-                        />
-                        <label for="email">Adresse email</label>
-                        <input
-                            id="email"
-                            type="text"
-                            name="email"
-                            placeholder="Adresse email..."
-                            required
-                        />
-                        <label for="compagnie">Compagnie</label>
-                        <input
-                            id="compagnie"
-                            type="text"
-                            name="compagnie"
-                            placeholder="Nom de la compagnie..."
-                        />
-                    </div>
-
-                    <div class="description">
-                        <label for="description">Description</label>
-                        <input
-                            id="description"
-                            type="text"
-                            name="description"
-                            placeholder="Écrivez votre message ici..."
-                            required
-                        />
-                    </div>
-
-                    <input
-                        id="envoi-email"
-                        type="hidden"
-                        name="_next"
-                        value=""
-                    />
-
-                    <button
-                        class="submit-email"
-                        type="submit"
-                        value="Soumettre"
+            <div class="section4-content">
+                <div class="contact-container">
+                    <h1>Contactez-moi!</h1>
+                    <form
+                        action="https://formsubmit.co/adrien.gagnon25@outlook.com"
+                        method="POST"
                     >
-                        Soumettre
-                    </button>
-                </form>
+                        <div class="name-email-comp">
+                            <label for="name">Nom</label>
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                placeholder="Votre nom..."
+                                required
+                            />
+                            <label for="email">Adresse email</label>
+                            <input
+                                id="email"
+                                type="text"
+                                name="email"
+                                placeholder="Adresse email..."
+                                required
+                            />
+                            <label for="compagnie">Compagnie</label>
+                            <input
+                                id="compagnie"
+                                type="text"
+                                name="compagnie"
+                                placeholder="Nom de la compagnie..."
+                            />
+                        </div>
+
+                        <div class="description">
+                            <label for="description">Description</label>
+                            <input
+                                id="description"
+                                type="text"
+                                name="description"
+                                placeholder="Écrivez votre message ici..."
+                                required
+                            />
+                        </div>
+
+                        <input
+                            id="envoi-email"
+                            type="hidden"
+                            name="_next"
+                            value=""
+                        />
+
+                        <button
+                            class="submit-email"
+                            type="submit"
+                            value="Soumettre"
+                        >
+                            Soumettre
+                        </button>
+                    </form>
+                </div>
+                <img
+                    src="../src/img/florence-river.jpg"
+                    alt="Florence, Italie"
+                />
             </div>
-            <img src="../src/img/florence-river.jpg" alt="Florence, Italie" />
+            <button class="revenirTop">Vers le haut de la page</button>
         </section>
         <footer class="footer">
             <div class="section-bottom section-4-wave">
@@ -309,7 +315,10 @@
                     ></path>
                 </svg>
             </div>
-            <p class="footer-text">Ce site a été conçu par Adrien Gagnon.</p>
+            <div class="footer-text">
+                <div>Ce site a été conçu par Adrien Gagnon.</div>
+                <div>Toutes les photos de paysages ont été prises par moi!</div>
+            </div>
             <div class="plateformes">
                 <p>Mes plateformes:</p>
                 <ul class="plateformes-content">
@@ -319,7 +328,7 @@
                             alt=""
                         />
                         <a href="https://linkedin.com/in/adrien-gagnon"
-                            >LinkedIn</a
+                            >GitHub</a
                         >
                     </li>
                     <li>
@@ -327,7 +336,7 @@
                             src="../src/img/footer-icons/linkedin.png"
                             alt=""
                         />
-                        <a href="https://github.com/AdrienGagnon">GitHub</a>
+                        <a href="https://github.com/AdrienGagnon">LinkedIn</a>
                     </li>
                     <li>
                         <img src="../src/img/footer-icons/email.png" alt="" />

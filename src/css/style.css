@@ -618,11 +618,20 @@ nav {
     font-size: 2rem;
 
     display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    align-items: center;
+}
+
+.section4-content {
+    font-size: 2rem;
+
+    display: flex;
     flex-direction: row;
     flex: 1;
 }
 
-#section4 > img {
+.section4-content > img {
     object-fit: cover;
     max-width: 50%;
     aspect-ratio: 1;
@@ -704,9 +713,23 @@ button[type='submit'] {
     z-index: 10;
 }
 
+.revenirTop {
+    position: relative;
+    display: flex;
+    background-color: var(--color-section-1);
+    width: fit-content;
+    padding-inline: 10px;
+    border-radius: 15px;
+}
+
+.revenirTop:hover {
+    background-color: var(--color-section-1-middle);
+}
+
 /* FOOTER */
 
 .footer {
+    bottom: 0;
     font-size: 1.2rem;
     display: flex;
     align-items: center;
@@ -715,6 +738,17 @@ button[type='submit'] {
     padding: 10px 3rem;
     background-color: var(--color-footer);
     color: var(--color-font-footer);
+    z-index: 10;
+}
+
+#footer-infos {
+    position: absolute;
+}
+
+@media screen and (max-height: 400px) {
+    .footer {
+        display: none;
+    }
 }
 
 .footer > .plateformes {
@@ -725,15 +759,25 @@ button[type='submit'] {
 }
 
 .footer-text {
+    display: flex;
+    position: relative;
+    flex-direction: column;
     flex: 1;
 }
 
+.footer-text > div {
+    position: relative;
+}
+
 .plateformes-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: left;
 }
 
 .plateformes-content > li {
     display: flex;
+    align-items: center;
     width: 100%;
     padding: 5px;
     gap: 5px;

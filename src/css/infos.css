@@ -36,22 +36,30 @@ body > canvas {
     top: 0;
     left: 0;
     z-index: -9999;
-    filter: blur(2px);
+    filter: blur(5px);
     scale: 1.1;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 /* General conatiner */
 .container-infos {
     display: grid;
-    margin: 5rem;
+    padding: 10rem 1rem 10rem 1rem;
+    margin: 0rem 15rem 1rem 15rem;
     grid-template-columns: 1fr 1fr;
     column-gap: 5rem;
     row-gap: 5rem;
-    padding: 10px;
     height: 75rem;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+@media screen and (max-width: 950px) {
+    .container-infos {
+        margin: 0rem 2rem 1rem 2rem;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -66,7 +74,7 @@ body > canvas {
     z-index: 10;
     height: fit-content;
     transition: scale ease-out 150ms;
-
+    padding: 10px;
     border-width: 3px;
     border-style: solid;
     border-image: linear-gradient(
@@ -103,7 +111,7 @@ body > canvas {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5rem;
+    gap: 1rem;
 }
 
 #arrow {
@@ -242,12 +250,21 @@ body > canvas {
 #telecharger-cv {
 }
 
-#pdf-cv {
+.pdf-cv {
     display: flex;
     position: absolute;
-    width: 100vh;
-    height: 100vw;
+    justify-content: center;
+    width: 100%;
+    height: 70%;
     z-index: 100;
+}
+
+.blur-page {
+    filter: blur(10px);
+}
+
+.hidden-cv {
+    display: none;
 }
 
 /* Section videos */
