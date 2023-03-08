@@ -96,8 +96,8 @@ a {
 /* Navigation */
 
 nav {
-    position: relative;
     display: flex;
+    width: 100%;
     gap: 1rem;
     background-color: var(--color-nav);
     padding: 1rem;
@@ -616,6 +616,23 @@ nav {
         var(--color-header) 70%
     );
     font-size: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+#section4 > img {
+    object-fit: cover;
+    max-width: 50%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    #section4 > img {
+        display: none;
+    }
 }
 
 .contact-container {
@@ -690,13 +707,49 @@ button[type='submit'] {
 /* FOOTER */
 
 .footer {
-    padding: 10rem 3rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 3rem;
     background-color: var(--color-footer);
     color: var(--color-font-footer);
 }
 
+.footer > .plateformes {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
 .footer-text {
-    font-size: 1.5rem;
+    flex: 1;
+}
+
+.plateformes-content {
+    justify-content: left;
+}
+
+.plateformes-content > li {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    gap: 5px;
+    list-style: none;
+}
+
+.plateformes-content > li > a {
+    text-decoration: none;
+}
+
+.plateformes-content > li > img {
+    width: 30px;
+    aspect-ratio: 1;
+
+    vertical-align: middle;
+    justify-content: center;
 }
 
 /* Waves */

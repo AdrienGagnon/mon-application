@@ -1,13 +1,13 @@
 :root {
     --color-pillar-1: rgb(240, 230, 140);
-    --color-pillar-2: rgb(255, 215, 0);
+    --color-pillar-2: rgb(160, 82, 45);
     --color-pillar-3: rgb(255, 165, 0);
     --color-pillar-4: rgb(210, 105, 30);
     --color-pillar-5: rgb(160, 82, 45);
     --color-pillar-5: rgb(22, 22, 22);
 
-    --color-background-info: rgba(41, 41, 65, 0.8);
-    --color-footer-infos: rgb(41, 41, 65);
+    --color-background-info: rgba(29, 29, 29, 0.8);
+    --color-footer-infos: rgb(37, 37, 37);
 
     --color-scrollbar: linear-gradient(to top, #a88c0d, #409c1c);
     --color-scrollbar-track: linear-gradient(
@@ -15,6 +15,15 @@
         rgba(0, 0, 0, 0) 50%,
         rgba(0, 0, 0, 1) 100%
     );
+
+    --color-background-etude: linear-gradient(
+        45deg,
+        rgb(160, 82, 45),
+        rgb(255, 165, 0)
+    );
+
+    --color-langage-prog: rgb(210, 105, 30);
+    --color-border-info: rgb(255, 165, 0);
 }
 
 body {
@@ -43,15 +52,29 @@ body > canvas {
     height: 75rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    direction: rtl;
+}
+
+@media screen and (max-width: 600px) {
+    .container-infos {
+        grid-template-columns: 1fr;
+    }
 }
 
 .infos-section {
     position: relative;
-    background: var(--color-background-info);
-    border-radius: 15px;
+    background-color: var(--color-background-info);
+    z-index: 10;
     height: fit-content;
     transition: scale ease-out 150ms;
+
+    border-width: 3px;
+    border-style: solid;
+    border-image: linear-gradient(
+            to bottom,
+            var(--color-border-info),
+            rgba(0, 0, 0, 0)
+        )
+        1 100%;
 }
 
 .infos-section:hover {
@@ -113,11 +136,7 @@ body > canvas {
 
 .etude::after {
     content: '';
-    background-image: linear-gradient(
-        45deg,
-        rgb(30, 27, 228),
-        rgb(121, 106, 255)
-    );
+    background-image: var(--color-background-etude);
     position: absolute;
     margin: auto;
     z-index: -1;
@@ -133,7 +152,7 @@ body > canvas {
 .langage,
 .outil,
 .concept {
-    background-color: blue;
+    background-color: var(--color-langage-prog);
     border-radius: 15px;
     transition: scale ease-out 150ms;
     z-index: 1;
@@ -153,6 +172,14 @@ body > canvas {
     column-gap: 2rem;
     row-gap: 2rem;
     padding-block: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.langage {
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 .langages {
@@ -166,8 +193,8 @@ body > canvas {
         to bottom right,
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0) 50%,
-        #3f3a68 50%,
-        #140d79 100%
+        #3d2d00 50%,
+        #ffc559 100%
     );
     transform-origin: top;
     position: absolute;
@@ -207,6 +234,21 @@ body > canvas {
 }
 
 /* Section contact */
+
+/* Section CV PDF */
+#visionner-cv {
+}
+
+#telecharger-cv {
+}
+
+#pdf-cv {
+    display: flex;
+    position: absolute;
+    width: 100vh;
+    height: 100vw;
+    z-index: 100;
+}
 
 /* Section videos */
 .infos-section:has(.section-loisir) {

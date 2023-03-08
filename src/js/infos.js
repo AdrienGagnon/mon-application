@@ -253,23 +253,12 @@ class Sketch {
         if (!this.isPlaying) return;
         this.time += this.step;
         this.playhead = this.time % 1;
-
         this.material.uniforms.playhead.value = this.playhead;
         this.mesh.rotation.y = this.playhead * 2 * Math.PI;
         requestAnimationFrame(this.render.bind(this));
         this.renderer.render(this.scene, this.camera);
     }
     // end of renderer
-    ///////////////////////////////
-
-    ///////////////////////////////
-    // debug GUI
-    settings() {
-        this.settings = { progress: 0 };
-        this.gui = new dat.GUI();
-        this.gui.add(this.settings, 'progress', 0, 1, 0.01);
-    }
-    // end of debug gui
     ///////////////////////////////
 
     ///////////////////////////////
@@ -320,9 +309,8 @@ class Sketch {
         this.group.add(this.mesh);
         // this.scene.add(this.mesh);
         this.addPillar(this.mesh.position.x, this.mesh.position.z);
-        this.render();
         this.scene.add(this.group);
-        console.log(this.group);
+        this.render();
     }
 
     addPillar(positionX, positionZ) {
@@ -366,3 +354,20 @@ new Sketch(
     1,
     scene
 );
+
+////////////////////////////////////////////////////////////////
+// Adding CV PDF view
+
+const infoSection = document.querySelector('.container-infos');
+const bodyInfo = document.querySelector('body');
+const visionnerCV = document.getElementById('visionner-cv');
+const telechargerCV = document.getElementById('telecharger-cv');
+const pdfMarkup = `<iframe
+id="pdf-cv"
+src="../src/pdf/CV_AG_janvier_2023-prog.pdf"
+></iframe>`;
+
+visionnerCV.addEventListener('click', function () {
+    infoSection.insertAdjacentHTML('afterbegin', pdfMarkup);
+    bodyInfo.style.filter = blur('0.5px');
+});
