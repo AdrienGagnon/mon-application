@@ -122,123 +122,41 @@ gsap.ticker.add(() => {
 // Sliding in sections
 
 // Check on which sections current state
-const section1 = document.getElementById('section1');
-const section3 = document.getElementById('section3');
-const header = document.getElementById('header');
-const section2 = document.getElementById('section2');
-const section4 = document.getElementById('section4');
 
-const headerState = ['header', false];
-const section2State = ['section2', false];
-const section4State = ['section4', false];
-
-const changeOtherState = function (entries) {
-    const [entry] = entries;
-    const activeOther = `${entry.target.id}`;
-    if (activeOther === 'header') {
-        headerState[1] = !entry.isIntersecting ? false : true;
-        document
-            .getElementById('section1')
-            .classList.remove('section--hidden-up');
-    }
-    if (activeOther === 'section2') {
-        section2State[1] = !entry.isIntersecting ? false : true;
-    }
-    if (activeOther === 'section4') {
-        section4State[1] = !entry.isIntersecting ? false : true;
-    }
-};
-
-const sectionObserverOther = new IntersectionObserver(changeOtherState, {
-    root: null,
-    threshold: 0.2,
-});
-
-const observeOther = function (sections) {
-    sections.forEach(section => {
-        sectionObserverOther.observe(section);
-    });
-};
-
-observeOther([header, section2, section4]);
+const section1Top = document.querySelector('.section1-top-shape');
+const section1Bottom = document.querySelector('.section1-bottom-shape');
+const section3Top = document.querySelector('.section3-top-shape');
+const section3Bottom = document.querySelector('.section3-bottom-shape');
 
 // Sliding sections 1 and 3
-const revealSection = function (entries) {
+const slidingShapes = function (entries) {
     const [entry] = entries;
-    if (!entry.isIntersecting) return;
-    entry.target.classList.remove('section--hidden-down');
-    const el1 = entry.target.querySelector('.layer1');
-    const el2 = entry.target.querySelector('.layer2');
-    if (
-        headerState[1] ||
-        (section2State[1] && entry.target.id === 'section3')
-    ) {
-        el1.classList.add('anim-slide-1');
-        el2.classList.add('anim-slide-2');
-    }
-    if (
-        section4State[1] ||
-        (section2State[1] && entry.target.id === 'section1')
-    ) {
-        el1.classList.add('anim-slide-3');
-        el2.classList.add('anim-slide-4');
-    }
-    entry.target.classList.remove('section--hidden-up');
-};
-
-const hideSection = function (entries) {
-    const [entry] = entries;
-    if (entry.isIntersecting) return;
-    if (entry.target.id === 'section1') {
-        entry.target.classList.add(
-            `section--hidden-${headerState[1] ? 'down' : 'up'}`
-        );
-        entry.target
-            .querySelector('.layer1')
-            .classList.remove('anim-slide-1', 'anim-slide-3');
-        entry.target
-            .querySelector('.layer2')
-            .classList.remove('anim-slide-2', 'anim-slide-4');
+    if (!entry.isIntersecting) {
+        entry.target.classList.add('section--hidden');
+        console.log('la');
+        sectionObserver.observe(entry.target);
     } else {
-        entry.target.classList.add(
-            `section--hidden-${section2State[1] ? 'down' : 'up'}`
-        );
-        entry.target
-            .querySelector('.layer1')
-            .classList.remove('anim-slide-1', 'anim-slide-3');
-        entry.target
-            .querySelector('.layer2')
-            .classList.remove('anim-slide-2', 'anim-slide-4');
+        entry.target.classList.remove('section--hidden');
+        console.log('ici');
+        sectionObserver.observe(entry.target);
     }
 };
 
 // Call the revealSection function when intersecting
-const sectionObserver = new IntersectionObserver(revealSection, {
+const sectionObserver = new IntersectionObserver(slidingShapes, {
     root: null,
-    threshold: 0.1,
-});
-const sectionObserverOut = new IntersectionObserver(hideSection, {
-    root: null,
-    threshold: 0.1,
+    threshold: 0.5,
 });
 
 // Adding the hidden class to the sections
-const observeSection1 = function (section) {
-    sectionObserver.observe(section);
-    sectionObserverOut.observe(section);
-
-    section.classList.add(`section--hidden-${headerState[1] ? 'down' : 'up'}`);
-};
-const observeSection3 = function (section) {
-    sectionObserver.observe(section);
-    sectionObserverOut.observe(section);
-    section.classList.add(
-        `section--hidden-${section2State[1] ? 'down' : 'up'}`
-    );
+const observeSection = function (sections) {
+    sections.forEach(section => {
+        section.classList.add('section--hidden');
+        sectionObserver.observe(section);
+    });
 };
 
-observeSection1(section1);
-observeSection3(section3);
+observeSection([section1Top, section1Bottom, section3Top, section3Bottom]);
 
 ///////////////////////////////////////////////////
 // Scrolling to sections

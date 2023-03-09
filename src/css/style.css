@@ -144,7 +144,6 @@ nav {
 }
 
 .nav-item:hover {
-    border: 1px solid;
     box-shadow: inset 0 0 20px rgba(97, 97, 97, 0.5),
         0 0 20px rgba(255, 255, 255, 0.2);
     outline-color: rgba(255, 255, 255, 0);
@@ -465,9 +464,11 @@ nav {
     position: relative;
     min-height: 100vh;
     transition: all 500ms;
+    display: flex;
+    flex-direction: column;
 }
 
-.section--hidden-down {
+.section--hidden {
     opacity: 0.5;
     transform: translateY(15rem);
     filter: blur(5px);
@@ -486,24 +487,6 @@ nav {
     filter: blur(5px);
 }
 
-.anim-slide-2 {
-    animation: sliding 1s;
-    opacity: 0.9;
-    filter: blur(2px);
-}
-
-.anim-slide-3 {
-    animation: slidingUp 2s;
-    opacity: 0.5;
-    filter: blur(5px);
-}
-
-.anim-slide-4 {
-    animation: slidingUp 1s;
-    opacity: 0.9;
-    filter: blur(2px);
-}
-
 @keyframes sliding {
     0% {
         transform: translateY(-20rem);
@@ -511,21 +494,6 @@ nav {
     100% {
         transform: translateY(0rem);
     }
-}
-
-@keyframes slidingUp {
-    0% {
-        transform: translateY(20rem);
-    }
-    100% {
-        transform: translateY(0rem);
-    }
-}
-
-.section--hidden-up {
-    opacity: 0.5;
-    transform: translateY(-15rem);
-    filter: blur(5px);
 }
 
 .img-section {
@@ -544,7 +512,25 @@ nav {
 }
 
 #questionnement {
-    border-radius: 10%;
+    border-radius: 100%;
+    width: 100%;
+    box-shadow: 0 0 20px rgb(0, 0, 0);
+    animation: turning infinite 5s;
+}
+
+@keyframes turning {
+    0% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+    25% {
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+    }
+    50% {
+        border-radius: 60% 40% 30% 70%/60% 60% 30% 60%;
+    }
+    100% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
 }
 
 .contenu {
@@ -554,6 +540,8 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 3rem;
+    height: 100%;
+    flex-grow: 1;
 }
 
 .section-description {
@@ -570,7 +558,6 @@ nav {
         var(--color-section-2-middle) 10%,
         var(--color-section-2) 70%
     );
-    z-index: -1;
 }
 
 .imgs-preview {
@@ -699,17 +686,22 @@ input[type='text'] {
 
 button[type='submit'] {
     font: var(--color-black);
-    background-color: var(--color-section-1-middle);
-    color: rgb(0, 0, 0);
+    background-color: var(--color-section-3);
+    color: rgb(255, 255, 255);
     padding: 5px 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin: 10px;
+    transition-duration: 0.5s;
+}
+
+button[type='submit']:hover {
+    transform: translateY(10px);
 }
 
 .submit-email:hover {
-    background-color: var(--color-section-1);
+    background-color: var(--color-section-3-middle);
 }
 
 .envoi-email {
@@ -721,14 +713,25 @@ button[type='submit'] {
 .revenirTop {
     position: relative;
     display: flex;
-    background-color: var(--color-section-1);
-    width: fit-content;
+    background-color: var(--color-section-3);
+    height: 5rem;
     padding-inline: 10px;
+    padding-block: 10px;
     border-radius: 15px;
+    align-items: center;
+    border: none;
+    gap: 5px;
+    transition-duration: 0.5s;
+}
+
+.revenirTop > img {
+    height: 100%;
+    aspect-ratio: 1;
 }
 
 .revenirTop:hover {
-    background-color: var(--color-section-1-middle);
+    background-color: var(--color-section-3-middle);
+    transform: translateY(-10px);
 }
 
 /* FOOTER */
@@ -775,9 +778,7 @@ button[type='submit'] {
 }
 
 .plateformes-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: left;
+    display: flex;
 }
 
 .plateformes-content > li {
@@ -793,6 +794,10 @@ button[type='submit'] {
     text-decoration: none;
 }
 
+.plateformes-content > li > a:hover {
+    color: var(--color-section-3-middle);
+}
+
 .plateformes-content > li > img {
     width: 30px;
     aspect-ratio: 1;
@@ -805,12 +810,13 @@ button[type='submit'] {
 
 .section-top {
     position: absolute;
-    bottom: -10%;
-    z-index: 5;
+    bottom: 0%;
+    z-index: 50;
     left: 0;
     width: 100%;
     overflow: hidden;
     line-height: 0;
+    transform: translateY(109px);
 }
 
 .section-top svg {
@@ -823,13 +829,14 @@ button[type='submit'] {
 
 .section-bottom {
     position: absolute;
-    top: -10%;
+    top: 0%;
     left: 0;
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    z-index: 5;
+    z-index: 50;
     rotate: 180deg;
+    transform: translateY(109px);
 }
 
 .section-bottom svg {
