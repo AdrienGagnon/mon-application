@@ -213,6 +213,11 @@ nav {
     /* text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black; */
 }
 
+.welcome-description > a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .blob {
     position: absolute;
     display: flex;

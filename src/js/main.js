@@ -57,7 +57,7 @@ let counter = 0;
 function animate() {
     requestAnimationFrame(animate);
     counter += 0.005;
-    sphere.rotation.y += 0.002;
+    sphere.rotation.y += 0.005;
     sphere.rotation.x = Math.sin(counter) / 2;
     renderer.render(scene, camera);
 }
@@ -239,3 +239,34 @@ const observeSection3 = function (section) {
 
 observeSection1(section1);
 observeSection3(section3);
+
+///////////////////////////////////////////////////
+// Scrolling to sections
+const toInfos = document.querySelector('.to-section-infos');
+const toPhotos = document.querySelector('.to-section-photos');
+const toQuiz = document.querySelector('.to-section-quiz');
+const toTop = document.querySelector('.revenirTop');
+
+toInfos.addEventListener('click', function (e) {
+    section1.scrollIntoView({
+        behavior: 'smooth',
+    });
+});
+
+toPhotos.addEventListener('click', function (e) {
+    section2.scrollIntoView({
+        behavior: 'smooth',
+    });
+});
+
+toQuiz.addEventListener('click', function (e) {
+    section3.scrollIntoView({
+        behavior: 'smooth',
+    });
+});
+
+toTop.addEventListener('click', function (e) {
+    header.scrollIntoView({
+        behavior: 'smooth',
+    });
+});
