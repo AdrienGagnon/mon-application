@@ -511,11 +511,15 @@ nav {
     );
 }
 
+#section1 > .contenu > .section-description {
+    max-width: 30%;
+}
+
 #questionnement {
     border-radius: 100%;
-    width: 100%;
     box-shadow: 0 0 20px rgb(0, 0, 0);
     animation: turning infinite 5s;
+    flex-grow: 1;
 }
 
 @keyframes turning {
@@ -588,7 +592,8 @@ nav {
 
 #earth-svg {
     position: relative;
-    width: 70%;
+    flex-grow: 1;
+    width: 10%;
     z-index: 3;
     pointer-events: none;
     text-align: center;
@@ -836,7 +841,7 @@ button[type='submit']:hover {
     line-height: 0;
     z-index: 50;
     rotate: 180deg;
-    transform: translateY(109px);
+    transform: translateY(-109px) rotate(180deg);
 }
 
 .section-bottom svg {

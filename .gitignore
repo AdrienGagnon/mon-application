@@ -2,3 +2,4 @@
 dist
 .prettierrc
 node_modules
+models

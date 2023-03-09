@@ -1,6 +1,5 @@
-import * as THREE from '../../node_modules/three/build/three.module.js';
-// import { Renderer } from 'three';
-import { gsap, Expo } from 'https://cdn.skypack.dev/gsap@3.7.1';
+import * as THREE from 'three';
+import { gsap, Expo } from 'gsap';
 const scene = new THREE.Scene();
 const container = document.querySelector('#earth-div');
 
@@ -62,6 +61,22 @@ function animate() {
     renderer.render(scene, camera);
 }
 
+const section3 = document.querySelector('#section3');
+const resizeEarth = function () {
+    const width = section3.offsetWidth / 2;
+    const height = section3.offsetHeight / 2;
+    // this.width = this.container.offsetWidth;
+    // this.height = this.container.offsetHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+};
+
+const setupResize = () => {
+    window.addEventListener('resize', resizeEarth());
+};
+
+setupResize();
 scene.add(light);
 scene.add(sphere);
 animate();
@@ -133,11 +148,9 @@ const slidingShapes = function (entries) {
     const [entry] = entries;
     if (!entry.isIntersecting) {
         entry.target.classList.add('section--hidden');
-        console.log('la');
         sectionObserver.observe(entry.target);
     } else {
         entry.target.classList.remove('section--hidden');
-        console.log('ici');
         sectionObserver.observe(entry.target);
     }
 };

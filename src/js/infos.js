@@ -1,56 +1,7 @@
-import * as THREE from '../../node_modules/three/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.117.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
-// spinning spirals info page
 const scene = new THREE.Scene();
-
-// import { Renderer } from 'three';
-const addpillar = function () {
-    const camera = new THREE.PerspectiveCamera(
-        100,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
-
-    const renderer = new THREE.WebGL1Renderer({
-        canvas: document.querySelector('#spirals-svg'),
-        alpha: true,
-    });
-
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.setZ(30);
-
-    renderer.render(scene, camera);
-
-    const geometry = new THREE.CylinderBufferGeometry(15, 15, 50, 8);
-
-    const color = 0xffffff;
-    const intensity = 1;
-    // const light = new THREE.AmbientLight(color, intensity);
-
-    const pillarTexture = new THREE.TextureLoader().load(
-        '../src/img/gold-texture.jpg'
-    );
-
-    const cylinder = new THREE.Mesh(
-        geometry,
-        new THREE.MeshBasicMaterial({
-            map: pillarTexture,
-        })
-    );
-
-    function animate() {
-        requestAnimationFrame(animate);
-        cylinder.rotation.y += 0.002;
-        renderer.render(scene, camera);
-    }
-
-    animate();
-    scene.add(light);
-    scene.add(cylinder);
-};
 
 /////////////////////////
 
@@ -208,10 +159,10 @@ class Sketch {
         // add object
         this.addObjects(-10, -20);
         this.addObjects(10, -20);
-        this.addObjects(6, -30);
-        this.addObjects(-8, -35);
-        this.addObjects(4, -60);
-        this.addObjects(-7, -65);
+        this.addObjects(-10, -40);
+        this.addObjects(10, -40);
+        this.addObjects(-10, -60);
+        this.addObjects(10, -60);
 
         // scroll
         this.listenOnScroll();
@@ -219,6 +170,7 @@ class Sketch {
         // Add plane
         this.addPlane();
         this.addLight();
+        // this.addPiano();
     }
     ///////////////////////////////
 
@@ -297,13 +249,7 @@ class Sketch {
         }
 
         let curve = new THREE.CatmullRomCurve3(points);
-        let geometry = new THREE.TubeBufferGeometry(
-            curve,
-            400,
-            0.08,
-            50,
-            false
-        );
+        let geometry = new THREE.TubeGeometry(curve, 400, 0.08, 50, false);
 
         this.mesh = new THREE.Mesh(geometry, this.material);
         this.mesh.position.y = -5.5;
@@ -318,13 +264,65 @@ class Sketch {
         this.childrenEl = this.group.children;
     }
 
+    addPiano() {
+        /* 
+        // instantiate a loader
+        const loader = new OBJLoader()
+        // load a resource
+        loader.load(
+            // resource URL
+            './models/piano.obj',
+            // called when resource is loaded
+            function (object) {
+                console.log('object', object);
+                object.position.z = 10;
+                this.group.add(object);
+            },
+            // called when loading is in progresses
+            function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+            },
+            // called when loading has errors
+            function (error) {
+                console.log(`An error happened: ${error}`);
+            }
+        ); */
+
+        /* new OBJLoader().setPath('./models/Piano').load(
+            './models/Piano.obj',
+            function (object) {
+                object.position.set(0, 0, 0);
+                scene.add(object);
+            },
+            function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+            }
+        ); */
+        const objLoader = new OBJLoader();
+        objLoader.setResourcePath('public/models/');
+
+        console.log(objLoader.path);
+        objLoader.load(
+            'Piano.obj',
+            object => {
+                object.position.set(0, 0, -5);
+                scene.add(object);
+            },
+            function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+            },
+            function (error) {
+                console.log(`An error happened: ${error}`);
+            }
+        );
+    }
+
     addPillar(positionX, positionZ) {
-        const geometryPillar = new THREE.CylinderBufferGeometry(1, 1, 50, 8);
+        const geometryPillar = new THREE.CylinderGeometry(1, 1, 50, 8);
 
         const pillarTexture = new THREE.TextureLoader().load(
-            '../src/img/gold-texture.jpg'
+            '../img/gold-texture.jpg'
         );
-
         const cylinder = new THREE.Mesh(
             geometryPillar,
             new THREE.MeshPhongMaterial({
@@ -339,7 +337,7 @@ class Sketch {
     }
 
     addPlane() {
-        const geometry = new THREE.PlaneBufferGeometry(100, 500);
+        const geometry = new THREE.PlaneGeometry(100, 500);
         const material = new THREE.MeshPhongMaterial({
             color: 'rgb(22, 22, 22)',
             side: THREE.DoubleSide,
