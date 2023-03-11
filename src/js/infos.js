@@ -1,5 +1,14 @@
 import * as THREE from 'three';
+import { LineCurve } from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+
+// change nav background color on load
+
+const nav = document.querySelector('.nav-infos');
+nav.style.background =
+    'linear-gradient(45deg, rgb(75, 35, 17), rgb(160, 82, 45))';
+
+//////////////////////////////////////////////////
 
 const scene = new THREE.Scene();
 

@@ -43,7 +43,21 @@ body > canvas {
     height: 100%;
 }
 
-/* General conatiner */
+.nav-infos {
+    position: relative;
+
+    --text-base: 255, 255, 255;
+    --text-hover: 25, 32, 94;
+    --shadow-start: 252, 170, 129;
+    --shadow-end: 199, 101, 52;
+    --shadow-inner: 121, 44, 5;
+
+    --box-shadow-1: #c5714d;
+    --box-shadow-2: rgba(192, 92, 55, 0.7);
+    --box-shadow-3: #7e300f;
+}
+
+/* General container */
 .container-infos {
     display: grid;
     padding: 10rem 3rem 10rem 3rem;

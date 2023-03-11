@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { gsap, Expo } from 'gsap';
+import { ImageLoader } from 'three';
 const scene = new THREE.Scene();
 const container = document.querySelector('#earth-div');
 
@@ -37,9 +38,21 @@ const color = 0xffffff;
 const intensity = 1;
 const light = new THREE.AmbientLight(color, intensity);
 
+// const earthTexture = new THREE.TextureLoader().load(
+//     '../src/img/2k_earth_daymap.jpg'
+// );
+const image = new ImageLoader('../img/2k_earth_daymap.jpg');
+
 const earthTexture = new THREE.TextureLoader().load(
-    '../src/img/2k_earth_daymap.jpg'
+    '../src/img/2k_earth_normal_map.jpg',
+    function (obj) {
+        console.log(obj);
+    },
+    function (obj) {
+        console.log(obj);
+    }
 );
+
 const normalTexture = new THREE.TextureLoader().load(
     '../src/img/2k_earth_normal_map.jpg'
 );
@@ -61,10 +74,10 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-const section3 = document.querySelector('#section3');
+const earthDiv = document.querySelector('#earth-div');
 const resizeEarth = function () {
-    const width = section3.offsetWidth / 2;
-    const height = section3.offsetHeight / 2;
+    const width = earthDiv.offsetWidth;
+    const height = earthDiv.offsetHeight;
     // this.width = this.container.offsetWidth;
     // this.height = this.container.offsetHeight;
     renderer.setSize(width, height);
