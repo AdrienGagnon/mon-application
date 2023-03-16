@@ -62,6 +62,7 @@ html {
 }
 
 body {
+    position: relative;
     font-weight: 300;
     color: var(--color-font);
     line-height: 1.9;
@@ -862,6 +863,8 @@ button[type='submit']:hover {
 /* FOOTER */
 
 .footer {
+    position: absolute;
+
     bottom: 0;
     font-size: 1rem;
     display: flex;
@@ -871,7 +874,8 @@ button[type='submit']:hover {
     padding: 10px 3rem;
     background-color: var(--color-footer);
     color: var(--color-font-footer);
-    z-index: 10;
+    z-index: 15;
+    max-height: 60px;
 }
 
 #footer-infos {
@@ -896,6 +900,12 @@ button[type='submit']:hover {
     position: relative;
     flex-direction: column;
     flex: 1;
+}
+
+@media screen and (max-width: 650px) {
+    .footer-text {
+        display: none;
+    }
 }
 
 .footer-text > div {

@@ -4,8 +4,8 @@
     "description": "myProject",
     "default": "index.html",
     "scripts": {
-        "start": "parcel ./html/index.html",
-        "build": "parcel build ./html/index.html --dist-dir ./dist"
+        "start": "parcel ./public/index.html",
+        "build": "parcel build ./public/index.html --dist-dir ./dist"
     },
     "repository": {
         "type": "git",

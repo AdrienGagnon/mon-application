@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Adrien Gagnon" />
+        <meta
+            name="description"
+            content="This site aims to present myself and the things I can do using JavaScript, CSS, HTML and more."
+        />
+        <link rel="stylesheet" href="../css/main.css" />
+        <link
+            rel="shortcut icon"
+            href="../img/forest.png"
+            type="image/x-icon"
+        />
+        <!-- <link rel="stylesheet" href="assets/css/blobz.min.css" /> -->
+
+        <title>My app</title>
+        <script
+            type="module"
+            src="../js/infos.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <nav class="nav-infos">
+        <img class="logo" src="../img/logo-adrien.png" alt="logo-adrien" />
+        <ul class="nav-links">
+            <a class="menu-link nav-item" href="../../public/index.html"
+                >Menu principal</a
+            >
+            <a class="info-link nav-item" href="infos.html"
+                >Infos personnelles</a
+            >
+            <a class="photos-link nav-item" href="photos.html">Photos</a>
+            <a class="quiz-link nav-item" href="quiz.html">Quiz</a>
+        </ul>
+    </nav>
+    <body id="body-infos">
+        <iframe
+            class="pdf-cv hidden-cv"
+            src="../pdf/CV_AG_janvier_2023-prog.pdf"
+        ></iframe>
+        <div class="container-infos">
+            <div class="infos-section" id="resume">
+                <h1>Résumé</h1>
+                <p>
+                    Originairement formé en chimie, je m’intéresse à un futur en
+                    programmation. Je suis un développeur autodidacte curieux
+                    d’apprendre et prêt à m’adapter à un nouvel environnement.
+                    Mon efficacité et mon attention aux détails font de moi un
+                    atout dans une équipe de développeurs.
+                </p>
+                <div>
+                    <img
+                        src="../img/infos-img/chemistry.jpg"
+                        alt="web developement"
+                    />
+                    <img
+                        src="../img/infos-img/web-dev.jpg"
+                        alt="web developement"
+                    />
+                </div>
+                <img
+                    id="arrow"
+                    src="../img/infos-img/arrow.png"
+                    alt="web developement"
+                />
+            </div>
+            <div class="infos-section">
+                <h1>Formation</h1>
+                <ul class="formation-description">
+                    <div class="etude">
+                        <p>Baccalauréat en chimie</p>
+                        <p>2019-2022</p>
+                        <p>Régime coopératif</p>
+                        <p>Université de Sherbrooke</p>
+                    </div>
+                    <div class="etude">
+                        <p>Diplôme d’études collégiales</p>
+                        <p>2017-2019</p>
+                        <p>Sciences, Lettres et Arts</p>
+                        <p>Cégep de Sherbrooke</p>
+                    </div>
+                </ul>
+            </div>
+            <div class="infos-section">
+                <h1>Compétences</h1>
+                <div class="competences">
+                    <div class="langages">
+                        <h2>Langages maîtrisés</h2>
+                        <div class="block">
+                            <div class="langage">Python</div>
+                            <div class="langage">JavaScript</div>
+                            <div class="langage">HTML</div>
+                            <div class="langage">CSS</div>
+                        </div>
+                    </div>
+                    <div class="outils">
+                        <h2>Outils utilisés</h2>
+                        <div class="block">
+                            <div class="outil">GitHub</div>
+                            <div class="outil">VS Code</div>
+                        </div>
+                    </div>
+                    <div class="concepts-autres">
+                        <h2>Autres concepts familiers</h2>
+                        <div class="block">
+                            <div class="concept">Three.js</div>
+                            <div class="concept">AJAX</div>
+                            <div class="concept">Node.js</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="infos-section">
+                <h1>Comptétences linguistiques</h1>
+                <div class="langue">
+                    <h2>Français:</h2>
+                    <div class="cercles-langues">
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                    </div>
+                </div>
+                <div class="langue">
+                    <h2>Anglais:</h2>
+                    <div class="cercles-langues">
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <img
+                            src="../img/infos-img/green-circle.png"
+                            alt="green circle"
+                        />
+                        <div id="demi-cercle">
+                            <img
+                                src="../img/infos-img/green-circle.png"
+                                alt="green circle"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="infos-section">
+                <h1>Loisirs</h1>
+                <div class="section-loisir">
+                    <p>
+                        J'aime bien faire du sport, en particulier le badminton.
+                        J'ai fait de la compétition pendant longtemps, notamment
+                        avec les Volontaires du Cégep de Sherbrooke.
+                    </p>
+                </div>
+                <div class="section-loisir">
+                    <p>
+                        Je joue du piano pour mon plaisir personnel depuis que
+                        j'ai 10 ans. Voici une petite création pour un projet de
+                        Cégep et une interprétation (quelque peu maladroite)
+                        d'une pièce célèbre de Maurice Ravel: Gaspard de la
+                        nuit.
+                    </p>
+                    <!-- <iframe
+                        src="https://www.youtube.com/embed/9NryGfikwlA"
+                        title="Ambiance"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/WFdy4j1IV34"
+                        title="Ondine"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe> -->
+                </div>
+            </div>
+            <div class="infos-section">
+                <h1>PDF CV</h1>
+                <button id="visionner-cv">Visionner le PDF</button>
+
+                <a
+                    href="../pdf/CV_AG_janvier_2023-prog.pdf"
+                    download="CV_Adrien_Gagnon"
+                    >Télécharger le PDF</a
+                >
+            </div>
+        </div>
+        <footer class="footer" id="footer-infos">
+            <div class="footer-text">
+                <div>Ce site a été conçu par Adrien Gagnon.</div>
+                <div>Toutes les photos de paysages ont été prises par moi!</div>
+            </div>
+            <div class="plateformes">
+                <p>Mes plateformes:</p>
+                <ul class="plateformes-content">
+                    <li>
+                        <img src="../img/footer-icons/github-sign.png" alt="" />
+                        <a href="https://github.com/AdrienGagnon">GitHub</a>
+                    </li>
+                    <li>
+                        <img src="../img/footer-icons/linkedin.png" alt="" />
+                        <a href="https://linkedin.com/in/adrien-gagnon"
+                            >LinkedIn</a
+                        >
+                    </li>
+                    <li>
+                        <img src="../img/footer-icons/email.png" alt="" />
+                        <a href="mailto: adrine.gagnon25@outlook.com"
+                            >Send Email</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>
