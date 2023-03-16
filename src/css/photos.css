@@ -1,5 +1,8 @@
-.body {
+.body-container {
     display: flex;
+}
+
+.sidebar-container {
 }
 
 .sidebar {
@@ -9,9 +12,6 @@
     display: flex;
     flex-direction: column;
     background-color: var(--color-background-sidebar);
-}
-
-.container-sidebar {
 }
 
 .content-sidebar {
@@ -37,11 +37,15 @@
 }
 
 /* MAP */
-#map {
-    flex: 1;
-    height: 100%;
-    background-color: var(--color-light--1);
+#map-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0;
+    z-index: 50;
 }
+
+.leaflet-container
 
 /* Popup width is defined in JS using options */
 .leaflet-popup .leaflet-popup-content-wrapper {

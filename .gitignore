@@ -3,3 +3,4 @@ dist
 .prettierrc
 node_modules
 models
+.parcel-cache/data.mdb

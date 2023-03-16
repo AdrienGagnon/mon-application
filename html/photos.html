@@ -19,10 +19,8 @@
             href="../src/img/forest.png"
             type="image/x-icon"
         />
-        <!-- <link rel="stylesheet" href="assets/css/blobz.min.css" /> -->
         <title>My app</title>
-        <script type="module" src="../src/jsx/photos.jsx"></script>
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <!-- <script type="module" src="../src/jsx/photos.jsx"></script> -->
     </head>
     <nav>
         <img class="logo" src="../src/img/logo-adrien.png" alt="logo-adrien" />
@@ -36,7 +34,7 @@
         </ul>
     </nav>
     <body>
-        <div id="react-page"></div>
+        <div id="root"></div>
         <footer class="footer">
             <div class="footer-text">
                 <div>Ce site a été conçu par Adrien Gagnon.</div>
@@ -68,14 +66,8 @@
                 </ul>
             </div>
         </footer>
-        <script
-            src="https://unpkg.com/react@18/umd/react.development.js"
-            crossorigin
-        ></script>
-        <script
-            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-            crossorigin
-        ></script>
-        <script src="../src/jsx/photos.jsx"></script>
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="../src/jsx/photos.jsx" type="module"></script>
     </body>
 </html>

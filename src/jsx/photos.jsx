@@ -1,29 +1,28 @@
 'use strict';
 
-const e = React.createElement;
+import ReactDOM from 'react-dom/client';
+import React from 'react';
 
-class LikeButton extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { liked: false };
-    }
+import Sidebar from './sidebar';
+import Map from './map';
 
-    render() {
-        if (this.state.liked) {
-            return 'You liked this.';
-        }
-
-        // return e(
-        //     'button',
-        //     { onClick: () => this.setState({ liked: true }) },
-        //     'Like'
-        // );
-        return (
-            <button onClick={() => this.setState({ liked: true })}>Like</button>
-        );
-    }
+function App() {
+    return (
+        <div className="body-container">
+            <div className="sidebar-container">
+                <div className="sidebar">
+                    <h1>Click on a photo</h1>
+                    <div className="content-sidebar">
+                        <Sidebar />
+                    </div>
+                </div>
+            </div>
+            <div id="map-container">
+                <Map />
+            </div>
+        </div>
+    );
 }
 
-const domContainer = document.querySelector('#react-page');
-const root = ReactDOM.createRoot(domContainer);
-root.render(e(LikeButton));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
