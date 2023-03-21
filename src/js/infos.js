@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { LineCurve } from 'three';
+// import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 // change nav background color on load
 
@@ -136,11 +138,14 @@ class Sketch {
 
         // renderer
         this.group = new THREE.Group();
+        this.groupPiano = new THREE.Group();
         this.childrenEl = [];
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(this.width, this.height);
         this.renderer.setClearColor(0x000000, 1);
         this.renderer.outputEncoding = THREE.sRGBEncoding;
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         // container
         this.container = options.dom;
@@ -166,6 +171,8 @@ class Sketch {
         this.setupResize();
 
         // add object
+        this.importPiano();
+
         this.addObjects(-10, -20);
         this.addObjects(10, -20);
         this.addObjects(-10, -40);
@@ -179,16 +186,34 @@ class Sketch {
         // Add plane
         this.addPlane();
         this.addLight();
-        // this.addPiano();
     }
     ///////////////////////////////
 
     // Add light
     addLight() {
-        this.light = new THREE.PointLight(0xffffff, 0.5);
-        this.light.position.set(0, 0, -20);
+        // this.light = new THREE.PointLight(0xffffff, 0.5);
+        // this.light.position.set(0, 3, -20);
+        // this.light.castShadow = true;
+
+        this.light = new THREE.SpotLight(0xffffff, 5);
+        this.light.position.set(0, 20, -20);
+        this.light.angle = Math.PI / 6;
+        this.light.penumbra = 1;
+        this.light.decay = 2;
+        this.light.distance = 100;
         this.light.castShadow = true;
-        this.scene.add(this.light);
+
+        this.light.castShadow = true;
+        this.light.shadow.mapSize.width = 1024;
+        this.light.shadow.mapSize.height = 1024;
+        this.light.shadow.camera.near = 10;
+        this.light.shadow.camera.far = 200;
+        this.light.shadow.focus = 1;
+        this.groupPiano.add(this.light);
+        this.groupPiano.add(this.light.target);
+        this.light.target.position.z = -20;
+        const helper = new THREE.CameraHelper(this.light.shadow.camera);
+        this.scene.add(helper);
     }
 
     ///////////////////////////////
@@ -217,7 +242,7 @@ class Sketch {
         this.playhead = this.time % 1;
         this.material.uniforms.playhead.value = this.playhead;
         this.childrenEl.forEach(element => {
-            if (element.geometry.type === 'CylinderGeometry') return;
+            if (element.geometry?.type === 'CylinderGeometry') return;
             element.rotation.y = this.playhead * 2 * Math.PI;
         });
         requestAnimationFrame(this.render.bind(this));
@@ -273,56 +298,42 @@ class Sketch {
         this.childrenEl = this.group.children;
     }
 
-    addPiano() {
-        /* 
-        // instantiate a loader
-        const loader = new OBJLoader()
-        // load a resource
-        loader.load(
-            // resource URL
-            './models/piano.obj',
-            // called when resource is loaded
-            function (object) {
-                console.log('object', object);
-                object.position.z = 10;
-                this.group.add(object);
-            },
-            // called when loading is in progresses
-            function (xhr) {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-            },
-            // called when loading has errors
-            function (error) {
-                console.log(`An error happened: ${error}`);
-            }
-        ); */
+    addPiano(object) {
+        object.position.z = -60;
+        object.position.y = -3;
+        object.rotation.y = -Math.PI / 4;
+        object.scale.set(2, 2, 2);
+        object.receiveShadow = true;
 
-        /* new OBJLoader().setPath('./models/Piano').load(
-            './models/Piano.obj',
-            function (object) {
-                object.position.set(0, 0, 0);
-                scene.add(object);
-            },
-            function (xhr) {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-            }
-        ); */
-        const objLoader = new OBJLoader();
-        objLoader.setResourcePath('public/models/');
+        this.groupPiano.add(object);
+        this.scene.add(this.groupPiano);
+    }
 
-        console.log(objLoader.path);
-        objLoader.load(
-            'Piano.obj',
-            object => {
-                object.position.set(0, 0, -5);
-                scene.add(object);
-            },
-            function (xhr) {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-            },
-            function (error) {
-                console.log(`An error happened: ${error}`);
-            }
+    importPiano() {
+        const mtlLoader = new MTLLoader();
+        const path = require('./models/piano.obj');
+        const pathmtl = require('./models/piano.mtl');
+
+        mtlLoader.load(
+            pathmtl,
+            function (materials) {
+                materials.preload();
+
+                const objLoader = new OBJLoader();
+                objLoader.setMaterials(materials);
+                objLoader.load(
+                    path,
+                    this.addPiano.bind(this),
+                    function (xhr) {
+                        console.log(
+                            (xhr.loaded / xhr.total) * 100 + '% loaded'
+                        );
+                    },
+                    function (error) {
+                        console.log(`An error happened: ${error}`);
+                    }
+                );
+            }.bind(this)
         );
     }
 
@@ -354,6 +365,8 @@ class Sketch {
         const plane = new THREE.Mesh(geometry, material);
         plane.rotateX(Math.PI / 2);
         plane.translateZ(5);
+        plane.receiveShadow = true;
+
         this.scene.add(plane);
     }
 
@@ -364,9 +377,10 @@ class Sketch {
 
     moveOnScroll() {
         const container = document.querySelector('.container-infos');
-        const movement = (-100 * container.scrollTop) / container.scrollHeight;
-        this.camera.position.set(0, 0, movement);
-        this.light.position.set(0, 0, -20 + movement);
+        const movement = (-70 * container.scrollTop) / container.scrollHeight;
+        this.camera.position.set(0, 0, 0 + movement);
+        this.light.position.set(0, 20, -20 + movement);
+        this.light.target.position.z = -20 + movement;
     }
 }
 

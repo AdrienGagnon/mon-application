@@ -48,7 +48,7 @@ export const imageID = [
         coords: [52.37185989346697, 4.895886074989968],
     },
     {
-        id: 4,
+        id: 5,
         pays: 'Italie',
         ville: 'Tre Cime di Lavaredo',
         description: 'Situé dans les Alpes italliennes',
@@ -57,4 +57,4 @@ export const imageID = [
     },
 ];
 
-export const photosArray = [img0, img1, img2, img3, img4, img5, img6];
+export const photosArray = [img0, img1, img2, img3, img4, img5];

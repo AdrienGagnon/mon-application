@@ -23,6 +23,8 @@
     flex-direction: column;
     flex-basis: 50rem;
 
+    /* visibility: hidden; */
+
     width: 600px;
     height: 80%;
 
@@ -119,6 +121,11 @@
 .leaflet-container {
     height: 100rem;
     z-index: 0;
+}
+
+.img-map {
+    width: 100px;
+    height: 100px;
 }
 
 /* Popup width is defined in JS using options */

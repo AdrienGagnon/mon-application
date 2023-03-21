@@ -1,4 +1,5 @@
-import { MapContainer, TileLayer, useMap } from 'react-leaflet/lib';
+import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet/lib';
+import MarkersAndPopups from './Imagespreview';
 
 export default function Map() {
     const coords = [48.85591395627553, 2.339240864028423];
