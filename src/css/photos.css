@@ -124,8 +124,8 @@
 }
 
 .img-map {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: auto;
 }
 
 /* Popup width is defined in JS using options */

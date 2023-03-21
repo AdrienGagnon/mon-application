@@ -4,7 +4,7 @@ import img2 from './Florence-Santa-Maria-del-Fiore.jpg';
 import img3 from './paris-eiffel.jpg';
 import img4 from './Tre-Cime-Di-Lavaredo-north.jpg';
 import img5 from './Corniglia-maisons.jpg';
-import img6 from './Corniglia-maisons.jpg';
+import img6 from './paysage-sassolungo.jpg';
 
 export const imageID = [
     {
@@ -37,7 +37,7 @@ export const imageID = [
         ville: 'Paris',
         description: 'La tour Eiffel',
         imgName: 'paris-eiffel.jpg',
-        coords: [52.37185989346697, 4.895886074989968],
+        coords: [48.857263, 2.296041],
     },
     {
         id: 4,
@@ -45,16 +45,16 @@ export const imageID = [
         ville: 'Tre Cime di Lavaredo',
         description: 'Situé dans les Alpes italliennes',
         imgName: 'Tre-Cime-Di-Lavaredo-north.jpg',
-        coords: [52.37185989346697, 4.895886074989968],
+        coords: [46.626688501402725, 12.312370438882837],
     },
     {
-        id: 5,
+        id: 6,
         pays: 'Italie',
-        ville: 'Tre Cime di Lavaredo',
+        ville: 'Seceda',
         description: 'Situé dans les Alpes italliennes',
-        imgName: 'Tre-Cime-Di-Lavaredo-north.jpg',
-        coords: [52.37185989346697, 4.895886074989968],
+        imgName: 'paysage-sassolungo.jpg',
+        coords: [46.59982292328854, 11.735825571003026],
     },
 ];
 
-export const photosArray = [img0, img1, img2, img3, img4, img5];
+export const photosArray = [img0, img1, img2, img3, img4, img5, img6];

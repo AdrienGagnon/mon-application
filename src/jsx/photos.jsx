@@ -18,8 +18,10 @@ import Map from './map';
 
 function App() {
     const [activeImg, setActiveImg] = useState(null);
+
     // const coords = [48.85591395627553, 2.339240864028423];
     const coords = [52.37185989346697, 4.895886074989968];
+
     const myIcon = L.icon({
         iconUrl: require('../img/photos-page/location-pointer.png'),
         iconSize: [64, 64],
@@ -30,10 +32,7 @@ function App() {
         shadowAnchor: null,
     });
 
-    const handleHover = function () {
-        setActiveImg(img);
-        console.log('activeImg');
-    };
+    const removeActiveMarker = function (img) {};
 
     return (
         <>
@@ -56,33 +55,25 @@ function App() {
                 />
                 {imageID.map(img => {
                     return (
-                        <Marker
-                            key={img.id}
-                            position={[img.coords[0], img.coords[1]]}
-                            onClick={handleHover}
-                            // eventHandlers={{
-                            //     click: e => {
-                            //         handleHover(img);
-                            //     },
-                            // }}
-                            icon={myIcon}
-                        />
+                        (activeImg === null || activeImg.id !== img.id) && (
+                            <Marker
+                                key={img.id}
+                                position={[img.coords[0], img.coords[1]]}
+                                icon={myIcon}
+                                eventHandlers={{
+                                    click: e => {
+                                        setActiveImg(img);
+                                    },
+                                }}
+                            />
+                        )
                     );
                 })}
                 {activeImg && (
                     <Popup
-                        position={[activeImg.coords[0], activeImg.coords[1]]}
-                        onClose={() => {
-                            console.log('bonj');
-                            setActiveImg(null);
-                        }}
-                        eventHandlers={{
-                            click: e => {
-                                console.log('allo');
-                                setActiveImg(null);
-                                handleHover(img);
-                            },
-                        }}
+                        setView={activeImg.coords}
+                        setZoom={2}
+                        position={activeImg.coords}
                     >
                         <img
                             className="img-map"
