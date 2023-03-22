@@ -1,7 +1,7 @@
 'use strict';
 
 import ReactDOM from 'react-dom/client';
-import React, { useState } from 'react';
+import React, { useState, createContext, Component } from 'react';
 
 import {
     MapContainer,
@@ -9,6 +9,7 @@ import {
     TileLayer,
     useMap,
     Popup,
+    ZoomControl,
 } from 'react-leaflet/lib';
 
 import Imagespreview from './Imagespreview';
@@ -16,11 +17,11 @@ import { imageID, photosArray } from '../img/photos-page';
 import { iconPointer } from '../img/photos-page/location-pointer.png';
 import Map from './map';
 
-function App() {
-    const [activeImg, setActiveImg] = useState(null);
+function stateImg(img) {}
 
-    // const coords = [48.85591395627553, 2.339240864028423];
-    const coords = [52.37185989346697, 4.895886074989968];
+function MarksAndPops() {
+    const map = useMap();
+    const [activeImg, setActiveImg] = useState(null);
 
     const myIcon = L.icon({
         iconUrl: require('../img/photos-page/location-pointer.png'),
@@ -32,7 +33,45 @@ function App() {
         shadowAnchor: null,
     });
 
-    const removeActiveMarker = function (img) {};
+    return (
+        <>
+            {imageID.map(img => {
+                return (
+                    (activeImg === null || activeImg.id !== img.id) && (
+                        <Marker
+                            animate={true}
+                            key={img.id}
+                            position={[img.coords[0], img.coords[1]]}
+                            icon={myIcon}
+                            eventHandlers={{
+                                click: e => {
+                                    setActiveImg(img);
+                                    map.flyTo(img.coords, map.getZoom(), {
+                                        animate: true,
+                                        duration: 1,
+                                    });
+                                },
+                            }}
+                        />
+                    )
+                );
+            })}
+            {activeImg && (
+                <Popup
+                    setView={activeImg.coords}
+                    setZoom={2}
+                    position={activeImg.coords}
+                >
+                    <img className="img-map" src={photosArray[activeImg.id]} />
+                </Popup>
+            )}
+        </>
+    );
+}
+
+function App() {
+    // const coords = [48.85591395627553, 2.339240864028423];
+    const coords = [45, 7];
 
     return (
         <>
@@ -42,7 +81,7 @@ function App() {
                     <Imagespreview />
                 </div>
             </div>
-            <MapContainer center={coords} zoom={12}>
+            <MapContainer center={coords} zoom={5}>
                 <TileLayer
                     // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     // attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -53,34 +92,7 @@ function App() {
                     maxZoom={18}
                     ext="png"
                 />
-                {imageID.map(img => {
-                    return (
-                        (activeImg === null || activeImg.id !== img.id) && (
-                            <Marker
-                                key={img.id}
-                                position={[img.coords[0], img.coords[1]]}
-                                icon={myIcon}
-                                eventHandlers={{
-                                    click: e => {
-                                        setActiveImg(img);
-                                    },
-                                }}
-                            />
-                        )
-                    );
-                })}
-                {activeImg && (
-                    <Popup
-                        setView={activeImg.coords}
-                        setZoom={2}
-                        position={activeImg.coords}
-                    >
-                        <img
-                            className="img-map"
-                            src={photosArray[activeImg.id]}
-                        />
-                    </Popup>
-                )}
+                <MarksAndPops />
             </MapContainer>
         </>
     );

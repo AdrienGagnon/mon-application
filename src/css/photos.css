@@ -3,6 +3,8 @@
 }
 
 #root {
+    display: flex;
+    flex-direction: row;
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -18,22 +20,18 @@
 }
 
 .sidebar {
-    position: absolute;
     display: flex;
     flex-direction: column;
-    flex-basis: 50rem;
 
     /* visibility: hidden; */
 
-    width: 600px;
-    height: 80%;
+    width: 40%;
+    height: 100%;
 
     background-color: var(--color-dark--1);
     background-color: var(--color-background-sidebar);
 
     z-index: 10;
-    margin: 1rem;
-    border-radius: 15px;
     padding: 1rem;
     box-shadow: 0 0 20px rgb(0, 0, 0);
 }
@@ -48,6 +46,7 @@
 
 .photo-container {
     display: grid;
+    position: relative;
     grid-template-columns: 1fr 3fr;
     padding: 1rem;
     margin: 1rem;
@@ -119,8 +118,11 @@
 }
 
 .leaflet-container {
-    height: 100rem;
+    height: 100%;
+    width: 100%;
     z-index: 0;
+
+    scale: 1.1;
 }
 
 .img-map {
