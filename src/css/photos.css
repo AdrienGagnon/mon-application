@@ -32,7 +32,6 @@
     background-color: var(--color-background-sidebar);
 
     z-index: 10;
-    padding: 1rem;
     box-shadow: 0 0 20px rgb(0, 0, 0);
 }
 
@@ -40,8 +39,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
+    padding: 1rem;
+    padding-block: 300px;
     overflow-y: scroll;
+
+    -webkit-mask-image: linear-gradient(to top, #0000 30%, #000, #000, #0000);
 }
 
 .photo-container {
@@ -54,6 +56,25 @@
     background: rgb(71, 71, 71);
     border-radius: 100px;
     box-shadow: 0 0 10px rgb(0, 0, 0);
+    z-index: 100;
+    transition-duration: 300ms;
+}
+
+.photo-container:active,
+.photo-container:focus,
+.photo-container:hover {
+    transform: scale(1.1);
+}
+
+.photo-containerNotVisible {
+    scale: 1.5;
+    transition-duration: 3s;
+}
+
+.photo-containerNotVisible > div {
+    transition-duration: 3s;
+
+    display: none;
 }
 
 .img-preview {

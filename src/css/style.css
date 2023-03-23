@@ -42,8 +42,8 @@
     --color-nav-btn-active: #ffffff;
     --color-font: white;
     --color-font-footer: #aaa;
-    --color-footer: #42484d;
-
+    /* --color-footer: #42484d; */
+    --color-footer: rgb(59, 58, 58);
     --padding-section: 20rem;
 }
 
