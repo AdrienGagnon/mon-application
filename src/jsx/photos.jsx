@@ -19,7 +19,31 @@ class App extends Component {
     }
 
     updateState = img => {
+        const currentCard = document
+            .querySelector('.content-sidebar')
+            .children.item(img.id);
+        const contentSidebar = document.querySelector('.content-sidebar');
+
+        // remove aspect of old active card
+        const oldActiveCard = document.querySelector('.activeCard');
+        if (oldActiveCard !== null) {
+            oldActiveCard.classList.remove('activeCard');
+        }
+
+        // active image
         this.setState(() => ({ activeImg: img }));
+
+        // scroll to
+        // contentSidebar.scrollTo({
+        //     top: img.id * 100 + 150,
+        //     behavior: 'smooth',
+        // });
+
+        console.log('combien pour top sidebar', contentSidebar.scrollTop);
+        console.log('par rapport au top du container', currentCard.offsetTop);
+
+        // change aspect of current card
+        currentCard.classList.add('activeCard');
     };
 
     saveMap = mapInst => {
@@ -59,7 +83,7 @@ class App extends Component {
     }
 
     loaded() {
-        window.addEventListener('DOMContentLoaded', this.shrinkCards);
+        document.addEventListener('DOMContentLoaded', this.shrinkCards);
     }
 
     render() {
