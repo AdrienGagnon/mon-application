@@ -31,11 +31,6 @@ class Imagespreview extends Component {
                             <div className="img-description-container">
                                 <div className="img-description flow">
                                     <div className="img-lieu flow">
-                                        <img
-                                            className="icon-photo"
-                                            src={require('../img/photos-page/icon-photo.png')}
-                                            alt=""
-                                        />
                                         {image.ville}, {image.pays}
                                     </div>
                                     <p className="card__description">
