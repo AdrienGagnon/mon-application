@@ -6,7 +6,32 @@ import { photosArray } from '../img/photos-page';
 import { Marker } from 'react-leaflet/lib';
 import { Marker, Popup } from 'react-leaflet/lib';
 
+import next from './next.png';
+
 class MarksAndPops extends Component {
+    goToNext(direction) {
+        let newImg =
+            imageID[
+                this.props.state.activeImg.id + (direction === 'left' ? -1 : 1)
+            ];
+        if (newImg === undefined) {
+            if (direction === 'left') {
+                newImg = imageID[imageID.length - 1];
+            } else {
+                newImg = imageID[0];
+            }
+        }
+        this.props.state.map.flyTo(
+            newImg.coords,
+            this.props.state.map.getZoom(),
+            {
+                animate: true,
+                duration: 1,
+            }
+        );
+        this.props.updateState(newImg);
+    }
+
     render() {
         const myIcon = L.icon({
             iconUrl: require('../img/photos-page/location-pointer.png'),
@@ -17,6 +42,7 @@ class MarksAndPops extends Component {
             shadowSize: null,
             shadowAnchor: null,
         });
+
         return (
             <>
                 {imageID.map(img => {
@@ -47,6 +73,7 @@ class MarksAndPops extends Component {
                 })}
                 {this.props.state.activeImg && (
                     <Popup
+                        className="popup-container"
                         setView={this.props.state.activeImg.coords}
                         setZoom={2}
                         position={this.props.state.activeImg.coords}
@@ -55,6 +82,28 @@ class MarksAndPops extends Component {
                             className="img-map"
                             src={photosArray[this.props.state.activeImg.id]}
                         />
+                        <div
+                            onClick={e => this.goToNext('left')}
+                            className="arrows-wrapper arrows-left"
+                        >
+                            <span className="arrow first-arrow next ">
+                                <img src={next} alt="" />
+                            </span>
+                            <span className="arrow second-arrow next ">
+                                <img src={next} alt="" />
+                            </span>
+                        </div>
+                        <div
+                            onClick={e => this.goToNext('right')}
+                            className="arrows-wrapper arrows-right"
+                        >
+                            <span className="arrow first-arrow next ">
+                                <img src={next} alt="" />
+                            </span>
+                            <span className="arrow second-arrow next ">
+                                <img src={next} alt="" />
+                            </span>
+                        </div>
                     </Popup>
                 )}
             </>

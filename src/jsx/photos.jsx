@@ -13,15 +13,11 @@ class App extends Component {
         activeImg: null,
     };
 
-    constructor() {
-        super();
-        this.loaded();
-    }
-
     updateState = img => {
         const currentCard = document
             .querySelector('.content-sidebar')
             .children.item(img.id);
+        const currentCardImg = currentCard.querySelector('.photo-container');
         const contentSidebar = document.querySelector('.content-sidebar');
 
         // remove aspect of old active card
@@ -34,57 +30,16 @@ class App extends Component {
         this.setState(() => ({ activeImg: img }));
 
         // scroll to
-        // contentSidebar.scrollTo({
-        //     top: img.id * 100 + 150,
-        //     behavior: 'smooth',
-        // });
-
-        console.log('combien pour top sidebar', contentSidebar.scrollTop);
-        console.log('par rapport au top du container', currentCard.offsetTop);
+        const topOff = currentCard.offsetTop;
+        contentSidebar.scrollTop = topOff - 450;
 
         // change aspect of current card
-        currentCard.classList.add('activeCard');
+        currentCardImg.classList.add('activeCard');
     };
 
     saveMap = mapInst => {
         this.setState(() => ({ map: mapInst }));
     };
-
-    isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <=
-                (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <=
-                (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    isCardVisible() {
-        const cards = document.querySelectorAll('.photo-container');
-        const allo = this.isElementInViewport;
-        console.log('yep');
-        for (const card of cards) {
-            allo
-                ? card.classList.add('photo-containerNotVisible')
-                : card.classList.remove('photo-containerNotVisible');
-        }
-    }
-
-    shrinkCards() {
-        const sidebarContainer = document.querySelector('content-sidebar');
-        console.log(sidebarContainer);
-        sidebarContainer.addEventListener('scroll', this.isCardVisible);
-        document.addEventListener('DOMContentLoaded', this.isCardVisible);
-        window.addEventListener('scroll', this.isCardVisible);
-        window.addEventListener('resize', this.isCardVisible);
-    }
-
-    loaded() {
-        document.addEventListener('DOMContentLoaded', this.shrinkCards);
-    }
 
     render() {
         const coords = [45, 7];

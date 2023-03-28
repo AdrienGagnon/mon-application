@@ -1,0 +1,34 @@
+TODO:
+
+✅
+
+-   general:
+
+    -   traduction
+    -   CV
+
+-   menu:
+
+    -   animation waves
+    -   adjust proportion on contact form
+    -   correct earth on quiz
+    -   better infos section
+
+-   infos:
+
+    -   correct shadows barckgroud
+    -   better looking cards
+    -   blur animation on cards
+    -   correct pillar texture
+
+-   photos:
+
+    -   go to sidebar
+    -   x in popup
+    -   cleaner popup
+    -   @media for mobile
+    -   correct centered photo preview description
+
+-   quiz:
+
+    -   API with react
