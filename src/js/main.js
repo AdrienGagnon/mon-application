@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { gsap, Expo } from 'gsap';
 import { ImageLoader } from 'three';
+import imgArrowFull from '../img/menu-principal/up-arrow-full.png';
+import imgArrowEmpty from '../img/menu-principal/up-arrow-full.png';
 const scene = new THREE.Scene();
 const container = document.querySelector('#earth-div');
 
@@ -149,22 +151,18 @@ gsap.ticker.add(() => {
 /////////////////////////
 // Sliding in sections
 
-// Check on which sections current state
-
-const section1Top = document.querySelector('.section1-top-shape');
-const section1Bottom = document.querySelector('.section1-bottom-shape');
-const section3Top = document.querySelector('.section3-top-shape');
-const section3Bottom = document.querySelector('.section3-bottom-shape');
+const sectionBottom = document.querySelectorAll('.section-bottom');
+const sectionTop = document.querySelectorAll('.section-top');
 
 // Sliding sections 1 and 3
 const slidingShapes = function (entries) {
     const [entry] = entries;
     if (!entry.isIntersecting) {
-        entry.target.classList.add('section--hidden');
-        sectionObserver.observe(entry.target);
+        const shapeSVG = entry.target.querySelectorAll('.shape');
+        shapeSVG.forEach(el => el.classList.add('section--hidden'));
     } else {
-        entry.target.classList.remove('section--hidden');
-        sectionObserver.observe(entry.target);
+        const shapeSVG = entry.target.querySelectorAll('.shape');
+        shapeSVG.forEach(el => el.classList.remove('section--hidden'));
     }
 };
 
@@ -176,13 +174,20 @@ const sectionObserver = new IntersectionObserver(slidingShapes, {
 
 // Adding the hidden class to the sections
 const observeSection = function (sections) {
-    sections.forEach(section => {
-        section.classList.add('section--hidden');
+    const allSections = [
+        sections[0][0],
+        sections[0][1],
+        sections[1][0],
+        sections[1][1],
+    ];
+    allSections.forEach(section => {
+        const shapeSVG = section.querySelectorAll('.shape');
+        shapeSVG.forEach(el => el.classList.add('section--hidden'));
         sectionObserver.observe(section);
     });
 };
 
-observeSection([section1Top, section1Bottom, section3Top, section3Bottom]);
+observeSection([sectionBottom, sectionTop]);
 
 ///////////////////////////////////////////////////
 // Scrolling to sections
@@ -190,6 +195,8 @@ const toInfos = document.querySelector('.to-section-infos');
 const toPhotos = document.querySelector('.to-section-photos');
 const toQuiz = document.querySelector('.to-section-quiz');
 const toTop = document.querySelector('.revenirTop');
+
+const toTopImage = document.querySelector('.toTop');
 
 toInfos.addEventListener('click', function (e) {
     section1.scrollIntoView({

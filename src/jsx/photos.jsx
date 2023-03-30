@@ -12,6 +12,18 @@ class App extends Component {
     state = {
         activeImg: null,
     };
+    constructor() {
+        super();
+        this.toggleMenu();
+    }
+
+    toggleMenu() {
+        const menu = document.getElementById('menu-toggle');
+        menu.addEventListener('click', function () {
+            menu.classList.toggle('open');
+            document.getElementById('nav-photos').classList.toggle('open');
+        });
+    }
 
     updateState = img => {
         const currentCard = document

@@ -9,7 +9,7 @@
             name="description"
             content="This site aims to present myself and the things I can do using JavaScript, CSS, HTML and more."
         />
-        <link rel="stylesheet" href="../css/main.css" />
+        <link rel="stylesheet" href="../css/photos.css" />
         <link
             href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900|Ubuntu:400,500,700"
             rel="stylesheet"
@@ -19,7 +19,7 @@
             href="../img/menu-principal/forest.png"
             type="image/x-icon"
         />
-        <title>My app</title>
+        <title>Album photo</title>
         <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -31,9 +31,8 @@
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
             crossorigin=""
         ></script>
-        <!-- <script type="module" src="../src/jsx/photos.jsx"></script> -->
     </head>
-    <nav>
+    <nav id="nav-photos">
         <img
             class="logo"
             src="../img/menu-principal/logo-adrien.png"
@@ -50,6 +49,11 @@
             <a class="quiz-link nav-item" href="quiz.html">Quiz</a>
         </ul>
     </nav>
+    <a id="menu-toggle" class="open">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
     <body class="body-photos">
         <div id="root"></div>
         <footer class="footer">
@@ -72,7 +76,7 @@
                     </li>
                     <li>
                         <img src="../img/footer-icons/email.png" alt="" />
-                        <a href="mailto: adrine.gagnon25@outlook.com">Email</a>
+                        <a href="mailto: adrien.gagnon25@outlook.com">Email</a>
                     </li>
                 </ul>
             </div>

@@ -1,3 +1,5 @@
+@import 'general.css';
+
 :root {
     --color-pillar-1: rgb(240, 230, 140);
     --color-pillar-2: rgb(160, 82, 45);
@@ -29,6 +31,7 @@
 body {
     /* overflow-y: hidden; */
     font-size: 1.6rem;
+    overflow: hidden;
 }
 
 body > canvas {
@@ -66,7 +69,7 @@ body > canvas {
     grid-template-columns: 1fr;
     column-gap: 5rem;
     row-gap: 5rem;
-    height: 80rem;
+    height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }

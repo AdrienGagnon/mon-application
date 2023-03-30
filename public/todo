@@ -9,8 +9,9 @@ TODO:
 
 -   menu:
 
-    -   animation waves
-    -   adjust proportion on contact form
+    ✅ animation waves
+    ✅ adjust proportion on contact form
+
     -   correct earth on quiz
     -   better infos section
 
@@ -23,11 +24,15 @@ TODO:
 
 -   photos:
 
-    -   go to sidebar
+    ✅ go to sidebar
+
     -   x in popup
     -   cleaner popup
     -   @media for mobile
     -   correct centered photo preview description
+    -   zoom in option
+    -   fix click on map and marker reappear
+    -   arrow keys for switching between photos
 
 -   quiz:
 
