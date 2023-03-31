@@ -1,8 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { imageID } from '../img/photos-page';
-import { photosArray } from '../img/photos-page';
+import { imageID } from '../../img/photos-page';
+import { photosArray } from '../../img/photos-page';
 
 class Imagespreview extends Component {
     render() {

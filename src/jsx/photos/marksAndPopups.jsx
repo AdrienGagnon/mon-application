@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { imageID } from '../img/photos-page';
-import { photosArray } from '../img/photos-page';
+import { imageID } from '../../img/photos-page';
+import { photosArray } from '../../img/photos-page';
 
 import { Marker } from 'react-leaflet/lib';
 import { Marker, Popup } from 'react-leaflet/lib';
@@ -34,7 +34,7 @@ class MarksAndPops extends Component {
 
     render() {
         const myIcon = L.icon({
-            iconUrl: require('../img/photos-page/location-pointer.png'),
+            iconUrl: require('../../img/photos-page/location-pointer.png'),
             iconSize: [64, 64],
             iconAnchor: [32, 64],
             popupAnchor: null,

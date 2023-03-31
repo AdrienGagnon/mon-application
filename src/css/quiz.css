@@ -3,12 +3,17 @@
 body {
     overflow: hidden;
     height: 100vh;
+    width: 100%;
 }
 
 #root-quiz {
     width: 100%;
     height: 100%;
-    background-color: var(--color-background);
+    background-color: black;
+}
+
+#menu-toggle {
+    background-color: black;
 }
 
 .menu-selection-page {
@@ -21,11 +26,22 @@ body {
     height: 100%;
 }
 
+.menu-selection-page::after {
+    content: '';
+    position: absolute;
+    display: block;
+    background-color: green;
+    opacity: 1;
+    z-index: 10000;
+}
+
 .earth-rotating-video {
     height: 100%;
+    width: 100%;
     object-fit: cover;
     position: absolute;
-    top: 0;
+
+    transition: 5s cubic-bezier(0.1, 0.2, 0.8, 1);
 }
 
 .options-selection-container {
@@ -35,16 +51,21 @@ body {
     width: 100%;
 
     padding-inline: 55% 5%;
-    padding-bottom: 5rem;
 
     font-size: 1.6rem;
 
     z-index: 10;
 }
 
+.form-container-quiz {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .form-choose-quiz {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     font: black;
     gap: 10px;
 }
@@ -54,20 +75,17 @@ body {
     padding-right: 20px;
 }
 
-input[type='text'] {
-    display: flex;
-    width: 100%;
-    padding: 12px;
+select[type='text'],
+input[type='text'],
+option {
     color: black;
-    text-align: start;
     border: 1px solid #000000;
     border-radius: 4px;
-    box-sizing: border-box;
     box-shadow: 0 0 10px rgb(0, 0, 0);
     resize: none;
 }
 
-button[type='submit'] {
+button[type='button'] {
     font: var(--color-black);
     background-color: var(--color-section-3);
     color: rgb(255, 255, 255);
@@ -75,12 +93,107 @@ button[type='submit'] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin: 10px;
+    margin: auto;
     transition-duration: 0.5s;
     box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
-button[type='submit']:hover {
-    transform: translateY(10px);
+button[type='button']:hover {
+    transform: translateY(5px);
     box-shadow: 0 0 10px rgb(100, 100, 100);
+}
+
+/* /////////////////////////////////////////////////// */
+/* Transition: menu to question */
+/* /////////////////////////////////////////////////// */
+
+.transition-shapes {
+    --color1: rgb (50, 52, 62);
+    --color2: rgb (64, 76, 84);
+    --color3: rgb (68, 107, 106);
+    --color4: rgb (71, 141, 115);
+    --color5: rgb (91, 169, 93);
+    width: 100%;
+    aspect-ratio: 1;
+    /* z-index: 100; */
+    position: absolute;
+    top: 0;
+
+    /* animation: transitionShapes 3s forwards;
+    animation-delay: 2s; */
+}
+.transition-shapes > span {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(0%) rotate(45deg);
+}
+
+.transition-shapes > :nth-child(1) {
+    transform: translate(10%) rotate(45deg);
+    background-color: var(--color1);
+    /* z-index: 110; */
+}
+
+.transition-shapes > :nth-child(2) {
+    transform: translate(20%) rotate(45deg);
+    background-color: var(--color2);
+    /* z-index: 12; */
+}
+
+.transition-shapes > :nth-child(3) {
+    transform: translate(30%) rotate(45deg);
+    background-color: var(--color3);
+    /* z-index: 13; */
+}
+
+.transition-shapes > :nth-child(4) {
+    transform: translate(40%) rotate(45deg);
+    background-color: var(--color4);
+    /* z-index: 14; */
+}
+
+.transition-shapes > :nth-child(5) {
+    transform: translate(50%) rotate(45deg);
+    background-color: var(--color5);
+    /* z-index: 15; */
+}
+
+@keyframes transitionShapes {
+    100% {
+        transform: translate(-110%);
+    }
+}
+
+.menu-selection-page.menuSelectionTransistion {
+}
+
+.menuSelectionTransistion {
+    transform: translate(50%, 30%) scale(3);
+}
+
+/* /////////////////////////////////////////////////// */
+/* Question Page */
+/* /////////////////////////////////////////////////// */
+
+.question-page {
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/quiz-img/space.jpg');
+}
+
+/* ////////////////////// */
+/* Drapeau */
+/* ////////////////////// */
+.question-drapeau-container {
+    margin: auto;
+    width: 300px;
+}
+
+.question-drapeau {
+    width: 100%;
+    height: 100%;
 }

@@ -89,7 +89,8 @@ nav {
     transition-duration: 1s;
 }
 
-#nav-photos.open {
+#nav-photos.open,
+#nav-quiz.open {
     display: none;
 }
 
