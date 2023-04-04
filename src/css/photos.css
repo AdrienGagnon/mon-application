@@ -109,6 +109,7 @@
     border-radius: 10rem;
     box-shadow: 0 0 10px rgb(0, 0, 0);
     transition-duration: 300ms;
+    cursor: pointer;
 }
 
 .img-preview {

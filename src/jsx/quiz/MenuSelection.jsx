@@ -46,9 +46,9 @@ export default function MenuSelection(props) {
                         </select>
                         <label htmlFor="reponse">À répondre:</label>
                         <select id="reponse" name="reponse" type="text">
-                            <option value="le nom du pays">Nom du pays</option>
-                            <option value="la capitale">Capitale</option>
-                            <option value="le drapeau">Drapeau</option>
+                            <option value="au nom du pays">Nom du pays</option>
+                            <option value="à la capitale">Capitale</option>
+                            <option value="au drapeau">Drapeau</option>
                         </select>
                         <label htmlFor="mode">Mode de réponse:</label>
                         <select id="mode" name="mode" type="text">

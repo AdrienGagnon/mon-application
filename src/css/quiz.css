@@ -1,7 +1,12 @@
 @import 'general.css';
 
+:root {
+    --background-card-question: rgba(0, 0, 0, 0.5);
+}
+
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-x: hidden;
     height: 100vh;
     width: 100%;
 }
@@ -65,7 +70,6 @@ body {
 
 .form-choose-quiz {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     font: black;
     gap: 10px;
 }
@@ -85,7 +89,7 @@ option {
     resize: none;
 }
 
-button[type='button'] {
+.submitQuizParameters {
     font: var(--color-black);
     background-color: var(--color-section-3);
     color: rgb(255, 255, 255);
@@ -98,7 +102,7 @@ button[type='button'] {
     box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
-button[type='button']:hover {
+.submitQuizParameters:hover {
     transform: translateY(5px);
     box-shadow: 0 0 10px rgb(100, 100, 100);
 }
@@ -106,6 +110,30 @@ button[type='button']:hover {
 /* /////////////////////////////////////////////////// */
 /* Transition: menu to question */
 /* /////////////////////////////////////////////////// */
+
+.quiz-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    flex: 1 1 1px;
+}
+
+.quiz-container::before {
+    content: '';
+    position: absolute;
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    filter: blur(1px);
+
+    background-image: url('../img/quiz-img/grenoble-avion.jpg');
+    background-size: cover;
+}
 
 .transition-shapes {
     --color1: rgb (50, 52, 62);
@@ -180,20 +208,406 @@ button[type='button']:hover {
 /* /////////////////////////////////////////////////// */
 
 .question-page {
-    width: 100%;
-    height: 100%;
-    background-image: url('../img/quiz-img/space.jpg');
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    z-index: 1;
+    margin: 5rem;
+    padding: 3rem;
+    border-radius: 1rem;
+    background-color: var(--background-card-question);
 }
 
 /* ////////////////////// */
-/* Drapeau */
+/* Question containers */
 /* ////////////////////// */
-.question-drapeau-container {
+
+.question-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    font-size: 1.6rem;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.question-title {
+    padding-inline: 2rem;
+    text-shadow: 2px 1px #00040a;
+}
+
+.reponse-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-block: 5rem;
+    gap: 2rem;
+    font-size: 2rem;
+}
+
+.reponse-container * {
+    color: #000000;
+}
+
+.stats-question {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background-color: white;
+    padding: 1rem 5rem;
+
+    border: #000000 solid 2px;
+    border-radius: 2rem;
+    filter: drop-shadow(8px 8px 5px black);
+}
+
+.nextQuestion {
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    position: relative;
+    font-size: 2rem;
+    overflow: hidden;
+    transform: 300ms all;
+}
+
+.nextQuestion:before {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    background: black;
+    height: 5px;
+    width: 40px;
+    transform: translateX(-105px);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     margin: auto;
-    width: 300px;
+}
+
+.nextQuestion:after {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    color: black;
+    border-top: 5px solid;
+    border-left: 5px solid;
+    transform: rotateZ(135deg) translateX(-100px);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.nextQuestion:hover {
+    color: white;
+}
+
+.nextQuestion:hover::before {
+    animation: lineLeft 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+.nextQuestion:hover::after {
+    animation: tipLeft 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+@keyframes tipLeft {
+    0% {
+        transform: translateX(-100px) rotateZ(135deg);
+    }
+
+    100% {
+        transform: translateX(100px) rotateZ(135deg);
+    }
+}
+
+@keyframes lineLeft {
+    0% {
+        transform: translateX(-105px);
+    }
+    100% {
+        transform: translateX(95px);
+    }
+}
+
+/* /////////////////////// */
+
+.submitReponse:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 0 10px rgb(100, 100, 100);
+}
+
+.submitReponse:disabled {
+    background-color: grey;
+}
+
+/* Drapeau */
+
+.question-drapeau-container {
+    position: relative;
+
+    margin: auto;
 }
 
 .question-drapeau {
+    height: 300px;
+    filter: drop-shadow(16px 16px 10px black);
+}
+
+/* Mode type */
+
+.type-reponse-container {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reponseQuestion {
+    justify-self: center;
+    width: 50%;
+    padding: 1rem;
+    filter: drop-shadow(8px 8px 5px black);
+    font-size: 2rem;
+}
+
+.submitReponse {
+    position: absolute;
+    right: 0;
+    margin-right: 4rem;
+    font: var(--color-black);
+    background-color: var(--color-section-3);
+    color: rgb(255, 255, 255);
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+
+.submitReponse:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 0 10px rgb(100, 100, 100);
+}
+
+/* Mode Choix reponse */
+
+.choix-reponse-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 2rem;
+}
+
+.choix {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #000000 solid 2px;
+    border-radius: 2rem;
+
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 5rem rgb(168, 168, 168);
+    filter: drop-shadow(8px 8px 5px #000);
+}
+
+.choix:hover {
+    color: rgb(0, 85, 0);
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 5rem rgb(137, 207, 126);
+    filter: drop-shadow(8px 8px 5px #112210);
+    cursor: pointer;
+}
+
+.choix.choix-resultat-montrer {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 5rem var(--color-bonne-reponse-dark);
+    filter: drop-shadow(8px 8px 5px #000);
+    cursor: default;
+}
+
+.choix-resultat-montrer {
+    box-shadow: 0 0 10px rgba(161, 161, 161, 0.5),
+        inset 0 0 5rem var(--color-bonne-reponse-dark);
+}
+
+/* ////////////////////// */
+/* Message resultat */
+/* ////////////////////// */
+
+.reponse-text {
+    position: absolute;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.reponse-text > span {
+    text-shadow: 2px 1px rgb(0, 0, 0);
+}
+
+.mauvaise-reponse-choix,
+.mauvaise-reponse-text {
+    --color-bonne-reponse-light: rgb(228, 165, 156);
+    --color-bonne-reponse-dark: rgb(202, 93, 74);
+    --color-background-reponse: rgb(124, 25, 0);
+    --color-inset-shadows: #af0000;
+    --color-text-shadows: rgb(87, 0, 0);
+}
+
+.bonne-reponse-choix,
+.bonne-reponse-text {
+    --color-bonne-reponse-light: rgb(182, 240, 182);
+    --color-bonne-reponse-dark: rgb(0, 187, 0);
+    --color-background-reponse: rgb(33, 105, 33);
+    --color-inset-shadows: #24b400;
+    --color-text-shadows: rgb(0, 85, 0);
+}
+
+.bonne-reponse-text,
+.mauvaise-reponse-text,
+.reponse-text,
+.checkmark,
+.crossmark {
+    color: var(--color-bonne-reponse-dark);
+    background-color: var(--color-background-reponse);
+    border: solid 1px var(--color-bonne-reponse-dark);
+}
+
+.bonne-reponse-text,
+.mauvaise-reponse-text {
+    text-shadow: 2px 1px var(--color-background-reponse);
+    box-shadow: 0 0 10px rgb(0, 0, 0),
+        0px 4px 16px var(--color-inset-shadows) inset;
+}
+
+.bonne-reponse-text > span,
+.mauvaise-reponse-text > span,
+.reponse-text {
+    color: var(--color-bonne-reponse-light);
+}
+
+.bonne-reponse-text > strong,
+.mauvaise-reponse-text > strong {
+    color: var(--color-background-reponse);
+    text-shadow: 2px 1px var(--color-text-shadows);
+    animation: colorTrans 1s infinite forwards;
+}
+
+@keyframes colorTrans {
+    0% {
+        color: var(--color-bonne-reponse-light);
+        border-bottom-color: var(--color-bonne-reponse-light);
+        border-right-color: var(--color-bonne-reponse-light);
+    }
+    50% {
+        color: var(--color-bonne-reponse-dark);
+        border-bottom-color: var(--color-bonne-reponse-dark);
+        border-right-color: var(--color-bonne-reponse-dark);
+    }
+    100% {
+        color: var(--color-bonne-reponse-light);
+        border-bottom-color: var(--color-bonne-reponse-light);
+        border-right-color: var(--color-bonne-reponse-light);
+    }
+}
+
+.checkmark {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 24px;
+    width: 12px;
+    border: none;
+    border-bottom: 7px solid rgb(172, 235, 172);
+    border-right: 7px solid rgb(172, 235, 172);
+
+    animation: colorTrans 1s infinite forwards;
+}
+
+.crossmark {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+
+    animation: colorTrans 1s infinite forwards;
+}
+
+.crossmark:before,
+.crossmark:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #ff0000;
+}
+.crossmark:before {
+    transform: rotate(45deg);
+}
+.crossmark:after {
+    transform: rotate(-45deg);
+}
+
+/* //////////// */
+
+.reponse-actuelle {
+    font-size: 3.2rem;
+    font-weight: 600;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    border-radius: 4px;
+
+    z-index: 2;
+
+    opacity: 0;
+    translate: -100%;
+
+    animation: slideInReponse 0.7s cubic-bezier(0.26, 0.9, 0.69, 1.01) forwards;
+}
+
+@keyframes slideInReponse {
+    to {
+        translate: 0%;
+        opacity: 1;
+    }
+}
+
+.slideOut {
+    animation: slideOutReponse 0.7s cubic-bezier(0.26, 0.9, 0.69, 1.01) forwards;
+}
+@keyframes slideOutReponse {
+    from {
+        translate: 0%;
+        opacity: 1;
+    }
+    to {
+        translate: 100%;
+        opacity: 0;
+    }
 }

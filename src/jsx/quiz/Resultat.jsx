@@ -2,6 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function Question(props) {
+export default function Resultat(props) {
     return <div>Bravo</div>;
 }

@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import MenuSelection from './MenuSelection';
 import Question from './Question';
+import Resultat from './Resultat';
 
 class AppQuiz extends Component {
     // state = {
@@ -18,8 +19,8 @@ class AppQuiz extends Component {
         activePage: 'Question',
         activeState: 'repondre',
         sujet: 'drapeau',
-        choixReponse: 'nom du pays',
-        mode: 'aucun choix',
+        choixReponse: 'au nom du pays',
+        mode: 'choix',
     };
 
     constructor() {
@@ -75,20 +76,16 @@ class AppQuiz extends Component {
                     <span></span>
                     <span></span>
                 </div> */}
-                {this.state.activePage === 'Question' && (
-                    <Question
-                        updatePage={this.updatePage}
-                        updateState={this.updateState}
-                        state={this.state}
-                    />
-                )}
-                {this.state.activePage === 'Resultat' && (
-                    <Resultat
-                        updatePage={this.updatePage}
-                        updateState={this.updateState}
-                        state={this.state}
-                    />
-                )}
+
+                <div className="quiz-container">
+                    {this.state.activePage === 'Question' && (
+                        <Question
+                            updatePage={this.updatePage}
+                            updateState={this.updateState}
+                            state={this.state}
+                        />
+                    )}
+                </div>
             </>
         );
     }
