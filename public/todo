@@ -14,6 +14,7 @@ TODO:
 
     -   correct earth on quiz
     -   better infos section
+    -   cliquer sur plateformes icone amene vers le site aussi
 
 -   infos:
 
@@ -36,4 +37,7 @@ TODO:
 
 -   quiz:
 
-    -   API with react
+    -   quand choix reponse, juste 1 essai
+    -   transition de selection vers quiz
+    -   ajout bouton retour
+    -   ecran resultats

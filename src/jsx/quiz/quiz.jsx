@@ -1,27 +1,29 @@
 'use strict';
 
 import ReactDOM from 'react-dom/client';
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
 
 import MenuSelection from './MenuSelection';
 import Question from './Question';
-import Resultat from './Resultat';
+
+export const StateContext = createContext(null);
 
 class AppQuiz extends Component {
-    // state = {
-    //     activePage: 'MenuSelection',
-    //     sujet: '',
-    //     choixReponse: '',
-    //     mode: '',
-    // };
-
     state = {
-        activePage: 'Question',
+        activePage: 'MenuSelection',
         activeState: 'repondre',
-        sujet: 'drapeau',
-        choixReponse: 'au nom du pays',
-        mode: 'choix',
+        sujet: '',
+        choixReponse: '',
+        mode: '',
     };
+
+    // state = {
+    //     activePage: 'Question',
+    //     activeState: 'repondre',
+    //     sujet: 'drapeau',
+    //     choixReponse: 'au nom du pays',
+    //     mode: 'choix',
+    // };
 
     constructor() {
         super();
@@ -42,12 +44,12 @@ class AppQuiz extends Component {
         }));
     };
 
-    updateModeQuiz = ([sujet, choixReponse, mode]) => {
+    updateModeQuiz = (sujet, choixReponse, mode) => {
         // active page
         this.setState(() => ({
-            sujet: sujet.value,
-            choixReponse: choixReponse.value,
-            mode: mode.value,
+            sujet: sujet,
+            choixReponse: choixReponse,
+            mode: mode,
         }));
     };
 
@@ -61,23 +63,27 @@ class AppQuiz extends Component {
 
     render() {
         return (
-            <>
-                {/* <MenuSelection
-                    updateState={this.updateState}
-                    updateModeQuiz={this.updateModeQuiz}
-                    transition={
-                        this.state.activePage === 'MenuSelection' ? false : true
-                    }
-                />
-                <div className="transition-shapes">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div> */}
-
+            <StateContext.Provider value={this.state}>
                 <div className="quiz-container">
+                    {this.state.activePage === 'MenuSelection' && (
+                        <MenuSelection
+                            updatePage={this.updatePage}
+                            updateState={this.updateState}
+                            updateModeQuiz={this.updateModeQuiz}
+                            transition={
+                                this.state.activePage === 'MenuSelection'
+                                    ? false
+                                    : true
+                            }
+                        />
+                    )}
+                    {/* <div className="transition-shapes">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div> */}
                     {this.state.activePage === 'Question' && (
                         <Question
                             updatePage={this.updatePage}
@@ -86,7 +92,7 @@ class AppQuiz extends Component {
                         />
                     )}
                 </div>
-            </>
+            </StateContext.Provider>
         );
     }
 }

@@ -1,13 +1,17 @@
 'use strict';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { MapContainer, TileLayer, useMap, Marker } from 'react-leaflet';
+
 import randomCountry from './randomCountry';
 import Resultat from './Resultat';
+import ToMenuSelectionButton from './MenuButton';
+import { StateContext } from './quiz';
 
 export default function Question(props) {
     const [activeCountry, setActiveCountry] = useState('');
-    const [otherChoices, setOtherChoices] = useState([]);
-    const [shuffleState, setShuffleState] = useState(false);
+    const [choices, setChoices] = useState([]);
+    const [map, setMap] = useState(null);
     const [score, setScore] = useState({
         score: 0,
         currentQuestionNumber: 1,
@@ -29,11 +33,13 @@ export default function Question(props) {
         }
     }
 
+    // Gere une bonne reponse
     function updateStateReussi() {
         props.updateState('repondreReussi');
         addScorePoint();
     }
 
+    // Gere une mauvaise reponse
     function updateStateRate() {
         setScore({
             score: score.score,
@@ -41,13 +47,14 @@ export default function Question(props) {
             essais: score.essais + 1,
         });
         // Si les essais sont finis, change le state
-        if (score.essais === 4) {
+        if (score.essais === nombreMaxEssais() - 1) {
             props.updateState('repondreEchoue');
         } else {
             props.updateState('repondreRate');
         }
     }
 
+    // Analyse si le choix de reponse est bon
     function handleChoixReponse(e) {
         if (e.target.classList[1] === 'bonne-reponse-choix') {
             updateStateReussi();
@@ -60,7 +67,9 @@ export default function Question(props) {
     async function setActiveCountryFunction(country) {
         const countryInfo = await fetchCountryData(country);
         props.state.mode === 'choix' && setOtherCountriesFunction(countryInfo);
-
+        if (props.state.sujet === 'au lieu géographique' && map) {
+            updateMapView(countryInfo);
+        }
         setActiveCountry(countryInfo);
     }
 
@@ -80,7 +89,19 @@ export default function Question(props) {
         const choix2Mauvais = await fetchCountryData(randomCountries[0]);
         const choix3Mauvais = await fetchCountryData(randomCountries[1]);
 
-        setOtherChoices([choix2Mauvais, choix3Mauvais]);
+        // Shuffle choices
+        const choix = [countryInfo, choix2Mauvais, choix3Mauvais];
+
+        const shuffleArray = array => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        };
+        shuffleArray(choix);
+        setChoices(choix);
     }
 
     // fetch info sur le pays.
@@ -90,7 +111,6 @@ export default function Question(props) {
                 `https://restcountries.com/v3.1/name/${country}`
             );
             const [countryInfo] = await countryInfoJSON.json();
-            console.log(countryInfo);
             return countryInfo;
         } catch (error) {
             console.log(error);
@@ -99,7 +119,7 @@ export default function Question(props) {
 
     // Appelé au debut et a chaque fois que currentQuestionNumber augmente. appel la fonction pour fetch data
     useEffect(() => {
-        setShuffleState(false);
+        console.log('useeffect', props.state.sujet, map);
         resetRepondre();
         setActiveCountryFunction(randomCountry());
     }, [score.currentQuestionNumber]);
@@ -118,6 +138,16 @@ export default function Question(props) {
         });
     }
 
+    // Fly to position of the new country
+    function updateMapView(countryInfo) {
+        if (!countryInfo) return;
+        map.target.flyTo(countryInfo.latlng, 6, {
+            animate: true,
+            duration: 1,
+        });
+    }
+
+    // Genere la bonne reponse en enlevant les espaces et les signes
     function genereBonneReponse() {
         return [
             activeCountry.translations.fra.official
@@ -160,38 +190,85 @@ export default function Question(props) {
         );
     }
 
-    // Si sujet drapeau, affiche svg du drapeau et le titre
-    function sujetDrapeau() {
-        function verbeCommence() {
-            if (props.state.mode === 'aucun choix') {
-                return 'Écrivez';
-            }
-            if (props.state.mode === 'choix') {
-                return 'Sélectionnez';
-            }
+    // Génère le titre en fonction du mode et de le reponse
+    function afficherTitre() {
+        let premierMot;
+        if (props.state.mode === 'aucun choix') {
+            premierMot = 'Écrivez';
         }
-
-        if (activeCountry === '') {
-            return;
+        if (props.state.mode === 'choix') {
+            premierMot = 'Sélectionnez';
         }
 
         return (
             <>
                 <h1 className="question-title">
-                    {verbeCommence()} le {props.state.choixReponse}{' '}
-                    correspondant {props.state.sujet}
+                    {premierMot} {props.state.choixReponse} correspondant{' '}
+                    {props.state.sujet}
                 </h1>
                 {(props.state.activeState === 'repondreReussi' ||
                     props.state.activeState === 'repondreEchoue') &&
                     reponseActuelle()}
-                <div className="question-drapeau-container">
-                    <img
-                        className="question-drapeau"
-                        src={activeCountry.flags.svg}
-                        alt=""
-                    />
-                </div>
             </>
+        );
+    }
+
+    // Si sujet drapeau, affiche svg du drapeau et le titre
+    function sujetDrapeau() {
+        if (activeCountry === '') {
+            return;
+        }
+
+        return (
+            <div className="question-drapeau-container">
+                <img
+                    className="question-drapeau"
+                    src={activeCountry.flags.svg}
+                    alt=""
+                />
+            </div>
+        );
+    }
+
+    // Si sujet capitale, affiche capitale et le titre
+    function sujetCapitale() {
+        if (activeCountry === '') {
+            return;
+        }
+
+        return (
+            <div className="question-capitale-container">
+                {activeCountry.capital}
+            </div>
+        );
+    }
+
+    // Si sujet lieu-geo, affiche carte avec marqueur du pays et le titre
+    function sujetLieuGeo() {
+        if (activeCountry === '') {
+            return;
+        }
+        console.log(activeCountry);
+
+        return (
+            <div className="question-lieu-geo-container">
+                <MapContainer
+                    center={activeCountry.latlng}
+                    zoom={6}
+                    scrollWheelZoom={true}
+                    whenReady={setMap}
+                >
+                    <TileLayer
+                        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}{r}.{ext}"
+                        subdomains="abcd"
+                        minZoom={2}
+                        maxZoom={18}
+                        ext="png"
+                    />
+                    <Marker position={activeCountry.latlng}></Marker>
+                </MapContainer>
+            </div>
         );
     }
 
@@ -251,37 +328,20 @@ export default function Question(props) {
     function modeChoixReponse() {
         if (
             activeCountry === '' ||
-            otherChoices === undefined ||
-            otherChoices === [] ||
-            otherChoices[0] === undefined ||
-            otherChoices[1] === undefined
+            choices === undefined ||
+            choices === [] ||
+            choices[0] === undefined ||
+            choices[1] === undefined ||
+            choices[2] === undefined
         ) {
             return;
         }
 
-        const choix = [activeCountry, otherChoices[0], otherChoices[1]];
-        const choixShuffle = choix.slice();
-
-        // if (!shuffleState) {
-        //     const shuffleArray = array => {
-        //         for (let i = array.length - 1; i > 0; i--) {
-        //             const j = Math.floor(Math.random() * (i + 1));
-        //             const temp = array[i];
-        //             array[i] = array[j];
-        //             array[j] = temp;
-        //         }
-        //     };
-
-        //     shuffleArray(choixShuffle);
-        //     setShuffleState(choixShuffle);
-        //     return;
-        // }
         // Trouver index de la bonne reponse
-        const indexBonneReponse = choixShuffle.indexOf(activeCountry);
-
+        const indexBonneReponse = choices.indexOf(activeCountry);
         return (
             <div className="choix-reponse-container">
-                {choixContent(choixShuffle, indexBonneReponse)}
+                {choixContent(choices, indexBonneReponse)}
             </div>
         );
     }
@@ -289,13 +349,13 @@ export default function Question(props) {
     function choixContent(choixShuffle, indexBonneReponse) {
         return choixShuffle.map((choix, index) => {
             let content;
-            if (props.state.choixReponse === 'au nom du pays') {
+            if (props.state.choixReponse === 'le nom du pays') {
                 content = choix.translations.fra.common;
             }
-            if (props.state.choixReponse === 'à la capitale') {
+            if (props.state.choixReponse === 'la capitale') {
                 content = choix.capital;
             }
-            if (props.state.choixReponse === 'au drapeau') {
+            if (props.state.choixReponse === 'le drapeau') {
                 content = choix.flags.svg;
             }
             return (
@@ -334,12 +394,34 @@ export default function Question(props) {
                 essais: score.essais,
             });
             reponseActuelle.classList.toggle('slideOut');
-
             if (score.currentQuestionNumber === 5) {
-                props.updateState('Resultat');
-                props.updatePage('Resultat');
+                handleToResultats();
             }
         }, 700);
+    }
+
+    // Enregistre le score au local storage
+    function persistResultats() {
+        // Get existing data
+        let storage;
+        const storageJSON = localStorage.getItem('Resultats');
+        if (storageJSON) {
+            storage = JSON.parse(storageJSON);
+            // Set data to local storage
+            localStorage.setItem(
+                'Resultats',
+                JSON.stringify([
+                    ...storage,
+                    [score.score, score.currentQuestionNumber, 10],
+                ])
+            );
+        } else {
+            // Set data to local storage if nothing yet
+            localStorage.setItem(
+                'Resultats',
+                JSON.stringify([[score.score, score.currentQuestionNumber, 10]])
+            );
+        }
     }
 
     // permet de peser sur enter pour soumettre la reponse
@@ -349,15 +431,45 @@ export default function Question(props) {
         }
     }
 
+    function handleToResultats() {
+        // add to local storage
+        persistResultats();
+
+        // update le state vers l'ecran resultats
+        props.updateState('Resultat');
+    }
+
+    // gere le nombre d'essais selon le mode de jeu
+    function nombreMaxEssais() {
+        return props.state.mode === 'choix' ? 1 : 5;
+    }
+
+    // Affiche le nombre d'essais
+    function affichageEssais() {
+        return (
+            <>
+                {score.essais} / {nombreMaxEssais()} essais
+            </>
+        );
+    }
+
     return (
         <div className="question-page">
             {props.state.activeState === 'Resultat' ? (
-                <Resultat />
+                <Resultat
+                    updatePage={props.updatePage}
+                    updateState={props.updateState}
+                />
             ) : (
                 <>
-                    {' '}
                     <div className="question-container">
-                        {props.state.sujet === 'drapeau' && sujetDrapeau()}
+                        {afficherTitre()}
+
+                        {props.state.sujet === 'au drapeau' && sujetDrapeau()}
+                        {props.state.sujet === 'à la capitale' &&
+                            sujetCapitale()}
+                        {props.state.sujet === 'au lieu géographique' &&
+                            sujetLieuGeo()}
                     </div>
                     <div className="reponse-container">
                         {props.state.mode === 'aucun choix' && modeAucun()}
@@ -365,24 +477,36 @@ export default function Question(props) {
                         <div className="stats-question">
                             <div>Score: {score.score}</div>
                             <div className="nombre-essais">
-                                {score.essais} / 5 essais
+                                {affichageEssais()}
                             </div>
                             <div className="currentQuestionNumber">
                                 {score.currentQuestionNumber} / 10 questions
                             </div>
                         </div>
                     </div>
-                    {(props.state.activeState === 'repondreReussi' ||
-                        props.state.activeState === 'repondreEchoue') && (
+                    <div className="buttons-to-menu-resultats-container">
                         <button
-                            className="nextQuestion"
-                            type="button"
-                            name="next question"
-                            onClick={handleSuivant}
+                            className="return-to-resultats"
+                            onClick={handleToResultats}
                         >
-                            Suivant
+                            Résultats
                         </button>
-                    )}
+                        {(props.state.activeState === 'repondreReussi' ||
+                            props.state.activeState === 'repondreEchoue') && (
+                            <button
+                                className="nextQuestion"
+                                type="button"
+                                name="next question"
+                                onClick={handleSuivant}
+                            >
+                                Suivant
+                            </button>
+                        )}
+                        <ToMenuSelectionButton
+                            updatePage={props.updatePage}
+                            updateState={props.updateState}
+                        />
+                    </div>
                 </>
             )}
         </div>

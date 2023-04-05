@@ -21,6 +21,7 @@ class MarksAndPops extends Component {
                 newImg = imageID[0];
             }
         }
+        console.log(this.props.state.map);
         this.props.state.map.flyTo(
             newImg.coords,
             this.props.state.map.getZoom(),
