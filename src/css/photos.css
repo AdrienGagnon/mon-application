@@ -4,6 +4,7 @@
     --background-description-photo: rgba(54, 54, 54, 0.6);
     --background-lieu-photo: rgba(255, 255, 255, 0.6);
     --color-nav: rgb(11, 27, 61);
+    --background-card: rgba(223, 245, 223, 0.9);
 }
 
 #root {
@@ -121,8 +122,6 @@
 
 .img-description {
     position: absolute;
-    display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 2rem;
@@ -319,6 +318,22 @@
 /* MAP */
 
 .leaflet-control-container {
+    position: absolute;
+    left: 60px;
+    top: 50px;
+}
+
+.leaflet-control-container span {
+    color: black;
+    transition-duration: 100ms;
+}
+
+.leaflet-control-zoom-in:hover span,
+.leaflet-control-zoom-out:hover span {
+    font-size: 115%;
+}
+
+.leaflet-control-attribution {
     display: none;
 }
 
@@ -333,6 +348,8 @@
 .img-map {
     width: 300px;
     height: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgb(0, 0, 0);
 }
 
 .arrows-wrapper {
@@ -340,7 +357,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--background-card);
 
     border: 3px solid rgb(0, 0, 0);
     border-radius: 100%;
@@ -404,30 +421,39 @@
     animation-delay: 0.2s;
 }
 
-/* Popup width is defined in JS using options */
-/* .leaflet-popup .leaflet-popup-content-wrapper {
-    background-color: var(--color-dark--1);
-    color: var(--color-light--2);
+.leaflet-popup {
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+
+.leaflet-popup,
+.leaflet-popup .leaflet-popup-content-wrapper {
     border-radius: 5px;
-    padding-right: 0.6rem;
+    border: none;
 }
 
-.leaflet-popup .leaflet-popup-content {
-    font-size: 1.5rem;
-}
-
+.leaflet-popup .leaflet-popup-content-wrapper,
 .leaflet-popup .leaflet-popup-tip {
-    background-color: var(--color-dark--1);
+    background-color: var(--background-card);
+    border: none;
 }
 
-.running-popup .leaflet-popup-content-wrapper {
-    border-left: 5px solid var(--color-brand--2);
+.leaflet-popup-close-button > span {
+    display: flex;
+    justify-content: center;
+    background: rgb(107, 129, 107);
+    border-radius: 100%;
+    line-height: 40%;
+    width: fit-content;
+    margin: auto;
+    margin-top: 4px;
+    padding: 4px;
+    border: 1px solid rgb(107, 129, 107);
+    box-sizing: border-box;
+    transition-duration: 300ms;
 }
-.cycling-popup .leaflet-popup-content-wrapper {
-    border-left: 5px solid var(--color-brand--1);
+
+.leaflet-popup-close-button:hover > span {
+    color: rgb(0, 0, 0);
+    border: 1px solid black;
+    background: rgba(146, 165, 146, 0.9);
 }
- */
-/* {
-    display: grid
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
-    }  */

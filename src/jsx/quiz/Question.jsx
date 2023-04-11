@@ -18,6 +18,11 @@ export default function Question(props) {
         essais: 0,
     });
     const [input, setInput] = useState('');
+    const [disableButton, setDisableButton] = useState({
+        retour: false,
+        suivant: false,
+        resultats: false,
+    });
 
     // Compare reponse et input, mene soit a reussi ou rate
     function handleReponse() {
@@ -56,7 +61,10 @@ export default function Question(props) {
 
     // Analyse si le choix de reponse est bon
     function handleChoixReponse(e) {
-        if (e.target.classList[1] === 'bonne-reponse-choix') {
+        if (
+            e.target.classList[1] === 'bonne-reponse-choix' ||
+            e.target.parentElement?.classList[1] === 'bonne-reponse-choix'
+        ) {
             updateStateReussi();
         } else {
             updateStateRate();
@@ -119,17 +127,26 @@ export default function Question(props) {
 
     // Appelé au debut et a chaque fois que currentQuestionNumber augmente. appel la fonction pour fetch data
     useEffect(() => {
-        console.log('useeffect', props.state.sujet, map);
+        if (props.state.activeState === 'Resultat') return;
         resetRepondre();
         setActiveCountryFunction(randomCountry());
     }, [score.currentQuestionNumber]);
 
     // useEffect appel cette fonction pour reseter le state, input et nombre d'essais
     function resetRepondre() {
+        // Activer buttons
+        setDisableButton({
+            retour: false,
+            suivant: false,
+            resultats: false,
+        });
+
         // changer state repondre
         props.updateState('repondre');
+
         // clear input
         setInput('');
+
         // remettre a 0 les try
         setScore({
             score: score.score,
@@ -238,7 +255,7 @@ export default function Question(props) {
 
         return (
             <div className="question-capitale-container">
-                {activeCountry.capital}
+                Nom de la capitale: {activeCountry.capital}
             </div>
         );
     }
@@ -248,7 +265,6 @@ export default function Question(props) {
         if (activeCountry === '') {
             return;
         }
-        console.log(activeCountry);
 
         return (
             <div className="question-lieu-geo-container">
@@ -336,7 +352,6 @@ export default function Question(props) {
         ) {
             return;
         }
-
         // Trouver index de la bonne reponse
         const indexBonneReponse = choices.indexOf(activeCountry);
         return (
@@ -346,6 +361,7 @@ export default function Question(props) {
         );
     }
 
+    // Affiche content des choix de reponse
     function choixContent(choixShuffle, indexBonneReponse) {
         return choixShuffle.map((choix, index) => {
             let content;
@@ -356,7 +372,13 @@ export default function Question(props) {
                 content = choix.capital;
             }
             if (props.state.choixReponse === 'le drapeau') {
-                content = choix.flags.svg;
+                content = (
+                    <img
+                        className="reponse-drapeau"
+                        src={choix.flags.svg}
+                        alt=""
+                    />
+                );
             }
             return (
                 <button
@@ -370,6 +392,11 @@ export default function Question(props) {
                         props.state.activeState === 'repondreEchoue'
                             ? 'choix-resultat-montrer'
                             : '')
+                    }
+                    id={
+                        props.state.choixReponse === 'le drapeau'
+                            ? 'reponse-drapeau-container'
+                            : ''
                     }
                     onClick={e => handleChoixReponse(e)}
                     disabled={
@@ -385,6 +412,16 @@ export default function Question(props) {
 
     // augmente la question actuelle de 1. déclenche useEffect
     function handleSuivant() {
+        // Check if the button has already been pressed
+        if (disableButton.suivant) {
+            return;
+        }
+        setDisableButton({
+            retour: disableButton.retour,
+            suivant: true,
+            resultats: disableButton.resultats,
+        });
+
         const reponseActuelle = document.querySelector('.reponse-actuelle');
         reponseActuelle.classList.toggle('slideOut');
         setTimeout(() => {
@@ -394,7 +431,7 @@ export default function Question(props) {
                 essais: score.essais,
             });
             reponseActuelle.classList.toggle('slideOut');
-            if (score.currentQuestionNumber === 5) {
+            if (score.currentQuestionNumber >= props.state.nombre) {
                 handleToResultats();
             }
         }, 700);
@@ -412,14 +449,24 @@ export default function Question(props) {
                 'Resultats',
                 JSON.stringify([
                     ...storage,
-                    [score.score, score.currentQuestionNumber, 10],
+                    [
+                        score.score,
+                        score.currentQuestionNumber,
+                        props.state.nombre,
+                    ],
                 ])
             );
         } else {
             // Set data to local storage if nothing yet
             localStorage.setItem(
                 'Resultats',
-                JSON.stringify([[score.score, score.currentQuestionNumber, 10]])
+                JSON.stringify([
+                    [
+                        score.score,
+                        score.currentQuestionNumber,
+                        props.state.nombre,
+                    ],
+                ])
             );
         }
     }
@@ -432,6 +479,16 @@ export default function Question(props) {
     }
 
     function handleToResultats() {
+        // Check if the button has already been pressed
+        if (disableButton.resultats) {
+            return;
+        }
+        setDisableButton({
+            retour: disableButton.retour,
+            suivant: disableButton.suivant,
+            resultats: true,
+        });
+
         // add to local storage
         persistResultats();
 
@@ -457,6 +514,8 @@ export default function Question(props) {
         <div className="question-page">
             {props.state.activeState === 'Resultat' ? (
                 <Resultat
+                    setDisableButton={setDisableButton}
+                    disableButton={disableButton}
                     updatePage={props.updatePage}
                     updateState={props.updateState}
                 />
@@ -480,7 +539,8 @@ export default function Question(props) {
                                 {affichageEssais()}
                             </div>
                             <div className="currentQuestionNumber">
-                                {score.currentQuestionNumber} / 10 questions
+                                {score.currentQuestionNumber} /{' '}
+                                {props.state.nombre} questions
                             </div>
                         </div>
                     </div>
@@ -503,6 +563,8 @@ export default function Question(props) {
                             </button>
                         )}
                         <ToMenuSelectionButton
+                            setDisableButton={setDisableButton}
+                            disableButton={disableButton}
                             updatePage={props.updatePage}
                             updateState={props.updateState}
                         />

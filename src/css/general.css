@@ -337,4 +337,6 @@ nav {
 
     vertical-align: middle;
     justify-content: center;
+
+    cursor: pointer;
 }

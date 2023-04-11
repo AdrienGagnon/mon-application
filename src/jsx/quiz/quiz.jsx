@@ -15,6 +15,7 @@ class AppQuiz extends Component {
         sujet: '',
         choixReponse: '',
         mode: '',
+        nombre: 5,
     };
 
     // state = {
@@ -44,12 +45,13 @@ class AppQuiz extends Component {
         }));
     };
 
-    updateModeQuiz = (sujet, choixReponse, mode) => {
+    updateModeQuiz = (sujet, choixReponse, mode, nombre) => {
         // active page
         this.setState(() => ({
             sujet: sujet,
             choixReponse: choixReponse,
             mode: mode,
+            nombre: nombre,
         }));
     };
 

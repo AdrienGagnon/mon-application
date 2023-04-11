@@ -37,7 +37,9 @@ TODO:
 
 -   quiz:
 
-    -   quand choix reponse, juste 1 essai
-    -   transition de selection vers quiz
-    -   ajout bouton retour
-    -   ecran resultats
+    ✅ quand choix reponse, juste 1 essai
+    ✅ ajout bouton retour
+    ✅ ecran resultats
+
+    -   transition de selection vers quiz (scroll)
+    -   ecran resultats parametres de chaque question

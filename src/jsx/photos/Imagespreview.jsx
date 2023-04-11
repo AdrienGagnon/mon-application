@@ -14,29 +14,18 @@ class Imagespreview extends Component {
                     const title = paysActuel !== image.pays ? true : false;
                     paysActuel = image.pays;
                     return (
-                        <div>
+                        <div key={image.id}>
                             {title && (
-                                <h1
-                                    key={image.description}
-                                    className="sidebar-pays-title"
-                                >
+                                <h1 className="sidebar-pays-title">
                                     {image.pays}
                                 </h1>
                             )}
                             <div
                                 ref={this.myRef}
-                                key={image.id}
                                 className={`photo-container`}
                                 onClick={() => {
                                     this.props.updateState(image);
-                                    this.props.state.map.flyTo(
-                                        image.coords,
-                                        this.props.state.map.getZoom(),
-                                        {
-                                            animate: true,
-                                            duration: 1,
-                                        }
-                                    );
+                                    this.props.flyToMarker(image.coords);
                                 }}
                             >
                                 <img className="img-preview" src={img} />

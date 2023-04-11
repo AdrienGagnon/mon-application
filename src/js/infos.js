@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import { LineCurve } from 'three';
-// import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 // change nav background color on load
 
@@ -12,6 +11,7 @@ nav.style.background =
 
 //////////////////////////////////////////////////
 
+// Create scene
 const scene = new THREE.Scene();
 
 /////////////////////////
@@ -163,9 +163,12 @@ class Sketch {
             0.01,
             100
         );
-        this.camera.position.set(0, 0, 0);
-        this.camera.lookAt(0, 0, -1);
+        this.setCamera();
 
+        this.controls = new OrbitControls(
+            this.camera,
+            this.renderer.domElement
+        );
         // resize
         this.resize();
         this.setupResize();
@@ -185,15 +188,28 @@ class Sketch {
 
         // Add plane
         this.addPlane();
+        this.addCircleSupport();
+        this.addCarpet();
         this.addLight();
     }
     ///////////////////////////////
+
+    // Set camera
+    setCamera() {
+        const container = document.querySelector('.container-infos');
+        const height = -60 * (container.clientHeight / container.scrollHeight);
+        this.camera.position.set(0, 0, 0);
+        this.camera.lookAt(0, 0, -100);
+        console.log(this.camera);
+    }
 
     // Add light
     addLight() {
         // this.light = new THREE.PointLight(0xffffff, 0.5);
         // this.light.position.set(0, 3, -20);
         // this.light.castShadow = true;
+
+        const ambientLight = new THREE.AmbientLight('white', 0.05);
 
         this.light = new THREE.SpotLight(0xffffff, 5);
         this.light.position.set(0, 20, -20);
@@ -209,7 +225,9 @@ class Sketch {
         this.light.shadow.camera.near = 10;
         this.light.shadow.camera.far = 200;
         this.light.shadow.focus = 1;
+
         this.groupPiano.add(this.light);
+        this.groupPiano.add(ambientLight);
         this.groupPiano.add(this.light.target);
         this.light.target.position.z = -20;
         const helper = new THREE.CameraHelper(this.light.shadow.camera);
@@ -221,6 +239,7 @@ class Sketch {
     resize() {
         this.width = body.offsetWidth;
         this.height = body.offsetHeight;
+
         // this.width = this.container.offsetWidth;
         // this.height = this.container.offsetHeight;
         this.renderer.setSize(this.width, this.height);
@@ -285,14 +304,14 @@ class Sketch {
         let curve = new THREE.CatmullRomCurve3(points);
         let geometry = new THREE.TubeGeometry(curve, 400, 0.08, 50, false);
 
-        this.mesh = new THREE.Mesh(geometry, this.material);
-        this.mesh.position.y = -5.5;
+        const mesh = new THREE.Mesh(geometry, this.material);
+        mesh.position.y = -5.5;
 
-        this.mesh.position.z = positionZ;
-        this.mesh.position.x = positionX;
-        this.group.add(this.mesh);
-        // this.scene.add(this.mesh);
-        this.addPillar(this.mesh.position.x, this.mesh.position.z);
+        mesh.position.z = positionZ;
+        mesh.position.x = positionX;
+        this.group.add(mesh);
+        // this.scene.add(mesh);
+        this.addPillar(mesh.position.x, mesh.position.z);
         this.scene.add(this.group);
         this.render();
         this.childrenEl = this.group.children;
@@ -300,10 +319,12 @@ class Sketch {
 
     addPiano(object) {
         object.position.z = -60;
-        object.position.y = -3;
-        object.rotation.y = -Math.PI / 4;
+        object.position.y = -2;
+        object.rotation.y = -Math.PI / 2;
         object.scale.set(2, 2, 2);
         object.receiveShadow = true;
+        object.castShadow = true;
+        object.children[0].castShadow = true;
 
         this.groupPiano.add(object);
         this.scene.add(this.groupPiano);
@@ -341,7 +362,7 @@ class Sketch {
         const geometryPillar = new THREE.CylinderGeometry(1, 1, 50, 8);
 
         const pillarTexture = new THREE.TextureLoader().load(
-            '../img/gold-texture.jpg'
+            '../img/infos-img/gold-texture.jpg'
         );
         const cylinder = new THREE.Mesh(
             geometryPillar,
@@ -351,7 +372,8 @@ class Sketch {
         );
         cylinder.position.x = positionX;
         cylinder.position.z = positionZ;
-
+        cylinder.castShadow = true;
+        console.log(cylinder);
         // this.scene.add(cylinder);
         this.group.add(cylinder);
     }
@@ -364,10 +386,36 @@ class Sketch {
         });
         const plane = new THREE.Mesh(geometry, material);
         plane.rotateX(Math.PI / 2);
-        plane.translateZ(5);
+        plane.translateZ(3);
         plane.receiveShadow = true;
-
         this.scene.add(plane);
+    }
+
+    addCarpet() {
+        const geometry = new THREE.PlaneGeometry(10, 130);
+        const material = new THREE.MeshPhongMaterial({
+            color: 'rgb(44, 2, 2)',
+            side: THREE.DoubleSide,
+        });
+        const carpet = new THREE.Mesh(geometry, material);
+        carpet.rotateX(Math.PI / 2);
+        carpet.translateZ(2.9);
+        carpet.receiveShadow = true;
+        this.scene.add(carpet);
+    }
+
+    addCircleSupport() {
+        const geometry = new THREE.CylinderGeometry(5, 5, 0.8, 32);
+        const material = new THREE.MeshPhongMaterial({
+            color: 'rgb(44, 2, 2)',
+            side: THREE.DoubleSide,
+        });
+        const cylinder = new THREE.Mesh(geometry, material);
+
+        cylinder.translateZ(-60);
+        cylinder.translateY(-2.5);
+        cylinder.receiveShadow = true;
+        this.scene.add(cylinder);
     }
 
     listenOnScroll() {
@@ -377,10 +425,24 @@ class Sketch {
 
     moveOnScroll() {
         const container = document.querySelector('.container-infos');
-        const movement = (-70 * container.scrollTop) / container.scrollHeight;
-        this.camera.position.set(0, 0, 0 + movement);
-        this.light.position.set(0, 20, -20 + movement);
-        this.light.target.position.z = -20 + movement;
+
+        // Donne le pourcentage de scroll: de 0 a 1
+        const pourcentage =
+            (container.scrollTop + container.clientHeight) /
+            container.scrollHeight;
+        const movement = -60 * pourcentage;
+        console.log(this.camera);
+        this.groupPiano.children[3].rotation.y =
+            -(Math.PI * (1 - pourcentage)) / 2;
+        if (movement <= -40) {
+            this.camera.position.set(0, 0 - (movement + 40) / 10, 5 + movement);
+            this.camera.lookAt(0, 0 + (movement + 40) / 10, -60);
+        } else {
+            this.camera.lookAt(0, 0, -100);
+            this.camera.position.set(0, 0, 5 + movement);
+            this.light.position.set(0, 20, -20 + movement);
+            this.light.target.position.z = -20 + movement;
+        }
     }
 }
 

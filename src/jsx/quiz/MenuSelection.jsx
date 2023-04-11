@@ -5,16 +5,28 @@ import rotatingEarth from './rotating-earth.mp4';
 
 export default function MenuSelection(props) {
     const [transitionToQuiz, setTransitionToQuiz] = useState(false);
+    const [selectedParameters, setSelectedParameters] = useState({
+        sujet: 'au drapeau',
+        choixReponse: 'le nom du pays',
+        mode: 'aucun choix',
+        nombre: 10,
+    });
 
     const handleSubmit = e => {
-        // get parameters state
-        const sujet = document.querySelector('#information').value;
-        const choixReponse = document.querySelector('#reponse').value;
-        const mode = document.querySelector('#mode').value;
-        if (sujet === choixReponse) {
+        const drapeauAucunChoix =
+            selectedParameters.choixReponse === 'le drapeau' &&
+            selectedParameters.mode === 'aucun choix';
+        const sameSujet =
+            (selectedParameters.choixReponse.includes('drapeau') &&
+                selectedParameters.sujet.includes('drapeau')) ||
+            (selectedParameters.choixReponse.includes('capitale') &&
+                selectedParameters.sujet.includes('capitale'));
+        selectedParameters.choixReponse === 'le drapeau' &&
+            selectedParameters.choixReponse === 'le drapeau';
+        if (sameSujet || drapeauAucunChoix) {
             handleToErrorSelection();
         } else {
-            handleToModeQuiz(sujet, choixReponse, mode);
+            handleToModeQuiz();
         }
     };
 
@@ -25,7 +37,7 @@ export default function MenuSelection(props) {
         messageErreur.classList.remove('hidden-text-selection');
     };
 
-    const handleToModeQuiz = (sujet, choixReponse, mode) => {
+    const handleToModeQuiz = () => {
         // remove error message if there is one
         const messageErreur = document.querySelector(
             '.error-message-selection'
@@ -33,7 +45,12 @@ export default function MenuSelection(props) {
         messageErreur.classList.add('hidden-text-selection');
 
         // set parameters state
-        props.updateModeQuiz(sujet, choixReponse, mode);
+        props.updateModeQuiz(
+            selectedParameters.sujet,
+            selectedParameters.choixReponse,
+            selectedParameters.mode,
+            selectedParameters.nombre
+        );
         props.updateState('repondre');
 
         // transition to question page true
@@ -59,6 +76,27 @@ export default function MenuSelection(props) {
         }, 2000);
     }
 
+    function handleOnChange(e) {
+        setSelectedParameters({
+            sujet:
+                e.target.id === 'information'
+                    ? e.target.value
+                    : selectedParameters.sujet,
+            choixReponse:
+                e.target.id === 'reponse'
+                    ? e.target.value
+                    : selectedParameters.choixReponse,
+            mode:
+                e.target.id === 'mode'
+                    ? e.target.value
+                    : selectedParameters.mode,
+            nombre:
+                e.target.id === 'nombre'
+                    ? e.target.value
+                    : selectedParameters.nombre,
+        });
+    }
+
     return (
         <div className="menu-selection-page">
             <video className="earth-rotating-video" autoPlay muted loop>
@@ -71,7 +109,13 @@ export default function MenuSelection(props) {
                     <div className="form-choose-quiz">
                         {/* information donnee */}
                         <label htmlFor="information">Information donnée:</label>
-                        <select id="information" name="information" type="text">
+                        <select
+                            id="information"
+                            name="information"
+                            type="text"
+                            onChange={e => handleOnChange(e)}
+                            defaultValue={selectedParameters.sujet}
+                        >
                             <option value="au drapeau">Drapeau</option>
                             <option value="à la capitale">Capitale</option>
                             <option value="au lieu géographique">
@@ -81,7 +125,13 @@ export default function MenuSelection(props) {
 
                         {/* information a donner */}
                         <label htmlFor="reponse">À répondre:</label>
-                        <select id="reponse" name="reponse" type="text">
+                        <select
+                            id="reponse"
+                            name="reponse"
+                            type="text"
+                            onChange={e => handleOnChange(e)}
+                            defaultValue={selectedParameters.choixReponse}
+                        >
                             <option value="le nom du pays">Nom du pays</option>
                             <option value="la capitale">Capitale</option>
                             <option value="le drapeau">Drapeau</option>
@@ -89,16 +139,35 @@ export default function MenuSelection(props) {
 
                         {/* mode reponse */}
                         <label htmlFor="mode">Mode de réponse:</label>
-                        <select id="mode" name="mode" type="text">
+                        <select
+                            id="mode"
+                            name="mode"
+                            type="text"
+                            onChange={e => handleOnChange(e)}
+                            defaultValue={selectedParameters.mode}
+                        >
                             <option value="choix">Choix de réponse</option>
                             <option value="aucun choix">
                                 Aucun choix de réponse
                             </option>
                         </select>
+
+                        {/* nombre de questions */}
+                        <label htmlFor="nombre">Nombre de questions:</label>
+                        <select
+                            id="nombre"
+                            name="nombre"
+                            type="text"
+                            onChange={e => handleOnChange(e)}
+                            defaultValue={selectedParameters.nombre}
+                        >
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={15}>15</option>
+                            <option value={20}>20</option>
+                        </select>
                     </div>
-                    <p>
-                        Vous pourrez changer le style de question à tout moment
-                    </p>
+                    <p>Vous pourrez changer les paramètres à tout moment</p>
                     <p className="error-message-selection hidden-text-selection">
                         Ces paramètres sont incompatibles. Veuillez en
                         sélectionner d'autres.

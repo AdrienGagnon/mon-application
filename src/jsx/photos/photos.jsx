@@ -11,7 +11,9 @@ import MarksAndPops from './marksAndPopups';
 class App extends Component {
     state = {
         activeImg: null,
+        height: 0,
     };
+
     constructor() {
         super();
         this.toggleMenu();
@@ -24,6 +26,11 @@ class App extends Component {
             document.getElementById('nav-photos').classList.toggle('open');
         });
     }
+
+    updateHeight = height => {
+        // change height of image
+        this.setState(() => ({ height: height }));
+    };
 
     updateState = img => {
         const currentCard = document
@@ -53,6 +60,30 @@ class App extends Component {
         this.setState(() => ({ map: mapInst }));
     };
 
+    flyToMarker() {
+        if (!this.state.activeImg) return;
+        const px = this.state.map.project(this.state.activeImg.coords);
+
+        px.y -= this.state.height / 3;
+
+        const newCoords = this.state.map.unproject(px);
+        this.state.map.flyTo(
+            newCoords,
+
+            this.state.map.getZoom(),
+            {
+                animate: true,
+                duration: 1,
+            }
+        );
+    }
+
+    componentDidUpdate(prevState) {
+        if (this.state.activeImg !== prevState.activeImg && this.state.map) {
+            this.flyToMarker();
+        }
+    }
+
     render() {
         const coords = [45, 7];
         return (
@@ -61,6 +92,7 @@ class App extends Component {
                     <h1>Sélectionnez une photo</h1>
                     <div className="content-sidebar">
                         <Imagespreview
+                            flyToMarker={this.flyToMarker}
                             updateState={this.updateState}
                             state={this.state}
                         />
@@ -76,7 +108,9 @@ class App extends Component {
                         ext="png"
                     />
                     <MarksAndPops
+                        flyToMarker={this.flyToMarker}
                         updateState={this.updateState}
+                        updateHeight={this.updateHeight}
                         state={this.state}
                     />
                 </MapContainer>

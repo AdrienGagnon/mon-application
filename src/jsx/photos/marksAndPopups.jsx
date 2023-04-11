@@ -9,6 +9,10 @@ import { Marker, Popup } from 'react-leaflet/lib';
 import next from './next.png';
 
 class MarksAndPops extends Component {
+    state = {
+        height: 0,
+    };
+
     goToNext(direction) {
         let newImg =
             imageID[
@@ -21,16 +25,21 @@ class MarksAndPops extends Component {
                 newImg = imageID[0];
             }
         }
-        console.log(this.props.state.map);
-        this.props.state.map.flyTo(
-            newImg.coords,
-            this.props.state.map.getZoom(),
-            {
-                animate: true,
-                duration: 1,
-            }
-        );
+
+        // Center the popup
+        // const px = this.props.state.map.project(newImg.coords);
+
+        // px.y -= this.props.state.height / 2;
+
+        // const newCoords = this.props.state.map.unproject(px);
+        // this.props.flyToMarker(newCoords);
+
+        // Set the new image as active
         this.props.updateState(newImg);
+    }
+
+    getImageHeight(e) {
+        this.props.updateHeight(e.target.height);
     }
 
     render() {
@@ -47,29 +56,29 @@ class MarksAndPops extends Component {
         return (
             <>
                 {imageID.map(img => {
-                    return (
-                        (this.props.state.activeImg === null ||
-                            this.props.state.activeImg.id !== img.id) && (
-                            <Marker
-                                animate={true}
-                                key={img.id}
-                                position={[img.coords[0], img.coords[1]]}
-                                icon={myIcon}
-                                eventHandlers={{
-                                    click: e => {
-                                        this.props.updateState(img);
-                                        this.props.state.map.flyTo(
-                                            img.coords,
-                                            this.props.state.map.getZoom(),
-                                            {
-                                                animate: true,
-                                                duration: 1,
-                                            }
-                                        );
-                                    },
-                                }}
-                            />
-                        )
+                    return this.props.state.activeImg === null ||
+                        this.props.state.activeImg.id !== img.id ? (
+                        <Marker
+                            animate={true}
+                            key={img.id}
+                            position={[img.coords[0], img.coords[1]]}
+                            icon={myIcon}
+                            eventHandlers={{
+                                click: e => {
+                                    this.props.updateState(img);
+                                    this.props.state.map.flyTo(
+                                        img.coords,
+                                        this.props.state.map.getZoom(),
+                                        {
+                                            animate: true,
+                                            duration: 1,
+                                        }
+                                    );
+                                },
+                            }}
+                        />
+                    ) : (
+                        ''
                     );
                 })}
                 {this.props.state.activeImg && (
@@ -82,6 +91,7 @@ class MarksAndPops extends Component {
                         <img
                             className="img-map"
                             src={photosArray[this.props.state.activeImg.id]}
+                            onLoad={e => this.getImageHeight(e)}
                         />
                         <div
                             onClick={e => this.goToNext('left')}

@@ -65,7 +65,7 @@ export default function Resultat(props) {
                 message = 'Hum... Vous manquez peut-être de pratique...';
                 couleur = 'rouge';
                 break;
-            case pourcentage > 50 || pourcentage < 80:
+            case pourcentage > 50 && pourcentage < 80:
                 message = 'Pas mal! Vous connaissez bien votre géographie.';
                 couleur = 'jaune';
                 break;
@@ -116,6 +116,8 @@ export default function Resultat(props) {
             </div>
             <div className="buttons-to-menu-resultats-container">
                 <ToMenuSelectionButton
+                    setDisableButton={props.setDisableButton}
+                    disableButton={props.disableButton}
                     updatePage={props.updatePage}
                     updateState={props.updateState}
                 />

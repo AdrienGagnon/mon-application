@@ -26,6 +26,7 @@
 
     --color-langage-prog: rgb(210, 105, 30);
     --color-border-info: rgb(255, 165, 0);
+    --color-bordsssser-info: rgb(44, 2, 2);
 }
 
 body {
@@ -63,7 +64,6 @@ body > canvas {
 /* General container */
 .container-infos {
     display: grid;
-
     padding: 10rem 3rem 10rem 3rem;
     margin: 0rem 15rem 0rem 15rem;
     grid-template-columns: 1fr;
@@ -87,8 +87,6 @@ body > canvas {
 }
 
 .infos-section {
-    visibility: hidden;
-
     position: relative;
     background-color: var(--color-background-info);
     z-index: 10;

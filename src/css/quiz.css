@@ -284,6 +284,10 @@ option {
     text-shadow: 2px 1px #00040a;
 }
 
+/* ////////////////////// */
+/* Reponse containers */
+/* ////////////////////// */
+
 .reponse-container {
     display: flex;
     flex-direction: column;
@@ -521,16 +525,29 @@ option {
 .choix {
     font-size: 2rem;
     font-weight: 500;
-    padding: 2rem;
     display: flex;
+    padding: 2rem;
     justify-content: center;
     align-items: center;
     border: #000000 solid 2px;
     border-radius: 2rem;
+    overflow: hidden;
 
     background-color: rgb(255, 255, 255);
     box-shadow: inset 0 0 5rem rgb(168, 168, 168);
     filter: drop-shadow(8px 8px 5px #000);
+
+    height: 20rem;
+}
+
+#reponse-drapeau-container {
+    padding: 0;
+}
+
+.reponse-drapeau {
+    border-radius: 2rem;
+    max-height: 90%;
+    max-width: 90%;
 }
 
 .choix:hover {

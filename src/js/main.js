@@ -221,3 +221,21 @@ toTop.addEventListener('click', function (e) {
         behavior: 'smooth',
     });
 });
+
+///////////////////////////////////////////////////
+// Click on plateformes icons
+
+const githubIcon = document.getElementById('github-icon');
+const linkedInIcon = document.getElementById('linkedin-icon');
+const emailIcon = document.getElementById('email-icon');
+
+function goTo(e) {
+    console.log(e);
+    if (e.target.id === 'github-icon') {
+    }
+}
+
+for (icon of [githubIcon, linkedInIcon, emailIcon]) {
+    console.log('yepo');
+    icon.addEventListener('click', e => goTo(e));
+}
