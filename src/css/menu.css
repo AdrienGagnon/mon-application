@@ -653,6 +653,7 @@ button[type='submit']:hover {
     gap: 5px;
     transition-duration: 0.5s;
     box-shadow: 0 0 10px rgb(0, 0, 0);
+    cursor: pointer;
 }
 
 .revenirTop > div > img {

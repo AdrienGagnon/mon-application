@@ -190,6 +190,10 @@ nav {
         0 1px 1px rgba(var(--shadow-inner), 0.32);
 }
 
+.nav-item:hover {
+    text-shadow: 2px 1px #00040a;
+}
+
 .nav-item:hover::before,
 .nav-item:hover::after,
 .nav-item:focus::before,

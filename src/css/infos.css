@@ -8,10 +8,15 @@
     --color-pillar-5: rgb(160, 82, 45);
     --color-pillar-5: rgb(22, 22, 22);
 
-    --color-background-info: rgba(29, 29, 29, 0.8);
+    --color-background-info: rgba(27, 27, 27, 0.9);
+    --color-background-info-motif: rgba(0, 0, 0, 0.8);
     --color-footer-infos: rgb(37, 37, 37);
 
-    --color-scrollbar: linear-gradient(to top, #a88c0d, #409c1c);
+    --color-scrollbar: linear-gradient(
+        to top,
+        rgb(160, 82, 45),
+        rgb(255, 165, 0)
+    );
     --color-scrollbar-track: linear-gradient(
         rgba(0, 0, 0, 1) 0%,
         rgba(0, 0, 0, 0) 50%,
@@ -20,13 +25,19 @@
 
     --color-background-etude: linear-gradient(
         45deg,
-        rgb(160, 82, 45),
-        rgb(255, 165, 0)
+        rgba(160, 82, 45, 0.8),
+        rgba(150, 97, 0, 0.8)
+    );
+    --color-background-etude-2: linear-gradient(
+        45deg,
+        rgb(129, 66, 36),
+        rgb(199, 129, 0)
     );
 
     --color-langage-prog: rgb(210, 105, 30);
     --color-border-info: rgb(255, 165, 0);
     --color-bordsssser-info: rgb(44, 2, 2);
+    --font-accent: rgb(210, 105, 30);
 }
 
 body {
@@ -63,15 +74,15 @@ body > canvas {
 
 /* General container */
 .container-infos {
-    display: grid;
+    display: inline-block;
+    flex-direction: column;
     padding: 10rem 3rem 10rem 3rem;
     margin: 0rem 15rem 0rem 15rem;
-    grid-template-columns: 1fr;
-    column-gap: 5rem;
-    row-gap: 5rem;
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    justify-items: center;
+    padding-bottom: 30rem;
 }
 
 @media screen and (max-width: 950px) {
@@ -86,9 +97,30 @@ body > canvas {
     }
 }
 
+/* 
+radial-gradient(
+            circle,
+            transparent 1rem,
+            var(--color-background-info) 1rem
+        ), */
 .infos-section {
     position: relative;
+
     background-color: var(--color-background-info);
+    background-image: conic-gradient(
+            from 330deg at 50% 70%,
+            var(--color-background-info-motif) 60deg,
+            transparent 60deg
+        ),
+        conic-gradient(
+            from 150deg at 50% 30%,
+            var(--color-background-info-motif) 60deg,
+            transparent 60deg
+        );
+
+    background-size: 5rem 5rem;
+    background-position: 0 0, 2.5rem -0.5rem;
+
     z-index: 10;
     transition: scale ease-out 150ms;
     padding: 10px;
@@ -97,14 +129,27 @@ body > canvas {
     border-image: linear-gradient(
             to bottom,
             var(--color-border-info),
-            rgba(0, 0, 0, 0)
+            rgb(0, 0, 0)
         )
         1 100%;
-    height: 50rem;
+    min-height: 30rem;
+    min-width: 60rem;
+    max-width: 100rem;
+    margin-bottom: 15rem;
+
+    overflow: hidden;
 }
 
 .infos-section:hover {
-    scale: 1.05;
+    scale: 1.01;
+}
+
+.infos-section h1 {
+    margin-block: 1rem;
+}
+
+.blur-section {
+    filter: blur(2px);
 }
 
 /* Scrollbar */
@@ -114,7 +159,8 @@ body > canvas {
 
 .container-infos::-webkit-scrollbar-track {
     background: var(--color-scrollbar-track);
-
+    margin-top: 3rem;
+    margin-bottom: 20rem;
     border-radius: 10px;
 }
 
@@ -124,32 +170,82 @@ body > canvas {
     border-radius: 100px;
 }
 
+/* ///////////////////////////////////////////////// */
 /* Section resume */
-#resume > div {
+/* ///////////////////////////////////////////////// */
+
+#resume {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.resume-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    margin-inline: 5rem;
+    margin-bottom: 3rem;
 }
 
-#arrow {
-    height: 10rem;
-    transform: rotate(30deg);
+.resume-container p {
+    position: relative;
+    text-align: left;
+    flex: 2 2;
 }
 
-#resume > div > img {
+.resume-container p::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        var(--color-border-info),
+        rgba(0, 0, 0, 0)
+    );
+
+    border-radius: 4px;
+}
+
+.resume-container div {
+    display: flex;
+    gap: 1rem;
+    flex: 1 2;
+}
+
+#resume img {
     height: 10rem;
     border-radius: 100%;
     aspect-ratio: 1;
 }
 
+#resume span {
+    font-weight: 800;
+    color: var(--font-accent);
+}
+
+@media screen and (max-width: 720px) {
+    .resume-container div {
+        display: none;
+    }
+}
+
+/* ///////////////////////////////////////////////// */
 /* Section formation */
+/* ///////////////////////////////////////////////// */
+
 .formation-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .etude {
@@ -158,62 +254,145 @@ body > canvas {
     grid-template-columns: 1fr 1fr;
     width: 100%;
     z-index: 5;
+    justify-items: start;
+    padding-block: 1rem;
+    padding-left: 10rem;
+    text-shadow: 2px 2px #00040a;
 }
 
 .etude::after {
     content: '';
-    background-image: var(--color-background-etude);
+    background: var(--color-background-etude);
     position: absolute;
     margin: auto;
     z-index: -1;
     inset: 0;
     transform: skew(-5deg);
     width: 95%;
+    border: 3px solid;
+    border-image: linear-gradient(
+            to bottom,
+            var(--color-border-info),
+            rgb(160, 82, 45)
+        )
+        1 100%;
 }
 
+.experiences {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+}
+
+.experience-un,
+.experience {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    z-index: 5;
+    padding-block: 1rem;
+}
+
+.experience-un div,
+.experience div {
+    display: inline-block;
+    margin: 0;
+}
+
+.experience-un p,
+.experience p,
+.experience-un div,
+.experience div {
+    text-align: left;
+}
+
+.experience-un div,
+.experience div {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    color: var(--font-accent);
+    margin-bottom: 0.5rem;
+}
+
+.experience {
+    display: none;
+}
+
+.button-plus {
+    width: fit-content;
+    margin: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: linear-gradient(45deg, rgb(160, 82, 45), rgb(255, 165, 0));
+    color: white;
+    border: none;
+    transition-duration: 300ms;
+}
+
+.button-plus:hover {
+    background: linear-gradient(45deg, rgb(129, 66, 36), rgb(199, 129, 0));
+}
+
+.hide-section-experience {
+    display: grid;
+}
+
+.fast-forward-arrow {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* ///////////////////////////////////////////////// */
 /* Section competences */
+/* ///////////////////////////////////////////////// */
+
 .competences {
 }
 
 .langage,
 .outil,
 .concept {
-    background-color: var(--color-langage-prog);
+    background: radial-gradient(var(--color-langage-prog), rgb(121, 58, 14));
     border-radius: 15px;
     transition: scale ease-out 150ms;
     z-index: 1;
+    padding: 10px 5rem;
+    max-width: 35rem;
+    width: 100%;
+    font-weight: 500;
+    text-shadow: 2px 1px #00040a;
 }
 
 .langage:hover,
 .outil:hover,
 .concept:hover {
-    scale: 1.05;
+    scale: 1.02;
+    box-shadow: inset 0 0 1rem rgb(209, 151, 42);
 }
 
 .block {
     display: grid;
     position: relative;
     grid-template-columns: 1fr 1fr;
-    padding-inline: 5px;
+    justify-items: center;
+    align-items: center;
     column-gap: 2rem;
     row-gap: 2rem;
     padding-block: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-inline: 5rem;
 }
 
 .langage {
-    display: flex;
-    width: 100%;
-    justify-content: center;
 }
 
 .langages {
-    position: relative;
-    isolation: isolate;
 }
 
-.block::after {
+/* .block::after {
     content: '';
     background: linear-gradient(
         to bottom right,
@@ -227,7 +406,7 @@ body > canvas {
     z-index: 0;
     inset: 0;
     overflow: hidden;
-}
+} */
 
 .concepts-autres {
 }
@@ -235,17 +414,29 @@ body > canvas {
 .concept {
 }
 
+/* ///////////////////////////////////////////////// */
 /* Section langues parlees */
+/* ///////////////////////////////////////////////// */
+
 .langue {
+    position: relative;
     display: flex;
     gap: 5px;
     align-items: center;
     justify-content: center;
+    margin-block: 5rem;
 }
 
 .cercles-langues {
     display: flex;
     overflow: hidden;
+    background-color: transparent;
+    background-image: radial-gradient(red 30%, transparent 70%),
+        radial-gradient(red 30%, transparent 70%);
+    background-position: 0 0, 2.5rem -0.5rem;
+    background-size: 5rem 5rem;
+    height: 100px;
+    width: 100px;
 }
 
 .cercles-langues > img,
@@ -259,9 +450,14 @@ body > canvas {
     width: 15px;
 }
 
+/* ///////////////////////////////////////////////// */
 /* Section contact */
+/* ///////////////////////////////////////////////// */
 
+/* ///////////////////////////////////////////////// */
 /* Section CV PDF */
+/* ///////////////////////////////////////////////// */
+
 #visionner-cv {
 }
 
@@ -285,7 +481,10 @@ body > canvas {
     display: none;
 }
 
+/* ///////////////////////////////////////////////// */
 /* Section videos */
+/* ///////////////////////////////////////////////// */
+
 .infos-section:has(.section-loisir) {
     display: grid;
     flex-direction: column;

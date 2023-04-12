@@ -177,11 +177,13 @@ class Sketch {
         this.importPiano();
 
         this.addObjects(-10, -20);
-        this.addObjects(10, -20);
-        this.addObjects(-10, -40);
-        this.addObjects(10, -40);
-        this.addObjects(-10, -60);
-        this.addObjects(10, -60);
+        // this.addObjects(10, -20);
+        // this.addObjects(-10, -40);
+        // this.addObjects(10, -40);
+        // this.addObjects(-10, -60);
+        // this.addObjects(10, -60);
+        // this.addObjects(-10, -80);
+        // this.addObjects(10, -80);
 
         // scroll
         this.listenOnScroll();
@@ -196,11 +198,8 @@ class Sketch {
 
     // Set camera
     setCamera() {
-        const container = document.querySelector('.container-infos');
-        const height = -60 * (container.clientHeight / container.scrollHeight);
         this.camera.position.set(0, 0, 0);
         this.camera.lookAt(0, 0, -100);
-        console.log(this.camera);
     }
 
     // Add light
@@ -230,8 +229,6 @@ class Sketch {
         this.groupPiano.add(ambientLight);
         this.groupPiano.add(this.light.target);
         this.light.target.position.z = -20;
-        const helper = new THREE.CameraHelper(this.light.shadow.camera);
-        this.scene.add(helper);
     }
 
     ///////////////////////////////
@@ -258,7 +255,7 @@ class Sketch {
     render() {
         if (!this.isPlaying) return;
         this.time += this.step;
-        this.playhead = this.time % 1;
+        this.playhead = (this.time % 3) / 3;
         this.material.uniforms.playhead.value = this.playhead;
         this.childrenEl.forEach(element => {
             if (element.geometry?.type === 'CylinderGeometry') return;
@@ -302,7 +299,7 @@ class Sketch {
         }
 
         let curve = new THREE.CatmullRomCurve3(points);
-        let geometry = new THREE.TubeGeometry(curve, 400, 0.08, 50, false);
+        let geometry = new THREE.TubeGeometry(curve, 500, 0.08, 50, false);
 
         const mesh = new THREE.Mesh(geometry, this.material);
         mesh.position.y = -5.5;
@@ -318,7 +315,7 @@ class Sketch {
     }
 
     addPiano(object) {
-        object.position.z = -60;
+        object.position.z = -100;
         object.position.y = -2;
         object.rotation.y = -Math.PI / 2;
         object.scale.set(2, 2, 2);
@@ -359,22 +356,18 @@ class Sketch {
     }
 
     addPillar(positionX, positionZ) {
-        const geometryPillar = new THREE.CylinderGeometry(1, 1, 50, 8);
+        const geometryPillar = new THREE.CylinderGeometry(1, 1, 60, 8);
 
-        const pillarTexture = new THREE.TextureLoader().load(
-            '../img/infos-img/gold-texture.jpg'
-        );
         const cylinder = new THREE.Mesh(
             geometryPillar,
             new THREE.MeshPhongMaterial({
-                map: pillarTexture,
+                color: '#ffa500',
             })
         );
         cylinder.position.x = positionX;
         cylinder.position.z = positionZ;
+        cylinder.rotation.y = 8;
         cylinder.castShadow = true;
-        console.log(cylinder);
-        // this.scene.add(cylinder);
         this.group.add(cylinder);
     }
 
@@ -392,16 +385,34 @@ class Sketch {
     }
 
     addCarpet() {
-        const geometry = new THREE.PlaneGeometry(10, 130);
-        const material = new THREE.MeshPhongMaterial({
-            color: 'rgb(44, 2, 2)',
-            side: THREE.DoubleSide,
-        });
-        const carpet = new THREE.Mesh(geometry, material);
-        carpet.rotateX(Math.PI / 2);
-        carpet.translateZ(2.9);
-        carpet.receiveShadow = true;
-        this.scene.add(carpet);
+        const path = require('./models/texture-tapis-rouge.jpg');
+        const carpetTexture = new THREE.TextureLoader().load(
+            path,
+
+            // onLoad callback
+            function (texture) {
+                const geometry = new THREE.PlaneGeometry(10, 105);
+                const material = new THREE.MeshPhongMaterial({
+                    color: 'rgb(44, 2, 2)',
+                    side: THREE.DoubleSide,
+                    map: texture,
+                });
+                const carpet = new THREE.Mesh(geometry, material);
+                carpet.rotateX(Math.PI / 2);
+                carpet.translateZ(2.9);
+                carpet.translateY(-50);
+                carpet.receiveShadow = true;
+                this.scene.add(carpet);
+            }.bind(this),
+
+            // onProgress callback currently not supported
+            undefined,
+
+            // onError callback
+            function (err) {
+                console.error('An error happened.', err);
+            }
+        );
     }
 
     addCircleSupport() {
@@ -412,7 +423,7 @@ class Sketch {
         });
         const cylinder = new THREE.Mesh(geometry, material);
 
-        cylinder.translateZ(-60);
+        cylinder.translateZ(-100);
         cylinder.translateY(-2.5);
         cylinder.receiveShadow = true;
         this.scene.add(cylinder);
@@ -425,21 +436,24 @@ class Sketch {
 
     moveOnScroll() {
         const container = document.querySelector('.container-infos');
-
-        // Donne le pourcentage de scroll: de 0 a 1
-        const pourcentage =
+        // Donne le pourcentage de scroll: de offSet a 1
+        const pourcentageOffSet =
             (container.scrollTop + container.clientHeight) /
             container.scrollHeight;
-        const movement = -60 * pourcentage;
-        console.log(this.camera);
+        const offSet = container.clientHeight / container.scrollHeight;
+
+        // Donne le pourcentage de scroll: de 0 a 1
+        const pourcentage = (pourcentageOffSet - offSet) / (1 - offSet);
+        const movement = -95 * pourcentage;
+
         this.groupPiano.children[3].rotation.y =
             -(Math.PI * (1 - pourcentage)) / 2;
-        if (movement <= -40) {
-            this.camera.position.set(0, 0 - (movement + 40) / 10, 5 + movement);
-            this.camera.lookAt(0, 0 + (movement + 40) / 10, -60);
+        if (movement <= -80) {
+            this.camera.position.set(0, 0 - (movement + 80) / 5, movement);
+            this.camera.lookAt(0, 0 + (movement + 80) / 5, -100);
         } else {
             this.camera.lookAt(0, 0, -100);
-            this.camera.position.set(0, 0, 5 + movement);
+            this.camera.position.set(0, 0, 0 + movement);
             this.light.position.set(0, 20, -20 + movement);
             this.light.target.position.z = -20 + movement;
         }
@@ -485,3 +499,49 @@ const clickExitCV = function () {
 };
 
 clickVisioPDf();
+
+//////////////////////////////
+// Hover blur
+
+function blurSections() {
+    const infoSections = document.querySelectorAll('.infos-section');
+    function blur(e) {
+        infoSections.forEach(section => {
+            if (e.target !== section) {
+                section.classList.add('blur-section');
+            }
+        });
+    }
+
+    function unblur() {
+        infoSections.forEach(section => {
+            section.classList.remove('blur-section');
+        });
+    }
+
+    infoSections.forEach(infoSection => {
+        infoSection.addEventListener('mouseenter', e => blur(e));
+        infoSection.addEventListener('mouseleave', () => unblur());
+    });
+}
+
+// blurSections();
+
+//////////////////////////////
+// click on plus
+
+function handleButtonPlus() {
+    const sectionsCachees = document.querySelectorAll('.experience');
+    const button = document.querySelector('.button-plus');
+
+    function handleClick() {
+        sectionsCachees.forEach(section => {
+            section.classList.toggle('hide-section-experience');
+        });
+        button.textContent = button.textContent === 'Plus' ? 'Moins' : 'Plus';
+    }
+
+    button.addEventListener('click', e => handleClick(e));
+}
+
+handleButtonPlus();
