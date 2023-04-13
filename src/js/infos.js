@@ -3,6 +3,12 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+import { goToGithub, goToLinkedIn, sendEmail } from './general';
+
+goToGithub();
+goToLinkedIn();
+sendEmail();
+
 // change nav background color on load
 
 const nav = document.querySelector('.nav-infos');
@@ -175,6 +181,7 @@ class Sketch {
 
         // add object
         this.importPiano();
+        this.importVolant();
 
         this.addObjects(-10, -20);
         // this.addObjects(10, -20);
@@ -324,7 +331,6 @@ class Sketch {
         object.children[0].castShadow = true;
 
         this.groupPiano.add(object);
-        this.scene.add(this.groupPiano);
     }
 
     importPiano() {
@@ -342,6 +348,55 @@ class Sketch {
                 objLoader.load(
                     path,
                     this.addPiano.bind(this),
+                    function (xhr) {
+                        console.log(
+                            (xhr.loaded / xhr.total) * 100 + '% loaded'
+                        );
+                    },
+                    function (error) {
+                        console.log(`An error happened: ${error}`);
+                    }
+                );
+            }.bind(this)
+        );
+    }
+
+    addVolant(volant) {
+        volant.receiveShadow = true;
+        volant.castShadow = true;
+
+        volant.position.x = -80;
+        volant.position.y = 0.2;
+        volant.position.z = -82;
+
+        volant.rotation.y = -(3 * Math.PI) / 4;
+        volant.rotation.z = -1;
+
+        volant.scale.set(0.5, 0.5, 0.5);
+
+        volant.children[0].castShadow = true;
+
+        const box = new THREE.BoxHelper(volant, 0xffff00);
+        this.scene.add(box);
+
+        this.groupPiano.add(volant);
+        this.scene.add(this.groupPiano);
+    }
+
+    importVolant() {
+        const mtlLoader = new MTLLoader();
+        const path = require('./models/volant.obj');
+        const pathmtl = require('./models/volant.mtl');
+        mtlLoader.load(
+            pathmtl,
+            function (materials) {
+                materials.preload();
+
+                const objLoader = new OBJLoader();
+                objLoader.setMaterials(materials);
+                objLoader.load(
+                    path,
+                    this.addVolant.bind(this),
                     function (xhr) {
                         console.log(
                             (xhr.loaded / xhr.total) * 100 + '% loaded'
@@ -422,7 +477,6 @@ class Sketch {
             side: THREE.DoubleSide,
         });
         const cylinder = new THREE.Mesh(geometry, material);
-
         cylinder.translateZ(-100);
         cylinder.translateY(-2.5);
         cylinder.receiveShadow = true;
@@ -446,8 +500,23 @@ class Sketch {
         const pourcentage = (pourcentageOffSet - offSet) / (1 - offSet);
         const movement = -95 * pourcentage;
 
-        this.groupPiano.children[3].rotation.y =
-            -(Math.PI * (1 - pourcentage)) / 2;
+        // rotation du piano
+        // this.groupPiano.children[3].rotation.y =
+        //     -(Math.PI * (1 - pourcentage)) / 2;
+        if (movement <= -75 && movement >= -95) {
+            this.groupPiano.children[3].rotation.y =
+                -(Math.PI * (1 + (75 + movement) / 20)) / 2;
+        }
+
+        // movement du volant
+        if (movement <= -40 && movement >= -100) {
+            this.groupPiano.children[4].position.x =
+                -50 + -(40 + movement) * 1.6;
+            // roation
+            this.groupPiano.children[4].rotation.z =
+                (Math.PI * -(40 + movement)) / 10;
+        }
+
         if (movement <= -80) {
             this.camera.position.set(0, 0 - (movement + 80) / 5, movement);
             this.camera.lookAt(0, 0 + (movement + 80) / 5, -100);
@@ -476,16 +545,21 @@ const containerInfos = document.querySelector('.container-infos');
 const iframe = document.querySelector('.pdf-cv');
 const visionnerCV = document.getElementById('visionner-cv');
 const telechargerCV = document.getElementById('telecharger-cv');
+const quiteCVView = document.querySelector('.quit-cv-view');
 
 const toggleCV = function () {
     iframe.classList.toggle('hidden-cv');
     containerInfos.classList.toggle('blur-page');
+    quiteCVView.classList.toggle('hidden-cv');
 };
 
 const clickVisioPDf = function () {
     visionnerCV.addEventListener('click', function () {
         toggleCV();
         clickExitCV();
+    });
+    quiteCVView.addEventListener('click', function () {
+        exitCV();
     });
 };
 
@@ -501,12 +575,29 @@ const clickExitCV = function () {
 clickVisioPDf();
 
 //////////////////////////////
+// Send email
+function sendEmailButton() {
+    const buttonEmail = document.getElementById('envoi-email-button');
+    buttonEmail.addEventListener('click', () => {
+        window.open('mailto: adrien.gagnon25@outlook.com');
+    });
+}
+
+sendEmailButton();
+
+//////////////////////////////
 // Hover blur
 
 function blurSections() {
     const infoSections = document.querySelectorAll('.infos-section');
+    const videos = document.querySelectorAll('.video-piano');
     function blur(e) {
         infoSections.forEach(section => {
+            if (e.target !== section) {
+                section.classList.add('blur-section');
+            }
+        });
+        videos.forEach(section => {
             if (e.target !== section) {
                 section.classList.add('blur-section');
             }
@@ -517,7 +608,15 @@ function blurSections() {
         infoSections.forEach(section => {
             section.classList.remove('blur-section');
         });
+        videos.forEach(section => {
+            section.classList.remove('blur-section');
+        });
     }
+
+    videos.forEach(infoSection => {
+        infoSection.addEventListener('mouseenter', e => blur(e));
+        infoSection.addEventListener('mouseleave', () => unblur());
+    });
 
     infoSections.forEach(infoSection => {
         infoSection.addEventListener('mouseenter', e => blur(e));
@@ -525,7 +624,7 @@ function blurSections() {
     });
 }
 
-// blurSections();
+blurSections();
 
 //////////////////////////////
 // click on plus
@@ -545,3 +644,24 @@ function handleButtonPlus() {
 }
 
 handleButtonPlus();
+
+//////////////////////////////
+// video zoom
+
+function handleClickVideo() {
+    const videos = document.querySelectorAll('.video-piano');
+    function zoomInVideo(e) {
+        e.target.classList.add('zoomInVideo');
+    }
+
+    function zoomOutVideo(e) {
+        e.target.classList.remove('zoomInVideo');
+    }
+
+    videos.forEach(video => {
+        video.addEventListener('mouseenter', e => zoomInVideo(e));
+        video.addEventListener('mouseleave', e => zoomOutVideo(e));
+    });
+}
+
+handleClickVideo();

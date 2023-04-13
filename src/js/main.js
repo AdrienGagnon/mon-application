@@ -1,8 +1,14 @@
 import * as THREE from 'three';
-import { gsap, Expo } from 'gsap';
+import { gsap } from 'gsap';
 import { ImageLoader } from 'three';
-import imgArrowFull from '../img/menu-principal/up-arrow-full.png';
-import imgArrowEmpty from '../img/menu-principal/up-arrow-full.png';
+
+import { goToGithub, goToLinkedIn, sendEmail } from './general';
+
+goToGithub();
+goToLinkedIn();
+sendEmail();
+
+// Rotating earth
 const scene = new THREE.Scene();
 const container = document.querySelector('#earth-div');
 
@@ -12,27 +18,12 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
+camera.position.setZ(30);
 
 const renderer = new THREE.WebGL1Renderer({
     canvas: document.querySelector('#earth-svg'),
     alpha: true,
 });
-renderer.setSize(container.offsetWidth, container.offsetHeight);
-
-container.addEventListener('resize', onContainerResize);
-
-function onContainerResize() {
-    const box = container.getBoundingClientRect();
-    renderer.setSize(box.width, box.height);
-
-    camera.aspect = box.width / box.height;
-    camera.updateProjectionMatrix();
-    // optional animate/renderloop call put here for render-on-changes
-}
-renderer.setPixelRatio(window.devicePixelRatio);
-camera.position.setZ(40);
-
-renderer.render(scene, camera);
 
 const geometry = new THREE.SphereGeometry(15, 32, 32);
 
@@ -40,24 +31,13 @@ const color = 0xffffff;
 const intensity = 1;
 const light = new THREE.AmbientLight(color, intensity);
 
-// const earthTexture = new THREE.TextureLoader().load(
-//     '../src/img/2k_earth_daymap.jpg'
-// );
-const image = new ImageLoader('../img/2k_earth_daymap.jpg');
+const path = require('../img/menu-principal/2k_earth_daymap.jpg');
+const pathTexture = require('../img/menu-principal/2k_earth_normal_map.jpg');
 
-const earthTexture = new THREE.TextureLoader().load(
-    '../src/img/2k_earth_normal_map.jpg',
-    function (obj) {
-        console.log(obj);
-    },
-    function (obj) {
-        console.log(obj);
-    }
-);
+const earthTexture = new THREE.TextureLoader().load(path);
 
-const normalTexture = new THREE.TextureLoader().load(
-    '../src/img/2k_earth_normal_map.jpg'
-);
+const normalTexture = new THREE.TextureLoader().load(pathTexture);
+
 const sphere = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial({
@@ -65,6 +45,20 @@ const sphere = new THREE.Mesh(
         normalMap: normalTexture,
     })
 );
+
+renderer.setSize(container.offsetWidth, container.offsetHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.render(scene, camera);
+
+// function onContainerResize() {
+//     console.log('resize');
+//     const box = container.getBoundingClientRect();
+//     renderer.setSize(box.width, box.height);
+
+//     camera.aspect = box.width / box.height;
+//     camera.updateProjectionMatrix();
+// }
+// container.addEventListener('resize', onContainerResize);
 
 let counter = 0;
 
@@ -77,52 +71,31 @@ function animate() {
 }
 
 const earthDiv = document.querySelector('#earth-div');
-const resizeEarth = function () {
-    const width = earthDiv.offsetWidth;
-    const height = earthDiv.offsetHeight;
-    // this.width = this.container.offsetWidth;
-    // this.height = this.container.offsetHeight;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-};
 
-const setupResize = () => {
-    window.addEventListener('resize', resizeEarth());
-};
+// const resizeEarth = function () {
+//     console.log('resize earth div');
+//     console.log(earthDiv.offsetWidth, earthDiv.offsetHeight);
+//     const width = earthDiv.offsetWidth;
+//     const height = earthDiv.offsetHeight;
+//     // this.width = this.container.offsetWidth;
+//     // this.height = this.container.offsetHeight;
+//     renderer.setSize(width, height);
+//     camera.aspect = width / height;
+//     camera.updateProjectionMatrix();
+// };
 
-setupResize();
+// const setupResize = () => {
+//     earthDiv.addEventListener('resize', resizeEarth());
+// };
+
+// setupResize();
 scene.add(light);
 scene.add(sphere);
 animate();
 
 //////////////////////////////////
 // Mouse blob
-/* gsap.set('.ball', { xPercent: -50, yPercent: -50 });
 
-const ball = document.querySelector('.ball');
-const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-const mouse = { x: pos.x, y: pos.y };
-const speed = 0.2;
-
-const xSet = gsap.quickSetter(ball, 'x', 'px');
-const ySet = gsap.quickSetter(ball, 'y', 'px');
-
-window.addEventListener('mousemove', e => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
-
-gsap.ticker.add(() => {
-    // adjust speed for higher refresh monitors
-    const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
-
-    pos.x += (mouse.x - pos.x) * dt;
-    pos.y += (mouse.y - pos.y) * dt;
-    xSet(pos.x);
-    ySet(pos.y);
-});
- */
 gsap.set('.ball', { xPercent: -50, yPercent: -50 });
 
 const ball = document.querySelector('.ball');
@@ -194,9 +167,8 @@ observeSection([sectionBottom, sectionTop]);
 const toInfos = document.querySelector('.to-section-infos');
 const toPhotos = document.querySelector('.to-section-photos');
 const toQuiz = document.querySelector('.to-section-quiz');
+const toContact = document.querySelector('.to-section-contact');
 const toTop = document.querySelector('.revenirTop');
-
-const toTopImage = document.querySelector('.toTop');
 
 toInfos.addEventListener('click', function (e) {
     section1.scrollIntoView({
@@ -216,6 +188,12 @@ toQuiz.addEventListener('click', function (e) {
     });
 });
 
+toContact.addEventListener('click', function (e) {
+    section4.scrollIntoView({
+        behavior: 'smooth',
+    });
+});
+
 toTop.addEventListener('click', function (e) {
     header.scrollIntoView({
         behavior: 'smooth',
@@ -225,17 +203,15 @@ toTop.addEventListener('click', function (e) {
 ///////////////////////////////////////////////////
 // Click on plateformes icons
 
-const githubIcon = document.getElementById('github-icon');
-const linkedInIcon = document.getElementById('linkedin-icon');
-const emailIcon = document.getElementById('email-icon');
+const githubIcon = document.getElementById('go-to-github-logo');
+const linkedInIcon = document.getElementById('go-to-linkedin-logo');
+const emailIcon = document.getElementById('send-email-logo');
 
 function goTo(e) {
-    console.log(e);
     if (e.target.id === 'github-icon') {
     }
 }
 
 for (icon of [githubIcon, linkedInIcon, emailIcon]) {
-    console.log('yepo');
     icon.addEventListener('click', e => goTo(e));
 }

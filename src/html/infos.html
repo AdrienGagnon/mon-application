@@ -46,6 +46,7 @@
             class="pdf-cv hidden-cv"
             src="../pdf/CV_AG_janvier_2023-prog.pdf"
         ></iframe>
+        <button class="quit-cv-view hidden-cv">X</button>
         <div class="container-infos">
             <div class="infos-section" id="resume">
                 <h1>Résumé</h1>
@@ -187,9 +188,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="infos-section">
-                <h1>Comptétences linguistiques</h1>
                 <div class="langues">
                     <div class="langue">
                         <h2>Français:</h2>
@@ -197,56 +195,80 @@
                     </div>
                     <div class="langue">
                         <h2>Anglais:</h2>
-                        <div class="cercles-langues">
-                            <div id="demi-cercle"></div>
-                        </div>
+                        <div class="cercles-langues anglais"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="infos-section" id="cv-contact-infos">
+                <h1>Curriculum vitæ & contacts</h1>
+                <div class="cv-contact-infos">
+                    <div class="cv-container">
+                        <button id="visionner-cv">Visionnez</button> ou
+                        <a
+                            id="telecharger-cv"
+                            href="../pdf/CV_AG_janvier_2023-prog.pdf"
+                            download="CV_Adrien_Gagnon"
+                            >téléchargez</a
+                        >
+                        le CV ici.
+                    </div>
+                    <div class="contact-infos-container">
+                        <p>Contactez-moi par</p>
+                        <button id="envoi-email-button">e-mail!</button>
                     </div>
                 </div>
             </div>
             <div class="infos-section">
-                <h1>PDF CV</h1>
-                <button id="visionner-cv">Visionner le PDF</button>
-
-                <a
-                    href="../pdf/CV_AG_janvier_2023-prog.pdf"
-                    download="CV_Adrien_Gagnon"
-                    >Télécharger le PDF</a
-                >
-            </div>
-            <div class="infos-section">
                 <h1>Loisirs</h1>
-                <div class="section-loisir">
+                <div class="section-loisir badminton">
                     <p>
-                        J'aime bien faire du sport, en particulier le badminton.
-                        J'ai fait de la compétition pendant longtemps, notamment
+                        J'aime faire du <span>sport</span>, en particulier le
+                        <span>badminton</span>. J'ai fait de la
+                        <span>compétition</span> pendant longtemps, notamment
                         avec les Volontaires du Cégep de Sherbrooke.
                     </p>
+                    <img src="../img/infos-img/badminton.jpg" alt="" />
                 </div>
-                <div class="section-loisir">
+                <div class="section-loisir piano">
                     <p>
-                        Je joue du piano pour mon plaisir personnel depuis que
-                        j'ai 10 ans. Voici une petite création pour un projet de
-                        Cégep et une interprétation (quelque peu maladroite)
-                        d'une pièce célèbre de Maurice Ravel: Gaspard de la
-                        nuit.
+                        Je joue du <span>piano</span>
+                        depuis que j'ai 10 ans. Ci-dessous, vous pourrez écouter
+                        une petite
+                        <span>création</span> pour un projet de Cégep et deux
+                        <span>interprétations</span> de pièces de Ravel et de
+                        Rachmaninoff.
                     </p>
+                    <img src="../img/infos-img/piano.jpg" alt="" />
                 </div>
             </div>
-            <div class="infos-section" id="videos-piano">
-                <!-- <iframe
-                src="https://www.youtube.com/embed/9NryGfikwlA"
-                title="Ambiance"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-            ></iframe>
-            <iframe
-                src="https://www.youtube.com/embed/WFdy4j1IV34"
-                title="Ondine"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-            ></iframe> -->
+            <div class="videos-piano-container">
+                <div class="video-piano" id="video-ambiance">
+                    <iframe
+                        src="https://www.youtube.com/embed/9NryGfikwlA"
+                        title="Ambiance"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <div class="video-piano" id="video-gaspard">
+                    <iframe
+                        src="https://www.youtube.com/embed/WFdy4j1IV34"
+                        title="Ondine"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <div class="video-piano" id="video-rach">
+                    <iframe
+                        src="https://www.youtube.com/embed/51sWBYVdGbs"
+                        title="Ondine"
+                        frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
             </div>
         </div>
         <footer class="footer" id="footer-infos">
@@ -258,17 +280,29 @@
                 <p>Mes plateformes:</p>
                 <ul class="plateformes-content">
                     <li>
-                        <img src="../img/footer-icons/github-sign.png" alt="" />
+                        <img
+                            id="go-to-github-logo"
+                            src="../img/footer-icons/github-sign.png"
+                            alt=""
+                        />
                         <a href="https://github.com/AdrienGagnon">GitHub</a>
                     </li>
                     <li>
-                        <img src="../img/footer-icons/linkedin.png" alt="" />
+                        <img
+                            id="go-to-linkedin-logo"
+                            src="../img/footer-icons/linkedin.png"
+                            alt=""
+                        />
                         <a href="https://linkedin.com/in/adrien-gagnon"
                             >LinkedIn</a
                         >
                     </li>
                     <li>
-                        <img src="../img/footer-icons/email.png" alt="" />
+                        <img
+                            id="send-email-logo"
+                            src="../img/footer-icons/email.png"
+                            alt=""
+                        />
                         <a href="mailto: adrien.gagnon25@outlook.com"
                             >Send Email</a
                         >
