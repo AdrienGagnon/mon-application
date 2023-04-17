@@ -12,24 +12,57 @@ class App extends Component {
     state = {
         activeImg: null,
         height: 0,
+        windowHeight: 0,
+        navHeight: 111,
     };
 
     constructor() {
         super();
-        this.toggleMenu();
+        this.toggleMenuListener();
+    }
+
+    updateDimensions() {
+        let w = window,
+            d = document,
+            documentElement = d.documentElement,
+            body = d.getElementsByTagName('body')[0],
+            nav = d.getElementsByTagName('nav')[0],
+            height =
+                w.innerHeight ||
+                documentElement.clientHeight ||
+                body.clientHeight;
+        height -= nav.clientHeight;
+        this.setState({ windowHeight: height, navHeight: nav });
+        const root = document.getElementById('root');
+        root.style.height = height - 1 + 'px';
+    }
+
+    componentDidMount() {
+        this.updateDimensions();
+        window.addEventListener('resize', this.updateDimensions.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions.bind(this));
     }
 
     toggleMenu() {
         const menu = document.getElementById('menu-toggle');
-        menu.addEventListener('click', function () {
-            menu.classList.toggle('open');
-            document.getElementById('nav-photos').classList.toggle('open');
-        });
+        menu.classList.toggle('open');
+        document.getElementById('nav-photos').classList.toggle('open');
+        this.updateDimensions();
+    }
+
+    toggleMenuListener() {
+        const menu = document.getElementById('menu-toggle');
+        menu.addEventListener('click', this.toggleMenu.bind(this));
     }
 
     updateHeight = height => {
         // change height of image
-        this.setState(() => ({ height: height }));
+        this.setState(() => ({
+            height: height,
+        }));
     };
 
     updateState = img => {

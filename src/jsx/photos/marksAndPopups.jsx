@@ -26,14 +26,6 @@ class MarksAndPops extends Component {
             }
         }
 
-        // Center the popup
-        // const px = this.props.state.map.project(newImg.coords);
-
-        // px.y -= this.props.state.height / 2;
-
-        // const newCoords = this.props.state.map.unproject(px);
-        // this.props.flyToMarker(newCoords);
-
         // Set the new image as active
         this.props.updateState(newImg);
     }

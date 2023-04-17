@@ -184,13 +184,13 @@ class Sketch {
         this.importVolant();
 
         this.addObjects(-10, -20);
-        // this.addObjects(10, -20);
-        // this.addObjects(-10, -40);
-        // this.addObjects(10, -40);
-        // this.addObjects(-10, -60);
-        // this.addObjects(10, -60);
-        // this.addObjects(-10, -80);
-        // this.addObjects(10, -80);
+        this.addObjects(10, -20);
+        this.addObjects(-10, -40);
+        this.addObjects(10, -40);
+        this.addObjects(-10, -60);
+        this.addObjects(10, -60);
+        this.addObjects(-10, -80);
+        this.addObjects(10, -80);
 
         // scroll
         this.listenOnScroll();
@@ -211,11 +211,7 @@ class Sketch {
 
     // Add light
     addLight() {
-        // this.light = new THREE.PointLight(0xffffff, 0.5);
-        // this.light.position.set(0, 3, -20);
-        // this.light.castShadow = true;
-
-        const ambientLight = new THREE.AmbientLight('white', 0.05);
+        const ambientLight = new THREE.AmbientLight('white', 0.01);
 
         this.light = new THREE.SpotLight(0xffffff, 5);
         this.light.position.set(0, 20, -20);
@@ -243,9 +239,6 @@ class Sketch {
     resize() {
         this.width = body.offsetWidth;
         this.height = body.offsetHeight;
-
-        // this.width = this.container.offsetWidth;
-        // this.height = this.container.offsetHeight;
         this.renderer.setSize(this.width, this.height);
         this.camera.aspect = this.width / this.height;
         this.camera.updateProjectionMatrix();
@@ -262,7 +255,7 @@ class Sketch {
     render() {
         if (!this.isPlaying) return;
         this.time += this.step;
-        this.playhead = (this.time % 3) / 3;
+        this.playhead = (this.time % 10) / 10;
         this.material.uniforms.playhead.value = this.playhead;
         this.childrenEl.forEach(element => {
             if (element.geometry?.type === 'CylinderGeometry') return;

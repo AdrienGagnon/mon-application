@@ -86,12 +86,15 @@ nav {
     --box-shadow-2: rgba(129, 142, 255, 0.7);
     --box-shadow-3: #8dabff;
 
-    transition-duration: 1s;
+    transition-duration: 150ms;
 }
 
 #nav-photos.open,
 #nav-quiz.open {
-    display: none;
+    height: 0px;
+    overflow: hidden;
+    padding: 0;
+    border: none;
 }
 
 .logo {

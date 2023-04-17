@@ -8,6 +8,7 @@
 }
 
 #root {
+    position: relative;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -66,7 +67,7 @@
 
     padding: 1rem;
     padding-top: 100px;
-    padding-bottom: 700px;
+    padding-bottom: 150px;
     overflow-y: scroll;
     -webkit-mask-image: linear-gradient(to top, #0000 10%, #000, #000, #0000);
     scroll-behavior: smooth;
@@ -294,18 +295,6 @@
 .content-sidebar::-webkit-scrollbar {
     display: none;
     background-color: transparent;
-}
-
-.content-sidebar::-webkit-scrollbar-track {
-    background: var(--color-scrollbar-track);
-
-    border-radius: 10px;
-}
-
-.content-sidebar::-webkit-scrollbar-thumb {
-    background: var(--color-scrollbar);
-
-    border-radius: 100px;
 }
 
 .images {

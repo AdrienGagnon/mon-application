@@ -11,27 +11,31 @@ TODO:
 
     ✅ animation waves
     ✅ adjust proportion on contact form
+    ✅ cliquer sur plateformes icone amene vers le site aussi
 
     -   correct earth on quiz
     -   better infos section
-    -   cliquer sur plateformes icone amene vers le site aussi
 
 -   infos:
 
-    -   correct shadows barckgroud
-    -   better looking cards
-    -   blur animation on cards
-    -   correct pillar texture
+    ✅ correct shadows barckgroud
+    ✅ better looking cards
+    ✅ blur animation on cards
+    ✅ correct pillar texture
+
+    -   hide volant quand scroll up
 
 -   photos:
 
     ✅ go to sidebar
+    ✅ x in popup
+    ✅ zoom in option
 
-    -   x in popup
+-   regler preview pas a la bonne hauteur
+
     -   cleaner popup
     -   @media for mobile
     -   correct centered photo preview description
-    -   zoom in option
     -   fix click on map and marker reappear
     -   arrow keys for switching between photos
 
