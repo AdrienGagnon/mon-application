@@ -5,6 +5,7 @@
     --background-lieu-photo: rgba(255, 255, 255, 0.6);
     --color-nav: rgb(11, 27, 61);
     --background-card: rgba(223, 245, 223, 0.9);
+    --background-card-btn: rgba(164, 185, 164, 0.9);
 }
 
 #root {
@@ -330,15 +331,50 @@
     height: 100%;
     width: 100%;
     z-index: 0;
-
-    scale: 1.1;
+    flex-grow: 1;
 }
 
 .img-map {
-    width: 300px;
+    width: 500px;
     height: auto;
     border-radius: 4px;
     box-shadow: 0 0 20px rgb(0, 0, 0);
+}
+
+.leaflet-popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+}
+
+.img-map-zoom-container {
+    display: flex;
+    background-color: var(--background-card-btn);
+    box-shadow: black 1px 1px 1px;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-inline: 1rem;
+
+    border-radius: 1rem;
+}
+
+.img-map-zoom-container div {
+    font-size: 20px;
+    cursor: pointer;
+    text-shadow: black 1px 1px;
+}
+
+.img-map-zoom-container:hover {
+    box-shadow: inset black 1px 1px 1px;
+}
+
+.img-map-zoom-container div:hover {
+    color: black;
 }
 
 .arrows-wrapper {

@@ -50,7 +50,6 @@ body > canvas {
     top: 0;
     left: 0;
     z-index: -9999;
-    /* filter: blur(1px); */
     scale: 1.1;
     overflow: hidden;
     width: 100%;
@@ -130,8 +129,6 @@ body > canvas {
     max-width: 100rem;
     margin-bottom: 15rem;
 
-    transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter,
-        filter, scale;
     transition-duration: 300ms;
 
     overflow: hidden;
@@ -143,10 +140,6 @@ body > canvas {
 
 .infos-section h1 {
     margin-block: 1rem;
-}
-
-.blur-section {
-    filter: blur(2px);
 }
 
 span {

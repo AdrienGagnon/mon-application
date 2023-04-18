@@ -28,8 +28,15 @@ const renderer = new THREE.WebGL1Renderer({
 const geometry = new THREE.SphereGeometry(15, 32, 32);
 
 const color = 0xffffff;
-const intensity = 1;
-const light = new THREE.AmbientLight(color, intensity);
+const intensity = 0.1;
+const ambientLight = new THREE.AmbientLight(color, intensity);
+const directLight = new THREE.SpotLight(0xffffff, 5);
+
+directLight.position.set(50, 50, 50);
+directLight.penumbra = 1;
+directLight.decay = 2;
+directLight.distance = 200;
+directLight.castShadow = true;
 
 const path = require('../img/menu-principal/2k_earth_daymap.jpg');
 const pathTexture = require('../img/menu-principal/2k_earth_normal_map.jpg');
@@ -45,20 +52,22 @@ const sphere = new THREE.Mesh(
         normalMap: normalTexture,
     })
 );
+directLight.target = sphere;
+sphere.castShadow = true;
 
 renderer.setSize(container.offsetWidth, container.offsetHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.render(scene, camera);
 
-// function onContainerResize() {
-//     console.log('resize');
-//     const box = container.getBoundingClientRect();
-//     renderer.setSize(box.width, box.height);
+function onContainerResize() {
+    console.log('resize');
+    const box = container.getBoundingClientRect();
+    renderer.setSize(box.width, box.height);
 
-//     camera.aspect = box.width / box.height;
-//     camera.updateProjectionMatrix();
-// }
-// container.addEventListener('resize', onContainerResize);
+    camera.aspect = box.width / box.height;
+    camera.updateProjectionMatrix();
+}
+container.addEventListener('resize', onContainerResize);
 
 let counter = 0;
 
@@ -72,24 +81,29 @@ function animate() {
 
 const earthDiv = document.querySelector('#earth-div');
 
-// const resizeEarth = function () {
-//     console.log('resize earth div');
-//     console.log(earthDiv.offsetWidth, earthDiv.offsetHeight);
-//     const width = earthDiv.offsetWidth;
-//     const height = earthDiv.offsetHeight;
-//     // this.width = this.container.offsetWidth;
-//     // this.height = this.container.offsetHeight;
-//     renderer.setSize(width, height);
-//     camera.aspect = width / height;
-//     camera.updateProjectionMatrix();
-// };
+const resizeEarth = function () {
+    console.log('resize earth div');
+    console.log(earthDiv.offsetWidth, earthDiv.offsetHeight);
+    const width = earthDiv.offsetWidth;
+    const height = earthDiv.offsetHeight;
+    // this.width = this.container.offsetWidth;
+    // this.height = this.container.offsetHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+};
 
-// const setupResize = () => {
-//     earthDiv.addEventListener('resize', resizeEarth());
-// };
+const setupResize = () => {
+    earthDiv.addEventListener('resize', resizeEarth());
+};
 
-// setupResize();
-scene.add(light);
+const sphereSize = 1;
+const pointLightHelper = new THREE.PointLightHelper(directLight, sphereSize);
+scene.add(pointLightHelper);
+
+setupResize();
+scene.add(ambientLight);
+scene.add(directLight);
 scene.add(sphere);
 animate();
 

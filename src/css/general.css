@@ -97,6 +97,10 @@ nav {
     border: none;
 }
 
+.sidebar.open {
+    display: none;
+}
+
 .logo {
     display: flex;
     float: left;
@@ -242,6 +246,12 @@ nav {
     background-color: var(--color-nav);
 }
 
+#menu-toggle.photo-menu {
+    left: 2rem;
+    top: 1.5rem;
+    background-color: var(--color-background-sidebar);
+}
+
 #menu-toggle span {
     background-color: rgb(255, 255, 255);
     width: 100%;
@@ -336,6 +346,7 @@ nav {
 
 .plateformes-content > li > a:hover {
     color: var(--color-section-3-middle);
+    text-decoration: underline;
 }
 
 .plateformes-content > li > img {

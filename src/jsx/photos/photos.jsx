@@ -27,6 +27,7 @@ class App extends Component {
             documentElement = d.documentElement,
             body = d.getElementsByTagName('body')[0],
             nav = d.getElementsByTagName('nav')[0],
+            sidebar = d.getElementsByClassName('sidebar'),
             height =
                 w.innerHeight ||
                 documentElement.clientHeight ||
@@ -35,6 +36,9 @@ class App extends Component {
         this.setState({ windowHeight: height, navHeight: nav });
         const root = document.getElementById('root');
         root.style.height = height - 1 + 'px';
+        if (this.state.map) {
+            this.state.map.invalidateSize();
+        }
     }
 
     componentDidMount() {
@@ -56,6 +60,13 @@ class App extends Component {
     toggleMenuListener() {
         const menu = document.getElementById('menu-toggle');
         menu.addEventListener('click', this.toggleMenu.bind(this));
+    }
+
+    togglePanel() {
+        const menu = document.querySelector('.photo-menu');
+        menu.classList.toggle('open');
+        document.querySelector('.sidebar').classList.toggle('open');
+        this.updateDimensions();
     }
 
     updateHeight = height => {
@@ -83,7 +94,7 @@ class App extends Component {
 
         // scroll to
         const topOff = currentCard.offsetTop;
-        contentSidebar.scrollTop = topOff - 450;
+        contentSidebar.scrollTop = topOff - 300;
 
         // change aspect of current card
         currentCardImg.classList.add('activeCard');
@@ -121,6 +132,15 @@ class App extends Component {
         const coords = [45, 7];
         return (
             <>
+                <a
+                    id="menu-toggle"
+                    className="open photo-menu"
+                    onClick={this.togglePanel.bind(this)}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
                 <div className="sidebar">
                     <h1>Sélectionnez une photo</h1>
                     <div className="content-sidebar">

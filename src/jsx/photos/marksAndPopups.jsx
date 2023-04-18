@@ -34,6 +34,12 @@ class MarksAndPops extends Component {
         this.props.updateHeight(e.target.height);
     }
 
+    zoomImage(direction) {
+        const img = document.querySelector('.leaflet-popup');
+        img.style.width = '500px';
+        console.log(img.style);
+    }
+
     render() {
         const myIcon = L.icon({
             iconUrl: require('../../img/photos-page/location-pointer.png'),
@@ -85,6 +91,20 @@ class MarksAndPops extends Component {
                             src={photosArray[this.props.state.activeImg.id]}
                             onLoad={e => this.getImageHeight(e)}
                         />
+                        <div className="img-map-zoom-container">
+                            <div
+                                className="img-map-zoom-in"
+                                onClick={() => this.zoomImage('in')}
+                            >
+                                +
+                            </div>
+                            <div
+                                className="img-map-zoom-out"
+                                onClick={() => this.zoomImage('out')}
+                            >
+                                −
+                            </div>
+                        </div>
                         <div
                             onClick={e => this.goToNext('left')}
                             className="arrows-wrapper arrows-left"

@@ -369,9 +369,6 @@ class Sketch {
 
         volant.children[0].castShadow = true;
 
-        const box = new THREE.BoxHelper(volant, 0xffff00);
-        this.scene.add(box);
-
         this.groupPiano.add(volant);
         this.scene.add(this.groupPiano);
     }
@@ -581,7 +578,7 @@ sendEmailButton();
 //////////////////////////////
 // Hover blur
 
-function blurSections() {
+/* function blurSections() {
     const infoSections = document.querySelectorAll('.infos-section');
     const videos = document.querySelectorAll('.video-piano');
     function blur(e) {
@@ -617,7 +614,7 @@ function blurSections() {
     });
 }
 
-blurSections();
+blurSections(); */
 
 //////////////////////////////
 // click on plus

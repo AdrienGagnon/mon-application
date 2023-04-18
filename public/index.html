@@ -124,7 +124,7 @@
                 </svg>
             </div>
             <h2 class="header-2">En connaitre davantage sur moi</h2>
-            <div class="section1-contenu-container">
+            <div class="section-contenu-container">
                 <div class="contenu section1-contenu">
                     <img
                         class="img-section"
@@ -142,8 +142,10 @@
                         >
                     </div>
                 </div>
-                <div class="contenu section1-contenu section1-contenu-extra1">
-                    <div class="section1-contenu-extra-container">
+                <div
+                    class="contenu section1-contenu section1-contenu-extra1 section-contenu-extra"
+                >
+                    <div class="section-contenu-extra-container">
                         <p>
                             <span>&#8594;</span> Inclut une version PDF de mon
                             CV
@@ -151,8 +153,10 @@
                         <img src="../src/img/menu-principal/cv.png" alt="" />
                     </div>
                 </div>
-                <div class="contenu section1-contenu section1-contenu-extra2">
-                    <div class="section1-contenu-extra-container">
+                <div
+                    class="contenu section1-contenu section1-contenu-extra2 section-contenu-extra"
+                >
+                    <div class="section-contenu-extra-container">
                         <p>
                             <span>&#8594;</span> Arrière-plan créé avec Three.js
                         </p>
@@ -184,6 +188,8 @@
                         />
                     </div>
                     <a href="../src/html/photos.html">Cliquez ici</a>
+                    <div class="background-1"></div>
+                    <div class="background-2"></div>
                 </div>
                 <div class="imgs-preview">
                     <img
@@ -210,31 +216,45 @@
             </div>
         </section>
         <section class="section" id="section3">
-            <h2>Quiz sur les pays</h2>
-            <div class="contenu">
-                <div id="earth-div">
-                    <canvas id="earth-svg">Rotating earth</canvas>
-                </div>
-                <div class="section-description">
-                    <p>
-                        Connaissez-vous bien votre planète bleue? Voici un petit
-                        quiz construit avec React faisant appel à des APIs et
-                        qui enregistre votre score.
-                    </p>
-                    <div>
+            <h2>Quiz de géographie</h2>
+            <div class="section-contenu-container">
+                <div class="contenu section3-contenu">
+                    <div id="earth-div">
+                        <canvas id="earth-svg">Rotating earth</canvas>
+                    </div>
+                    <div class="section-description section-description-infos">
                         <p>
-                            <span>&#8594;</span> Créé avec
-                            <a href="https://react.dev/">React</a>
+                            Connaissez-vous bien votre
+                            <span>planète bleue?</span> Voici un petit
+                            <span>quiz</span> pour tester vos connaissances.
                         </p>
-                        <img
+                        <a href="../src/html/quiz.html"
+                            >Cliquez ici pour commencer</a
+                        >
+                    </div>
+                </div>
+                <div
+                    class="contenu section3-contenu section3-contenu-extra1 section-contenu-extra"
+                >
+                    <div class="section-contenu-extra-container">
+                        <span>&#8594;</span> Créé avec
+                        <a href="https://react.dev/">React</a
+                        ><img
                             class="react-logo"
                             src="../src/img/menu-principal/react.png"
                             alt=""
                         />
                     </div>
-                    <a href="../src/html/quiz.html"
-                        >Cliquez ici pour commencer</a
-                    >
+                </div>
+                <div
+                    class="contenu section3-contenu section3-contenu-extra2 section-contenu-extra"
+                >
+                    <div class="section-contenu-extra-container">
+                        <p>
+                            <span>&#8594;</span> Fait appel à des
+                            <span>APIs REST</span>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="section-bottom section-2-wave">

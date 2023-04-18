@@ -12,9 +12,9 @@ TODO:
     ✅ animation waves
     ✅ adjust proportion on contact form
     ✅ cliquer sur plateformes icone amene vers le site aussi
+    ✅ better infos section
 
     -   correct earth on quiz
-    -   better infos section
 
 -   infos:
 
@@ -31,13 +31,10 @@ TODO:
     ✅ x in popup
     ✅ zoom in option
 
--   regler preview pas a la bonne hauteur
-
     -   cleaner popup
     -   @media for mobile
     -   correct centered photo preview description
     -   fix click on map and marker reappear
-    -   arrow keys for switching between photos
 
 -   quiz:
 
