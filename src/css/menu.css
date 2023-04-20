@@ -411,7 +411,6 @@ h2 {
 
 .section-description {
     min-width: 50%;
-    max-width: 50%;
 }
 
 #questionnement {
@@ -625,22 +624,12 @@ h2 {
     gap: 1rem;
 }
 
-@media screen and (max-width: 920px) {
-    #section2 > .contenu {
-        flex-direction: column;
-    }
-
-    .contenu .imgs-preview {
-        width: 100%;
-        max-width: calc(3 * var(--s) + 2 * var(--g));
-    }
-}
-
 .photo-description {
     isolation: isolate;
     position: relative;
     padding: 2rem 4rem;
     text-shadow: 1px 2px #00040a;
+    margin-inline: 3rem;
 }
 
 .photo-description:hover .background-1 {
@@ -792,21 +781,6 @@ h2 {
     aspect-ratio: 1;
     box-shadow: 0 0 10px rgb(0, 0, 0);
     border-radius: 10px;
-}
-
-@media screen and (max-width: 920px) {
-    .section-contenu-container {
-        margin: 0;
-    }
-    .photo-description {
-        margin-bottom: 3rem;
-    }
-    .section4-content {
-        margin-inline: 0;
-    }
-    .section4-content > img {
-        display: none;
-    }
 }
 
 .contact-container {
@@ -998,4 +972,45 @@ button[type='submit']:hover {
 /* section 4 bottom color*/
 .section-4-wave .shape-fill-4 {
     fill: var(--color-footer);
+}
+
+/* //////////////////////////////////// */
+/* @media */
+/* //////////////////////////////////// */
+
+@media screen and (max-width: 920px) {
+    .section-contenu-container {
+        margin-inline: 0;
+    }
+    .photo-description {
+        margin-bottom: 3rem;
+        margin-inline: 0;
+    }
+    .section4-content {
+        margin-inline: 0;
+    }
+    .section4-content > img {
+        display: none;
+    }
+    #section2 > .contenu {
+        flex-direction: column;
+    }
+    .contenu .imgs-preview {
+        width: 100%;
+        max-width: calc(3 * var(--s) + 2 * var(--g));
+    }
+    .section1-contenu,
+    .section3-contenu {
+        flex-direction: column;
+    }
+
+    .section-contenu-container:hover .section-contenu-extra {
+        justify-content: end;
+        align-items: center;
+        align-content: center;
+    }
+    .section-contenu-extra {
+        font-size: 1.6rem;
+        line-height: normal;
+    }
 }

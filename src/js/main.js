@@ -60,7 +60,6 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.render(scene, camera);
 
 function onContainerResize() {
-    console.log('resize');
     const box = container.getBoundingClientRect();
     renderer.setSize(box.width, box.height);
 
@@ -82,8 +81,6 @@ function animate() {
 const earthDiv = document.querySelector('#earth-div');
 
 const resizeEarth = function () {
-    console.log('resize earth div');
-    console.log(earthDiv.offsetWidth, earthDiv.offsetHeight);
     const width = earthDiv.offsetWidth;
     const height = earthDiv.offsetHeight;
     // this.width = this.container.offsetWidth;

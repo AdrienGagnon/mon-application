@@ -11,7 +11,7 @@
 
 body {
     /* overflow: hidden; */
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     height: 100vh;
     width: 100%;
 }
@@ -73,6 +73,10 @@ body {
     transition: opacity 300ms ease-in-out;
 }
 
+.options-selection-container.activated {
+    z-index: 200;
+}
+
 .form-container-quiz {
     display: flex;
     flex-direction: column;
@@ -99,6 +103,7 @@ option {
     border-radius: 4px;
     box-shadow: 0 0 10px rgb(0, 0, 0);
     resize: none;
+    cursor: pointer;
 }
 
 .error-message-selection {
@@ -159,65 +164,126 @@ option {
 }
 
 .transition-shapes {
-    --color1: rgb (50, 52, 62);
-    --color2: rgb (64, 76, 84);
-    --color3: rgb (68, 107, 106);
-    --color4: rgb (71, 141, 115);
-    --color5: rgb (91, 169, 93);
-    width: 100%;
-    aspect-ratio: 1;
-    /* z-index: 100; */
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-
-    /* animation: transitionShapes 3s forwards;
-    animation-delay: 2s; */
-}
-.transition-shapes > span {
+    --color2: rgb(91, 169, 93);
+    --color3: rgb(22, 78, 26);
     width: 100%;
     height: 100%;
+    aspect-ratio: 1;
+    top: 0;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    transform: translate(calc(100% + 500px), 0);
+}
+
+.transition-shapes.activated {
+    animation: transitionShapesIn 2s forwards;
+}
+
+.transition-shapes.deactivated {
+    animation: transitionShapesOut 2s forwards;
+}
+
+@keyframes transitionShapesIn {
+    100% {
+        transform: translate(0%);
+    }
+}
+
+@keyframes transitionShapesOut {
+    0% {
+        transform: translate(0%);
+    }
+    100% {
+        transform: translate(-100%);
+    }
+}
+
+.background-transition-shapes {
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(0%) rotate(45deg);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(var(--color3) 0%, var(--color2) 60%);
+}
+
+.transition-shapes > span {
+    display: none;
+    --width: 1500px;
+    width: var(--width);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background-image: conic-gradient(
+        from 30deg,
+        var(--color1) 120deg,
+        transparent 18deg 45deg
+    );
+    translate: 400px;
+    --distance: 0px;
+}
+
+.transition-shapes.activated > span {
+    display: inline;
+    animation: triangleSpeed 300ms forwards;
+}
+
+.transition-shapes.activated > :nth-child(2) {
+    --distance: 100px;
+    animation-delay: 150ms;
+}
+
+.transition-shapes.activated > :nth-child(3) {
+    --distance: 200px;
+    animation-delay: 300ms;
+}
+
+.transition-shapes.activated > :nth-child(4) {
+    --distance: 300px;
+    animation-delay: 450ms;
+}
+
+.transition-shapes.activated > :nth-child(5) {
+    --distance: 401px;
+    animation-delay: 600ms;
+}
+
+@keyframes triangleSpeed {
+    100% {
+        translate: var(--distance);
+    }
 }
 
 .transition-shapes > :nth-child(1) {
-    transform: translate(10%) rotate(45deg);
-    background-color: var(--color1);
-    /* z-index: 110; */
+    --color1: rgb(43, 50, 54);
+    display: inline-block;
+    z-index: -5;
 }
 
 .transition-shapes > :nth-child(2) {
-    transform: translate(20%) rotate(45deg);
-    background-color: var(--color2);
-    /* z-index: 12; */
+    --color1: rgb(64, 76, 84);
+    z-index: -4;
 }
 
 .transition-shapes > :nth-child(3) {
-    transform: translate(30%) rotate(45deg);
-    background-color: var(--color3);
-    /* z-index: 13; */
+    --color1: rgb(68, 107, 106);
+    z-index: -3;
 }
 
 .transition-shapes > :nth-child(4) {
-    transform: translate(40%) rotate(45deg);
-    background-color: var(--color4);
-    /* z-index: 14; */
+    --color1: rgb(71, 141, 115);
+    z-index: -2;
 }
 
 .transition-shapes > :nth-child(5) {
-    transform: translate(50%) rotate(45deg);
-    background-color: var(--color5);
-    /* z-index: 15; */
-}
-
-@keyframes transitionShapes {
-    100% {
-        transform: translate(-110%);
-    }
+    --color1: rgb(91, 169, 93);
+    z-index: -1;
+    translate: 401px;
 }
 
 .hidden-options-selection-container {
@@ -225,11 +291,37 @@ option {
     translate: 100%;
 }
 
-.menu-selection-page.menuSelectionTransistion {
+.loading-screen {
+    border-radius: 10rem;
+    padding: 2rem 3rem;
+    z-index: 2;
+    font-size: 6rem;
+    font-weight: 700;
+    text-shadow: black 2px 2px;
 }
 
-.menuSelectionTransistion {
-    transform: translate(50%, 30%) scale(3);
+.loading-screen span {
+    display: inline-block;
+    animation: loadingDots 2s infinite cubic-bezier(0.06, 0.39, 0.18, 1);
+}
+
+.loading-screen span:nth-child(2) {
+    animation-delay: 200ms;
+}
+
+.loading-screen span:nth-child(1) {
+    animation-delay: 400ms;
+}
+
+@keyframes loadingDots {
+    50% {
+        opacity: 0;
+        translate: 30px;
+    }
+    51% {
+        opacity: 0;
+        translate: -30px;
+    }
 }
 
 /* /////////////////////////////////////////////////// */

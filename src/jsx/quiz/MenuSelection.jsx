@@ -4,7 +4,6 @@ import React, { Component, useState } from 'react';
 import rotatingEarth from './rotating-earth.mp4';
 
 export default function MenuSelection(props) {
-    const [transitionToQuiz, setTransitionToQuiz] = useState(false);
     const [selectedParameters, setSelectedParameters] = useState({
         sujet: 'au drapeau',
         choixReponse: 'le nom du pays',
@@ -44,37 +43,29 @@ export default function MenuSelection(props) {
         );
         messageErreur.classList.add('hidden-text-selection');
 
-        // set parameters state
-        props.updateModeQuiz(
-            selectedParameters.sujet,
-            selectedParameters.choixReponse,
-            selectedParameters.mode,
-            selectedParameters.nombre
-        );
-        props.updateState('repondre');
-
-        // transition to question page true
-        setTransitionToQuiz(true);
-    };
-
-    if (transitionToQuiz) {
-        const optionsSelectionContainer = document.querySelector(
+        // transition animation
+        const transition = document.querySelector('.transition-shapes');
+        const selection = document.querySelector(
             '.options-selection-container'
         );
-        const earthRotatingVideo = document.querySelector(
-            '.earth-rotating-video'
-        );
-        optionsSelectionContainer.classList.add(
-            'hidden-options-selection-container'
-        );
-        earthRotatingVideo.classList.add('menuSelectionTransistion');
-        setTimeout(() => {
-            props.updatePage('Question');
+        transition.classList.toggle('activated');
+        selection.classList.toggle('activated');
 
-            // transition to question page false
-            setTransitionToQuiz(false);
+        // letting the animation proceed
+        setTimeout(() => {
+            // set parameters state
+            props.updateModeQuiz(
+                selectedParameters.sujet,
+                selectedParameters.choixReponse,
+                selectedParameters.mode,
+                selectedParameters.nombre
+            );
+            props.updateState('repondre');
+            props.updatePage('Question');
+            // transition to question page true
+            props.updateTransition(true);
         }, 2000);
-    }
+    };
 
     function handleOnChange(e) {
         setSelectedParameters({
@@ -102,7 +93,7 @@ export default function MenuSelection(props) {
             <video className="earth-rotating-video" autoPlay muted loop>
                 <source src={rotatingEarth} type="video/mp4"></source>
             </video>
-            <div className="options-selection-container">
+            <div className="options-selection-container activated">
                 <h1>Sélectionnez vos paramètres de quiz</h1>
                 <p>Vous pourrez changer le style de question à tout moment</p>
                 <div className="form-container-quiz">

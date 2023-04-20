@@ -11,11 +11,12 @@ export const StateContext = createContext(null);
 class AppQuiz extends Component {
     state = {
         activePage: 'MenuSelection',
-        activeState: 'repondre',
+        activeState: '',
         sujet: '',
         choixReponse: '',
         mode: '',
         nombre: 5,
+        transitionToQuiz: false,
     };
 
     // state = {
@@ -45,6 +46,13 @@ class AppQuiz extends Component {
         }));
     };
 
+    updateTransition = newActiveState => {
+        // active page
+        this.setState(() => ({
+            transitionToQuiz: newActiveState,
+        }));
+    };
+
     updateModeQuiz = (sujet, choixReponse, mode, nombre) => {
         // active page
         this.setState(() => ({
@@ -69,6 +77,7 @@ class AppQuiz extends Component {
                 <div className="quiz-container">
                     {this.state.activePage === 'MenuSelection' && (
                         <MenuSelection
+                            updateTransition={this.updateTransition}
                             updatePage={this.updatePage}
                             updateState={this.updateState}
                             updateModeQuiz={this.updateModeQuiz}
@@ -79,15 +88,22 @@ class AppQuiz extends Component {
                             }
                         />
                     )}
-                    {/* <div className="transition-shapes">
+                    <div className="transition-shapes">
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div> */}
+                        <div className="background-transition-shapes"></div>
+                        <div className="loading-screen">
+                            Chargement <span>. </span>
+                            <span>. </span>
+                            <span>. </span>
+                        </div>
+                    </div>
                     {this.state.activePage === 'Question' && (
                         <Question
+                            updateTransition={this.updateTransition}
                             updatePage={this.updatePage}
                             updateState={this.updateState}
                             state={this.state}
@@ -101,17 +117,3 @@ class AppQuiz extends Component {
 
 const root = ReactDOM.createRoot(document.getElementById('root-quiz'));
 root.render(<AppQuiz />);
-
-/* 
-function resizeNav() {
-    // Set the nav height to fill the window
-    $("#nav-fullscreen").css({"height": window.innerHeight});
-
-    // Set the circle radius to the length of the window diagonal,
-    // this way we're only making the circle as big as it needs to be.
-    var radius = Math.sqrt(Math.pow(window.innerHeight, 2) + Math.pow(window.innerWidth, 2));
-    var diameter = radius * 2;
-    $("#nav-overlay").width(diameter);
-    $("#nav-overlay").height(diameter);
-    $("#nav-overlay").css({"margin-top": -radius, "margin-left": -radius});
-} */

@@ -510,6 +510,20 @@ export default function Question(props) {
         );
     }
 
+    // Appelé au début pour enlever la transition
+    if (props.state.transitionToQuiz) {
+        // Activate fade out
+        const transition = document.querySelector('.transition-shapes');
+        transition.classList.toggle('deactivated');
+
+        setTimeout(() => {
+            // Deactivate transition
+            transition.classList.toggle('deactivated');
+            transition.classList.toggle('activated');
+            props.updateTransition(false);
+        }, 2000);
+    }
+
     return (
         <div className="question-page">
             {props.state.activeState === 'Resultat' ? (

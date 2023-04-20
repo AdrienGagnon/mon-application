@@ -11,6 +11,7 @@ import next from './next.png';
 class MarksAndPops extends Component {
     state = {
         height: 0,
+        zoomLevel: 500,
     };
 
     goToNext(direction) {
@@ -35,9 +36,26 @@ class MarksAndPops extends Component {
     }
 
     zoomImage(direction) {
-        const img = document.querySelector('.leaflet-popup');
-        img.style.width = '500px';
-        console.log(img.style);
+        const img = document.querySelector('.img-map');
+        const possibleHeight = [200, 300, 400, 500, 600];
+        const index = possibleHeight.indexOf(this.state.zoomLevel);
+        let newZoomLevel;
+        if (direction === 'in') {
+            if (index === possibleHeight.length - 1) {
+                return;
+            }
+            newZoomLevel = possibleHeight[index + 1];
+        } else {
+            if (index === 0) {
+                return;
+            }
+            newZoomLevel = possibleHeight[index - 1];
+        }
+        this.setState(() => ({
+            zoomLevel: newZoomLevel,
+        }));
+        img.style.height = newZoomLevel + 'px';
+        this.props.updateHeight(newZoomLevel);
     }
 
     render() {
@@ -85,6 +103,7 @@ class MarksAndPops extends Component {
                         setView={this.props.state.activeImg.coords}
                         setZoom={2}
                         position={this.props.state.activeImg.coords}
+                        maxWidth={'auto'}
                     >
                         <img
                             className="img-map"

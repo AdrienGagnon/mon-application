@@ -309,8 +309,8 @@
 
 .leaflet-control-container {
     position: absolute;
-    left: 60px;
-    top: 50px;
+    left: 30px;
+    top: 60px;
 }
 
 .leaflet-control-container span {
@@ -335,8 +335,8 @@
 }
 
 .img-map {
-    width: 500px;
-    height: auto;
+    width: auto;
+    height: 500px;
     border-radius: 4px;
     box-shadow: 0 0 20px rgb(0, 0, 0);
 }

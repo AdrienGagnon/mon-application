@@ -12,7 +12,6 @@ class App extends Component {
     state = {
         activeImg: null,
         height: 0,
-        windowHeight: 0,
         navHeight: 111,
     };
 
@@ -27,13 +26,11 @@ class App extends Component {
             documentElement = d.documentElement,
             body = d.getElementsByTagName('body')[0],
             nav = d.getElementsByTagName('nav')[0],
-            sidebar = d.getElementsByClassName('sidebar'),
             height =
                 w.innerHeight ||
                 documentElement.clientHeight ||
                 body.clientHeight;
         height -= nav.clientHeight;
-        this.setState({ windowHeight: height, navHeight: nav });
         const root = document.getElementById('root');
         root.style.height = height - 1 + 'px';
         if (this.state.map) {
@@ -67,6 +64,7 @@ class App extends Component {
         menu.classList.toggle('open');
         document.querySelector('.sidebar').classList.toggle('open');
         this.updateDimensions();
+        this.scrollPanelTo(this.state.activeImg);
     }
 
     updateHeight = height => {
@@ -76,13 +74,22 @@ class App extends Component {
         }));
     };
 
-    updateState = img => {
+    scrollPanelTo(img) {
         const currentCard = document
             .querySelector('.content-sidebar')
             .children.item(img.id);
         const currentCardImg = currentCard.querySelector('.photo-container');
         const contentSidebar = document.querySelector('.content-sidebar');
 
+        // scroll to
+        const topOff = currentCard.offsetTop;
+        contentSidebar.scrollTop = topOff - 300;
+
+        // change aspect of current card
+        currentCardImg.classList.add('activeCard');
+    }
+
+    updateState = img => {
         // remove aspect of old active card
         const oldActiveCard = document.querySelector('.activeCard');
         if (oldActiveCard !== null) {
@@ -92,12 +99,10 @@ class App extends Component {
         // active image
         this.setState(() => ({ activeImg: img }));
 
-        // scroll to
-        const topOff = currentCard.offsetTop;
-        contentSidebar.scrollTop = topOff - 300;
+        this.scrollPanelTo(img);
 
-        // change aspect of current card
-        currentCardImg.classList.add('activeCard');
+        // Update dimensions
+        this.updateDimensions();
     };
 
     saveMap = mapInst => {
@@ -108,7 +113,7 @@ class App extends Component {
         if (!this.state.activeImg) return;
         const px = this.state.map.project(this.state.activeImg.coords);
 
-        px.y -= this.state.height / 3;
+        px.y -= this.state.height / 2;
 
         const newCoords = this.state.map.unproject(px);
         this.state.map.flyTo(
