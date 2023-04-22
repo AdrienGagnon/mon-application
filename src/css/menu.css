@@ -14,11 +14,6 @@ body {
     z-index: -1;
 }
 
-/* .hidden {
-    display: none;
-    opacity: 0;
-} */
-
 a {
     color: var(--color-font);
 }
@@ -124,26 +119,16 @@ a {
     font-weight: 700;
 }
 
-@media screen and (max-width: 800px) {
-    .welcome-message {
-        font-size: 3rem;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .welcome-description {
-        font-size: 1.6rem;
-    }
-}
-
 .blob {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 80%;
+    height: 90%;
     min-height: 500px;
     min-width: 600px;
+    max-height: 80%;
 }
 
 .blob > img {
@@ -506,7 +491,7 @@ h2 {
 
     translate: 20px 20px;
     z-index: -1;
-    transition-duration: 1s;
+    transition-duration: 1.5s;
     transition-timing-function: cubic-bezier(0.19, 1.48, 0.26, 0.92);
 }
 
@@ -572,7 +557,7 @@ h2 {
 
 .section-contenu-container:hover .section1-contenu-extra2,
 .section-contenu-container:hover .section3-contenu-extra2 {
-    transition-duration: 300ms;
+    transition-duration: 800ms;
     transform: translate(0px, 100px);
     background-position: 4rem 4rem, 4rem 4rem;
     align-content: end;
@@ -580,7 +565,7 @@ h2 {
 
 .section-contenu-container:hover .section1-contenu-extra1,
 .section-contenu-container:hover .section3-contenu-extra1 {
-    transition-duration: 300ms;
+    transition-duration: 800ms;
     transform: translate(0px, 50px);
     background-position: 4rem 4rem, 4rem 4rem;
     align-content: end;
@@ -592,6 +577,14 @@ h2 {
     flex-direction: column;
     padding-inline: 2rem;
     align-items: center;
+}
+
+.section-description * {
+    font-size: 2.6rem;
+}
+
+.section-description-infos {
+    margin-right: 4rem;
 }
 
 .section-description-infos::after {
@@ -700,6 +693,7 @@ h2 {
     --g: 10px;
     --f: 1.5;
     display: grid;
+    position: relative;
     gap: var(--g);
     width: calc(3 * var(--s) + 2 * var(--g));
     aspect-ratio: 1.33;
@@ -720,8 +714,8 @@ h2 {
 }
 
 .img-preview-menu:hover {
-    width: calc(var(--s) * var(--f));
-    height: calc(var(--s) * var(--f));
+    width: 20rem;
+    height: 20rem;
 }
 
 /* ///////////////////////////////////////////////////////// */
@@ -733,7 +727,7 @@ h2 {
         var(--color-section-3-middle) 10%,
         var(--color-section-3) 70%
     );
-    max-height: 500px;
+    min-height: 300px;
 }
 
 #section3 > .contenu > .section-description {
@@ -749,7 +743,6 @@ h2 {
 
 #earth-div {
     height: 100%;
-    width: 100%;
     align-items: center;
     flex-grow: 1;
     aspect-ratio: 1;
@@ -778,6 +771,7 @@ h2 {
     flex-direction: row;
     flex: 1;
     margin-inline: 10rem;
+    max-width: 1200px;
 }
 
 .section4-content > img {
@@ -983,23 +977,31 @@ button[type='submit']:hover {
 /* @media */
 /* //////////////////////////////////// */
 
-@media screen and (max-width: 920px) {
-    .section-contenu-container {
-        margin-inline: 0;
+@media screen and (max-width: 1100px) {
+    #section2 > .contenu {
+        flex-direction: column;
     }
     .photo-description {
         margin-bottom: 3rem;
         margin-inline: 0;
     }
+}
+
+@media screen and (max-width: 920px) {
+    .section-contenu-container {
+        margin-inline: 0;
+    }
+    .blob {
+        height: 70%;
+    }
+
     .section4-content {
         margin-inline: 0;
     }
     .section4-content > img {
         display: none;
     }
-    #section2 > .contenu {
-        flex-direction: column;
-    }
+
     .contenu .imgs-preview {
         width: 100%;
         max-width: calc(3 * var(--s) + 2 * var(--g));
@@ -1007,6 +1009,22 @@ button[type='submit']:hover {
     .section1-contenu,
     .section3-contenu {
         flex-direction: column;
+    }
+
+    .section3-contenu {
+        min-height: 500px;
+        gap: 0;
+    }
+
+    .section3-contenu .section-description {
+        padding-inline: 4rem;
+    }
+
+    #earth-div {
+        height: 0%;
+    }
+    .section-description-infos {
+        margin-right: 0;
     }
 
     .section-contenu-container:hover .section-contenu-extra {
@@ -1017,5 +1035,26 @@ button[type='submit']:hover {
     .section-contenu-extra {
         font-size: 1.6rem;
         line-height: normal;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .welcome-message {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .welcome-description {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-contact-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
     }
 }

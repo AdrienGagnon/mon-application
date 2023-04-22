@@ -44,7 +44,6 @@
     --color-nav-btn-active: #ffffff;
     --color-font: white;
     --color-font-footer: #aaa;
-    /* --color-footer: #42484d; */
     --color-footer: rgb(59, 58, 58);
     --padding-section: 20rem;
 }
@@ -132,11 +131,6 @@ nav {
 }
 
 .nav-item {
-    /*     color: rgb(20, 40, 80);
-    color: rgb(39, 73, 109);
-    color: rgb(12, 123, 147);
-    color: rgb(0, 168, 204); */
-
     position: relative;
     font-size: 1.6rem;
     padding: 1rem;
@@ -211,6 +205,31 @@ nav {
 #menu-toggle:focus::after {
     transform: none;
     opacity: 1;
+}
+
+#google_translate_element {
+    margin-left: 2rem;
+}
+
+#google_translate_element div div {
+    float: right;
+    border-radius: 2rem;
+    border: 5px solid rgba(var(--text-base), 1);
+    border-radius: 2em;
+    background: none;
+
+    color: rgba(var(--text-base), 1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 5px solid rgba(var(--text-base), 1);
+    border-radius: 2em;
+
+    font-size: 1.6rem;
+    padding: 1rem;
+}
+
+.goog-te-gadget-icon {
+    display: none;
 }
 
 #menu-toggle {

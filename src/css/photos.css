@@ -82,25 +82,7 @@
 
 /* CARDS */
 
-.flow > * + * {
-    /* margin-top: var(--flow-space, 1em); */
-}
-
 .img-description-container {
-    /* --flow-space: 0.9375rem; */
-    /* --flow-space: 0.9375rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-self: flex-end;
-    height: 55%;
-    padding: 12% 1.25rem 1.875rem;
-    background: linear-gradient(
-        180deg,
-        hsla(0, 0%, 0%, 0) 0%,
-        hsla(0, 0%, 0%, 0.3) 10%,
-        hsl(0, 0%, 0%) 100%
-    ); */
     width: 100%;
     z-index: 100;
 }

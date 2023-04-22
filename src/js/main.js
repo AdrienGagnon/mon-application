@@ -83,22 +83,18 @@ const earthDiv = document.querySelector('#earth-div');
 const resizeEarth = function () {
     const width = earthDiv.offsetWidth;
     const height = earthDiv.offsetHeight;
-    // this.width = this.container.offsetWidth;
-    // this.height = this.container.offsetHeight;
+
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 };
-
-const setupResize = () => {
-    earthDiv.addEventListener('resize', resizeEarth());
-};
+window.onresize = resizeEarth;
+window.addEventListener('resize', resizeEarth());
 
 const sphereSize = 1;
 const pointLightHelper = new THREE.PointLightHelper(directLight, sphereSize);
 scene.add(pointLightHelper);
 
-setupResize();
 scene.add(ambientLight);
 scene.add(directLight);
 scene.add(sphere);

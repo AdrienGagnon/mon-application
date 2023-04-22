@@ -350,7 +350,7 @@ span {
 .langage,
 .outil,
 .concept {
-    background: radial-gradient(var(--color-langage-prog), rgb(121, 58, 14));
+    position: relative;
     border-radius: 15px;
     transition: scale ease-out 150ms;
     z-index: 1;
@@ -361,11 +361,37 @@ span {
     text-shadow: 2px 1px #00040a;
 }
 
+.langage::after,
+.outil::after,
+.concept::after {
+    content: '';
+    background: var(--color-background-etude);
+    position: absolute;
+    margin: auto;
+    z-index: -1;
+    inset: 0;
+    transform: skew(-5deg);
+    width: 95%;
+    border: 3px solid;
+    border-image: linear-gradient(
+            to bottom,
+            var(--color-border-info),
+            rgb(160, 82, 45)
+        )
+        1 100%;
+    transition: ease-out 150ms;
+}
+
 .langage:hover,
 .outil:hover,
 .concept:hover {
     scale: 1.02;
-    box-shadow: inset 0 0 1rem rgb(209, 151, 42);
+}
+
+.langage:hover::after,
+.outil:hover::after,
+.concept:hover::after {
+    transform: skew(0deg);
 }
 
 .block {
@@ -380,27 +406,11 @@ span {
     margin-inline: 5rem;
 }
 
-.langage {
+.langages h2,
+.outils h2,
+.concepts-autres h2 {
+    margin-block: 1rem;
 }
-
-.langages {
-}
-
-/* .block::after {
-    content: '';
-    background: linear-gradient(
-        to bottom right,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0) 50%,
-        #3d2d00 50%,
-        #ffc559 100%
-    );
-    transform-origin: top;
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    overflow: hidden;
-} */
 
 .concepts-autres {
 }
@@ -445,15 +455,11 @@ span {
 /* Section contact et CV */
 /* ///////////////////////////////////////////////// */
 
-#cv-contact-infos {
-    display: flex;
-    flex-direction: column;
-}
-
 .cv-contact-infos {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 5rem;
+    gap: 2rem;
     margin-block: auto;
 }
 
@@ -463,6 +469,7 @@ span {
 
 .contact-infos-container {
     display: flex;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -470,14 +477,8 @@ span {
     align-self: center;
 }
 
-#visionner-cv {
-}
-
 #telecharger-cv {
     text-decoration: none;
-}
-
-#envoi-email-button {
 }
 
 .pdf-cv {
@@ -507,7 +508,6 @@ span {
 #cv-contact-infos a,
 .quit-cv-view {
     width: fit-content;
-    margin: auto;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     background: linear-gradient(45deg, rgb(160, 82, 45), rgb(255, 165, 0));
@@ -540,6 +540,7 @@ span {
     padding-inline: 10rem;
     justify-content: center;
     align-content: center;
+    gap: 1rem;
 }
 
 .section-loisir p {
@@ -646,4 +647,27 @@ span {
     width: 150%;
     height: 120%;
     z-index: 1;
+}
+
+/* //////////////////////////////////// */
+/* @media */
+/* //////////////////////////////////// */
+
+@media screen and (max-width: 920px) {
+    .container-infos {
+        padding-inline: 0 1rem;
+    }
+    .section-loisir {
+        padding-inline: 1rem;
+    }
+    .videos-piano-container {
+        flex-direction: column;
+    }
+    .zoomInVideo {
+        width: 100%;
+        scale: 1.1;
+    }
+    .video-piano {
+        height: 30rem;
+    }
 }
