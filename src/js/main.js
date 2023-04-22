@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { ImageLoader } from 'three';
 
 import { goToGithub, goToLinkedIn, sendEmail } from './general';
 
