@@ -338,18 +338,9 @@ class Sketch {
 
                 const objLoader = new OBJLoader();
                 objLoader.setMaterials(materials);
-                objLoader.load(
-                    path,
-                    this.addPiano.bind(this),
-                    function (xhr) {
-                        console.log(
-                            (xhr.loaded / xhr.total) * 100 + '% loaded'
-                        );
-                    },
-                    function (error) {
-                        console.log(`An error happened: ${error}`);
-                    }
-                );
+                objLoader.load(path, this.addPiano.bind(this), function (xhr) {
+                    (xhr.loaded / xhr.total) * 100 + '% loaded';
+                });
             }.bind(this)
         );
     }
@@ -384,18 +375,9 @@ class Sketch {
 
                 const objLoader = new OBJLoader();
                 objLoader.setMaterials(materials);
-                objLoader.load(
-                    path,
-                    this.addVolant.bind(this),
-                    function (xhr) {
-                        console.log(
-                            (xhr.loaded / xhr.total) * 100 + '% loaded'
-                        );
-                    },
-                    function (error) {
-                        console.log(`An error happened: ${error}`);
-                    }
-                );
+                objLoader.load(path, this.addVolant.bind(this), function (xhr) {
+                    (xhr.loaded / xhr.total) * 100 + '% loaded';
+                });
             }.bind(this)
         );
     }
@@ -451,12 +433,7 @@ class Sketch {
             }.bind(this),
 
             // onProgress callback currently not supported
-            undefined,
-
-            // onError callback
-            function (err) {
-                console.error('An error happened.', err);
-            }
+            undefined
         );
     }
 

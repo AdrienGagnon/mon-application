@@ -35,6 +35,5 @@
         "process": "^0.11.10",
         "three": "^0.150.1"
     },
-    "main": "index.js",
     "keywords": []
 }
