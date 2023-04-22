@@ -1,4 +1,5 @@
 'use strict';
+import cityScape from '../../img/quiz-img/cityscape.png';
 
 import React, { useState, useEffect, useContext } from 'react';
 import { MapContainer, TileLayer, useMap, Marker } from 'react-leaflet';
@@ -23,6 +24,7 @@ export default function Question(props) {
         suivant: false,
         resultats: false,
     });
+    const [aucunResultat, setAucunResultat] = useState(false);
 
     // Compare reponse et input, mene soit a reussi ou rate
     function handleReponse() {
@@ -124,7 +126,6 @@ export default function Question(props) {
             console.log(error);
         }
     }
-
     // Appelé au debut et a chaque fois que currentQuestionNumber augmente. appel la fonction pour fetch data
     useEffect(() => {
         if (props.state.activeState === 'Resultat') return;
@@ -172,6 +173,14 @@ export default function Question(props) {
                 .toLowerCase()
                 .replace('é', 'e'),
             activeCountry.translations.fra.common
+                .replace(/\s+/g, '')
+                .toLowerCase()
+                .replace('é', 'e'),
+            activeCountry.name.common
+                .replace(/\s+/g, '')
+                .toLowerCase()
+                .replace('é', 'e'),
+            activeCountry.name.official
                 .replace(/\s+/g, '')
                 .toLowerCase()
                 .replace('é', 'e'),
@@ -252,10 +261,12 @@ export default function Question(props) {
         if (activeCountry === '') {
             return;
         }
+        // const imageVille = require
 
         return (
             <div className="question-capitale-container">
-                Nom de la capitale: {activeCountry.capital}
+                Nom de la capitale: <span>{activeCountry.capital}</span>
+                <img src={cityScape} alt="" />
             </div>
         );
     }
@@ -301,17 +312,19 @@ export default function Question(props) {
     function modeAucun() {
         return (
             <div className="type-reponse-container">
-                {(props.state.activeState === 'repondreRate' ||
-                    props.state.activeState === 'repondreEchoue') && (
-                    <div className="mauvaise-reponse-text reponse-text">
-                        Mauvaise réponse!
-                    </div>
-                )}
-                {props.state.activeState === 'repondreReussi' && (
-                    <div className="bonne-reponse-text reponse-text">
-                        Bonne réponse!
-                    </div>
-                )}
+                <div className="reponse-text-container">
+                    {(props.state.activeState === 'repondreRate' ||
+                        props.state.activeState === 'repondreEchoue') && (
+                        <div className="mauvaise-reponse-text reponse-text">
+                            Mauvaise réponse!
+                        </div>
+                    )}
+                    {props.state.activeState === 'repondreReussi' && (
+                        <div className="bonne-reponse-text reponse-text">
+                            Bonne réponse!
+                        </div>
+                    )}
+                </div>
                 <input
                     className="reponseQuestion"
                     type="text"
@@ -324,18 +337,20 @@ export default function Question(props) {
                         props.state.activeState === 'repondreEchoue'
                     }
                 />
-                {props.state.activeState !== 'repondreReussi' &&
-                    props.state.activeState !== 'repondreEchoue' && (
-                        <button
-                            className="submitReponse"
-                            type="button"
-                            name="Soumettre la reponse"
-                            onClick={handleReponse}
-                            disabled={!input}
-                        >
-                            Soumettre
-                        </button>
-                    )}
+                <div className="submitReponse-container">
+                    {props.state.activeState !== 'repondreReussi' &&
+                        props.state.activeState !== 'repondreEchoue' && (
+                            <button
+                                className="submitReponse"
+                                type="button"
+                                name="Soumettre la reponse"
+                                onClick={handleReponse}
+                                disabled={!input}
+                            >
+                                Soumettre
+                            </button>
+                        )}
+                </div>
             </div>
         );
     }
@@ -442,6 +457,25 @@ export default function Question(props) {
         // Get existing data
         let storage;
         const storageJSON = localStorage.getItem('Resultats');
+
+        // Check if manualy go to resultats
+        let nombreQuestionsRepondues = score.currentQuestionNumber;
+
+        if (
+            score.currentQuestionNumber + '' !== props.state.nombre &&
+            props.state.activeState !== 'repondreReussi' &&
+            props.state.activeState !== 'repondreEchoue'
+        ) {
+            nombreQuestionsRepondues--;
+        }
+
+        if (nombreQuestionsRepondues === 0) {
+            setAucunResultat(true);
+            return;
+        }
+
+        setAucunResultat(false);
+
         if (storageJSON) {
             storage = JSON.parse(storageJSON);
             // Set data to local storage
@@ -449,11 +483,14 @@ export default function Question(props) {
                 'Resultats',
                 JSON.stringify([
                     ...storage,
-                    [
-                        score.score,
-                        score.currentQuestionNumber,
-                        props.state.nombre,
-                    ],
+                    {
+                        score: score.score,
+                        currentQuestionNumber: nombreQuestionsRepondues,
+                        nombre: props.state.nombre,
+                        sujet: props.state.sujet,
+                        choixReponse: props.state.choixReponse,
+                        mode: props.state.mode,
+                    },
                 ])
             );
         } else {
@@ -461,11 +498,14 @@ export default function Question(props) {
             localStorage.setItem(
                 'Resultats',
                 JSON.stringify([
-                    [
-                        score.score,
-                        score.currentQuestionNumber,
-                        props.state.nombre,
-                    ],
+                    {
+                        score: score.score,
+                        currentQuestionNumber: score.currentQuestionNumber,
+                        nombre: props.state.nombre,
+                        sujet: props.state.sujet,
+                        choixReponse: props.state.choixReponse,
+                        mode: props.state.mode,
+                    },
                 ])
             );
         }
@@ -512,16 +552,20 @@ export default function Question(props) {
 
     // Appelé au début pour enlever la transition
     if (props.state.transitionToQuiz) {
-        // Activate fade out
-        const transition = document.querySelector('.transition-shapes');
-        transition.classList.toggle('deactivated');
-
         setTimeout(() => {
-            // Deactivate transition
-            transition.classList.toggle('deactivated');
-            transition.classList.toggle('activated');
-            props.updateTransition(false);
-        }, 2000);
+            // Activate fade out
+            const transition = document.querySelector(
+                '.transition-shapes-container'
+            );
+            transition.classList.add('left');
+            transition.classList.add('transition-out-left');
+            setTimeout(() => {
+                // Deactivate transition
+                transition.classList.add('hidden-shapes');
+                transition.classList.remove('transition-out-left');
+                props.updateTransition(false);
+            }, 2000);
+        }, 1000);
     }
 
     return (
@@ -532,6 +576,8 @@ export default function Question(props) {
                     disableButton={disableButton}
                     updatePage={props.updatePage}
                     updateState={props.updateState}
+                    updateTransitionMenu={props.updateTransitionMenu}
+                    aucunResultat={aucunResultat}
                 />
             ) : (
                 <>
@@ -577,6 +623,7 @@ export default function Question(props) {
                             </button>
                         )}
                         <ToMenuSelectionButton
+                            updateTransitionMenu={props.updateTransitionMenu}
                             setDisableButton={setDisableButton}
                             disableButton={disableButton}
                             updatePage={props.updatePage}

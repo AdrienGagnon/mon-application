@@ -44,26 +44,39 @@ export default function MenuSelection(props) {
         messageErreur.classList.add('hidden-text-selection');
 
         // transition animation
-        const transition = document.querySelector('.transition-shapes');
-        const selection = document.querySelector(
+        const transition = document.querySelector(
+            '.transition-shapes-container'
+        );
+        const earthRotatingVideo = document.querySelector(
+            '.earth-rotating-video'
+        );
+        const optionsSelectionContainer = document.querySelector(
             '.options-selection-container'
         );
-        transition.classList.toggle('activated');
-        selection.classList.toggle('activated');
 
-        // letting the animation proceed
+        optionsSelectionContainer.classList.add('menu-selection-transistion');
+        earthRotatingVideo.classList.add('zoom-on-earth-transition');
+        transition.classList.toggle('hidden-shapes');
+
         setTimeout(() => {
-            // set parameters state
-            props.updateModeQuiz(
-                selectedParameters.sujet,
-                selectedParameters.choixReponse,
-                selectedParameters.mode,
-                selectedParameters.nombre
-            );
-            props.updateState('repondre');
-            props.updatePage('Question');
-            // transition to question page true
-            props.updateTransition(true);
+            transition.classList.toggle('right');
+            transition.classList.toggle('transition-in-left');
+
+            // letting the animation proceed
+            setTimeout(() => {
+                transition.classList.toggle('transition-in-left');
+                // set parameters state
+                props.updateModeQuiz(
+                    selectedParameters.sujet,
+                    selectedParameters.choixReponse,
+                    selectedParameters.mode,
+                    selectedParameters.nombre
+                );
+                props.updateState('repondre');
+                props.updatePage('Question');
+                // transition to question page true
+                props.updateTransition(true);
+            }, 2000);
         }, 2000);
     };
 
@@ -88,12 +101,30 @@ export default function MenuSelection(props) {
         });
     }
 
+    // Appelé au début pour enlever la transition
+    if (props.state?.transitionToMenu) {
+        setTimeout(() => {
+            // Activate fade out
+            const transition = document.querySelector(
+                '.transition-shapes-container'
+            );
+            transition.classList.add('right');
+            transition.classList.add('transition-out-right');
+            setTimeout(() => {
+                // Deactivate transition
+                transition.classList.add('hidden-shapes');
+                transition.classList.remove('transition-out-right');
+                props.updateTransitionMenu(false);
+            }, 2000);
+        }, 1000);
+    }
+
     return (
         <div className="menu-selection-page">
             <video className="earth-rotating-video" autoPlay muted loop>
                 <source src={rotatingEarth} type="video/mp4"></source>
             </video>
-            <div className="options-selection-container activated">
+            <div className="options-selection-container">
                 <h1>Sélectionnez vos paramètres de quiz</h1>
                 <p>Vous pourrez changer le style de question à tout moment</p>
                 <div className="form-container-quiz">

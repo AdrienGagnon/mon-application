@@ -22,26 +22,83 @@ export default function Resultat(props) {
         if (storageJSON) {
             storage = JSON.parse(storageJSON);
             setListe(storage);
-            setResultatActuel(storage.slice(-1));
+
+            if (props.aucunResultat) {
+                setResultatActuel(false);
+            } else {
+                setResultatActuel(storage.slice(-1));
+            }
         }
     }, []);
 
+    function corrigerTexte(resultat) {
+        if (!resultat) return;
+        // Corriger le texte
+        let texte = { sujet: '', choixReponse: '', mode: '' };
+        switch (resultat.sujet) {
+            case 'au drapeau':
+                texte.sujet = 'Avec le drapeau';
+                break;
+            case 'à la capitale':
+                texte.sujet = 'Avec la capitale';
+                break;
+            case 'au lieu géographique':
+                texte.sujet = 'Avec le lieu géographique';
+        }
+
+        switch (resultat.choixReponse) {
+            case 'le nom du pays':
+                texte.choixReponse = 'Donner le nom du pays';
+                break;
+            case 'la capitale':
+                texte.choixReponse = 'Donner la capitale';
+                break;
+            case 'le drapeau':
+                texte.choixReponse = 'Identifier le drapeau';
+        }
+
+        switch (resultat.mode) {
+            case 'choix':
+                texte.mode = 'Choix de réponse';
+                break;
+            case 'aucun choix':
+                texte.mode = 'Sans choix de réponse';
+        }
+
+        return texte;
+    }
+
     function afficherResultats() {
-        if (liste) {
+        if (liste !== []) {
             return liste.map((resultat, index) => {
                 const pourcentage = Math.floor(
-                    (100 * resultat[0]) / resultat[1]
+                    (100 * resultat.score) / resultat.currentQuestionNumber
                 );
                 const [_, couleur] = calculTauxReussiteMessage(pourcentage);
+
+                const texte = corrigerTexte(resultat);
+
                 return (
-                    <li className="resultat-item" key={index}>
+                    <li className={'resultat-item ' + couleur} key={index}>
                         <div className={couleur}>
                             Taux de réussite: {pourcentage}%
                         </div>
 
-                        <div>Score: {resultat[0]}</div>
                         <div>
-                            Questions répondues: {resultat[1]} / {resultat[2]}
+                            <div>Score: {resultat.score}</div>
+                            <div>
+                                Questions répondues:{' '}
+                                {resultat.currentQuestionNumber} /{' '}
+                                {resultat.nombre}
+                            </div>
+                        </div>
+                        <div className="parametres-resultats">
+                            <div>Paramètres:</div>
+                            <ul>
+                                <li>{texte.sujet}</li>
+                                <li>{texte.choixReponse}</li>
+                                <li>{texte.mode}</li>
+                            </ul>
                         </div>
                         <button
                             className="delete-resultat"
@@ -53,7 +110,11 @@ export default function Resultat(props) {
                 );
             });
         } else {
-            return <li>Il n'y a pas de encore résultat.</li>;
+            return (
+                <li className="pas-de-resultats">
+                    Il n'y a pas de encore résultat.
+                </li>
+            );
         }
     }
 
@@ -79,26 +140,42 @@ export default function Resultat(props) {
     }
 
     function afficherResultatActuel() {
-        if (!resultatActuel) return;
-        const [scoreArray] = resultatActuel;
-        const [score, numberQuestions, totalNumberQuestions] = [
-            scoreArray[0],
-            scoreArray[1],
-            scoreArray[2],
-        ];
+        if (!resultatActuel) {
+            return (
+                <div className="pas-de-resultat-actuel">
+                    Vous n'avez pas répondu à assez de questions.
+                </div>
+            );
+        }
 
-        const pourcentage = Math.floor((100 * score) / numberQuestions);
+        const [resultat] = resultatActuel;
+
+        const pourcentage = Math.floor(
+            (100 * resultat.score) / resultat.currentQuestionNumber
+        );
 
         const [message, couleur] = calculTauxReussiteMessage(pourcentage);
 
+        const texte = corrigerTexte(resultat);
+
         return (
-            <div className="score-actuel-container">
+            <div className={'score-actuel-container ' + couleur}>
                 <div className={couleur}>Taux de réussite: {pourcentage}%</div>
                 <p className="message-resultat">{message}</p>
-                <div className="score">Score: {score}</div>
-                <div className="nombre-questions">
-                    Questions répondues: {numberQuestions} /{' '}
-                    {totalNumberQuestions}
+                <div>
+                    <div className="score">Score: {resultat.score}</div>
+                    <div>
+                        Questions répondues: {resultat.currentQuestionNumber} /{' '}
+                        {resultat.nombre}
+                    </div>
+                </div>
+                <div className="parametres-resultats">
+                    <div>Paramètres:</div>
+                    <ul>
+                        <li>{texte.sujet}</li>
+                        <li>{texte.choixReponse}</li>
+                        <li>{texte.mode}</li>
+                    </ul>
                 </div>
             </div>
         );
@@ -120,6 +197,7 @@ export default function Resultat(props) {
                     disableButton={props.disableButton}
                     updatePage={props.updatePage}
                     updateState={props.updateState}
+                    updateTransitionMenu={props.updateTransitionMenu}
                 />
             </div>
         </>

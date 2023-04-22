@@ -75,11 +75,10 @@ class App extends Component {
     };
 
     scrollPanelTo(img) {
-        const currentCard = document
-            .querySelector('.content-sidebar')
-            .children.item(img.id);
-        const currentCardImg = currentCard.querySelector('.photo-container');
+        if (!img) return;
         const contentSidebar = document.querySelector('.content-sidebar');
+        const currentCard = contentSidebar.children.item(img.id);
+        const currentCardImg = currentCard.querySelector('.photo-container');
 
         // scroll to
         const topOff = currentCard.offsetTop;

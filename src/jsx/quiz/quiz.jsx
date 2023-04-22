@@ -17,6 +17,7 @@ class AppQuiz extends Component {
         mode: '',
         nombre: 5,
         transitionToQuiz: false,
+        transitionToMenu: false,
     };
 
     // state = {
@@ -53,6 +54,13 @@ class AppQuiz extends Component {
         }));
     };
 
+    updateTransitionMenu = newActiveState => {
+        // active page
+        this.setState(() => ({
+            transitionToMenu: newActiveState,
+        }));
+    };
+
     updateModeQuiz = (sujet, choixReponse, mode, nombre) => {
         // active page
         this.setState(() => ({
@@ -78,17 +86,14 @@ class AppQuiz extends Component {
                     {this.state.activePage === 'MenuSelection' && (
                         <MenuSelection
                             updateTransition={this.updateTransition}
+                            updateTransitionMenu={this.updateTransitionMenu}
                             updatePage={this.updatePage}
                             updateState={this.updateState}
                             updateModeQuiz={this.updateModeQuiz}
-                            transition={
-                                this.state.activePage === 'MenuSelection'
-                                    ? false
-                                    : true
-                            }
+                            state={this.state}
                         />
                     )}
-                    <div className="transition-shapes">
+                    <div className="transition-shapes-container right hidden-shapes">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -104,6 +109,7 @@ class AppQuiz extends Component {
                     {this.state.activePage === 'Question' && (
                         <Question
                             updateTransition={this.updateTransition}
+                            updateTransitionMenu={this.updateTransitionMenu}
                             updatePage={this.updatePage}
                             updateState={this.updateState}
                             state={this.state}

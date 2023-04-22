@@ -4,14 +4,33 @@ export default function ToMenuSelectionButton(props) {
         if (props.disableButton.retour) {
             return;
         }
+
+        // Disable button
         props.setDisableButton({
             retour: true,
             suivant: props.disableButton.suivant,
             resultats: props.disableButton.resultats,
         });
 
-        props.updateState('');
-        props.updatePage('MenuSelection');
+        // Commence transition
+        const transition = document.querySelector(
+            '.transition-shapes-container'
+        );
+        transition.classList.remove('hidden-shapes');
+        setTimeout(() => {
+            transition.classList.remove('left');
+            transition.classList.add('transition-in-right');
+
+            // Timer to wait for the transition
+            setTimeout(() => {
+                // Deactivate transition
+                transition.classList.remove('transition-in-right');
+
+                props.updateState('');
+                props.updatePage('MenuSelection');
+                props.updateTransitionMenu(true);
+            }, 2000);
+        }, 500);
     }
 
     return (
