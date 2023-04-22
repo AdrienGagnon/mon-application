@@ -2,7 +2,6 @@
 dist
 .prettierrc
 node_modules
-models
 .parcel-cache/data.mdb
 .cache
 data.mdb
