@@ -4,13 +4,14 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { goToGithub, goToLinkedIn, sendEmail } from './general';
+import pianoObj from './models/piano.obj';
+import pianoMtl from './models/piano.mtl';
 
 goToGithub();
 goToLinkedIn();
 sendEmail();
 
 // change nav background color on load
-
 const nav = document.querySelector('.nav-infos');
 nav.style.background =
     'linear-gradient(45deg, rgb(75, 35, 17), rgb(160, 82, 45))';
@@ -328,8 +329,10 @@ class Sketch {
 
     importPiano() {
         const mtlLoader = new MTLLoader();
-        const path = require('./models/piano.obj');
-        const pathmtl = require('./models/piano.mtl');
+        const path = pianoObj;
+        const pathmtl = pianoMtl;
+        // const path = require('./models/piano.obj');
+        // const pathmtl = require('./models/piano.mtl');
 
         mtlLoader.load(
             pathmtl,
