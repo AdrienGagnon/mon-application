@@ -2,11 +2,6 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import pianoObj from './models/piano.obj';
-import pianoMtl from './models/piano.mtl';
-import volantObj from './models/volant.obj';
-import volantMtl from './models/volant.mtl';
-import carpet from './models/texture-tapis-rouge.jpg';
 
 import { goToGithub, goToLinkedIn, sendEmail } from './general';
 
@@ -333,9 +328,8 @@ class Sketch {
     importPiano() {
         const mtlLoader = new MTLLoader();
 
-        const path = pianoObj;
-        const pathmtl = pianoMtl;
-        // const pathmtl = require('./models/piano.mtl');
+        const path = require('../../public/models/piano.obj');
+        const pathmtl = require('../../public/models/piano.mtl');
 
         mtlLoader.load(
             pathmtl,
@@ -372,8 +366,8 @@ class Sketch {
 
     importVolant() {
         const mtlLoader = new MTLLoader();
-        const path = volantObj;
-        const pathmtl = volantMtl;
+        const path = require('../../public/models/volant.obj');
+        const pathmtl = require('../../public/models/volant.mtl');
         mtlLoader.load(
             pathmtl,
             function (materials) {
@@ -418,7 +412,7 @@ class Sketch {
     }
 
     addCarpet() {
-        const path = carpet;
+        const path = require('./models/texture-tapis-rouge.jpg');
         const carpetTexture = new THREE.TextureLoader().load(
             path,
 
