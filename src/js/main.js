@@ -218,6 +218,19 @@ function goTo(e) {
     }
 }
 
-for (icon of [githubIcon, linkedInIcon, emailIcon]) {
+for (const icon of [githubIcon, linkedInIcon, emailIcon]) {
     icon.addEventListener('click', e => goTo(e));
 }
+
+/////////////////////////////////////////////
+// Lazy load image welcome
+
+// Remove blur: only when loading is done
+const imageLecco = document.getElementById('welcome-img-lecco');
+const newImg = new Image();
+
+newImg.onload = function () {
+    imageLecco.src = this.src;
+};
+
+newImg.src = '../img/menu-principal/lecco-adrien.jpg';

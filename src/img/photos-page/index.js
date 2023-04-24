@@ -230,7 +230,7 @@ const imageID = [
 // Adding id to imageID array
 function addID(images) {
     let id = 0;
-    for (image of images) {
+    for (const image of images) {
         image.id = id;
         id++;
     }
