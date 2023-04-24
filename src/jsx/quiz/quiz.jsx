@@ -18,6 +18,8 @@ class AppQuiz extends Component {
         nombre: 5,
         transitionToQuiz: false,
         transitionToMenu: false,
+        loaded: false,
+        fadeOut: false,
     };
 
     // state = {
@@ -31,6 +33,13 @@ class AppQuiz extends Component {
     constructor() {
         super();
         this.toggleMenu();
+    }
+
+    updateLoaded() {
+        this.setState(() => ({ fadeOut: true }));
+        setTimeout(() => {
+            this.setState(() => ({ loaded: true }));
+        }, 1000);
     }
 
     updatePage = newActivePage => {
@@ -91,6 +100,7 @@ class AppQuiz extends Component {
                             updateState={this.updateState}
                             updateModeQuiz={this.updateModeQuiz}
                             state={this.state}
+                            updateLoaded={this.updateLoaded.bind(this)}
                         />
                     )}
                     <div className="transition-shapes-container right hidden-shapes">
@@ -100,7 +110,7 @@ class AppQuiz extends Component {
                         <span></span>
                         <span></span>
                         <div className="background-transition-shapes"></div>
-                        <div className="loading-screen">
+                        <div className="loading-screen-transition">
                             Chargement <span>. </span>
                             <span>. </span>
                             <span>. </span>

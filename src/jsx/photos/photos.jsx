@@ -13,6 +13,7 @@ class App extends Component {
         activeImg: null,
         height: 0,
         navHeight: 111,
+        loaded: true,
     };
 
     constructor() {
@@ -41,6 +42,16 @@ class App extends Component {
     componentDidMount() {
         this.updateDimensions();
         window.addEventListener('resize', this.updateDimensions.bind(this));
+        setTimeout(() => {
+            this.setState(() => ({
+                loaded: false,
+            }));
+            setTimeout(() => {
+                this.setState(() => ({
+                    loaded: 1,
+                }));
+            }, 1000);
+        }, 500);
     }
 
     componentWillUnmount() {
@@ -136,6 +147,16 @@ class App extends Component {
         const coords = [45, 7];
         return (
             <>
+                {this.state.loaded !== 1 && (
+                    <div
+                        className={
+                            'loading-screen ' +
+                            (this.state.loaded ? '' : 'fade-out')
+                        }
+                    >
+                        <div className="loading-screen-spin photos-spin"></div>
+                    </div>
+                )}
                 <a
                     id="menu-toggle"
                     className="open photo-menu"

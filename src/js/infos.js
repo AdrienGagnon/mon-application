@@ -128,6 +128,7 @@ class Sketch {
     // contructor
     constructor(options, row, position, scene) {
         // constant
+        this.counterLoading = 0;
         this.time = 0;
         this.isPlaying = true;
         this.duration = 2;
@@ -231,6 +232,17 @@ class Sketch {
         this.groupPiano.add(ambientLight);
         this.groupPiano.add(this.light.target);
         this.light.target.position.z = -20;
+        this.counterLoading++;
+        this.finishingLoading();
+    }
+
+    finishingLoading() {
+        if (this.counterLoading <= 20) return;
+        const loader = document.querySelector('.loading-screen');
+        loader.classList.add('fade-out');
+        setTimeout(() => {
+            loader.classList.add('displayNone');
+        }, 1000);
     }
 
     ///////////////////////////////
@@ -311,6 +323,8 @@ class Sketch {
         this.scene.add(this.group);
         this.render();
         this.childrenEl = this.group.children;
+        this.counterLoading++;
+        this.finishingLoading();
     }
 
     addPiano(object) {
@@ -323,6 +337,8 @@ class Sketch {
         object.children[0].castShadow = true;
 
         this.groupPiano.add(object);
+        this.counterLoading++;
+        this.finishingLoading();
     }
 
     importPiano() {
@@ -362,6 +378,8 @@ class Sketch {
 
         this.groupPiano.add(volant);
         this.scene.add(this.groupPiano);
+        this.counterLoading++;
+        this.finishingLoading();
     }
 
     importVolant() {
@@ -396,6 +414,8 @@ class Sketch {
         cylinder.rotation.y = 8;
         cylinder.castShadow = true;
         this.group.add(cylinder);
+        this.counterLoading++;
+        this.finishingLoading();
     }
 
     addPlane() {
@@ -409,6 +429,8 @@ class Sketch {
         plane.translateZ(3);
         plane.receiveShadow = true;
         this.scene.add(plane);
+        this.counterLoading++;
+        this.finishingLoading();
     }
 
     addCarpet() {
@@ -430,6 +452,8 @@ class Sketch {
                 carpet.translateY(-50);
                 carpet.receiveShadow = true;
                 this.scene.add(carpet);
+                this.counterLoading++;
+                this.finishingLoading();
             }.bind(this),
 
             // onProgress callback currently not supported
@@ -448,6 +472,8 @@ class Sketch {
         cylinder.translateY(-2.5);
         cylinder.receiveShadow = true;
         this.scene.add(cylinder);
+        this.counterLoading++;
+        this.finishingLoading();
     }
 
     listenOnScroll() {

@@ -10,6 +10,7 @@ export default function MenuSelection(props) {
         mode: 'aucun choix',
         nombre: 10,
     });
+    const [loaded, setLoaded] = useState({ loaded: false, fadeOut: false });
 
     const handleSubmit = e => {
         const drapeauAucunChoix =
@@ -119,11 +120,31 @@ export default function MenuSelection(props) {
         }, 1000);
     }
 
+    function handleVideoLoaded() {
+        props.updateLoaded();
+    }
+
     return (
         <div className="menu-selection-page">
-            <video className="earth-rotating-video" autoPlay muted loop>
+            <video
+                className="earth-rotating-video"
+                autoPlay
+                muted
+                loop
+                onLoadedData={handleVideoLoaded}
+            >
                 <source src={rotatingEarth} type="video/mp4"></source>
             </video>
+            {!props.state.loaded && (
+                <div
+                    className={
+                        'loading-screen ' +
+                        (props.state.fadeOut ? 'fade-out' : '')
+                    }
+                >
+                    <div className="loading-screen-spin quiz-spin"></div>
+                </div>
+            )}
             <div className="options-selection-container">
                 <h1>Sélectionnez vos paramètres de quiz</h1>
                 <p>Vous pourrez changer le style de question à tout moment</p>

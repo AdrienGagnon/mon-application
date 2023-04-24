@@ -369,7 +369,7 @@ option {
     translate: 100%;
 }
 
-.loading-screen {
+.loading-screen-transition {
     border-radius: 10rem;
     padding: 2rem 3rem;
     z-index: 2;
@@ -378,16 +378,16 @@ option {
     text-shadow: black 2px 2px;
 }
 
-.loading-screen span {
+.loading-screen-transition span {
     display: inline-block;
     animation: loadingDots 2s infinite cubic-bezier(0.06, 0.39, 0.18, 1);
 }
 
-.loading-screen span:nth-child(2) {
+.loading-screen-transition span:nth-child(2) {
     animation-delay: 200ms;
 }
 
-.loading-screen span:nth-child(1) {
+.loading-screen-transition span:nth-child(1) {
     animation-delay: 400ms;
 }
 
@@ -982,6 +982,15 @@ option {
 
 .votre-resultat-container > h1 {
     font-size: 2.6rem;
+}
+
+.pas-de-resultats,
+.pas-de-resultat-actuel {
+    font-size: 2rem;
+    padding-block: 2rem;
+}
+
+.pas-de-resultat-actuel {
 }
 
 .score-actuel-container {
