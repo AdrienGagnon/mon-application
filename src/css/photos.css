@@ -287,6 +287,10 @@
     overflow: scroll;
 }
 
+.rotate-img {
+    transform: rotate(90deg);
+}
+
 /* MAP */
 
 .leaflet-control-container {

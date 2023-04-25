@@ -210,7 +210,7 @@ export default function Question(props) {
                         </>
                     )}
                 </strong>{' '}
-                La bonne réponse était:{' '}
+                Le pays en question était:{' '}
                 <span> {activeCountry.translations.fra.common}</span>
             </div>
         );

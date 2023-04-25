@@ -404,6 +404,8 @@ option {
 
 .zoom-on-earth-transition {
     transform: translate(50%, 30%) scale(3);
+    max-height: 100vh;
+    overflow-y: hidden;
 }
 
 .menu-selection-transistion {

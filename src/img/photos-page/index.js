@@ -41,6 +41,7 @@ const imageID = [
         description: 'La tour Eiffel',
         imgName: 'paris-eiffel.jpg',
         coords: [48.857263, 2.296041],
+        portrait: true,
     },
     {
         pays: 'France',
@@ -69,6 +70,7 @@ const imageID = [
         description: 'Une vu de Chamechaude depuis Saint-Eynard',
         imgName: 'chamechaude-grenoble.jpg',
         coords: [45.23580055796551, 5.762375329108977],
+        portrait: true,
     },
     {
         pays: 'France',
@@ -83,6 +85,7 @@ const imageID = [
         description: 'Un ruisseau dans la chaîne de Belledonne',
         imgName: 'ruisseau-grenoble.jpg',
         coords: [45.14685389348281, 5.929052475623842],
+        portrait: true,
     },
     {
         pays: 'France',
@@ -112,6 +115,7 @@ const imageID = [
         description: "Le jet d'eau de 140m dans le lac Léman",
         imgName: 'jet-eau-geneve.jpg',
         coords: [46.20895283699144, 6.151096520961646],
+        portrait: true,
     },
     {
         pays: 'Italie',
@@ -147,6 +151,7 @@ const imageID = [
         description: 'Un tunnel menant à la plage',
         imgName: 'porte-mer-corniglia.jpg',
         coords: [44.11748934558981, 9.718562301450474],
+        portrait: true,
     },
     {
         pays: 'Italie',
@@ -161,6 +166,7 @@ const imageID = [
         description: 'La célèbre tour penchée de Pise',
         imgName: 'tour-pise.jpg',
         coords: [43.72314581366591, 10.397107249930201],
+        portrait: true,
     },
     {
         pays: 'Italie',
@@ -189,6 +195,7 @@ const imageID = [
         description: 'Un canal traversant Venise',
         imgName: 'venise-canal.jpg',
         coords: [45.437444020255676, 12.348776695446187],
+        portrait: true,
     },
     {
         pays: 'Italie',
@@ -196,6 +203,7 @@ const imageID = [
         description: "La tour de l'horloge de la place Saint-Marc",
         imgName: 'tour-horloge-venise.jpg',
         coords: [45.43427182913643, 12.338854928643196],
+        portrait: true,
     },
     {
         pays: 'Italie',

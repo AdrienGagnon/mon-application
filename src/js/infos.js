@@ -10,9 +10,9 @@ goToLinkedIn();
 sendEmail();
 
 // change nav background color on load
-const nav = document.querySelector('.nav-infos');
-nav.style.background =
-    'linear-gradient(45deg, rgb(75, 35, 17), rgb(160, 82, 45))';
+// const nav = document.querySelector('.nav-infos');
+// nav.style.background =
+//     'linear-gradient(45deg, rgb(75, 35, 17), rgb(160, 82, 45))';
 
 //////////////////////////////////////////////////
 

@@ -68,6 +68,7 @@ body > canvas {
     --box-shadow-1: #c5714d;
     --box-shadow-2: rgba(192, 92, 55, 0.7);
     --box-shadow-3: #7e300f;
+    background: linear-gradient(45deg, rgb(75, 35, 17), rgb(160, 82, 45));
 }
 
 /* General container */

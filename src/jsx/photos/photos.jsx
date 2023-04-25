@@ -11,7 +11,7 @@ import MarksAndPops from './marksAndPopups';
 class App extends Component {
     state = {
         activeImg: null,
-        height: 0,
+        height: 1,
         navHeight: 111,
         loaded: true,
     };
@@ -79,6 +79,7 @@ class App extends Component {
     }
 
     updateHeight = height => {
+        console.log(this.state.activeImg.portrait);
         // change height of image
         this.setState(() => ({
             height: height,
@@ -120,21 +121,16 @@ class App extends Component {
     };
 
     flyToMarker() {
-        if (!this.state.activeImg) return;
+        if (!this.state.activeImg || !this.state.height) return;
         const px = this.state.map.project(this.state.activeImg.coords);
 
         px.y -= this.state.height / 2;
 
         const newCoords = this.state.map.unproject(px);
-        this.state.map.flyTo(
-            newCoords,
-
-            this.state.map.getZoom(),
-            {
-                animate: true,
-                duration: 1,
-            }
-        );
+        this.state.map.flyTo(newCoords, this.state.map.getZoom(), {
+            animate: true,
+            duration: 1,
+        });
     }
 
     componentDidUpdate(prevState) {
