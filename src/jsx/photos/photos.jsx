@@ -79,7 +79,6 @@ class App extends Component {
     }
 
     updateHeight = height => {
-        console.log(this.state.activeImg.portrait);
         // change height of image
         this.setState(() => ({
             height: height,
