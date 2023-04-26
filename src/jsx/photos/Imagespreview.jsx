@@ -5,19 +5,8 @@ import { imageID } from '../../img/photos-page';
 import { photosArray } from '../../img/photos-page';
 
 class Imagespreview extends Component {
-    componentDidMount() {
-        const imgs = document.querySelectorAll('.img-preview');
-        // imgs.forEach(img => {
-        //     if (img.naturalWidth < img.naturalHeight) {
-        //         img.classList.add('rotate-img');
-        //         console.log('yep');
-        //     }
-        // });
-    }
-
     render() {
         let paysActuel = '';
-
         return (
             <>
                 {imageID.map(image => {

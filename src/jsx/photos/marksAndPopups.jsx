@@ -32,11 +32,7 @@ class MarksAndPops extends Component {
     }
 
     getImageHeight(e) {
-        if (this.props.state.activeImg.portrait) {
-            this.props.updateHeight(e.target.width);
-        } else {
-            this.props.updateHeight(e.target.height);
-        }
+        this.props.updateHeight(e.target.height);
     }
 
     zoomImage(direction) {
@@ -109,12 +105,7 @@ class MarksAndPops extends Component {
                         maxWidth={'auto'}
                     >
                         <img
-                            className={
-                                'img-map ' +
-                                (this.props.state.activeImg.portrait
-                                    ? 'rotate-img'
-                                    : '')
-                            }
+                            className="img-map"
                             src={photosArray[this.props.state.activeImg.id]}
                             onLoad={e => this.getImageHeight(e)}
                         />
