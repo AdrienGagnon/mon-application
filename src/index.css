@@ -1,0 +1,63 @@
+/* General */
+
+:root {
+    --color-green-dark: rgb(6, 70, 53);
+    --color-green: rgb(81, 146, 89);
+    --color-orange-light: rgb(240, 187, 98);
+    --color-yellow-light: rgb(244, 238, 169);
+
+    --color-background-sidebar: rgb(59, 58, 58);
+
+    color: rgb(20, 40, 80);
+    color: rgb(39, 73, 109);
+    color: rgb(12, 123, 147);
+    color: rgb(0, 168, 204);
+
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-orange-1: #f27500;
+    --color-grey-dark: #42484d;
+    --color-grey-light: #aaa;
+    --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+
+    --color-section-1: rgb(12, 123, 147);
+    --color-section-1-middle: rgb(21, 191, 230);
+
+    --color-section-2: rgb(11, 21, 44);
+    --color-section-2-middle: rgb(20, 40, 80);
+
+    --color-section-3: rgb(39, 73, 109);
+    --color-section-3-middle: rgb(56, 105, 156);
+
+    --color-section-4: rgb(0, 114, 139);
+    --color-section-4-middle: rgb(0, 168, 204);
+
+    --color-header: rgb(11, 21, 44);
+    --color-header-middle: rgb(20, 40, 80);
+
+    --color-nav: rgb(11, 27, 61);
+    --color-nav-btn-border: rgb(91, 143, 185);
+    --color-blob: blue;
+
+    --color-background: rgb(3, 0, 28);
+    --color-nav-btn: #ffffff;
+    --color-nav-btn-active: #ffffff;
+    --color-font: white;
+    --color-font-footer: #aaa;
+    --color-footer: rgb(59, 58, 58);
+    --padding-section: 20rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: var(--color-font);
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}

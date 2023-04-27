@@ -13,8 +13,7 @@ TODO:
     ✅ adjust proportion on contact form
     ✅ cliquer sur plateformes icone amene vers le site aussi
     ✅ better infos section
-
-    -   correct earth on quiz
+    ✅ correct earth on quiz
 
 -   infos:
 
@@ -31,8 +30,9 @@ TODO:
     ✅ x in popup
     ✅ zoom in option
 
-    -   cleaner popup
-    -   @media for mobile
+    ✅ cleaner popup
+    ✅ @media for mobile
+
     -   correct centered photo preview description
     -   fix click on map and marker reappear
 
@@ -41,6 +41,5 @@ TODO:
     ✅ quand choix reponse, juste 1 essai
     ✅ ajout bouton retour
     ✅ ecran resultats
-
-    -   transition de selection vers quiz (scroll)
-    -   ecran resultats parametres de chaque question
+    ✅ transition de selection vers quiz (scroll)
+    ✅ ecran resultats parametres de chaque question
