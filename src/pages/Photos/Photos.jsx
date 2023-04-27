@@ -7,6 +7,8 @@ import ToggleMenu from '../../components/ToggleMenu/ToggleMenu';
 import Imagespreview from './Imagespreview';
 import MarksAndPops from './marksAndPopups';
 
+import './Photos.css';
+
 class PhotoApp extends Component {
     state = {
         activeImg: null,
@@ -49,14 +51,10 @@ class PhotoApp extends Component {
         }, 500);
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDimensions.bind(this));
-    }
-
     toggleMenu() {
         const menu = document.getElementById('menu-toggle');
         menu.classList.toggle('open');
-        document.getElementById('nav-photos').classList.toggle('open');
+        document.querySelector('nav').classList.toggle('open');
         this.updateDimensions();
     }
 
@@ -111,6 +109,7 @@ class PhotoApp extends Component {
     };
 
     saveMap = mapInst => {
+        if (!mapInst) return;
         this.setState(() => ({ map: mapInst }));
     };
 
@@ -134,6 +133,7 @@ class PhotoApp extends Component {
     }
 
     render() {
+        document.body.classList = 'body-photos';
         const coords = [45, 7];
         return (
             <>
@@ -148,41 +148,53 @@ class PhotoApp extends Component {
                         <div className="loading-screen-spin photos-spin"></div>
                     </div>
                 )}
-                <a
-                    id="menu-toggle"
-                    className="open photo-menu"
-                    onClick={this.togglePanel.bind(this)}
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-                <div className="sidebar">
-                    <h1>Sélectionnez une photo</h1>
-                    <div className="content-sidebar">
-                        <Imagespreview
+                <div className="photo-content-container">
+                    <a
+                        id="menu-toggle"
+                        className="open photo-menu"
+                        onClick={this.togglePanel.bind(this)}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                    <div className="sidebar">
+                        <h1>Sélectionnez une photo</h1>
+                        <div className="content-sidebar">
+                            <Imagespreview
+                                flyToMarker={this.flyToMarker}
+                                updateState={this.updateState}
+                                state={this.state}
+                            />
+                        </div>
+                    </div>
+                    <MapContainer
+                        maxBounds={[
+                            [27.18924572540303, -22.401246030957967],
+                            [57.07073561113823, 30.883233118021305],
+                        ]}
+                        maxBoundsViscosity={0.6}
+                        minZoom={4}
+                        center={coords}
+                        zoom={5}
+                        ref={this.saveMap}
+                    >
+                        <TileLayer
+                            url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}"
+                            attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            subdomains="abcd"
+                            minZoom={0}
+                            maxZoom={18}
+                            ext="png"
+                        />
+                        <MarksAndPops
                             flyToMarker={this.flyToMarker}
                             updateState={this.updateState}
+                            updateHeight={this.updateHeight}
                             state={this.state}
                         />
-                    </div>
+                    </MapContainer>
                 </div>
-                <MapContainer center={coords} zoom={5} ref={this.saveMap}>
-                    <TileLayer
-                        url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}"
-                        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        subdomains="abcd"
-                        minZoom={0}
-                        maxZoom={18}
-                        ext="png"
-                    />
-                    <MarksAndPops
-                        flyToMarker={this.flyToMarker}
-                        updateState={this.updateState}
-                        updateHeight={this.updateHeight}
-                        state={this.state}
-                    />
-                </MapContainer>
             </>
         );
     }

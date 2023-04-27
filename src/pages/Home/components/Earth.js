@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { gsap } from 'gsap';
 
 import mapDayEarth from '../assets/2k_earth_daymap.jpg';
 import mapNormalEarth from '../assets/2k_earth_normal_map.jpg';
@@ -166,139 +165,22 @@ function RotatingEarth(container) {
 
 export default RotatingEarth;
 /* 
-//////////////////////////////////
-// Mouse blob
 
-gsap.set('.ball', { xPercent: -50, yPercent: -50 });
 
-const ball = document.querySelector('.ball');
-const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-const mouse = { x: pos.x, y: pos.y };
-const speed = 0.35;
 
-const xSet = gsap.quickSetter(ball, 'x', 'px');
-const ySet = gsap.quickSetter(ball, 'y', 'px');
 
-window.addEventListener('mousemove', e => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
+    /////////////////////////////////////////////
+    // Lazy load image welcome
 
-gsap.ticker.add(() => {
-    // adjust speed for higher refresh monitors
-    const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
+    // Remove blur: only when loading is done
+    const imageLecco = document.getElementById('welcome-img-lecco');
+    const newImg = new Image();
 
-    pos.x += (mouse.x - pos.x) * dt;
-    pos.y += (mouse.y - pos.y) * dt;
-    xSet(pos.x);
-    ySet(pos.y);
-});
+    newImg.onload = function () {
+        imageLecco.src = this.src;
+    };
 
-/////////////////////////
-// Sliding in sections
+    newImg.src = '../img/menu-principal/lecco-adrien.jpg';
 
-const sectionBottom = document.querySelectorAll('.section-bottom');
-const sectionTop = document.querySelectorAll('.section-top');
 
-// Sliding sections 1 and 3
-const slidingShapes = function (entries) {
-    const [entry] = entries;
-    if (!entry.isIntersecting) {
-        const shapeSVG = entry.target.querySelectorAll('.shape');
-        shapeSVG.forEach(el => el.classList.add('section--hidden'));
-    } else {
-        const shapeSVG = entry.target.querySelectorAll('.shape');
-        shapeSVG.forEach(el => el.classList.remove('section--hidden'));
-    }
-};
-
-// Call the revealSection function when intersecting
-const sectionObserver = new IntersectionObserver(slidingShapes, {
-    root: null,
-    threshold: 0.5,
-});
-
-// Adding the hidden class to the sections
-const observeSection = function (sections) {
-    const allSections = [
-        sections[0][0],
-        sections[0][1],
-        sections[1][0],
-        sections[1][1],
-    ];
-    allSections.forEach(section => {
-        const shapeSVG = section.querySelectorAll('.shape');
-        shapeSVG.forEach(el => el.classList.add('section--hidden'));
-        sectionObserver.observe(section);
-    });
-};
-
-observeSection([sectionBottom, sectionTop]);
-
-///////////////////////////////////////////////////
-// Scrolling to sections
-const toInfos = document.querySelector('.to-section-infos');
-const toPhotos = document.querySelector('.to-section-photos');
-const toQuiz = document.querySelector('.to-section-quiz');
-const toContact = document.querySelector('.to-section-contact');
-const toTop = document.querySelector('.revenirTop');
-
-toInfos.addEventListener('click', function (e) {
-    section1.scrollIntoView({
-        behavior: 'smooth',
-    });
-});
-
-toPhotos.addEventListener('click', function (e) {
-    section2.scrollIntoView({
-        behavior: 'smooth',
-    });
-});
-
-toQuiz.addEventListener('click', function (e) {
-    section3.scrollIntoView({
-        behavior: 'smooth',
-    });
-});
-
-toContact.addEventListener('click', function (e) {
-    section4.scrollIntoView({
-        behavior: 'smooth',
-    });
-});
-
-toTop.addEventListener('click', function (e) {
-    header.scrollIntoView({
-        behavior: 'smooth',
-    });
-});
-
-///////////////////////////////////////////////////
-// Click on plateformes icons
-
-const githubIcon = document.getElementById('go-to-github-logo');
-const linkedInIcon = document.getElementById('go-to-linkedin-logo');
-const emailIcon = document.getElementById('send-email-logo');
-
-function goTo(e) {
-    if (e.target.id === 'github-icon') {
-    }
-}
-
-for (const icon of [githubIcon, linkedInIcon, emailIcon]) {
-    icon.addEventListener('click', e => goTo(e));
-}
-
-/////////////////////////////////////////////
-// Lazy load image welcome
-
-// Remove blur: only when loading is done
-const imageLecco = document.getElementById('welcome-img-lecco');
-const newImg = new Image();
-
-newImg.onload = function () {
-    imageLecco.src = this.src;
-};
-
-newImg.src = '../img/menu-principal/lecco-adrien.jpg';
  */

@@ -60,6 +60,15 @@ class MarksAndPops extends Component {
     }
 
     render() {
+        const myIcon = L.icon({
+            iconUrl: locationPointer,
+            iconSize: [64, 64],
+            iconAnchor: [32, 64],
+            popupAnchor: null,
+            shadowUrl: null,
+            shadowSize: null,
+            shadowAnchor: null,
+        });
         return (
             <>
                 {imageID.map(img => {
@@ -69,7 +78,7 @@ class MarksAndPops extends Component {
                             animate={true}
                             key={img.id}
                             position={[img.coords[0], img.coords[1]]}
-                            icon={locationPointer}
+                            icon={myIcon}
                             eventHandlers={{
                                 click: e => {
                                     this.props.updateState(img);

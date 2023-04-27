@@ -2,7 +2,9 @@
     --color-section-1-middle-ajusted: rgb(15, 148, 179);
 }
 
-body {
+/* Tags */
+
+.body-home {
     position: relative;
     font-weight: 300;
     color: var(--color-font);
@@ -12,9 +14,20 @@ body {
     z-index: -1;
 }
 
-a {
+.body-home #root {
+    height: auto !important;
+}
+
+.body-home a {
     color: var(--color-font);
 }
+
+.body-home h2 {
+    font-size: 4rem;
+    text-shadow: 1px 2px #00040a;
+}
+
+/* Mouse object */
 
 .ball {
     position: relative;
@@ -59,7 +72,7 @@ a {
     min-height: 100vh;
 }
 
-.container {
+.body-home .container {
     background: radial-gradient(
         var(--color-header-middle) 10%,
         var(--color-header) 70%
@@ -344,11 +357,6 @@ a {
     display: flex;
     flex-direction: column;
     font-size: 2rem;
-}
-
-h2 {
-    font-size: 4rem;
-    text-shadow: 1px 2px #00040a;
 }
 
 .layer1,
@@ -809,7 +817,7 @@ h2 {
     padding-right: 20px;
 }
 
-input[type='text'],
+.body-home input[type='text'],
 #description {
     display: flex;
     width: 100%;

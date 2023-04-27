@@ -62,7 +62,7 @@ function Section1() {
                     />
                     <div className="section-description section-description-infos">
                         <p>
-                            Apprenez-en plus sur mon <span>parcours</span>, mes
+                            Apprenez-en plus sur mon <span>parcours</span>, mes{' '}
                             <span>intérêts</span> et mes <span>ambitions</span>.
                         </p>
                         <Link to="/infos" className="link-contact">

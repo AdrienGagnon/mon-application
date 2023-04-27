@@ -284,6 +284,11 @@ export default function Question(props) {
                     zoom={6}
                     scrollWheelZoom={true}
                     whenReady={setMap}
+                    maxBounds={
+                        (activeCountry.latlng[0], activeCountry.latlng[1])
+                    }
+                    maxBoundsViscosity={0.6}
+                    minZoom={4}
                 >
                     <TileLayer
                         attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

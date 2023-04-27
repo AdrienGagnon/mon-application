@@ -1,7 +1,10 @@
-'use strict';
-
 import ReactDOM from 'react-dom/client';
 import React, { Component, createContext } from 'react';
+
+import './Quiz.css';
+
+import MenuSelection from './MenuSelection';
+import Question from './Question';
 
 export const StateContext = createContext(null);
 
@@ -29,7 +32,7 @@ class QuizApp extends Component {
 
     constructor() {
         super();
-        this.toggleMenu();
+        // this.toggleMenu();
     }
 
     updateLoaded() {
@@ -86,6 +89,7 @@ class QuizApp extends Component {
     }
 
     render() {
+        document.body.classList = 'body-quiz';
         return (
             <StateContext.Provider value={this.state}>
                 <div className="quiz-container">
