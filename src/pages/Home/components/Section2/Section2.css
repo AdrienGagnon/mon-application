@@ -1,0 +1,108 @@
+#section2 {
+    position: relative;
+    background: radial-gradient(
+        var(--color-section-2-middle) 10%,
+        var(--color-section-2) 70%
+    );
+}
+
+#section2 > .contenu {
+    padding-inline: 2rem;
+    gap: 1rem;
+}
+
+.photo-description {
+    isolation: isolate;
+    position: relative;
+    padding: 2rem 4rem;
+    text-shadow: 1px 2px #00040a;
+    margin-inline: 3rem;
+}
+
+.photo-description:hover .background-1 {
+    translate: -10px 10px;
+}
+
+.photo-description:hover .background-2 {
+    translate: -20px 20px;
+}
+
+.background-1,
+.background-2 {
+    content: '';
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    z-index: -2;
+    box-shadow: -2.5px 2.5px 2.5px 2px black;
+    transition-duration: 300ms;
+}
+
+.background-1 {
+    background-color: rgb(10, 19, 39);
+}
+
+.background-2 {
+    background-color: rgb(8, 15, 31);
+    z-index: -3;
+}
+
+.photo-description > div {
+    display: flex;
+    gap: 1rem;
+}
+
+.react-logo {
+    height: 40px;
+}
+
+.photo-description::before {
+    content: '';
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-image: radial-gradient(
+        var(--color-section-2-middle),
+        var(--color-section-2)
+    );
+    border-radius: 10rem;
+    z-index: -1;
+    box-shadow: -2.5px 2.5px 2.5px 2px black;
+}
+
+.imgs-preview {
+    --s: 200px;
+    --g: 10px;
+    --f: 1.5;
+    display: grid;
+    position: relative;
+    gap: var(--g);
+    width: calc(3 * var(--s) + 2 * var(--g));
+    aspect-ratio: 1.33;
+    grid-template-columns: repeat(2, auto);
+    z-index: 1;
+}
+
+.img-preview-menu {
+    width: 0;
+    height: 0;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 300ms linear;
+    border-radius: 2rem;
+    box-shadow: -2.5px 2.5px 2.5px 2px black;
+}
+
+.img-preview-menu:hover {
+    width: 20rem;
+    height: 20rem;
+}

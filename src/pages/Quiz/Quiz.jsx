@@ -5,6 +5,9 @@ import './Quiz.css';
 
 import MenuSelection from './MenuSelection';
 import Question from './Question';
+import TransitionScreen from './components/TransitionScreen';
+
+import ToggleMenu from '../../components/ToggleMenu/ToggleMenu';
 
 export const StateContext = createContext(null);
 
@@ -21,19 +24,6 @@ class QuizApp extends Component {
         loaded: false,
         fadeOut: false,
     };
-
-    // state = {
-    //     activePage: 'Question',
-    //     activeState: 'repondre',
-    //     sujet: 'drapeau',
-    //     choixReponse: 'au nom du pays',
-    //     mode: 'choix',
-    // };
-
-    constructor() {
-        super();
-        // this.toggleMenu();
-    }
 
     updateLoaded() {
         this.setState(() => ({ fadeOut: true }));
@@ -80,54 +70,42 @@ class QuizApp extends Component {
         }));
     };
 
-    toggleMenu() {
-        const menu = document.getElementById('menu-toggle');
-        menu.addEventListener('click', function () {
-            menu.classList.toggle('open');
-            document.getElementById('nav-quiz').classList.toggle('open');
-        });
+    handleToggleMenu(e) {
+        e.target.closest('#menu-toggle').classList.toggle('open');
+        document.querySelector('nav').classList.toggle('open');
     }
 
     render() {
         document.body.classList = 'body-quiz';
         return (
-            <StateContext.Provider value={this.state}>
-                <div className="quiz-container">
-                    {this.state.activePage === 'MenuSelection' && (
-                        <MenuSelection
-                            updateTransition={this.updateTransition}
-                            updateTransitionMenu={this.updateTransitionMenu}
-                            updatePage={this.updatePage}
-                            updateState={this.updateState}
-                            updateModeQuiz={this.updateModeQuiz}
-                            state={this.state}
-                            updateLoaded={this.updateLoaded.bind(this)}
-                        />
-                    )}
-                    <div className="transition-shapes-container right hidden-shapes">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <div className="background-transition-shapes"></div>
-                        <div className="loading-screen-transition">
-                            Chargement <span>. </span>
-                            <span>. </span>
-                            <span>. </span>
-                        </div>
+            <>
+                <ToggleMenu handleToggleMenu={e => this.handleToggleMenu(e)} />
+                <StateContext.Provider value={this.state}>
+                    <div className="quiz-container">
+                        {this.state.activePage === 'MenuSelection' && (
+                            <MenuSelection
+                                updateTransition={this.updateTransition}
+                                updateTransitionMenu={this.updateTransitionMenu}
+                                updatePage={this.updatePage}
+                                updateState={this.updateState}
+                                updateModeQuiz={this.updateModeQuiz}
+                                state={this.state}
+                                updateLoaded={this.updateLoaded.bind(this)}
+                            />
+                        )}
+                        <TransitionScreen />
+                        {this.state.activePage === 'Question' && (
+                            <Question
+                                updateTransition={this.updateTransition}
+                                updateTransitionMenu={this.updateTransitionMenu}
+                                updatePage={this.updatePage}
+                                updateState={this.updateState}
+                                state={this.state}
+                            />
+                        )}
                     </div>
-                    {this.state.activePage === 'Question' && (
-                        <Question
-                            updateTransition={this.updateTransition}
-                            updateTransitionMenu={this.updateTransitionMenu}
-                            updatePage={this.updatePage}
-                            updateState={this.updateState}
-                            state={this.state}
-                        />
-                    )}
-                </div>
-            </StateContext.Provider>
+                </StateContext.Provider>
+            </>
         );
     }
 }

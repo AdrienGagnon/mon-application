@@ -124,14 +124,14 @@ nav.open {
     pointer-events: none;
 }
 
-.nav-item:focus,
+/* .nav-item:focus,
 #menu-toggle:focus {
     color: rgba(var(--text-hover), 1);
     border-color: transparent;
     box-shadow: inset 0 1.4em 0 rgba(var(--shadow-inner), 0.1),
         inset 0 0 1.4em rgba(var(--shadow-inner), 0.32),
         0 1px 1px rgba(var(--shadow-inner), 0.32);
-}
+} */
 
 .nav-item:hover {
     text-shadow: 2px 1px #00040a;
@@ -139,8 +139,8 @@ nav.open {
 
 .nav-item:hover::before,
 .nav-item:hover::after,
-.nav-item:focus::before,
-.nav-item:focus::after,
+/* .nav-item:focus::before,
+.nav-item:focus::after, */
 #menu-toggle:hover::before,
 #menu-toggle:hover::after,
 #menu-toggle:focus::before,

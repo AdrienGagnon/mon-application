@@ -1,5 +1,7 @@
 import { gsap } from 'gsap';
 
+import './componentsStyles/mouseBlob.css';
+
 function mouseBlob() {
     gsap.set('.ball', { xPercent: -50, yPercent: -50 });
 

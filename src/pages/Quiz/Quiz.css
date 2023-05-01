@@ -666,7 +666,7 @@ option {
     height: 300px;
 }
 
-.leaflet-container {
+.body-quiz .leaflet-container {
     height: 100%;
     width: 100%;
     z-index: 1;

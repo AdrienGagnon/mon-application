@@ -1,0 +1,26 @@
+#section3 {
+    background: radial-gradient(
+        var(--color-section-3-middle) 10%,
+        var(--color-section-3) 70%
+    );
+    min-height: 300px;
+}
+
+#section3 > .contenu > .section-description {
+    max-width: 20rem;
+}
+
+#earth-svg {
+    position: relative;
+    z-index: 3;
+    pointer-events: none;
+    text-align: center;
+}
+
+#earth-div {
+    align-items: center;
+    flex-grow: 1;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+}

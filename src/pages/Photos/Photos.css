@@ -4,11 +4,18 @@
     --color-nav: rgb(11, 27, 61);
     --background-card: rgba(223, 245, 223, 0.9);
     --background-card-btn: rgba(164, 185, 164, 0.9);
+
+    --brand-color: hsl(0, 0%, 0%);
+    --black: hsl(0, 0%, 0%);
+    --white: hsl(0, 0%, 100%);
+    --font-title: 'Montserrat', sans-serif;
+    --font-text: 'Lato', sans-serif;
 }
 
 .body-photos {
     height: 100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 .body-photos #root {
@@ -23,14 +30,6 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-}
-
-:root {
-    --brand-color: hsl(0, 0%, 0%);
-    --black: hsl(0, 0%, 0%);
-    --white: hsl(0, 0%, 100%);
-    --font-title: 'Montserrat', sans-serif;
-    --font-text: 'Lato', sans-serif;
 }
 
 .body-photos *,

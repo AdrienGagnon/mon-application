@@ -1,3 +1,5 @@
+import './componentsStyles/waveMovement.css';
+
 function waveMovement() {
     const sectionBottom = document.querySelectorAll('.section-bottom');
     const sectionTop = document.querySelectorAll('.section-top');

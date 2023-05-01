@@ -4,8 +4,10 @@ import { MapContainer, TileLayer } from 'react-leaflet/lib';
 
 import ToggleMenu from '../../components/ToggleMenu/ToggleMenu';
 
-import Imagespreview from './Imagespreview';
-import MarksAndPops from './marksAndPopups';
+import Imagespreview from './components/Imagespreview';
+import Markersandpopup from './components/Markersandpopup';
+
+import updateDimensions from './utils/updateDimensions';
 
 import './Photos.css';
 
@@ -17,28 +19,9 @@ class PhotoApp extends Component {
         loaded: true,
     };
 
-    updateDimensions() {
-        let w = window,
-            d = document,
-            documentElement = d.documentElement,
-            body = d.getElementsByTagName('body')[0],
-            nav = d.getElementsByTagName('nav')[0],
-            height =
-                w.innerHeight ||
-                documentElement.clientHeight ||
-                body.clientHeight;
-        height -= nav.clientHeight;
-        const root = document.getElementById('root');
-        root.style.height = height - 1 + 'px';
-        if (this.state.map) {
-            this.state.map.invalidateSize();
-        }
-    }
-
     componentDidMount() {
-        this.toggleMenuListener();
-        this.updateDimensions();
-        window.addEventListener('resize', this.updateDimensions.bind(this));
+        updateDimensions();
+        window.addEventListener('resize', updateDimensions.bind(this));
         setTimeout(() => {
             this.setState(() => ({
                 loaded: false,
@@ -51,23 +34,17 @@ class PhotoApp extends Component {
         }, 500);
     }
 
-    toggleMenu() {
-        const menu = document.getElementById('menu-toggle');
-        menu.classList.toggle('open');
+    handleToggleMenu(e) {
+        e.target.closest('#menu-toggle').classList.toggle('open');
         document.querySelector('nav').classList.toggle('open');
-        this.updateDimensions();
-    }
-
-    toggleMenuListener() {
-        const menu = document.getElementById('menu-toggle');
-        menu.addEventListener('click', this.toggleMenu.bind(this));
+        updateDimensions();
     }
 
     togglePanel() {
         const menu = document.querySelector('.photo-menu');
         menu.classList.toggle('open');
         document.querySelector('.sidebar').classList.toggle('open');
-        this.updateDimensions();
+        updateDimensions();
         this.scrollPanelTo(this.state.activeImg);
     }
 
@@ -105,7 +82,7 @@ class PhotoApp extends Component {
         this.scrollPanelTo(img);
 
         // Update dimensions
-        this.updateDimensions();
+        updateDimensions();
     };
 
     saveMap = mapInst => {
@@ -135,9 +112,12 @@ class PhotoApp extends Component {
     render() {
         document.body.classList = 'body-photos';
         const coords = [45, 7];
+        window.scrollTo(0, 0);
         return (
             <>
-                <ToggleMenu />
+                <ToggleMenu
+                    handleToggleMenu={this.handleToggleMenu.bind(this)}
+                />
                 {this.state.loaded !== 1 && (
                     <div
                         className={
@@ -170,8 +150,8 @@ class PhotoApp extends Component {
                     </div>
                     <MapContainer
                         maxBounds={[
-                            [27.18924572540303, -22.401246030957967],
-                            [57.07073561113823, 30.883233118021305],
+                            [0.11832122328452595, -87.93179010344474],
+                            [79.3886171442911, 104.2877041908634],
                         ]}
                         maxBoundsViscosity={0.6}
                         minZoom={4}
@@ -187,7 +167,7 @@ class PhotoApp extends Component {
                             maxZoom={18}
                             ext="png"
                         />
-                        <MarksAndPops
+                        <Markersandpopup
                             flyToMarker={this.flyToMarker}
                             updateState={this.updateState}
                             updateHeight={this.updateHeight}
