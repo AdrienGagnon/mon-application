@@ -1,13 +1,11 @@
-:root {
+.body-quiz {
     --background-card-question: rgba(0, 0, 0, 0.5);
     --background-resultat: rgba(0, 0, 0, 0.5);
     --color-scrollbar: black;
     --color-scrollbar-track: black;
     --background-delete: rgb(151, 0, 0);
     --background-delete-hover: rgb(75, 1, 1);
-}
 
-.body-quiz {
     overflow-x: hidden;
     height: 100vh;
     width: 100%;
@@ -26,6 +24,9 @@
 /* /////////////////////////////////////////////////// */
 /* Menu selection */
 /* /////////////////////////////////////////////////// */
+.body-quiz:has(.menu-selection-page) {
+    overflow-y: hidden;
+}
 
 .menu-selection-page {
     display: flex;

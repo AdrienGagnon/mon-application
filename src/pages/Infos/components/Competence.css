@@ -1,0 +1,97 @@
+.langage,
+.outil,
+.concept {
+    position: relative;
+    border-radius: 15px;
+    transition: scale ease-out 150ms;
+    z-index: 1;
+    padding: 10px 5rem;
+    max-width: 35rem;
+    width: 100%;
+    font-weight: 500;
+    text-shadow: 2px 1px #00040a;
+}
+
+.langage::after,
+.outil::after,
+.concept::after {
+    content: '';
+    background: var(--color-background-etude);
+    position: absolute;
+    margin: auto;
+    z-index: -1;
+    inset: 0;
+    transform: skew(-5deg);
+    width: 95%;
+    border: 3px solid;
+    border-image: linear-gradient(
+            to bottom,
+            var(--color-border-info),
+            rgb(160, 82, 45)
+        )
+        1 100%;
+    transition: ease-out 150ms;
+}
+
+.langage:hover,
+.outil:hover,
+.concept:hover {
+    scale: 1.02;
+}
+
+.langage:hover::after,
+.outil:hover::after,
+.concept:hover::after {
+    transform: skew(0deg);
+}
+
+.block {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    padding-block: 5px;
+    margin-inline: 5rem;
+}
+
+.langages h2,
+.outils h2,
+.concepts-autres h2 {
+    margin-block: 1rem;
+}
+
+.langues {
+    margin-block: 1rem;
+}
+
+.langue {
+    position: relative;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cercles-langues {
+    display: flex;
+    overflow: hidden;
+
+    background-color: transparent;
+    background-image: radial-gradient(
+        rgb(255, 165, 0) 20%,
+        rgb(172, 112, 0) 40%,
+        rgb(0, 0, 0) 45%,
+        transparent 55%
+    );
+    background-size: 50px 50px;
+
+    height: 50px;
+    width: 250px;
+}
+
+.anglais {
+    width: 225px;
+}

@@ -1,6 +1,8 @@
 import badminton from '../assets/badminton.jpg';
 import piano from '../assets/piano.jpg';
 
+import './Loisirs.css';
+
 function Loisirs() {
     return (
         <div className="infos-section">

@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import './Photos.css';
+
+import { useEffect, useState } from 'react';
 
 import { MapContainer, TileLayer } from 'react-leaflet/lib';
 
@@ -9,53 +11,54 @@ import Markersandpopup from './components/Markersandpopup';
 
 import updateDimensions from './utils/updateDimensions';
 
-import './Photos.css';
-
-class PhotoApp extends Component {
-    state = {
+function PhotoApp() {
+    const [state, setState] = useState({
         activeImg: null,
         height: 1,
         navHeight: 111,
         loaded: true,
-    };
+    });
+    const [mapInst, setMapInst] = useState();
 
-    componentDidMount() {
+    useEffect(() => {
+        document.body.classList = 'body-photos';
+        window.scrollTo(0, 0);
         updateDimensions();
-        window.addEventListener('resize', updateDimensions.bind(this));
+        window.addEventListener('resize', updateDimensions);
         setTimeout(() => {
-            this.setState(() => ({
-                loaded: false,
-            }));
+            setState({ ...state, loaded: false });
             setTimeout(() => {
-                this.setState(() => ({
-                    loaded: 1,
-                }));
+                setState({ ...state, loaded: 1 });
             }, 1000);
         }, 500);
-    }
 
-    handleToggleMenu(e) {
+        // return window.removeEventListener('resize', updateDimensions);
+    }, []);
+
+    useEffect(() => {
+        flyToMarker();
+    });
+
+    function handleToggleMenu(e) {
         e.target.closest('#menu-toggle').classList.toggle('open');
         document.querySelector('nav').classList.toggle('open');
         updateDimensions();
     }
 
-    togglePanel() {
+    function togglePanel() {
         const menu = document.querySelector('.photo-menu');
         menu.classList.toggle('open');
         document.querySelector('.sidebar').classList.toggle('open');
         updateDimensions();
-        this.scrollPanelTo(this.state.activeImg);
+        scrollPanelTo(state.activeImg);
     }
 
-    updateHeight = height => {
+    function updateHeight(height) {
         // change height of image
-        this.setState(() => ({
-            height: height,
-        }));
-    };
+        setState({ ...state, height: height });
+    }
 
-    scrollPanelTo(img) {
+    function scrollPanelTo(img) {
         if (!img) return;
         const contentSidebar = document.querySelector('.content-sidebar');
         const currentCard = contentSidebar.children.item(img.id);
@@ -69,7 +72,7 @@ class PhotoApp extends Component {
         currentCardImg.classList.add('activeCard');
     }
 
-    updateState = img => {
+    function updateState(img) {
         // remove aspect of old active card
         const oldActiveCard = document.querySelector('.activeCard');
         if (oldActiveCard !== null) {
@@ -77,107 +80,90 @@ class PhotoApp extends Component {
         }
 
         // active image
-        this.setState(() => ({ activeImg: img }));
+        setState({ ...state, activeImg: img });
 
-        this.scrollPanelTo(img);
+        scrollPanelTo(img);
 
         // Update dimensions
         updateDimensions();
-    };
+    }
 
-    saveMap = mapInst => {
-        if (!mapInst) return;
-        this.setState(() => ({ map: mapInst }));
-    };
+    function flyToMarker() {
+        if (!state.activeImg || !state.height) return;
+        const px = mapInst.target.project(state.activeImg.coords);
 
-    flyToMarker() {
-        if (!this.state.activeImg || !this.state.height) return;
-        const px = this.state.map.project(this.state.activeImg.coords);
-
-        px.y -= this.state.height / 2;
-
-        const newCoords = this.state.map.unproject(px);
-        this.state.map.flyTo(newCoords, this.state.map.getZoom(), {
+        px.y -= state.height / 2;
+        const newCoords = mapInst.target.unproject(px);
+        mapInst.target.flyTo(newCoords, mapInst.target.getZoom(), {
             animate: true,
             duration: 1,
         });
     }
 
-    componentDidUpdate(prevState) {
-        if (this.state.activeImg !== prevState.activeImg && this.state.map) {
-            this.flyToMarker();
-        }
-    }
+    const coords = [45, 7];
 
-    render() {
-        document.body.classList = 'body-photos';
-        const coords = [45, 7];
-        window.scrollTo(0, 0);
-        return (
-            <>
-                <ToggleMenu
-                    handleToggleMenu={this.handleToggleMenu.bind(this)}
-                />
-                {this.state.loaded !== 1 && (
-                    <div
-                        className={
-                            'loading-screen ' +
-                            (this.state.loaded ? '' : 'fade-out')
-                        }
-                    >
-                        <div className="loading-screen-spin photos-spin"></div>
-                    </div>
-                )}
-                <div className="photo-content-container">
-                    <a
-                        id="menu-toggle"
-                        className="open photo-menu"
-                        onClick={this.togglePanel.bind(this)}
-                    >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                    <div className="sidebar">
-                        <h1>Sélectionnez une photo</h1>
-                        <div className="content-sidebar">
-                            <Imagespreview
-                                flyToMarker={this.flyToMarker}
-                                updateState={this.updateState}
-                                state={this.state}
-                            />
-                        </div>
-                    </div>
-                    <MapContainer
-                        maxBounds={[
-                            [0.11832122328452595, -87.93179010344474],
-                            [79.3886171442911, 104.2877041908634],
-                        ]}
-                        maxBoundsViscosity={0.6}
-                        minZoom={4}
-                        center={coords}
-                        zoom={5}
-                        ref={this.saveMap}
-                    >
-                        <TileLayer
-                            url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}"
-                            attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            subdomains="abcd"
-                            minZoom={0}
-                            maxZoom={18}
-                            ext="png"
-                        />
-                        <Markersandpopup
-                            flyToMarker={this.flyToMarker}
-                            updateState={this.updateState}
-                            updateHeight={this.updateHeight}
-                            state={this.state}
-                        />
-                    </MapContainer>
+    return (
+        <>
+            <ToggleMenu handleToggleMenu={handleToggleMenu} />
+            {state.loaded !== 1 && (
+                <div
+                    className={
+                        'loading-screen ' + (state.loaded ? '' : 'fade-out')
+                    }
+                >
+                    <div className="loading-screen-spin photos-spin"></div>
                 </div>
-            </>
-        );
-    }
+            )}
+            <div className="photo-content-container">
+                <a
+                    id="menu-toggle"
+                    className="open photo-menu"
+                    onClick={togglePanel}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+                <div className="sidebar">
+                    <h1>Sélectionnez une photo</h1>
+                    <div className="content-sidebar">
+                        <Imagespreview
+                            flyToMarker={flyToMarker}
+                            updateState={updateState}
+                            state={state}
+                        />
+                    </div>
+                </div>
+                <MapContainer
+                    maxBounds={[
+                        [0.11832122328452595, -87.93179010344474],
+                        [79.3886171442911, 104.2877041908634],
+                    ]}
+                    maxBoundsViscosity={0.6}
+                    minZoom={4}
+                    center={coords}
+                    zoom={5}
+                    whenReady={setMapInst}
+                >
+                    <TileLayer
+                        url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}"
+                        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        subdomains="abcd"
+                        minZoom={0}
+                        maxZoom={18}
+                        ext="png"
+                    />
+                    <Markersandpopup
+                        flyToMarker={flyToMarker}
+                        updateState={updateState}
+                        updateHeight={updateHeight}
+                        state={state}
+                        mapInst={mapInst}
+                    />
+                </MapContainer>
+            </div>
+        </>
+    );
 }
 
 export default PhotoApp;

@@ -1,4 +1,4 @@
-:root {
+.body-photos {
     --background-description-photo: rgba(54, 54, 54, 0.6);
     --background-lieu-photo: rgba(255, 255, 255, 0.6);
     --color-nav: rgb(11, 27, 61);
@@ -10,9 +10,7 @@
     --white: hsl(0, 0%, 100%);
     --font-title: 'Montserrat', sans-serif;
     --font-text: 'Lato', sans-serif;
-}
 
-.body-photos {
     height: 100vh;
     width: 100%;
     overflow: hidden;
@@ -361,7 +359,7 @@
     box-shadow: inset black 1px 1px 1px;
 }
 
-.img-map-zoom-container div:hover {
+.img-map-zoom-container div:hover span {
     color: black;
 }
 

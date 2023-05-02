@@ -1,5 +1,7 @@
 import fastForward from '../assets/fast-forward.png';
 
+import './Formation.css';
+
 function Formation() {
     const experience = [
         {

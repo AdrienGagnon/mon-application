@@ -1,9 +1,9 @@
 import { imageID } from '../assets';
-import locationPointer from './assets/location-pointer.png';
+import locationPointer from '../assets/location-pointer.png';
 
 import { Marker } from 'react-leaflet/lib';
 
-function MapMarkers() {
+function MapMarkers(props) {
     const myIcon = L.icon({
         iconUrl: locationPointer,
         iconSize: [64, 64],
@@ -26,10 +26,11 @@ function MapMarkers() {
                         icon={myIcon}
                         eventHandlers={{
                             click: e => {
-                                updateState(img);
-                                props.state.map.flyTo(
+                                console.log('click');
+                                props.updateState(img);
+                                props.mapInst.target.flyTo(
                                     img.coords,
-                                    props.state.map.getZoom(),
+                                    props.mapInst.target.getZoom(),
                                     {
                                         animate: true,
                                         duration: 1,

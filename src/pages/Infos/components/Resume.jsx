@@ -1,6 +1,8 @@
 import chemistry from '../assets/chemistry.jpg';
 import webDev from '../assets/web-dev.jpg';
 
+import './Resume.css';
+
 function Resume() {
     return (
         <div className="infos-section" id="resume">

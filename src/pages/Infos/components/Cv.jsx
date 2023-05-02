@@ -1,5 +1,7 @@
 import cv from '../assets/pdf/CV_AG_avril_2023-prog.pdf';
 
+import './Cv.css';
+
 function Cv() {
     return (
         <div className="infos-section" id="cv-contact-infos">

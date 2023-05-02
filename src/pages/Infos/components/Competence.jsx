@@ -1,3 +1,5 @@
+import './Competence.css';
+
 function Competence() {
     return (
         <div className="infos-section">

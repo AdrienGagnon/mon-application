@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import ToMenuSelectionButton from './MenuButton';
+import ToMenuSelectionButton from '../Questionnaire/Buttons/ToMenuButton';
+
+import tauxReussite from '../../utils/tauxReussite';
 
 export default function Resultat(props) {
     const [liste, setListe] = useState([]);
     const [resultatActuel, setResultatActuel] = useState(null);
+    const {
+        parametres: [parametres, setParametres],
+        activePage: [activePage, setActivePage],
+        activeState: [activeState, setActiveState],
+        transitionState: [transitionState, setTransitionState],
+    } = props.quizContext;
 
     function handleDeleteResultat(index) {
         const newList = liste.filter((_, i) => {
@@ -72,7 +80,7 @@ export default function Resultat(props) {
                 const pourcentage = Math.floor(
                     (100 * resultat.score) / resultat.currentQuestionNumber
                 );
-                const [_, couleur] = calculTauxReussiteMessage(pourcentage);
+                const [_, couleur] = tauxReussite(pourcentage);
 
                 const texte = corrigerTexte(resultat);
 
@@ -116,27 +124,6 @@ export default function Resultat(props) {
         }
     }
 
-    function calculTauxReussiteMessage(pourcentage) {
-        let message, couleur;
-
-        switch (true) {
-            case pourcentage <= 50:
-                message = 'Hum... Vous manquez peut-être de pratique...';
-                couleur = 'rouge';
-                break;
-            case pourcentage > 50 && pourcentage < 80:
-                message = 'Pas mal! Vous connaissez bien votre géographie.';
-                couleur = 'jaune';
-                break;
-            case pourcentage >= 80:
-                message =
-                    'Wow! Soit vous êtes expert en géographie, soit vous avez été chanceux...';
-                couleur = 'vert';
-                break;
-        }
-        return [message, couleur];
-    }
-
     function afficherResultatActuel() {
         if (!resultatActuel) {
             return (
@@ -152,7 +139,7 @@ export default function Resultat(props) {
             (100 * resultat.score) / resultat.currentQuestionNumber
         );
 
-        const [message, couleur] = calculTauxReussiteMessage(pourcentage);
+        const [message, couleur] = tauxReussite(pourcentage);
 
         const texte = corrigerTexte(resultat);
 

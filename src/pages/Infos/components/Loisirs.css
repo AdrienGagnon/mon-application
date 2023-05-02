@@ -1,0 +1,49 @@
+.section-loisir {
+    display: flex;
+    padding-inline: 10rem;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+}
+
+.section-loisir p {
+    position: relative;
+    text-align: left;
+    align-self: center;
+    flex: 2;
+}
+
+.section-loisir img {
+    width: 20rem;
+    flex: 1;
+    border: 1px black solid;
+    box-shadow: 5px 5px 2px rgb(0, 0, 0);
+}
+
+.badminton img {
+    border-radius: 50% 50% 0 0;
+}
+
+.piano img {
+    border-radius: 0 0 50% 50%;
+}
+
+.piano {
+    margin-bottom: 5rem;
+}
+
+.section-loisir p::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        var(--color-border-info),
+        rgba(0, 0, 0, 0)
+    );
+
+    border-radius: 4px;
+}

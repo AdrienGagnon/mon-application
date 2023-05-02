@@ -1,10 +1,6 @@
-:root {
-    --color-section-1-middle-ajusted: rgb(15, 148, 179);
-}
-
-/* Tags */
-
 .body-home {
+    --color-section-1-middle-ajusted: rgb(15, 148, 179);
+
     position: relative;
     font-weight: 300;
     color: var(--color-font);
@@ -13,6 +9,8 @@
     background-color: var(--color-header);
     z-index: -1;
 }
+
+/* Tags */
 
 .body-home #root {
     height: auto !important;
