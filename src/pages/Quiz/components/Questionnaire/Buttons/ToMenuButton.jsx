@@ -1,4 +1,5 @@
 import handleToMenu from './handleToMenu';
+import './ToMenuButton.css';
 
 function ToMenuButton(props) {
     return (
@@ -8,10 +9,7 @@ function ToMenuButton(props) {
                 handleToMenu(
                     props.disableButton,
                     props.setDisableButton,
-                    props.setActiveState,
-                    props.setActivePage,
-                    props.transitionState,
-                    props.setTransitionState
+                    props.quizContext
                 )
             }
         >

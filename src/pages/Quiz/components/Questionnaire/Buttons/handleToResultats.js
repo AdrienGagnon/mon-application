@@ -1,14 +1,17 @@
-import setLocalStorage from '../LocalStorage/setLocalStorage';
+import setLocalStorage from '../../LocalStorage/setLocalStorage';
 
 function handleToResultats(
     disableButton,
     setDisableButton,
-    setActiveState,
     score,
-    parametres,
-    activeState,
-    setAucunResultat
+    setAucunResultat,
+    quizContext
 ) {
+    const {
+        parametres: [parametres, setParametres],
+        activeState: [activeState, setActiveState],
+    } = quizContext;
+
     // Check if the button has already been pressed
     if (disableButton.resultats) {
         return;

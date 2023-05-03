@@ -6,10 +6,8 @@ function handleSuivant(
     setDisableButton,
     score,
     setScore,
-    parametres,
-    setActiveState,
-    activeState,
-    setAucunResultat
+    setAucunResultat,
+    quizContext
 ) {
     // Check if the button has already been pressed
     if (disableButton.suivant) {
@@ -30,15 +28,13 @@ function handleSuivant(
             essais: score.essais,
         });
         reponseActuelle.classList.toggle('slideOut');
-        if (score.currentQuestionNumber >= parametres.nombre) {
+        if (score.currentQuestionNumber >= quizContext.parametres[0].nombre) {
             handleToResultats(
                 disableButton,
                 setDisableButton,
-                setActiveState,
                 score,
-                parametres,
-                activeState,
-                setAucunResultat
+                setAucunResultat,
+                quizContext
             );
         }
     }, 700);

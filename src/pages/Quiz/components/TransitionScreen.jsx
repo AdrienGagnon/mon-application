@@ -1,3 +1,5 @@
+import './TransitionScreen.css';
+
 function TransitionScreen() {
     return (
         <div className="transition-shapes-container right hidden-shapes">

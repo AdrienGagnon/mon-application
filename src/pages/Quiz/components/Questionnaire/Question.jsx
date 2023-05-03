@@ -4,7 +4,6 @@ import randomCountry from './Data/randomCountry';
 import Resultat from '../Resultats/Resultat';
 
 import { QuizStateContext } from '../../Quiz';
-/////
 
 import AfficherTitre from './Titre/AfficherTitre';
 import AfficherSujetDrapeau from './Question/Drapeau/AfficherSujetDrapeau';
@@ -13,8 +12,8 @@ import AfficherSujetLieuGeo from './Question/LieuGeo/AfficherSujetLieuGeo';
 
 import AfficherEssais from './Statistiques/AfficherEssais';
 
-import ModeAucun from './Reponse/ModeAucun';
-import ModeChoixReponse from './Reponse/ModeChoixReponse';
+import ModeAucun from './Reponse/AucunChoix/ModeAucun';
+import ModeChoixReponse from './Reponse/Choix/ModeChoixReponse';
 
 import ActiveCountry from './Data/ActiveCountry';
 import randomCountry from './Data/randomCountry';
@@ -25,9 +24,11 @@ import ToSuivantButton from './Buttons/ToSuivantButton';
 
 import resetRepondre from './Logic/resetRepondre';
 
+import './Question.css';
+
 export const QuestionContext = createContext(null);
 
-export default function Question(props) {
+export default function Question() {
     const [activeCountry, setActiveCountry] = useState('');
     const [choices, setChoices] = useState([]);
     const [map, setMap] = useState(null);
@@ -110,18 +111,15 @@ export default function Question(props) {
             >
                 {activeState === 'Resultat' ? (
                     <Resultat
-                        setDisableButton={setDisableButton}
                         disableButton={disableButton}
-                        quizContext={quizContext}
-                        aucunResultat={aucunResultat}
+                        setDisableButton={setDisableButton}
                     />
                 ) : (
                     <>
                         <div className="question-container">
                             <AfficherTitre
                                 activeCountry={activeCountry}
-                                activeState={activeState}
-                                parametres={parametres}
+                                quizContext={quizContext}
                             />
                             {parametres.sujet === 'au drapeau' && (
                                 <AfficherSujetDrapeau
@@ -143,13 +141,22 @@ export default function Question(props) {
                         <div className="reponse-container">
                             {parametres.mode === 'aucun choix' && (
                                 <ModeAucun
-                                    activeState={activeState}
-                                    setInput={setInput}
                                     input={input}
+                                    setInput={setInput}
+                                    score={score}
+                                    setScore={setScore}
+                                    quizContext={quizContext}
+                                    activeCountry={activeCountry}
                                 />
                             )}
                             {parametres.mode === 'choix' && (
-                                <ModeChoixReponse />
+                                <ModeChoixReponse
+                                    activeCountry={activeCountry}
+                                    choices={choices}
+                                    score={score}
+                                    setScore={setScore}
+                                    quizContext={quizContext}
+                                />
                             )}
                             <div className="stats-question">
                                 <div>Score: {score.score}</div>
@@ -169,11 +176,9 @@ export default function Question(props) {
                             <ToResultatsButton
                                 disableButton={disableButton}
                                 setDisableButton={setDisableButton}
-                                setActiveState={setActiveState}
                                 score={score}
-                                parametres={parametres}
-                                activeState={activeState}
                                 setAucunResultat={setAucunResultat}
+                                quizContext={quizContext}
                             />
                             {(activeState === 'repondreReussi' ||
                                 activeState === 'repondreEchoue') && (
@@ -182,22 +187,14 @@ export default function Question(props) {
                                     setDisableButton={setDisableButton}
                                     score={score}
                                     setScore={setScore}
-                                    parametres={parametres}
-                                    setActiveState={setActiveState}
-                                    activeState={activeState}
                                     setAucunResultat={setAucunResultat}
+                                    quizContext={quizContext}
                                 />
                             )}
                             <ToMenuButton
                                 disableButton={disableButton}
                                 setDisableButton={setDisableButton}
-                                setActiveState={setActiveState}
-                                setActivePage={setActivePage}
-                                transitionState={transitionState}
-                                setTransitionState={setTransitionState}
-                                updateTransitionMenu={
-                                    props.updateTransitionMenu
-                                }
+                                quizContext={quizContext}
                             />
                         </div>
                     </>

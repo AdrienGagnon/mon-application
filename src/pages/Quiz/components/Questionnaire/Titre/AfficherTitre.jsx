@@ -2,25 +2,30 @@ import ReponseActuelle from './ReponseActuelle';
 
 // Génère le titre en fonction du mode et de le reponse
 function AfficherTitre(props) {
+    const {
+        parametres: [parametres, setParametres],
+        activeState: [activeState, setActiveState],
+    } = props.quizContext;
+
     let premierMot;
-    if (props.parametres.mode === 'aucun choix') {
+    if (parametres.mode === 'aucun choix') {
         premierMot = 'Écrivez';
     }
-    if (props.parametres.mode === 'choix') {
+    if (parametres.mode === 'choix') {
         premierMot = 'Sélectionnez';
     }
 
     return (
         <>
             <h1 className="question-title">
-                {premierMot} {props.parametres.choixReponse} correspondant{' '}
-                {props.parametres.sujet}
+                {premierMot} {parametres.choixReponse} correspondant{' '}
+                {parametres.sujet}
             </h1>
-            {(props.activeState === 'repondreReussi' ||
-                props.activeState === 'repondreEchoue') && (
+            {(activeState === 'repondreReussi' ||
+                activeState === 'repondreEchoue') && (
                 <ReponseActuelle
                     activeCountry={props.activeCountry}
-                    activeState={props.activeState}
+                    activeState={activeState}
                 />
             )}
         </>

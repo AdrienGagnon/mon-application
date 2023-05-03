@@ -12,10 +12,8 @@ function ToSuivantButton(props) {
                     props.setDisableButton,
                     props.score,
                     props.setScore,
-                    props.parametres,
-                    props.setActiveState,
-                    props.activeState,
-                    props.setAucunResultat
+                    props.setAucunResultat,
+                    props.quizContext
                 )
             }
         >

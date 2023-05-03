@@ -1,15 +1,14 @@
-function handleToMenu(
-    disableButton,
-    setDisableButton,
-    setActiveState,
-    setActivePage,
-    transitionState,
-    setTransitionState
-) {
+function handleToMenu(disableButton, setDisableButton, quizContext) {
     // Check if the button has already been pressed
     if (disableButton.retour) {
         return;
     }
+
+    const {
+        activePage: [activePage, setActivePage],
+        activeState: [activeState, setActiveState],
+        transitionState: [transitionState, setTransitionState],
+    } = quizContext;
 
     // Disable button
     setDisableButton({

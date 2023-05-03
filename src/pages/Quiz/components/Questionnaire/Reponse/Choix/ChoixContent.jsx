@@ -1,8 +1,14 @@
 import handleChoixReponse from './handleChoixReponse';
+import './ChoixContent.css';
 
 // Affiche content des choix de reponse
-function ChoixContent(choixShuffle, indexBonneReponse) {
-    return choixShuffle.map((choix, index) => {
+function ChoixContent(props) {
+    const {
+        parametres: [parametres, setParametres],
+        activeState: [activeState, setActiveState],
+    } = props.quizContext;
+
+    return props.choices.map((choix, index) => {
         let content;
         if (parametres.choixReponse === 'le nom du pays') {
             content = choix.translations.fra.common;
@@ -15,29 +21,35 @@ function ChoixContent(choixShuffle, indexBonneReponse) {
                 <img className="reponse-drapeau" src={choix.flags.svg} alt="" />
             );
         }
+
+        const activeStateResultat =
+            activeState === 'repondreReussi' ||
+            activeState === 'repondreEchoue';
+
         return (
             <button
                 key={index}
                 className={
                     'choix ' +
-                    (index === indexBonneReponse
+                    (index === props.indexBonneReponse
                         ? 'bonne-reponse-choix '
                         : 'mauvaise-reponse-choix ') +
-                    (activeState === 'repondreReussi' ||
-                    activeState === 'repondreEchoue'
-                        ? 'choix-resultat-montrer'
-                        : '')
+                    (activeStateResultat ? 'choix-resultat-montrer' : '')
                 }
                 id={
                     parametres.choixReponse === 'le drapeau'
                         ? 'reponse-drapeau-container'
                         : ''
                 }
-                onClick={e => handleChoixReponse(e)}
-                disabled={
-                    activeState === 'repondreReussi' ||
-                    activeState === 'repondreEchoue'
+                onClick={e =>
+                    handleChoixReponse(
+                        e,
+                        props.score,
+                        props.setScore,
+                        props.quizContext
+                    )
                 }
+                disabled={activeStateResultat}
             >
                 {content}
             </button>

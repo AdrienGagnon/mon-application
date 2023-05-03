@@ -1,18 +1,20 @@
 import handleKeyDown from './handleKeyDown';
-import handleReponse from '../Logic/handleReponse';
+import handleReponse from '../../Logic/handleReponse';
+import './ModeAucun.css';
 
 // Si on doit taper nous meme la reponse
 function ModeAucun(props) {
+    const activeState = props.quizContext.activeState[0];
     return (
         <div className="type-reponse-container">
             <div className="reponse-text-container">
-                {(props.props.activeState === 'repondreRate' ||
-                    props.activeState === 'repondreEchoue') && (
+                {(activeState === 'repondreRate' ||
+                    activeState === 'repondreEchoue') && (
                     <div className="mauvaise-reponse-text reponse-text">
                         Mauvaise réponse!
                     </div>
                 )}
-                {props.activeState === 'repondreReussi' && (
+                {activeState === 'repondreReussi' && (
                     <div className="bonne-reponse-text reponse-text">
                         Bonne réponse!
                     </div>
@@ -22,23 +24,31 @@ function ModeAucun(props) {
                 className="reponseQuestion"
                 type="text"
                 placeholder="Votre réponse"
-                value={input}
+                value={props.input}
                 onChange={e => props.setInput(e.target.value)}
                 onKeyDown={e => handleKeyDown(e, props.input)}
                 disabled={
-                    props.activeState === 'repondreReussi' ||
-                    props.activeState === 'repondreEchoue'
+                    activeState === 'repondreReussi' ||
+                    activeState === 'repondreEchoue'
                 }
             />
             <div className="submitReponse-container">
-                {props.activeState !== 'repondreReussi' &&
-                    props.activeState !== 'repondreEchoue' && (
+                {activeState !== 'repondreReussi' &&
+                    activeState !== 'repondreEchoue' && (
                         <button
                             className="submitReponse"
                             type="button"
                             name="Soumettre la reponse"
-                            onClick={() => handleReponse(props.input)}
-                            disabled={!input}
+                            onClick={() =>
+                                handleReponse(
+                                    props.input,
+                                    props.activeCountry,
+                                    props.score,
+                                    props.setScore,
+                                    props.quizContext
+                                )
+                            }
+                            disabled={!props.input}
                         >
                             Soumettre
                         </button>

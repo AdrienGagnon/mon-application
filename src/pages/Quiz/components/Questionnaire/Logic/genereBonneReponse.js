@@ -1,5 +1,6 @@
 // Genere la bonne reponse en enlevant les espaces et les signes
-function genereBonneReponse() {
+function genereBonneReponse(activeCountry) {
+    console.log(activeCountry);
     return [
         activeCountry.translations.fra.official
             .replace(/\s+/g, '')

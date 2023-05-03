@@ -1,14 +1,15 @@
 import nombreMaxEssais from './nombreMaxEssais';
 
 // Gere une mauvaise reponse
-function updateStateRate() {
+function updateStateRate(score, setScore, quizContext) {
     setScore({
         score: score.score,
         currentQuestionNumber: score.currentQuestionNumber,
         essais: score.essais + 1,
     });
     // Si les essais sont finis, change le state
-    if (score.essais === nombreMaxEssais() - 1) {
+    const setActiveState = quizContext.activeState[1];
+    if (score.essais === nombreMaxEssais(quizContext.parametres[0]) - 1) {
         setActiveState('repondreEchoue');
     } else {
         setActiveState('repondreRate');

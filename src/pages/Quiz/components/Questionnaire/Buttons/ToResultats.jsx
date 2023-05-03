@@ -1,4 +1,5 @@
 import handleToResultats from './handleToResultats';
+import './ToResultats.css';
 
 function ToResultatsButton(props) {
     return (
@@ -8,11 +9,9 @@ function ToResultatsButton(props) {
                 handleToResultats(
                     props.disableButton,
                     props.setDisableButton,
-                    props.setActiveState,
                     props.score,
-                    props.parametres,
-                    props.activeState,
-                    props.setAucunResultat
+                    props.setAucunResultat,
+                    props.quizContext
                 )
             }
         >

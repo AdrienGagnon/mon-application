@@ -1,3 +1,6 @@
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import './AfficherSujetLieuGeo.css';
+
 // Si sujet lieu-geo, affiche carte avec marqueur du pays et le titre
 function AfficherSujetLieuGeo(props) {
     if (props.activeCountry === '') {

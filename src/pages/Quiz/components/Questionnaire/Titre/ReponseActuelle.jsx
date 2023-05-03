@@ -1,3 +1,5 @@
+import './ReponseActuelle.css';
+
 // Affiche la bonne reponse quand les essais sont ecoules ou la bonne reponse est donnee
 function ReponseActuelle(props) {
     return (

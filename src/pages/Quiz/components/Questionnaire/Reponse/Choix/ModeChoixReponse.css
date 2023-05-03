@@ -1,0 +1,6 @@
+.choix-reponse-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 2rem;
+}

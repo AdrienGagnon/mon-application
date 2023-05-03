@@ -79,6 +79,7 @@ function FormParameters(props) {
                             props.setSelectedParameters
                         )
                     }
+                    defaultValue={props.selectedParameters.mode}
                 >
                     <option value={5}>5</option>
                     <option value={10}>10</option>

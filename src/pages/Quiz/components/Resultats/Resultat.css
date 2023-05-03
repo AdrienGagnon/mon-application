@@ -1,0 +1,42 @@
+/* /////////////////////////////////////////////////// */
+/* Resultats Page */
+/* /////////////////////////////////////////////////// */
+
+.votre-resultat-container {
+    width: 100%;
+}
+
+.votre-resultat-container > h1,
+.tous-resultats-container > h1 {
+    font-size: 2.6rem;
+    margin-bottom: 2rem;
+}
+
+.tous-resultats-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-y: hidden;
+}
+
+.votre-resultat-container,
+.tous-resultats-container {
+    max-width: 100rem;
+}
+
+.score-actuel-container {
+    margin-block: 2rem;
+    min-height: 100px;
+}
+
+.rouge {
+    color: red;
+}
+
+.jaune {
+    color: rgb(229, 255, 0);
+}
+
+.vert {
+    color: rgb(30, 255, 0);
+}

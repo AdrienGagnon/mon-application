@@ -1,3 +1,5 @@
+import './AfficherSujetDrapeau.css';
+
 // Si sujet drapeau, affiche svg du drapeau et le titre
 function AfficherSujetDrapeau(props) {
     if (props.activeCountry === '') {

@@ -8,6 +8,9 @@ async function fetchCountryData(country) {
         return countryInfo;
     } catch (error) {
         console.log(error);
+        alert(
+            "Un problème est survenu en faisant appel à la banque de données. Cela peut survenir quand elle reçoit une demande trop importante d'information. Veuillez réessayer ultérieurement."
+        );
     }
 }
 

@@ -7,12 +7,14 @@ import FormParameters from './formParameters';
 
 import { QuizStateContext } from '../../Quiz';
 
+import './MenuSelection.css';
+
 export default function MenuSelection() {
     const [selectedParameters, setSelectedParameters] = useState({
         sujet: 'au drapeau',
         choixReponse: 'le nom du pays',
-        mode: 'aucun choix',
-        nombre: 10,
+        mode: 'choix',
+        nombre: 5,
     });
 
     const {

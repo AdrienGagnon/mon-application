@@ -1,4 +1,5 @@
-import randomCountry from '../Data/randomCountry';
+import randomCountry from '../../Data/randomCountry';
+import fetchCountryData from '../../Data/fetchCountryData';
 
 // Set otherCountries appelé par useEffect.
 async function OtherChoices(countryInfo, setChoices) {

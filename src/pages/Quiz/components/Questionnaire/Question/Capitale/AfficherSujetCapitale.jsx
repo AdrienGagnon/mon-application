@@ -1,4 +1,5 @@
 import cityScape from '../../../../assets/cityscape.png';
+import './AfficherSujetCapitale.css';
 
 // Si sujet capitale, affiche capitale et le titre
 function AfficherSujetCapitale(props) {

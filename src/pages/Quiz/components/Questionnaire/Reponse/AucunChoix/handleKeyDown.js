@@ -1,4 +1,4 @@
-import handleReponse from '../Logic/handleReponse';
+import handleReponse from '../../Logic/handleReponse';
 
 // permet de peser sur enter pour soumettre la reponse
 function handleKeyDown(e, input) {
