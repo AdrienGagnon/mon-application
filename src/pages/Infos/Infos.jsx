@@ -28,6 +28,7 @@ function InfosPage() {
     }, []);
 
     document.body.classList = 'body-infos';
+
     return (
         <>
             <div id="body-infos" style={styles}>
