@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { imageID } from '../assets/index.js';
 import { photosArray } from '../assets/index.js';
 
-class Imagespreview extends Component {
+import './ImagesPreview.css';
+
+class ImagesPreview extends Component {
     render() {
         let paysActuel = '';
         return (
@@ -23,16 +25,10 @@ class Imagespreview extends Component {
                                 className="photo-container"
                                 onClick={() => {
                                     this.props.updateState(image);
-                                    this.props.flyToMarker(image.coords);
+                                    // this.props.flyToMarker(image.coords);
                                 }}
                             >
-                                <img
-                                    className="img-preview"
-                                    src={img}
-                                    onLoadedData={e =>
-                                        handleRotationPortrait(e)
-                                    }
-                                />
+                                <img className="img-preview" src={img} />
                                 <div className="img-description-container">
                                     <div className="img-description flow">
                                         <div className="img-lieu flow">
@@ -52,4 +48,4 @@ class Imagespreview extends Component {
     }
 }
 
-export default Imagespreview;
+export default ImagesPreview;

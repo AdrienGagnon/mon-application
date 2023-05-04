@@ -168,6 +168,10 @@
     }
 }
 
+.reponse-actuelle-decalage {
+    transform: translateY(8rem);
+}
+
 .slideOut {
     animation: slideOutReponse 0.7s cubic-bezier(0.26, 0.9, 0.69, 1.01) forwards;
 }

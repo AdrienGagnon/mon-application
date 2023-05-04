@@ -26,16 +26,7 @@ function MapMarkers(props) {
                         icon={myIcon}
                         eventHandlers={{
                             click: e => {
-                                console.log('click');
                                 props.updateState(img);
-                                props.mapInst.target.flyTo(
-                                    img.coords,
-                                    props.mapInst.target.getZoom(),
-                                    {
-                                        animate: true,
-                                        duration: 1,
-                                    }
-                                );
                             },
                         }}
                     />

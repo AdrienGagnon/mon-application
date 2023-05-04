@@ -8,7 +8,10 @@ function ReponseActuelle(props) {
                 'reponse-actuelle ' +
                 (props.activeState === 'repondreReussi'
                     ? 'bonne-reponse-text'
-                    : 'mauvaise-reponse-text')
+                    : 'mauvaise-reponse-text') +
+                (props.parametres.sujet === 'à la capitale'
+                    ? ' reponse-actuelle-decalage'
+                    : '')
             }
         >
             <strong>

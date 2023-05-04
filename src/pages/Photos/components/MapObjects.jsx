@@ -3,7 +3,7 @@ import { useState } from 'react';
 import MapMarkers from './MapMarkers.jsx';
 import MapPopups from './MapPopups.jsx';
 
-function Markersandpopup(props) {
+function MapObjects(props) {
     const [imageSettings, setImageSettings] = useState({
         height: 0,
         zoomLevel: 500,
@@ -32,4 +32,4 @@ function Markersandpopup(props) {
     );
 }
 
-export default Markersandpopup;
+export default MapObjects;

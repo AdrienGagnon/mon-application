@@ -6,25 +6,28 @@ import { MapContainer, TileLayer } from 'react-leaflet/lib';
 
 import ToggleMenu from '../../components/ToggleMenu/ToggleMenu';
 
-import Imagespreview from './components/Imagespreview';
-import Markersandpopup from './components/Markersandpopup';
+import ImagesPreview from './components/Imagespreview';
+import MapObjects from './components/MapObjects';
 
 import updateDimensions from './utils/updateDimensions';
 
 function PhotoApp() {
     const [state, setState] = useState({
         activeImg: null,
-        height: 1,
+        height: 0,
         navHeight: 111,
         loaded: true,
     });
     const [mapInst, setMapInst] = useState();
 
+    function saveMap(mapInst) {
+        setMapInst(mapInst);
+    }
+
     useEffect(() => {
         document.body.classList = 'body-photos';
         window.scrollTo(0, 0);
-        updateDimensions();
-        window.addEventListener('resize', updateDimensions);
+        window.addEventListener('resize', () => updateDimensions(mapInst));
         setTimeout(() => {
             setState({ ...state, loaded: false });
             setTimeout(() => {
@@ -32,24 +35,30 @@ function PhotoApp() {
             }, 1000);
         }, 500);
 
-        // return window.removeEventListener('resize', updateDimensions);
+        return window.removeEventListener('resize', () =>
+            updateDimensions(mapInst)
+        );
     }, []);
 
     useEffect(() => {
-        flyToMarker();
+        if (state.activeImg) flyToMarker();
     });
+
+    useEffect(() => {
+        updateDimensions(mapInst);
+    }, [mapInst]);
 
     function handleToggleMenu(e) {
         e.target.closest('#menu-toggle').classList.toggle('open');
         document.querySelector('nav').classList.toggle('open');
-        updateDimensions();
+        updateDimensions(mapInst);
     }
 
     function togglePanel() {
         const menu = document.querySelector('.photo-menu');
         menu.classList.toggle('open');
         document.querySelector('.sidebar').classList.toggle('open');
-        updateDimensions();
+        updateDimensions(mapInst);
         scrollPanelTo(state.activeImg);
     }
 
@@ -85,11 +94,11 @@ function PhotoApp() {
         scrollPanelTo(img);
 
         // Update dimensions
-        updateDimensions();
+        updateDimensions(mapInst);
     }
 
     function flyToMarker() {
-        if (!state.activeImg || !state.height) return;
+        if (!state.activeImg || state.height === 0) return;
         const px = mapInst.target.project(state.activeImg.coords);
 
         px.y -= state.height / 2;
@@ -127,7 +136,7 @@ function PhotoApp() {
                 <div className="sidebar">
                     <h1>Sélectionnez une photo</h1>
                     <div className="content-sidebar">
-                        <Imagespreview
+                        <ImagesPreview
                             flyToMarker={flyToMarker}
                             updateState={updateState}
                             state={state}
@@ -143,7 +152,7 @@ function PhotoApp() {
                     minZoom={4}
                     center={coords}
                     zoom={5}
-                    whenReady={setMapInst}
+                    whenReady={saveMap}
                 >
                     <TileLayer
                         url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}"
@@ -153,7 +162,7 @@ function PhotoApp() {
                         maxZoom={18}
                         ext="png"
                     />
-                    <Markersandpopup
+                    <MapObjects
                         flyToMarker={flyToMarker}
                         updateState={updateState}
                         updateHeight={updateHeight}

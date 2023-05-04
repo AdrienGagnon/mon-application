@@ -1,6 +1,8 @@
 import NextArrows from './NextArrows.jsx';
 import ImageZoom from './ImageZoom.jsx';
 
+import './MapPopups.css';
+
 import { photosArray } from '../assets/index.js';
 
 import { Popup } from 'react-leaflet/lib';

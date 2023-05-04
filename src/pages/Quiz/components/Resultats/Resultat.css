@@ -17,6 +17,7 @@
     width: 100%;
     position: relative;
     overflow-y: hidden;
+    margin-bottom: 2rem;
 }
 
 .votre-resultat-container,

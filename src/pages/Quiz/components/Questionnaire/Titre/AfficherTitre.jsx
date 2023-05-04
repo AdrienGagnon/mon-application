@@ -26,6 +26,7 @@ function AfficherTitre(props) {
                 <ReponseActuelle
                     activeCountry={props.activeCountry}
                     activeState={activeState}
+                    parametres={parametres}
                 />
             )}
         </>

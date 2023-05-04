@@ -1,4 +1,5 @@
 import updateZoomImage from '../utils/updateZoomImage.js';
+import './ImageZoom.css';
 
 function ImageZoom(props) {
     const options = [

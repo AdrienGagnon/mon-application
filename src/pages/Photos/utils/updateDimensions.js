@@ -1,4 +1,4 @@
-function updateDimensions() {
+function updateDimensions(mapInst) {
     let w = window,
         d = document,
         documentElement = d.documentElement,
@@ -9,6 +9,9 @@ function updateDimensions() {
     height -= nav.clientHeight;
     const root = document.getElementById('root');
     root.style.height = height - 1 + 'px';
+    if (mapInst) {
+        mapInst.target.invalidateSize();
+    }
 }
 
 export default updateDimensions;

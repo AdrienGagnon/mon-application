@@ -1,5 +1,6 @@
 import next from '../assets/next.png';
 import goToNext from '../utils/goToNext.js';
+import './NextArrows.css';
 
 function NextArrows(props) {
     const arrowSpan = position => {
