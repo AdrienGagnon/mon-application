@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ToMenuSelectionButton from '../Questionnaire/Buttons/ToMenuButton';
 
-import AfficherResultatActuel from './afficherResultatActuel';
-import AfficherResultats from './afficherResultats';
+import AfficherResultatActuel from './AfficherResultatActuel';
+import AfficherResultats from './AfficherResultats';
 
 import { QuizStateContext } from '../../Quiz';
 

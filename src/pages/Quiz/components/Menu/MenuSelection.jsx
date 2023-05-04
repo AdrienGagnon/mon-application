@@ -3,7 +3,7 @@ import rotatingEarth from '../../assets/rotating-earth.mp4';
 
 import handleVideoLoaded from './handleVideoLoaded';
 
-import FormParameters from './formParameters';
+import FormParameters from './FormParameters';
 
 import { QuizStateContext } from '../../Quiz';
 
