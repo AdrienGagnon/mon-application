@@ -5,7 +5,7 @@ import FooterLayout from './components/Footer/FooterRoot';
 
 import HomePage from './pages/Home/Home';
 import InfosPage from './pages/Infos/Infos';
-import PhotoApp from './pages/Photos/photos';
+import PhotoApp from './pages/Photos/Photos';
 import QuizApp from './pages/Quiz/Quiz';
 
 const router = createBrowserRouter([
