@@ -1,0 +1,12 @@
+/* Drapeau */
+
+.question-drapeau-container {
+    position: relative;
+
+    margin: auto;
+}
+
+.question-drapeau {
+    height: 300px;
+    filter: drop-shadow(16px 16px 10px black);
+}

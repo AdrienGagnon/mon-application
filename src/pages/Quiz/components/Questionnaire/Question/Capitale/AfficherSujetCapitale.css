@@ -1,0 +1,22 @@
+/* capitale */
+
+.question-capitale-container {
+    display: flex;
+    margin-block: 5rem;
+    font-size: 3rem;
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-capitale-container img {
+    height: 8rem;
+    width: fit-content;
+    margin-left: 2rem;
+}
+
+.question-capitale-container span {
+    font-size: 5rem;
+    margin-left: 2rem;
+    filter: drop-shadow(8px 8px 10px black);
+}

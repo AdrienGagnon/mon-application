@@ -1,0 +1,108 @@
+.formation-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.etude {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    z-index: 5;
+    justify-items: start;
+    padding-block: 1rem;
+    padding-left: 10rem;
+    text-shadow: 2px 2px #00040a;
+}
+
+.etude::after {
+    content: '';
+    background: var(--color-background-etude);
+    position: absolute;
+    margin: auto;
+    z-index: -1;
+    inset: 0;
+    transform: skew(-5deg);
+    width: 95%;
+    border: 3px solid;
+    border-image: linear-gradient(
+            to bottom,
+            var(--color-border-info),
+            rgb(160, 82, 45)
+        )
+        1 100%;
+}
+
+.experiences {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+}
+
+.experience-un,
+.experience {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    width: 100%;
+    z-index: 5;
+    padding-block: 1rem;
+}
+
+.experience-un div,
+.experience div {
+    display: inline-block;
+    margin: 0;
+}
+
+.experience-un p,
+.experience p,
+.experience-un div,
+.experience div {
+    text-align: left;
+}
+
+.experience-un div,
+.experience div {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    color: var(--font-accent);
+    margin-bottom: 0.5rem;
+}
+
+.experience {
+    display: none;
+}
+
+.button-plus {
+    width: fit-content;
+    margin: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: linear-gradient(45deg, rgb(160, 82, 45), rgb(255, 165, 0));
+    color: white;
+    border: none;
+    transition-duration: 300ms;
+    cursor: pointer;
+}
+
+.button-plus:hover {
+    background: linear-gradient(45deg, rgb(129, 66, 36), rgb(199, 129, 0));
+}
+
+.hide-section-experience {
+    display: grid;
+}
+
+.fast-forward-arrow {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+    vertical-align: middle;
+}

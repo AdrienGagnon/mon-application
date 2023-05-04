@@ -1,0 +1,182 @@
+.question-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    z-index: 1;
+    margin: 5rem;
+    padding: 3rem;
+    border-radius: 1rem;
+    background-color: var(--background-card-question);
+}
+
+.quiz-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    flex: 1 1 1px;
+}
+
+.quiz-container::before {
+    content: '';
+    position: absolute;
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    filter: blur(1px);
+
+    background-image: url('../../assets/grenoble-avion.jpg');
+    background-size: cover;
+}
+
+/* ////////////////////// */
+/* Question containers */
+/* ////////////////////// */
+
+.question-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    font-size: 1.6rem;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.question-title {
+    padding-inline: 2rem;
+    text-shadow: 2px 1px #00040a;
+}
+
+/* ////////////////////// */
+/* Buttons to menu and resultats */
+/* ////////////////////// */
+
+.buttons-to-menu-resultats-container {
+    display: inline;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 1rem;
+}
+
+.nextQuestion,
+.return-to-resultats,
+.return-to-menu-selection {
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    position: relative;
+    font-size: 2rem;
+    overflow: hidden;
+    transform: 300ms all;
+}
+
+.nextQuestion:before,
+.return-to-resultats:before,
+.return-to-menu-selection::before {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    background: black;
+    height: 5px;
+    width: 40px;
+    transform: translateX(-105px);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.nextQuestion:after,
+.return-to-resultats:after,
+.return-to-menu-selection::after {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    color: black;
+    border-top: 5px solid;
+    border-left: 5px solid;
+    transform: rotateZ(135deg) translateX(-100px);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.nextQuestion:hover,
+.return-to-resultats:hover,
+.return-to-menu-selection:hover {
+    color: white;
+}
+
+.nextQuestion:hover::before,
+.return-to-menu-selection:hover::before {
+    animation: lineLeft 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+.return-to-resultats:hover::before {
+    animation: lineRight 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+.nextQuestion:hover::after,
+.return-to-menu-selection:hover::after {
+    animation: tipLeft 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+.return-to-resultats:hover::after {
+    animation: tipRight 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+@keyframes tipLeft {
+    0% {
+        transform: translateX(-100px) rotateZ(135deg);
+    }
+
+    100% {
+        transform: translateX(100px) rotateZ(135deg);
+    }
+}
+
+@keyframes lineLeft {
+    0% {
+        transform: translateX(-105px);
+    }
+    100% {
+        transform: translateX(95px);
+    }
+}
+
+@keyframes tipRight {
+    0% {
+        transform: translateX(100px) rotateZ(-45deg);
+    }
+
+    100% {
+        transform: translateX(-100px) rotateZ(-45deg);
+    }
+}
+
+@keyframes lineRight {
+    0% {
+        transform: translateX(105px);
+    }
+    100% {
+        transform: translateX(-95px);
+    }
+}

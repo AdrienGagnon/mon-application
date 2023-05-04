@@ -1,0 +1,21 @@
+/* lieu-geo */
+
+.question-lieu-geo-container {
+    width: 100%;
+    height: 300px;
+}
+
+.body-quiz .leaflet-container {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    border-radius: 2rem;
+}
+
+.leaflet-control-zoom span {
+    color: black;
+}
+
+.leaflet-bottom {
+    display: none;
+}

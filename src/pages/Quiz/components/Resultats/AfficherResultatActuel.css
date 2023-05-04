@@ -1,0 +1,61 @@
+/* Reponse Actuelle */
+
+.message-resultat {
+    max-width: 30rem;
+    width: 100%;
+}
+
+.score-actuel-container,
+.resultat-item {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+
+    font-size: 1.6rem;
+
+    padding: 1rem;
+
+    border-radius: 2rem;
+
+    transition-duration: 300ms;
+
+    background: linear-gradient(
+        90deg,
+        var(--color-background-result-1),
+        var(--color-background-result-2)
+    );
+
+    filter: drop-shadow(0px 0px 5px black);
+}
+
+.score-actuel-container *,
+.resultat-item * {
+    text-shadow: 1px 1px black;
+    font-weight: 600;
+}
+
+.score-actuel-container:hover,
+.resultat-item:hover {
+    translate: 3px -3px;
+}
+
+.score-actuel-container.rouge,
+.resultat-item.rouge {
+    --color-background-result-1: rgba(161, 0, 0, 0.5);
+    --color-background-result-2: rgba(143, 0, 0, 0.5);
+}
+
+.score-actuel-container.jaune,
+.resultat-item.jaune {
+    --color-background-result-1: rgba(248, 229, 56, 0.5);
+    --color-background-result-2: rgba(226, 213, 140, 0.5);
+}
+
+.score-actuel-container.vert,
+.resultat-item.vert {
+    --color-background-result-1: rgba(41, 177, 0, 0.5);
+    --color-background-result-2: rgba(42, 95, 18, 0.5);
+}

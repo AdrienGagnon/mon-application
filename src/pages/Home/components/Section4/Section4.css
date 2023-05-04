@@ -1,0 +1,139 @@
+#section4 {
+    background: radial-gradient(
+        var(--color-header-middle) 10%,
+        var(--color-header) 70%
+    );
+
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    align-items: center;
+}
+
+.section4-content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    margin-inline: 10rem;
+    max-width: 1200px;
+}
+
+.section4-content > img {
+    object-fit: cover;
+    max-width: 40%;
+    aspect-ratio: 1;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    border-radius: 10px;
+}
+
+.contact-container {
+    position: relative;
+    border-radius: 5px;
+    padding: 20px;
+    margin: auto;
+    width: 90%;
+    color: rgb(255, 255, 255);
+    z-index: 100;
+}
+
+.contact-container > h1 {
+    font-size: 3rem;
+}
+
+.form-contact-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    font: black;
+    gap: 10px;
+}
+
+.form-contact-container > label {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.body-home input[type='text'],
+#description {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+    color: black;
+    text-align: start;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    resize: none;
+}
+
+button[type='submit'] {
+    font: var(--color-black);
+    background-color: var(--color-section-3);
+    color: rgb(255, 255, 255);
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+
+button[type='submit']:hover {
+    transform: translateY(10px);
+    box-shadow: 0 0 10px rgb(100, 100, 100);
+}
+
+.submit-email:hover {
+    background-color: var(--color-section-3-middle);
+}
+
+.envoi-email {
+    height: 100px;
+    z-index: 10;
+}
+
+.revenirTop {
+    position: relative;
+    display: flex;
+    background-color: var(--color-section-3);
+    height: 5rem;
+    padding-inline: 10px;
+    padding-block: 10px;
+    border-radius: 15px;
+    align-items: center;
+    border: none;
+    gap: 5px;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.revenirTop > div > img {
+    height: 100%;
+    aspect-ratio: 1;
+    filter: invert(100%);
+}
+
+.toTopFull {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.revenirTop > div {
+    position: relative;
+    height: 100%;
+}
+
+.revenirTop:hover {
+    background-color: var(--color-section-3-middle);
+    transform: translateY(-10px);
+    box-shadow: 0 0 10px rgb(100, 100, 100);
+}
+
+.revenirTop:hover > div > .toTopFull {
+    opacity: 1;
+}

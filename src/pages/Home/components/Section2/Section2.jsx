@@ -1,0 +1,48 @@
+import { Link } from 'react-router-dom';
+
+import amsterdam from '../../assets/amsterdam-canal.jpg';
+import corniglia from '../../assets/Corniglia-maisons.jpg';
+import santaMaria from '../../assets/Florence-Santa-Maria-del-Fiore.jpg';
+import treCime from '../../assets/Tre-Cime-Di-Lavaredo-north.jpg';
+
+import './Section2.css';
+
+function Section2() {
+    return (
+        <section className="section" id="section2">
+            <h2>Des clichés d'Europe</h2>
+            <div className="contenu">
+                <div className="section-description photo-description">
+                    <p>
+                        Une petite application servant d'album photo de mes
+                        voyages.
+                    </p>
+                    <div>
+                        <p>
+                            <span>&#8594;</span> Créé avec{' '}
+                            <a href="https://react.dev/">React</a>
+                        </p>
+                        <img
+                            className="react-logo"
+                            src="../src/img/menu-principal/react.png"
+                            alt=""
+                        />
+                    </div>
+                    <Link to="/photos" className="link-contact">
+                        Cliquez ici
+                    </Link>
+                    <div className="background-1"></div>
+                    <div className="background-2"></div>
+                </div>
+                <div className="imgs-preview">
+                    <img className="img-preview-menu" src={amsterdam} alt="" />
+                    <img className="img-preview-menu" src={corniglia} alt="" />
+                    <img className="img-preview-menu" src={santaMaria} alt="" />
+                    <img className="img-preview-menu" src={treCime} alt="" />
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export default Section2;

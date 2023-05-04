@@ -9,6 +9,9 @@
         ],
         "*.mp4": [
             "@parcel/transformer-raw"
+        ],
+        "*.pdf": [
+            "@parcel/transformer-raw"
         ]
     }
 }

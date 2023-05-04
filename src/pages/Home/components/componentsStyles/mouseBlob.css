@@ -1,0 +1,36 @@
+.ball {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: 2px solid var(--color-nav);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 200;
+    transform-origin: 50% 50%;
+    animation: ball 4s infinite ease-in-out;
+}
+
+@keyframes ball {
+    from {
+        border-radius: 50% 80% 80% 80%/50% 80% 80% 80%;
+    }
+
+    25% {
+        border-radius: 80% 50% 80% 80%/80% 50% 80% 80%;
+    }
+
+    50% {
+        border-radius: 80% 80% 50% 80%/80% 80% 50% 80%;
+    }
+
+    75% {
+        border-radius: 80% 80% 80% 50%/80% 80% 80% 50%;
+    }
+
+    to {
+        border-radius: 50% 80% 80% 80%/50% 80% 80% 80%;
+    }
+}

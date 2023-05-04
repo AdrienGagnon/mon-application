@@ -1,0 +1,187 @@
+/* ////////////////////// */
+/* Message resultat */
+/* ////////////////////// */
+
+.reponse-text {
+    padding: 0.5rem;
+    border-radius: 4px;
+    animation: appear-reponse-text 300ms;
+}
+
+@keyframes appear-reponse-text {
+    from {
+        opacity: 0;
+        translate: -3rem;
+    }
+    to {
+        opacity: 1;
+        translate: 0;
+    }
+}
+
+.reponse-text > span {
+    text-shadow: 2px 1px rgb(0, 0, 0);
+}
+
+.mauvaise-reponse-choix,
+.mauvaise-reponse-text {
+    --color-bonne-reponse-light: rgb(228, 165, 156);
+    --color-bonne-reponse-dark: rgb(202, 93, 74);
+    --color-background-reponse: rgb(124, 25, 0);
+    --color-inset-shadows: #af0000;
+    --color-text-shadows: rgb(87, 0, 0);
+}
+
+.bonne-reponse-choix,
+.bonne-reponse-text {
+    --color-bonne-reponse-light: rgb(182, 240, 182);
+    --color-bonne-reponse-dark: rgb(0, 187, 0);
+    --color-background-reponse: rgb(33, 105, 33);
+    --color-inset-shadows: #24b400;
+    --color-text-shadows: rgb(0, 85, 0);
+}
+
+.bonne-reponse-text,
+.mauvaise-reponse-text,
+.reponse-text,
+.checkmark,
+.crossmark {
+    color: var(--color-bonne-reponse-dark);
+    background-color: var(--color-background-reponse);
+    border: solid 1px var(--color-bonne-reponse-dark);
+}
+
+.bonne-reponse-text,
+.mauvaise-reponse-text {
+    text-shadow: 2px 1px var(--color-background-reponse);
+    box-shadow: 0 0 10px rgb(0, 0, 0),
+        0px 4px 16px var(--color-inset-shadows) inset;
+}
+
+.bonne-reponse-text > span,
+.mauvaise-reponse-text > span,
+.reponse-text {
+    color: var(--color-bonne-reponse-light);
+}
+
+.bonne-reponse-text > strong,
+.mauvaise-reponse-text > strong {
+    display: flex;
+    gap: 1rem;
+    color: var(--color-background-reponse);
+    text-shadow: 2px 1px var(--color-text-shadows);
+    animation: colorTrans 1s infinite forwards;
+}
+
+@keyframes colorTrans {
+    0% {
+        color: var(--color-bonne-reponse-light);
+        border-bottom-color: var(--color-bonne-reponse-light);
+        border-right-color: var(--color-bonne-reponse-light);
+        fill: var(--color-bonne-reponse-light);
+    }
+    50% {
+        color: var(--color-bonne-reponse-dark);
+        border-bottom-color: var(--color-bonne-reponse-dark);
+        border-right-color: var(--color-bonne-reponse-dark);
+    }
+    100% {
+        color: var(--color-bonne-reponse-light);
+        border-bottom-color: var(--color-bonne-reponse-light);
+        border-right-color: var(--color-bonne-reponse-light);
+    }
+}
+
+.checkmark {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 24px;
+    width: 12px;
+    border: none;
+    margin-top: 5px;
+    border-bottom: 7px solid rgb(172, 235, 172);
+    border-right: 7px solid rgb(172, 235, 172);
+    background: none;
+    animation: colorTrans 1s infinite forwards;
+}
+
+.crossmark {
+    display: inline-block;
+    position: relative;
+    height: 39px;
+    width: 40px;
+    border: none;
+    background: none;
+}
+
+.crossmark::after,
+.crossmark::before {
+    position: absolute;
+    box-sizing: border-box;
+    left: 20;
+    content: ' ';
+    height: 40px;
+
+    border: none;
+    border-right: 7px solid #ff0000;
+    animation: colorTrans 1s infinite forwards;
+}
+
+.crossmark::after {
+    transform: rotate(45deg);
+}
+
+.crossmark::before {
+    transform: rotate(-45deg);
+}
+
+/* //////////// */
+
+.reponse-actuelle {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3.2rem;
+    font-weight: 600;
+    top: 50%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    border-radius: 4px;
+
+    gap: 1rem;
+
+    z-index: 2;
+
+    opacity: 0;
+    translate: -100%;
+
+    animation: slideInReponse 0.7s cubic-bezier(0.26, 0.9, 0.69, 1.01) forwards;
+}
+
+@keyframes slideInReponse {
+    to {
+        translate: 0%;
+        opacity: 1;
+    }
+}
+
+.reponse-actuelle-decalage {
+    transform: translateY(8rem);
+}
+
+.slideOut {
+    animation: slideOutReponse 0.7s cubic-bezier(0.26, 0.9, 0.69, 1.01) forwards;
+}
+@keyframes slideOutReponse {
+    from {
+        translate: 0%;
+        opacity: 1;
+    }
+    to {
+        translate: 100%;
+        opacity: 0;
+    }
+}

@@ -1,0 +1,208 @@
+.body-infos {
+    --color-pillar-1: rgb(240, 230, 140);
+    --color-pillar-2: rgb(160, 82, 45);
+    --color-pillar-3: rgb(255, 165, 0);
+    --color-pillar-4: rgb(210, 105, 30);
+    --color-pillar-5: rgb(160, 82, 45);
+    --color-pillar-5: rgb(22, 22, 22);
+
+    --color-background-info: rgba(27, 27, 27, 0.9);
+    --color-background-info-motif: rgba(0, 0, 0, 0.8);
+    --color-footer-infos: rgb(37, 37, 37);
+
+    --color-scrollbar: linear-gradient(
+        to top,
+        rgb(160, 82, 45),
+        rgb(255, 165, 0)
+    );
+    --color-scrollbar-track: linear-gradient(
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 50%,
+        rgba(0, 0, 0, 1) 100%
+    );
+
+    --color-background-etude: linear-gradient(
+        45deg,
+        rgba(160, 82, 45, 0.8),
+        rgba(150, 97, 0, 0.8)
+    );
+    --color-background-etude-2: linear-gradient(
+        45deg,
+        rgb(129, 66, 36),
+        rgb(199, 129, 0)
+    );
+
+    --color-langage-prog: rgb(210, 105, 30);
+    --color-border-info: rgb(255, 165, 0);
+    --color-bordsssser-info: rgb(44, 2, 2);
+    --font-accent: rgb(210, 105, 30);
+
+    font-size: 1.6rem;
+    overflow: hidden;
+}
+
+/* Tags */
+
+.body-infos nav {
+    transition-duration: 1s;
+    background: linear-gradient(45deg, #4b2311, sienna);
+    --box-shadow-1: #c5714d;
+    --box-shadow-2: #c05c37b3;
+    --box-shadow-3: #7e300f;
+    --text-base: 255, 255, 255;
+    --text-hover: 25, 32, 94;
+    --shadow-start: 252, 170, 129;
+    --shadow-end: 199, 101, 52;
+    --shadow-inner: 121, 44, 5;
+}
+
+#body-infos > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -9999;
+    scale: 1.1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.body-infos span {
+    font-weight: 800;
+    color: var(--font-accent);
+}
+
+.body-infos .footer {
+    --color-footer-infos: rgb(37, 37, 37);
+    background-color: var(--color-footer-infos);
+}
+
+/* Nav infos */
+
+.nav-infos {
+    position: relative;
+
+    --text-base: 255, 255, 255;
+    --text-hover: 25, 32, 94;
+    --shadow-start: 252, 170, 129;
+    --shadow-end: 199, 101, 52;
+    --shadow-inner: 121, 44, 5;
+
+    --box-shadow-1: #c5714d;
+    --box-shadow-2: rgba(192, 92, 55, 0.7);
+    --box-shadow-3: #7e300f;
+    background: linear-gradient(45deg, rgb(75, 35, 17), rgb(160, 82, 45));
+}
+
+/* General container */
+.container-infos {
+    display: inline-block;
+    flex-direction: column;
+    padding: 10rem 10rem 10rem 10rem;
+    margin: 0rem 5rem 0rem 5rem;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    justify-items: center;
+    padding-bottom: 30rem;
+}
+
+@media screen and (max-width: 950px) {
+    .container-infos {
+        margin: 0rem 2rem 1rem 2rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container-infos {
+        grid-template-columns: 1fr;
+    }
+}
+
+.infos-section {
+    position: relative;
+
+    background-color: var(--color-background-info);
+    background-image: conic-gradient(
+            from 330deg at 50% 70%,
+            var(--color-background-info-motif) 60deg,
+            transparent 60deg
+        ),
+        conic-gradient(
+            from 150deg at 50% 30%,
+            var(--color-background-info-motif) 60deg,
+            transparent 60deg
+        );
+
+    background-size: 5rem 5rem;
+    background-position: 0 0, 2.5rem -0.5rem;
+
+    z-index: 10;
+    transition: scale ease-out 150ms;
+    padding: 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-image: linear-gradient(
+            to bottom,
+            var(--color-border-info),
+            rgb(0, 0, 0)
+        )
+        1 100%;
+    min-height: 30rem;
+    min-width: 60rem;
+    max-width: 100rem;
+    margin-bottom: 15rem;
+
+    transition-duration: 300ms;
+
+    overflow: hidden;
+}
+
+.infos-section:hover {
+    scale: 1.01;
+}
+
+.infos-section h1 {
+    margin-block: 1rem;
+}
+
+/* Scrollbar */
+.container-infos::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.container-infos::-webkit-scrollbar-track {
+    background: var(--color-scrollbar-track);
+    margin-top: 3rem;
+    margin-bottom: 20rem;
+    border-radius: 10px;
+}
+
+.container-infos::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar);
+
+    border-radius: 100px;
+}
+
+/* //////////////////////////////////// */
+/* @media */
+/* //////////////////////////////////// */
+
+@media screen and (max-width: 920px) {
+    .container-infos {
+        padding-inline: 0 1rem;
+    }
+    .section-loisir {
+        padding-inline: 1rem;
+    }
+    .videos-piano-container {
+        flex-direction: column;
+    }
+    .zoomInVideo {
+        width: 100%;
+        scale: 1.1;
+    }
+    .video-piano {
+        height: 30rem;
+    }
+}

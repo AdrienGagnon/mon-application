@@ -1,0 +1,9 @@
+.hidden-section-home {
+    opacity: 0;
+    translate: 0 10rem;
+}
+
+.sliding-section {
+    opacity: 1;
+    translate: 0;
+}

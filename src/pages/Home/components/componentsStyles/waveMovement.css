@@ -1,0 +1,78 @@
+/* ///////////////////////////////////////////////////////// */
+/* Waves */
+/* ///////////////////////////////////////////////////////// */
+
+.section-top {
+    position: absolute;
+    bottom: 0%;
+    z-index: 50;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    translate: 0px 109px;
+}
+
+.section-top svg {
+    width: calc(111% + 1.3px);
+    height: 110px;
+    z-index: 5;
+}
+
+.section-top > svg > :first-child,
+.section-bottom > svg > :first-child {
+    transition-delay: 300ms;
+}
+
+.section-bottom {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 50;
+    rotate: 180deg;
+    translate: 0px -109px;
+}
+
+.section-bottom svg {
+    width: calc(111% + 1.3px);
+    height: 110px;
+    z-index: 5;
+}
+
+.shape {
+    transition-duration: 700ms;
+}
+
+.section--hidden {
+    opacity: 0.5;
+    transform: translateY(-15rem);
+    filter: blur(5px);
+}
+
+/* header bottom color*/
+.header-bottom-wave .shape-fill-1 {
+    fill: var(--color-section-1);
+}
+
+/* section 2 top color*/
+.section-2-wave .shape-fill-2 {
+    fill: var(--color-section-1);
+}
+
+/* section 2 bottom color*/
+.section-2-wave .shape-fill-3 {
+    fill: var(--color-section-3);
+}
+
+/* section 4 top color*/
+.shape-fill-3 {
+    fill: var(--color-section-3);
+}
+
+/* section 4 bottom color*/
+.section-4-wave .shape-fill-4 {
+    fill: var(--color-footer);
+}

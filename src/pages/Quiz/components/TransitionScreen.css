@@ -1,0 +1,250 @@
+/* /////////////////////////////// */
+/* transition shapes */
+
+.transition-shapes-container {
+    --color2: rgb(91, 169, 93);
+    --color3: rgb(22, 78, 26);
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    top: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    translate: 0;
+    transition-duration: 2s;
+    z-index: 100;
+
+    isolation: isolate;
+}
+
+/* Hide shapes */
+
+.transition-shapes-container.hidden-shapes {
+    z-index: -100;
+}
+
+/* To the left or right of screen */
+
+.transition-shapes-container.right {
+    transform: translate(calc(100% + 700px), 0);
+}
+
+.transition-shapes-container.left {
+    transform: translate(calc(-100% - 700px), 0);
+}
+
+/* Transition animation */
+
+.transition-shapes-container.transition-in-left > span {
+    animation: transitionShapesInLeft 2s;
+}
+
+.transition-shapes-container.transition-out-left > span {
+    animation: transitionShapesOutLeft 2s;
+}
+
+.transition-shapes-container.transition-in-right > span {
+    animation: transitionShapesInRight 2s;
+}
+
+.transition-shapes-container.transition-out-right > span {
+    animation: transitionShapesOutRight 2s;
+}
+
+@keyframes transitionShapesInRight {
+    100% {
+        transform: translate(var(--distance));
+    }
+}
+
+@keyframes transitionShapesInLeft {
+    100% {
+        transform: translate(calc(var(--distance) * -1));
+    }
+}
+
+@keyframes transitionShapesOutRight {
+    50% {
+        transform: translate(calc(var(--distance) * -1));
+    }
+    100% {
+        transform: translate(0%);
+    }
+}
+
+@keyframes transitionShapesOutLeft {
+    50% {
+        transform: translate(var(--distance));
+    }
+    100% {
+        transform: translate(0%);
+    }
+}
+
+.background-transition-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('../assets/grenoble-clairere.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.background-transition-shapes::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: radial-gradient(transparent, var(--color2) 70%);
+}
+
+.transition-shapes-container > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background: var(--color1);
+}
+
+.transition-shapes-container > span::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: calc(var(--width) * -1 + 1px);
+
+    width: var(--width);
+    height: 100%;
+
+    z-index: var(--index);
+
+    background-image: conic-gradient(
+        from 20deg,
+        var(--color1) 140deg,
+        transparent 18deg 45deg
+    );
+}
+
+.transition-shapes-container > span::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+
+    top: 0;
+    right: calc(var(--width) * -1 + 1px);
+
+    width: var(--width);
+    height: 100%;
+
+    background-image: conic-gradient(
+        from 200deg,
+        var(--color1) 140deg,
+        transparent 18deg 45deg
+    );
+}
+
+@keyframes triangleSpeed {
+    100% {
+        translate: var(--distance);
+    }
+}
+
+.transition-shapes-container > :nth-child(1) {
+    --color1: rgb(91, 169, 93);
+    --distance: 0px;
+    --width: 500px;
+    z-index: -1;
+}
+
+.transition-shapes-container > :nth-child(2) {
+    --color1: rgb(71, 141, 115);
+    --distance: 200px;
+    --width: 700px;
+    z-index: -2;
+    animation-delay: 150ms;
+}
+
+.transition-shapes-container > :nth-child(3) {
+    --color1: rgb(68, 107, 106);
+    --distance: 400px;
+    --width: 900px;
+    z-index: -3;
+    animation-delay: 300ms;
+}
+
+.transition-shapes-container > :nth-child(4) {
+    --color1: rgb(64, 76, 84);
+    --distance: 600px;
+    --width: 1100px;
+    z-index: -4;
+    animation-delay: 450ms;
+}
+
+.transition-shapes-container > :nth-child(5) {
+    --color1: rgb(43, 50, 54);
+    --distance: 801px;
+    --width: 1300px;
+    z-index: -5;
+    animation-delay: 600ms;
+}
+
+/* ///////////////////////////////////// */
+
+.hidden-options-selection-container {
+    opacity: 0;
+    translate: 100%;
+}
+
+.loading-screen-transition {
+    border-radius: 10rem;
+    padding: 2rem 3rem;
+    z-index: 2;
+    font-size: 6rem;
+    font-weight: 700;
+    text-shadow: black 2px 2px;
+}
+
+.loading-screen-transition span {
+    display: inline-block;
+    animation: loadingDots 2s infinite cubic-bezier(0.06, 0.39, 0.18, 1);
+}
+
+.loading-screen-transition span:nth-child(2) {
+    animation-delay: 200ms;
+}
+
+.loading-screen-transition span:nth-child(1) {
+    animation-delay: 400ms;
+}
+
+@keyframes loadingDots {
+    50% {
+        opacity: 0;
+        translate: 30px;
+    }
+    51% {
+        opacity: 0;
+        translate: -30px;
+    }
+}
+
+.zoom-on-earth-transition {
+    transform: translate(50%, 30%) scale(3);
+    max-height: 100vh;
+    overflow-y: hidden;
+}
+
+.menu-selection-transistion {
+    opacity: 0;
+    translate: 100%;
+}

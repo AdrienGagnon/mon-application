@@ -1,0 +1,75 @@
+.cv-contact-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    margin-block: auto;
+}
+
+.cv-contact-infos * {
+    font-size: 2.6rem;
+}
+
+.contact-infos-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.contact-infos-container * {
+    align-self: center;
+}
+
+#telecharger-cv {
+    text-decoration: none;
+}
+
+.pdf-cv {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.quit-cv-view {
+    display: flex;
+    z-index: 1000;
+    position: absolute;
+    bottom: 5rem;
+    right: 5rem;
+    border: 1px solid black;
+    box-shadow: 2px 5px 5px black;
+}
+
+.quit-cv-view:hover {
+    color: rgb(170, 170, 170);
+}
+
+#cv-contact-infos button,
+#cv-contact-infos a,
+.quit-cv-view {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: linear-gradient(45deg, rgb(160, 82, 45), rgb(255, 165, 0));
+    color: white;
+    border: none;
+    transition-duration: 300ms;
+    cursor: pointer;
+}
+
+#cv-contact-infos button:hover,
+#cv-contact-infos a:hover,
+.quit-cv-view:hover {
+    background: linear-gradient(45deg, rgb(129, 66, 36), rgb(199, 129, 0));
+}
+
+.blur-page {
+    filter: blur(10px);
+}
+
+.hidden-cv {
+    display: none;
+}

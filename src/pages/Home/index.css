@@ -1,0 +1,175 @@
+.body-home {
+    --color-section-1-middle-ajusted: rgb(15, 148, 179);
+
+    position: relative;
+    font-weight: 300;
+    color: var(--color-font);
+    line-height: 1.9;
+    overflow-x: hidden;
+    background-color: var(--color-header);
+    z-index: -1;
+}
+
+/* Tags */
+
+.body-home #root {
+    height: auto !important;
+}
+
+.body-home a {
+    color: var(--color-font);
+}
+
+.body-home h2 {
+    font-size: 4rem;
+    text-shadow: 1px 2px #00040a;
+}
+
+/* ///////////////////////////////////////////////////////// */
+/* Sections (general) */
+/* ///////////////////////////////////////////////////////// */
+
+.section {
+    padding: var(--padding-section) 3rem;
+    position: relative;
+    min-height: 100vh;
+    transition: all 500ms;
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+}
+
+.layer1,
+.layer2 {
+    opacity: 0;
+    animation: 500ms;
+    transform: 500ms;
+}
+
+.anim-slide-1 {
+    animation: sliding 2s;
+    opacity: 0.5;
+    filter: blur(5px);
+}
+
+@keyframes sliding {
+    0% {
+        transform: translateY(-20rem);
+    }
+    100% {
+        transform: translateY(0rem);
+    }
+}
+
+.img-section {
+    height: 100%;
+    transition-duration: 200ms;
+}
+
+.section-description {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2rem;
+    align-items: center;
+    min-width: 50%;
+}
+
+.section-description * {
+    font-size: 2.6rem;
+}
+
+.section-description-infos {
+    margin-right: 4rem;
+}
+
+.section-description-infos::after {
+    content: '';
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 110%;
+    translate: -5%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10rem;
+    z-index: -1;
+}
+
+/* //////////////////////////////////// */
+/* @media */
+/* //////////////////////////////////// */
+
+@media screen and (max-width: 1100px) {
+    #section2 > .contenu {
+        flex-direction: column;
+    }
+    .photo-description {
+        margin-bottom: 3rem;
+        margin-inline: 0;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .section-contenu-container {
+        margin-inline: 0;
+    }
+    .blob {
+        height: 70%;
+    }
+    .section4-content {
+        margin-inline: 0;
+    }
+    .section4-content > img {
+        display: none;
+    }
+    .contenu .imgs-preview {
+        width: 100%;
+        max-width: calc(3 * var(--s) + 2 * var(--g));
+    }
+    .section1-contenu,
+    .section3-contenu {
+        flex-direction: column;
+    }
+    .section3-contenu {
+        min-height: 500px;
+        gap: 0;
+    }
+    .section3-contenu .section-description {
+        padding-inline: 4rem;
+    }
+    #earth-div {
+        height: 0%;
+    }
+    .section-description-infos {
+        margin-right: 0;
+    }
+    .section-contenu-container:hover .section-contenu-extra {
+        justify-content: end;
+        align-items: center;
+        align-content: center;
+    }
+    .section-contenu-extra {
+        font-size: 1.6rem;
+        line-height: normal;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .welcome-description {
+        font-size: 1.6rem;
+    }
+    .welcome-message {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-contact-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+}

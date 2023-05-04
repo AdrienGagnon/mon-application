@@ -1,0 +1,26 @@
+.img-map-zoom-container {
+    display: flex;
+    background-color: var(--background-card-btn);
+    box-shadow: black 1px 1px 1px;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-inline: 1rem;
+
+    border-radius: 1rem;
+}
+
+.img-map-zoom-container div {
+    font-size: 20px;
+    cursor: pointer;
+    text-shadow: black 1px 1px;
+}
+
+.img-map-zoom-container:hover {
+    box-shadow: inset black 1px 1px 1px;
+}
+
+.img-map-zoom-container div:hover span {
+    color: black;
+}
