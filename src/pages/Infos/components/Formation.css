@@ -106,3 +106,30 @@
     margin-right: 5px;
     vertical-align: middle;
 }
+
+@media screen and (max-width: 1000px) {
+    .etude {
+        padding-inline: 3rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .etude {
+        grid-template-columns: 1fr;
+    }
+
+    .etude p {
+        width: 100%;
+        text-align: center;
+    }
+
+    .experience-un,
+    .experience {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-un > *,
+    .experience > * {
+        margin-bottom: 1rem;
+    }
+}

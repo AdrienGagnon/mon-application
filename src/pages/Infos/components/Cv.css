@@ -73,3 +73,18 @@
 .hidden-cv {
     display: none;
 }
+
+/* Media */
+
+@media screen and (max-width: 500px) {
+    .cv-contact-infos * {
+        font-size: 1.6rem;
+        line-height: 2;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .contact-infos-container {
+        flex-direction: column;
+    }
+}

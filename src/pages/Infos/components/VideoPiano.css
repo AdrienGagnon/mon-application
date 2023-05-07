@@ -53,3 +53,20 @@
     height: 120%;
     z-index: 1;
 }
+
+/* Media */
+
+@media screen and (max-width: 1350px) {
+    .zoomInVideo {
+        width: 100%;
+        scale: 1.1;
+    }
+
+    .videos-piano-container {
+        flex-direction: column;
+    }
+
+    .video-piano {
+        height: 30rem;
+    }
+}

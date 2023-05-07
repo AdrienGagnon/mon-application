@@ -95,3 +95,28 @@
 .anglais {
     width: 225px;
 }
+
+@media screen and (max-width: 650px) {
+    .block {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .langue {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .block {
+        margin: 0;
+    }
+
+    .cercles-langues {
+        background-size: 30px 30px;
+        width: 150px;
+        height: 30px;
+    }
+}

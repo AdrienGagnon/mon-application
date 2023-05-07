@@ -47,3 +47,21 @@
 
     border-radius: 4px;
 }
+
+@media screen and (max-width: 1100px) {
+    .section-loisir {
+        padding-inline: 1rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .section-loisir {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-loisir img {
+        border-radius: 5rem;
+    }
+}

@@ -82,6 +82,10 @@
 }
 
 @media screen and (max-width: 390px) {
+    .footer-text {
+        margin-bottom: 1rem;
+    }
+
     .plateformes {
         flex-direction: column;
     }
