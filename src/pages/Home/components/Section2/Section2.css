@@ -107,3 +107,16 @@
     width: 20rem;
     height: 20rem;
 }
+
+/* Media */
+
+@media screen and (max-width: 800px) {
+    #section2 > .contenu {
+        padding-inline: 0rem;
+    }
+
+    .photo-description {
+        margin: 3rem 1rem;
+        padding: 1rem;
+    }
+}

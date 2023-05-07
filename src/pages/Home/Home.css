@@ -5,7 +5,7 @@
     font-weight: 300;
     color: var(--color-font);
     line-height: 1.9;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     background-color: var(--color-header);
     z-index: -1;
 }
@@ -112,69 +112,27 @@
 }
 
 @media screen and (max-width: 920px) {
-    .section-contenu-container {
-        margin-inline: 0;
-    }
-    .blob {
-        height: 70%;
-    }
-    .section4-content {
-        margin-inline: 0;
-    }
-    .section4-content > img {
-        display: none;
-    }
     .contenu .imgs-preview {
         width: 100%;
         max-width: calc(3 * var(--s) + 2 * var(--g));
     }
-    .section1-contenu,
-    .section3-contenu {
-        flex-direction: column;
-    }
+
     .section3-contenu {
         min-height: 500px;
         gap: 0;
     }
+
     .section3-contenu .section-description {
         padding-inline: 4rem;
     }
+
     #earth-div {
         height: 0%;
-    }
-    .section-description-infos {
-        margin-right: 0;
-    }
-    .section-contenu-container:hover .section-contenu-extra {
-        justify-content: end;
-        align-items: center;
-        align-content: center;
-    }
-    .section-contenu-extra {
-        font-size: 1.6rem;
-        line-height: normal;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .welcome-description {
-        font-size: 1.6rem;
-        padding: 0;
-    }
-    .welcome-message {
-        font-size: 3rem;
-    }
-
     body .section {
         padding-inline: 1rem;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .form-contact-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: start;
     }
 }
