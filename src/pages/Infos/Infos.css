@@ -39,11 +39,7 @@
 
     font-size: 1.6rem;
 
-    /* overflow: hidden; */
-}
-
-* {
-    /* border: red solid 1px; */
+    overflow: hidden;
 }
 
 /* Tags */
