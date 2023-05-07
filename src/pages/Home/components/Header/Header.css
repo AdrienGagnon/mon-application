@@ -39,10 +39,24 @@
     overflow: hidden;
 }
 
+.text-block * {
+    translate: -10rem;
+    opacity: 0;
+    animation: slideInTextBlock 800ms forwards;
+}
+
+@keyframes slideInTextBlock {
+    to {
+        translate: 0;
+        opacity: 1;
+    }
+}
+
 .welcome-message {
     color: var(--color-white);
     font-size: 5rem;
-    line-height: 2;
+    line-height: 1;
+    margin-bottom: 1rem;
 }
 
 .welcome-description {
@@ -83,6 +97,13 @@
     justify-content: center;
     box-shadow: 0 20px 5px 5px rgba(0, 0, 0, 0.2);
     animation: move 12s ease-in-out infinite;
+    background-color: rgb(202, 232, 250);
+    opacity: 0;
+}
+
+.blob .loaded {
+    transition-duration: 300ms;
+    opacity: 1;
 }
 
 @keyframes move {

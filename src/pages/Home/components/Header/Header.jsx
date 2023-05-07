@@ -1,8 +1,13 @@
 import leccoHigh from '../../assets/lecco-adrien.jpg';
+import { useState } from 'react';
 
 import './Header.css';
 
 function Header() {
+    const [loaded, setLoaded] = useState(false);
+    const handleLoaded = () => {
+        setLoaded(true);
+    };
     return (
         <header className="container" id="header">
             <div className="blob-page">
@@ -19,7 +24,12 @@ function Header() {
                 <div className="shape-blob ten"></div>
             </div>
             <div className="blob">
-                <img id="welcome-img-lecco" src={leccoHigh} loading="lazy" />
+                <img
+                    id="welcome-img-lecco"
+                    className={loaded ? 'loaded' : ''}
+                    src={leccoHigh}
+                    onLoad={handleLoaded}
+                />
             </div>
             <div className="text-block">
                 <h1 className="welcome-message">

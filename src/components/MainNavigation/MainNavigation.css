@@ -61,9 +61,19 @@ nav.open {
         flex-direction: column;
     }
 
+    .logo {
+        width: 10rem;
+        height: 6rem;
+    }
+
     .nav-links {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+
+    .nav-links .nav-item {
+        letter-spacing: 0;
+        padding: 0.5rems;
     }
 }
 

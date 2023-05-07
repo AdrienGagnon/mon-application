@@ -1,40 +1,45 @@
 {
-    "name": "myproject",
-    "version": "1.0.0",
-    "description": "myProject",
-    "default": "index.html",
-    "scripts": {
-        "start": "parcel ./public/index.html",
-        "build": "parcel build ./public/index.html --dist-dir ./dist"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/AdrienGagnon/myProject.git"
-    },
-    "author": "Adrien Gagnon",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/AdrienGagnon/myProject/issues"
-    },
-    "homepage": "https://github.com/AdrienGagnon/myProject#readme",
-    "dependencies": {
-        "babel-cli": "^6.26.0",
-        "babel-preset-react-app": "^3.1.2",
-        "gsap": "^3.11.4",
-        "jquery": "^3.6.3",
-        "leaflet": "^1.9.3",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-leaflet": "^4.2.1",
-        "react-router-dom": "^6.10.0",
-        "three": "^0.150.1",
-        "three-obj-loader": "^1.1.3"
-    },
-    "devDependencies": {
-        "@babel/standalone": "^7.21.3",
-        "parcel": "^2.8.3",
-        "process": "^0.11.10",
-        "three": "^0.150.1"
-    },
-    "keywords": []
+  "name": "myproject",
+  "version": "1.0.0",
+  "description": "myProject",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel ./public/index.html",
+    "build": "parcel build ./public/index.html --dist-dir ./dist",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdrienGagnon/myProject.git"
+  },
+  "author": "Adrien Gagnon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdrienGagnon/myProject/issues"
+  },
+  "homepage": "https://github.com/AdrienGagnon/myProject#readme",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "gsap": "^3.11.4",
+    "jest": "^29.5.0",
+    "jquery": "^3.6.3",
+    "leaflet": "^1.9.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "react-router-dom": "^6.10.0",
+    "three": "^0.150.1",
+    "three-obj-loader": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/standalone": "^7.21.3",
+    "parcel": "^2.8.3",
+    "process": "^0.11.10",
+    "three": "^0.150.1"
+  },
+  "keywords": []
 }

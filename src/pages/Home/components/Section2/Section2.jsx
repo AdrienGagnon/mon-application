@@ -4,6 +4,7 @@ import amsterdam from '../../assets/amsterdam-canal.jpg';
 import corniglia from '../../assets/Corniglia-maisons.jpg';
 import santaMaria from '../../assets/Florence-Santa-Maria-del-Fiore.jpg';
 import treCime from '../../assets/Tre-Cime-Di-Lavaredo-north.jpg';
+import reactLogo from '../../assets/react.png';
 
 import './Section2.css';
 
@@ -22,11 +23,7 @@ function Section2() {
                             <span>&#8594;</span> Créé avec{' '}
                             <a href="https://react.dev/">React</a>
                         </p>
-                        <img
-                            className="react-logo"
-                            src="../src/img/menu-principal/react.png"
-                            alt=""
-                        />
+                        <img className="react-logo" src={reactLogo} alt="" />
                     </div>
                     <Link to="/photos" className="link-contact">
                         Cliquez ici

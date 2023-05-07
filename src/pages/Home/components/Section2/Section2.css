@@ -54,6 +54,7 @@
 .photo-description > div {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 .react-logo {
