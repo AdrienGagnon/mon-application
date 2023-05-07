@@ -159,9 +159,14 @@
 @media screen and (max-width: 800px) {
     .welcome-description {
         font-size: 1.6rem;
+        padding: 0;
     }
     .welcome-message {
         font-size: 3rem;
+    }
+
+    body .section {
+        padding-inline: 1rem;
     }
 }
 

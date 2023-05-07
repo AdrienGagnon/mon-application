@@ -16,6 +16,7 @@
     flex: 1;
     margin-inline: 10rem;
     max-width: 1200px;
+    justify-content: center;
 }
 
 .section4-content > img {
@@ -136,4 +137,11 @@ button[type='submit']:hover {
 
 .revenirTop:hover > div > .toTopFull {
     opacity: 1;
+}
+
+@media screen and (max-width: 800px) {
+    .contact-container {
+        margin: 0;
+        padding: 0;
+    }
 }
