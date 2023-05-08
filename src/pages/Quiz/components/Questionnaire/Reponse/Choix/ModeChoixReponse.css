@@ -4,3 +4,9 @@
     gap: 3rem;
     padding: 2rem;
 }
+
+@media screen and (max-width: 750px) {
+    .choix-reponse-container {
+        grid-template-columns: auto;
+    }
+}

@@ -13,6 +13,10 @@
     margin-block: 1rem;
 }
 
+.parametres-resultats {
+    margin-left: 2rem;
+}
+
 .parametres-resultats ul {
     display: flex;
     flex-direction: column;

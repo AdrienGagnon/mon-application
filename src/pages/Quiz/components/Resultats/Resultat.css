@@ -41,3 +41,17 @@
 .vert {
     color: rgb(30, 255, 0);
 }
+
+@media screen and (max-width: 1030px) {
+    .score-actuel-container,
+    .resultat-item {
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .score-actuel-container,
+    .resultat-item {
+        grid-template-columns: repeat(1, auto);
+    }
+}

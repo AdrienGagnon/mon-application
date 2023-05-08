@@ -24,7 +24,10 @@ function AfficherResultats(props) {
                         <div>Score: {resultat.score}</div>
                         <div>
                             Questions répondues:{' '}
-                            {resultat.currentQuestionNumber} / {resultat.nombre}
+                            <span>
+                                {resultat.currentQuestionNumber} /{' '}
+                                {resultat.nombre}
+                            </span>
                         </div>
                     </div>
                     <div className="parametres-resultats">

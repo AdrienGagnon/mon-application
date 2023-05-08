@@ -50,8 +50,8 @@ function QuizApp() {
                 }}
             >
                 <div className="quiz-container">
-                    {activePage === 'MenuSelection' && <MenuSelection />}
                     <TransitionScreen />
+                    {activePage === 'MenuSelection' && <MenuSelection />}
                     {activePage === 'Question' && <Question />}
                 </div>
             </QuizStateContext.Provider>

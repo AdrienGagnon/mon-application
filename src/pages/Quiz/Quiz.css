@@ -51,33 +51,3 @@
     border-radius: 2rem;
     filter: drop-shadow(8px 8px 5px black);
 }
-
-/* //////////////////////////////////// */
-/* @media */
-/* //////////////////////////////////// */
-
-@media screen and (max-width: 750px) {
-    .earth-rotating-video {
-        width: 150%;
-        transition-duration: 0s;
-        translate: -15%;
-    }
-    .options-selection-container {
-        padding-inline: 30% 5%;
-    }
-    .form-choose-quiz {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-    }
-    .form-choose-quiz,
-    .form-container-quiz p {
-        padding-inline: 2rem;
-    }
-    .form-choose-quiz * {
-        width: 100%;
-    }
-    .form-choose-quiz label {
-        text-align: left;
-    }
-}

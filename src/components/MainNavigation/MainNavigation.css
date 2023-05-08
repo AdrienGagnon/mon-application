@@ -239,7 +239,7 @@ nav.open {
     }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 740px) {
     nav {
         flex-direction: column;
     }

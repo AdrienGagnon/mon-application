@@ -29,8 +29,10 @@ function AfficherResultatActuel(props) {
             <div>
                 <div className="score">Score: {resultat.score}</div>
                 <div>
-                    Questions répondues: {resultat.currentQuestionNumber} /{' '}
-                    {resultat.nombre}
+                    Questions répondues:{' '}
+                    <span>
+                        {resultat.currentQuestionNumber} / {resultat.nombre}
+                    </span>
                 </div>
             </div>
             <div className="parametres-resultats">

@@ -3,6 +3,7 @@
 .message-resultat {
     max-width: 30rem;
     width: 100%;
+    padding-inline: 2rem;
 }
 
 .score-actuel-container,

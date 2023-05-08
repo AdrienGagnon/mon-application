@@ -175,6 +175,7 @@
 .slideOut {
     animation: slideOutReponse 0.7s cubic-bezier(0.26, 0.9, 0.69, 1.01) forwards;
 }
+
 @keyframes slideOutReponse {
     from {
         translate: 0%;
@@ -183,5 +184,23 @@
     to {
         translate: 100%;
         opacity: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .reponse-actuelle *,
+    .reponse-actuelle {
+        font-size: 2rem;
+    }
+
+    .reponse-actuelle strong {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .reponse-actuelle {
+        flex-direction: column;
     }
 }

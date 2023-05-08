@@ -12,11 +12,16 @@
 }
 
 .quiz-container {
+    min-height: 100vh;
     width: 100%;
     height: 100%;
     display: flex;
     position: relative;
     flex: 1 1 1px;
+}
+
+.quiz-container:has(.question-page) {
+    height: auto;
 }
 
 .quiz-container::before {
@@ -62,6 +67,7 @@
     width: 100%;
     margin-top: auto;
     margin-bottom: 1rem;
+    padding-inline: 1rem;
 }
 
 .nextQuestion,
@@ -178,5 +184,19 @@
     }
     100% {
         transform: translateX(-95px);
+    }
+}
+
+/* Media */
+@media screen and (max-width: 750px) {
+    .question-page {
+        margin-inline: 1rem;
+        padding-inline: 0;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .stats-question {
+        flex-direction: column;
     }
 }
