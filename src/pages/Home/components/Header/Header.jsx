@@ -1,13 +1,14 @@
-import leccoHigh from '../../assets/lecco-adrien.jpg';
-import { useState } from 'react';
+import lecco480w from '../../assets/lecco/lecco-adrien-480w.jpg';
+import lecco768w from '../../assets/lecco/lecco-adrien-768w.jpg';
+import lecco1400w from '../../assets/lecco/lecco-adrien-1400w.jpg';
+import { useRef, useState } from 'react';
 
 import './Header.css';
 
 function Header() {
+    const imgLecco = useRef();
     const [loaded, setLoaded] = useState(false);
-    const handleLoaded = () => {
-        setLoaded(true);
-    };
+
     return (
         <header className="container" id="header">
             <div className="blob-page">
@@ -24,11 +25,22 @@ function Header() {
                 <div className="shape-blob ten"></div>
             </div>
             <div className="blob">
+                {!loaded && (
+                    <img
+                        ref={imgLecco}
+                        id="welcome-img-lecco-low"
+                        src={lecco480w}
+                    />
+                )}
                 <img
+                    ref={imgLecco}
                     id="welcome-img-lecco"
-                    className={loaded ? 'loaded' : ''}
-                    src={leccoHigh}
-                    onLoad={handleLoaded}
+                    className={loaded ? '' : 'welcome-img-loading'}
+                    src={lecco768w}
+                    srcSet={`${lecco480w} 480w, ${lecco768w} 768w, ${lecco1400w} 1400w `}
+                    sizes="(max-width: 600px) 480px, (max-width: 1000px) 768px,
+            1400px"
+                    onLoad={() => setLoaded(true)}
                 />
             </div>
             <div className="text-block">

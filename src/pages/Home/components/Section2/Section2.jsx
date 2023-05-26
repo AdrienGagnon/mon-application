@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import amsterdam from '../../assets/amsterdam-canal.jpg';
-import corniglia from '../../assets/Corniglia-maisons.jpg';
-import santaMaria from '../../assets/Florence-Santa-Maria-del-Fiore.jpg';
-import treCime from '../../assets/Tre-Cime-Di-Lavaredo-north.jpg';
+import amsterdam from '../../assets/section-2-preview/amsterdam-canal.jpg';
+import corniglia from '../../assets/section-2-preview/Corniglia-maisons.jpg';
+import santaMaria from '../../assets/section-2-preview/Florence-Santa-Maria-del-Fiore.jpg';
+import treCime from '../../assets/section-2-preview/Tre-Cime-Di-Lavaredo-north.jpg';
 import reactLogo from '../../assets/react.png';
 
 import './Section2.css';

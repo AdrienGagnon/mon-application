@@ -85,9 +85,12 @@
     height: 90%;
     min-height: 500px;
     max-height: 80%;
+    opacity: 0;
+    animation: slideInTextBlock 800ms forwards;
 }
 
-.blob > img {
+#welcome-img-lecco,
+#welcome-img-lecco-low {
     position: relative;
     object-fit: cover;
     width: 100%;
@@ -97,12 +100,16 @@
     box-shadow: 0 20px 5px 5px rgba(0, 0, 0, 0.2);
     animation: move 12s ease-in-out infinite;
     background-color: rgb(202, 232, 250);
+    transition-duration: 300ms;
+    opacity: 1;
+}
+
+.welcome-img-loading {
     opacity: 0;
 }
 
-.blob .loaded {
-    transition-duration: 300ms;
-    opacity: 1;
+#welcome-img-lecco-low {
+    position: absolute;
 }
 
 @keyframes move {
