@@ -7,7 +7,7 @@ import pianoMtl from '../assets/models/piano.mtl';
 import pianoObj from '../assets/models/piano.obj';
 import volantMtl from '../assets/models/volant.mtl';
 import volantObj from '../assets/models/volant.obj';
-import tapisTexture from '../assets/texture-tapis-rouge.jpg';
+import tapisTexture from '../assets/texture-de-tapis-rouge.jpg';
 
 import { fragmentShader, vertexShader, colors } from './constants';
 
@@ -330,6 +330,9 @@ function createScene() {
 
                 // onLoad callback
                 function (texture) {
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                    texture.offset.set(0, 0);
+                    texture.repeat.set(2, 2);
                     const geometry = new THREE.PlaneGeometry(10, 105);
                     const material = new THREE.MeshPhongMaterial({
                         color: 'rgb(44, 2, 2)',
