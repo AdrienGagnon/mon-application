@@ -3,6 +3,7 @@ import upArrow from '../../assets/up-arrow.png';
 import upArrowFull from '../../assets/up-arrow-full.png';
 
 import './Section4.css';
+import handleToSection from '../handleToSection';
 
 function Section4() {
     return (
@@ -65,7 +66,10 @@ function Section4() {
                 </div>
                 <img src={florenceRiver} alt="Florence, Italie" />
             </div>
-            <button className="revenirTop">
+            <button
+                onClick={() => handleToSection('top')}
+                className="revenirTop"
+            >
                 Vers le haut de la page
                 <div>
                     <img className="toTop" src={upArrow} alt="" />

@@ -1,41 +1,118 @@
-import { Link } from 'react-router-dom';
-
-import amsterdam from '../../assets/section-2-preview/amsterdam-canal.jpg';
-import corniglia from '../../assets/section-2-preview/Corniglia-maisons.jpg';
-import santaMaria from '../../assets/section-2-preview/Florence-Santa-Maria-del-Fiore.jpg';
-import treCime from '../../assets/section-2-preview/Tre-Cime-Di-Lavaredo-north.jpg';
-import reactLogo from '../../assets/react.png';
-
 import './Section2.css';
 
+import playlistManagerMenu from '../../assets/playlist-manager-menu.png';
+import playlistManagerPlaylist from '../../assets/playlist-manager-playlist.png';
+import playlistManagerPlaylistTracks from '../../assets/playlist-manager-playlist-tracks.png';
+import { useEffect, useRef, useState } from 'react';
+
 function Section2() {
+    const [unmount, setUnmount] = useState(false);
+    const img1 = useRef();
+    const img2 = useRef();
+    const img3 = useRef();
+
+    function handleCarousel(e, automaticNewPosition = undefined) {
+        const newActive = e?.target;
+        const isItem = newActive?.closest('.carousel-img');
+        if ((!isItem || isItem?.dataset.pos === 0) && !automaticNewPosition)
+            return;
+        const elems = new Array(img1.current, img2.current, img3.current);
+        let newActivePos;
+        if (automaticNewPosition) {
+            newActivePos = automaticNewPosition;
+        } else {
+            newActivePos = newActive.dataset.pos;
+        }
+
+        elems.forEach(item => {
+            const itemPos = item.dataset.pos;
+            item.dataset.pos = getPos(itemPos, newActivePos);
+        });
+    }
+
+    function getPos(current, newActivePos) {
+        const diff = current - newActivePos;
+
+        if (Math.abs(current - newActivePos) > 1) {
+            return -current;
+        }
+
+        return diff;
+    }
+
+    function handleToWebsite(adress) {
+        window.location.href = adress;
+    }
+
+    useEffect(() => {
+        setUnmount(true);
+        handleCountDown();
+        return setUnmount(false);
+    }, []);
+
+    function handleCountDown() {
+        if (!unmount) return;
+        window.clearTimeout;
+        const rotateImagesTimeout = window.setTimeout(() => {
+            handleCarousel(undefined, -1);
+            handleCountDown();
+        }, 10000);
+    }
+
     return (
         <section className="section" id="section2">
-            <h2>Des clichés d'Europe</h2>
-            <div className="contenu">
-                <div className="section-description photo-description">
-                    <p>
-                        Une petite application servant d'album photo de mes
-                        voyages.
-                    </p>
-                    <div>
-                        <p>
-                            <span>&#8594;</span> Créé avec{' '}
-                            <a href="https://react.dev/">React</a>
-                        </p>
-                        <img className="react-logo" src={reactLogo} alt="" />
+            <h2 className="neon-tile portfolio-title">Portfolio</h2>
+            <div className="contenu project-container">
+                <h3 className="project-title">Playlist Manager</h3>
+                <div className="project-content">
+                    <div
+                        onClick={e => handleCarousel(e)}
+                        className="carousel-container"
+                    >
+                        <img
+                            ref={img1}
+                            className="carousel-img"
+                            src={playlistManagerPlaylist}
+                            alt="playlist-manager-playlist"
+                            data-pos="-1"
+                        />
+                        <img
+                            ref={img2}
+                            className="carousel-img"
+                            src={playlistManagerMenu}
+                            alt="playlist-manager-menu"
+                            data-pos="0"
+                        />
+                        <img
+                            ref={img3}
+                            className="carousel-img"
+                            src={playlistManagerPlaylistTracks}
+                            alt="playlist-manager-playlist-tracks"
+                            data-pos="1"
+                        />
                     </div>
-                    <Link to="/photos" className="link-contact">
-                        Cliquez ici
-                    </Link>
-                    <div className="background-1"></div>
-                    <div className="background-2"></div>
-                </div>
-                <div className="imgs-preview">
-                    <img className="img-preview-menu" src={amsterdam} alt="" />
-                    <img className="img-preview-menu" src={corniglia} alt="" />
-                    <img className="img-preview-menu" src={santaMaria} alt="" />
-                    <img className="img-preview-menu" src={treCime} alt="" />
+                    <div className="description-container">
+                        <p className="description-text">
+                            <span>
+                                Voici un clone de l'application pour Desktop de
+                                <span> Spotify</span> fait entièrement par moi.
+                                Il fait appel à l'API de Spotify et vous permet
+                                de vous connecter avec votre propre compte
+                                Spotify pour écouter vos listes de lecture
+                                favorites.
+                            </span>
+                        </p>
+                        <button
+                            onClick={() =>
+                                handleToWebsite(
+                                    'https://playlist-manager-ag.netlify.app'
+                                )
+                            }
+                            className="link-website-btn"
+                        >
+                            Visiter le site
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

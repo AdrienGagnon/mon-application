@@ -1,7 +1,9 @@
+import { useRef, useState } from 'react';
+
 import lecco480w from '../../assets/lecco/lecco-adrien-480w.jpg';
 import lecco768w from '../../assets/lecco/lecco-adrien-768w.jpg';
 import lecco1400w from '../../assets/lecco/lecco-adrien-1400w.jpg';
-import { useRef, useState } from 'react';
+import handleToSection from '../handleToSection';
 
 import './Header.css';
 
@@ -50,11 +52,40 @@ function Header() {
                 <p className="welcome-description">
                     Ce site sert à montrer mes connaissances en développement
                     web. Il contient une section{' '}
-                    <a className="to-section-infos">information</a> pour en
-                    apprendre davantage sur moi, une section de{' '}
-                    <a className="to-section-photos">photos</a> et une section
-                    de <a className="to-section-quiz">quiz</a>! Vous pouvez me
-                    contacter <a className="to-section-contact">ici!</a>
+                    <a
+                        onClick={() => handleToSection('information')}
+                        className="to-section-infos"
+                    >
+                        information
+                    </a>{' '}
+                    pour en apprendre davantage sur moi, un{' '}
+                    <a
+                        onClick={() => handleToSection('portfolio')}
+                        className="to-section-portfolio"
+                    >
+                        portfolio
+                    </a>{' '}
+                    de mes projets, une section de{' '}
+                    <a
+                        onClick={() => handleToSection('photos')}
+                        className="to-section-photos"
+                    >
+                        photos
+                    </a>{' '}
+                    et une section de{' '}
+                    <a
+                        onClick={() => handleToSection('quiz')}
+                        className="to-section-quiz"
+                    >
+                        quiz
+                    </a>
+                    ! Vous pouvez me contacter{' '}
+                    <a
+                        onClick={() => handleToSection('contact')}
+                        className="to-section-contact"
+                    >
+                        ici!
+                    </a>
                 </p>
             </div>
         </header>

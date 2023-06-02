@@ -23,6 +23,7 @@
 .body-home h2 {
     font-size: 4rem;
     text-shadow: 1px 2px #00040a;
+    margin-bottom: 5rem;
 }
 
 /* ///////////////////////////////////////////////////////// */
@@ -79,10 +80,6 @@
     font-size: 2.6rem;
 }
 
-.section-description-infos {
-    margin-right: 4rem;
-}
-
 .section-description-infos::after {
     content: '';
     position: absolute;
@@ -104,30 +101,6 @@
 @media screen and (max-width: 1100px) {
     #section2 > .contenu {
         flex-direction: column;
-    }
-    .photo-description {
-        margin-bottom: 3rem;
-        margin-inline: 0;
-    }
-}
-
-@media screen and (max-width: 920px) {
-    .contenu .imgs-preview {
-        width: 100%;
-        max-width: calc(3 * var(--s) + 2 * var(--g));
-    }
-
-    .section3-contenu {
-        min-height: 500px;
-        gap: 0;
-    }
-
-    .section3-contenu .section-description {
-        padding-inline: 4rem;
-    }
-
-    #earth-div {
-        height: 0%;
     }
 }
 

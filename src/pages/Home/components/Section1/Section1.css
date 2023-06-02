@@ -3,6 +3,8 @@
         var(--color-section-1-middle) 10%,
         var(--color-section-1) 70%
     );
+    padding-block: 5rem 20rem;
+    min-height: fit-content;
 }
 
 #section1 span,

@@ -1,39 +1,32 @@
-function handleToSection() {
-    const toInfos = document.querySelector('.to-section-infos');
-    const toPhotos = document.querySelector('.to-section-photos');
-    const toQuiz = document.querySelector('.to-section-quiz');
-    const toContact = document.querySelector('.to-section-contact');
-    const toTop = document.querySelector('.revenirTop');
-
-    toInfos.addEventListener('click', function (e) {
-        section1.scrollIntoView({
-            behavior: 'smooth',
-        });
-    });
-
-    toPhotos.addEventListener('click', function (e) {
-        section2.scrollIntoView({
-            behavior: 'smooth',
-        });
-    });
-
-    toQuiz.addEventListener('click', function (e) {
-        section3.scrollIntoView({
-            behavior: 'smooth',
-        });
-    });
-
-    toContact.addEventListener('click', function (e) {
-        section4.scrollIntoView({
-            behavior: 'smooth',
-        });
-    });
-
-    toTop.addEventListener('click', function (e) {
-        header.scrollIntoView({
-            behavior: 'smooth',
-        });
-    });
+function handleToSection(section) {
+    switch (section) {
+        case 'top':
+            document.querySelector('header').scrollIntoView({
+                behavior: 'smooth',
+            });
+            break;
+        case 'information':
+            document.querySelector('#section1').scrollIntoView({
+                behavior: 'smooth',
+            });
+            break;
+        case 'portfolio':
+            document.querySelector('.portfolio-title').scrollIntoView({
+                behavior: 'smooth',
+            });
+            break;
+        case 'photos':
+        case 'quiz':
+            document.querySelector('.half-content-container').scrollIntoView({
+                behavior: 'smooth',
+            });
+            break;
+        case 'contact':
+            document.querySelector('#section4').scrollIntoView({
+                behavior: 'smooth',
+            });
+            break;
+    }
 }
 
 export default handleToSection;
