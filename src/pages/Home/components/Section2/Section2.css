@@ -11,10 +11,16 @@
     align-items: center;
 }
 
-.neon-tile {
+.portfolio-title.neon-tile {
     width: fit-content;
     width: 100%;
     max-width: 50rem;
+    border: var(--middle) solid 5px;
+    border-radius: 2rem;
+    padding-block: 2rem;
+    box-shadow: 0px 0px 5px 2px var(--exterior) inset,
+        0px 0px 5px 2px var(--exterior);
+    text-shadow: 0px 0px 5px var(--exterior);
 }
 
 .portfolio-title {

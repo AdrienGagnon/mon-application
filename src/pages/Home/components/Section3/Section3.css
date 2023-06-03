@@ -5,6 +5,7 @@
     );
     min-height: 300px;
     padding-inline: 0;
+    padding-block: 10rem;
 }
 
 .half-content-container {
@@ -12,7 +13,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 3rem 2rem;
 }
 
 /* .half-content-container::before {
@@ -52,10 +52,11 @@
 .section3-description {
     isolation: isolate;
     position: relative;
-    padding: 2rem 4rem;
+    padding: 3rem 4rem;
     text-shadow: 1px 2px #00040a;
     margin-inline: 3rem;
     height: fit-content;
+    max-width: 750px;
 }
 
 .section3-description:hover .background-1 {
@@ -170,6 +171,10 @@
 @media screen and (max-width: 1150px) {
     .half-content-container {
         flex-direction: column;
+        gap: 5rem;
+    }
+
+    #section3 {
         gap: 5rem;
     }
 
