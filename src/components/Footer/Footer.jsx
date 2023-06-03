@@ -53,9 +53,7 @@ function Footer() {
                             alt=""
                             onClick={handleClickEmail}
                         />
-                        <a href="mailto: adrien.gagnon25@outlook.com">
-                            Send Email
-                        </a>
+                        <a href="mailto: adrien.gagnon25@outlook.com">Email</a>
                     </li>
                 </ul>
             </div>
