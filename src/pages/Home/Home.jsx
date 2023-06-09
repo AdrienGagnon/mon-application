@@ -7,7 +7,6 @@ import Section3 from './components/Section3/Section3';
 import Section4 from './components/Section4/Section4';
 import mouseBlob from './components/mouseBlob';
 import waveMovement from './components/waveMovement';
-// import slidingSection from './components/slidingSection'; if i have time
 
 import { useEffect } from 'react';
 
@@ -17,7 +16,6 @@ function HomePage() {
     useEffect(() => {
         mouseBlob();
         waveMovement();
-        // slidingSection(); if i have time
     }, []);
 
     return (

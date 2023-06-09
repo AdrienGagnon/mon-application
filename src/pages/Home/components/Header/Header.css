@@ -1,7 +1,7 @@
 /* Header welcome message */
 
 #header {
-    min-height: 100vh;
+    min-height: 80vh;
 }
 
 .body-home .container {
@@ -13,11 +13,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100rem;
     width: 100%;
     box-shadow: 0% 0% 0% 100% var(--color-section-1) inset;
     background-color: var(--color-header);
-    padding-bottom: 5%;
+    margin-bottom: 10rem;
 }
 
 .container-welcome {

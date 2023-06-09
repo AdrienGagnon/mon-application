@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import lecco480w from '../../assets/lecco/lecco-adrien-480w.jpg';
 import lecco768w from '../../assets/lecco/lecco-adrien-768w.jpg';
@@ -9,10 +9,18 @@ import './Header.css';
 
 function Header() {
     const imgLecco = useRef();
+    const headerRef = useRef();
     const [loaded, setLoaded] = useState(false);
 
+    useEffect(() => {
+        const nav = document.querySelector('nav');
+        if (!nav) return;
+        const height = window.innerHeight - nav.clientHeight;
+        headerRef.current.style.height = `${height}px`;
+    }, []);
+
     return (
-        <header className="container" id="header">
+        <header ref={headerRef} className="container" id="header">
             <div className="blob-page">
                 <div className="shape-blob"></div>
                 <div className="shape-blob one"></div>

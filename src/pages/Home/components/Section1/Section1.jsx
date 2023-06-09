@@ -7,10 +7,23 @@ import threeLogo from '../../assets/threejs.png';
 import './Section1.css';
 
 import Section1Svg from './Section1Svg';
+import { useEffect, useRef } from 'react';
+import slidingSection from '../slidingSection';
 
 function Section1() {
+    const section1 = useRef();
+
+    useEffect(() => {
+        if (!section1 && !section1.current) return;
+        slidingSection(section1.current, 'hidden-section');
+    }, [section1]);
+
     return (
-        <section className="section" id="section1">
+        <section
+            ref={section1}
+            className="section hidden-section"
+            id="section1"
+        >
             <Section1Svg />
             <h2 className="header-2">En connaitre davantage sur moi</h2>
             <div className="section-contenu-container">

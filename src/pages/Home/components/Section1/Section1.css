@@ -5,6 +5,19 @@
     );
     padding-block: 5rem 20rem;
     min-height: fit-content;
+    z-index: 2;
+
+    transform: translateY(0rem);
+}
+
+#section1.hidden-section {
+    transform: translateY(20rem);
+}
+
+@media (prefers-reduced-motion) {
+    #section1.hidden-section {
+        transform: translateY(0rem);
+    }
 }
 
 #section1 span,
@@ -219,6 +232,10 @@
 }
 
 @media screen and (max-width: 740px) {
+    .section-description * {
+        font-size: 2rem;
+    }
+
     .section-contenu-container {
         margin-inline: 0;
     }

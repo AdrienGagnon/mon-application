@@ -33,6 +33,21 @@
     flex-direction: column;
     padding: 0;
     width: 100%;
+    opacity: 1;
+    transform: translateY(0rem);
+    transition-duration: 1s;
+}
+
+.project-container.hidden-project {
+    opacity: 0;
+    transform: translateY(5rem);
+}
+
+@media (prefers-reduced-motion) {
+    .project-container.hidden-project {
+        opacity: 1;
+        transform: translateY(0rem);
+    }
 }
 
 .project-title {
@@ -213,4 +228,19 @@
 
 .link-website-btn:active {
     box-shadow: inset 5px 5px 5px black;
+}
+
+@media screen and (max-width: 700px) {
+    .description-text {
+        font-size: 1.6rem;
+    }
+
+    .project-title {
+        font-size: 2.4rem;
+    }
+
+    .description-text::after,
+    .description-text::before {
+        font-size: 3rem;
+    }
 }

@@ -148,6 +148,7 @@ button[type='submit']:hover {
     .section4-content img {
         max-width: fit-content;
         height: 300px;
+        margin-top: 2rem;
     }
 
     .contact-container {
@@ -157,6 +158,11 @@ button[type='submit']:hover {
 }
 
 @media screen and (max-width: 500px) {
+    .contact-container h2 {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+    }
+
     .form-contact-container {
         display: flex;
         flex-direction: column;

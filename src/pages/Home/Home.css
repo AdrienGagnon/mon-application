@@ -5,7 +5,7 @@
     font-weight: 300;
     color: var(--color-font);
     line-height: 1.9;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
     background-color: var(--color-header);
     z-index: -1;
 }

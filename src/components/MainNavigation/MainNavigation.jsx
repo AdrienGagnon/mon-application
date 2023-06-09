@@ -5,7 +5,7 @@ import logoAdrien from '../../assets/logo-adrien.png';
 function MainNavigation() {
     return (
         <nav>
-            <img className="logo" src={logoAdrien} alt="logo-adrien" />
+            {/* <img className="logo" src={logoAdrien} alt="logo-adrien" /> */}
             <ul className="nav-links">
                 <NavLink to="/" className={'menu-link nav-item'} end>
                     Menu principal

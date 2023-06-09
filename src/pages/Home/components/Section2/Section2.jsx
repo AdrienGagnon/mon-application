@@ -1,18 +1,29 @@
-import './Section2.css';
+import { useEffect, useRef, useState } from 'react';
 
+import './Section2.css';
 import playlistManagerMenu from '../../assets/playlist-manager-menu.png';
 import playlistManagerPlaylist from '../../assets/playlist-manager-playlist.png';
 import playlistManagerPlaylistTracks from '../../assets/playlist-manager-playlist-tracks.png';
-import { useEffect, useRef, useState } from 'react';
+import slidingSection from '../slidingSection';
 
 function Section2() {
-    const [unmount, setUnmount] = useState(false);
     const img1 = useRef();
     const img2 = useRef();
     const img3 = useRef();
+    const projectContainer1 = useRef();
+
+    useEffect(() => {
+        handleCountDown();
+    }, []);
+
+    useEffect(() => {
+        if (!projectContainer1 && !projectContainer1.current) return;
+        slidingSection(projectContainer1.current, 'hidden-project');
+    }, [projectContainer1]);
 
     function handleCarousel(e, automaticNewPosition = undefined) {
         const newActive = e?.target;
+
         const isItem = newActive?.closest('.carousel-img');
         if ((!isItem || isItem?.dataset.pos === 0) && !automaticNewPosition)
             return;
@@ -25,6 +36,7 @@ function Section2() {
         }
 
         elems.forEach(item => {
+            if (!item) return;
             const itemPos = item.dataset.pos;
             item.dataset.pos = getPos(itemPos, newActivePos);
         });
@@ -44,16 +56,10 @@ function Section2() {
         window.location.href = adress;
     }
 
-    useEffect(() => {
-        setUnmount(true);
-        handleCountDown();
-        return setUnmount(false);
-    }, []);
-
     function handleCountDown() {
-        if (!unmount) return;
         window.clearTimeout;
-        const rotateImagesTimeout = window.setTimeout(() => {
+        window.setTimeout(() => {
+            if (!img1.current) return;
             handleCarousel(undefined, -1);
             handleCountDown();
         }, 10000);
@@ -62,7 +68,10 @@ function Section2() {
     return (
         <section className="section" id="section2">
             <h2 className="neon-tile portfolio-title">Portfolio</h2>
-            <div className="contenu project-container">
+            <div
+                ref={projectContainer1}
+                className="contenu project-container hidden-project"
+            >
                 <h3 className="project-title">Playlist Manager</h3>
                 <div className="project-content">
                     <div

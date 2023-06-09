@@ -7,7 +7,7 @@ nav {
     width: 100%;
     gap: 1rem;
     background-color: var(--color-nav);
-    padding: 1rem;
+    padding: 2rem 2rem;
     border-bottom: 0.1rem solid black;
     z-index: 100;
 
