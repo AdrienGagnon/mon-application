@@ -18,7 +18,7 @@ function Section2() {
 
     useEffect(() => {
         if (!projectContainer1 && !projectContainer1.current) return;
-        slidingSection(projectContainer1.current, 'hidden-project');
+        slidingSection(projectContainer1.current, 'hidden-project', 0.5);
     }, [projectContainer1]);
 
     function handleCarousel(e, automaticNewPosition = undefined) {

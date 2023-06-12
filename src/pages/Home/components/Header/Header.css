@@ -97,7 +97,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 20px 5px 5px rgba(0, 0, 0, 0.2);
-    animation: move 12s ease-in-out infinite;
+    animation: move 20s cubic-bezier(0.28, 0.01, 0.64, 0.92) infinite;
     background-color: rgb(202, 232, 250);
     transition-duration: 300ms;
     opacity: 1;

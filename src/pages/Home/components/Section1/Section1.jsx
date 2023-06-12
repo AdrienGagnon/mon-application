@@ -15,7 +15,7 @@ function Section1() {
 
     useEffect(() => {
         if (!section1 && !section1.current) return;
-        slidingSection(section1.current, 'hidden-section');
+        slidingSection(section1.current, 'hidden-section', 0.1);
     }, [section1]);
 
     return (

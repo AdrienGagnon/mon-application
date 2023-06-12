@@ -1,4 +1,4 @@
-function slidingSection(section, classname) {
+function slidingSection(section, classname, threshold) {
     const slidingShapes = function (entries) {
         const [entry] = entries;
         if (!entry.isIntersecting) return;
@@ -8,7 +8,7 @@ function slidingSection(section, classname) {
     // Call the revealSection function when intersecting
     const sectionObserver = new IntersectionObserver(slidingShapes, {
         root: null,
-        threshold: 0.1,
+        threshold: threshold,
     });
 
     // Adding the hidden class to the sections

@@ -64,6 +64,7 @@
     box-sizing: border-box;
     box-shadow: 0 0 10px rgb(0, 0, 0);
     resize: none;
+    cursor: text;
 }
 
 button[type='submit'] {
